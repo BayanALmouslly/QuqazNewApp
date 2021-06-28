@@ -10,4 +10,7 @@ export class LoginComponent {
   login(){
     this.router.navigate(['/dashboard'])
   }
+  Register(){
+    this.router.navigate(['/register'])
+  }
 }
