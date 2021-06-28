@@ -129,4 +129,15 @@
           </div>
         </div>
       </div>
+   
+</div>
+<div class="col-xs-12 col-12 col-md-6">
+  <pager
+    [totalItems]="totalItems"
+    [(ngModel)]="currentPager"
+    (pageChanged)="pageChanged($event)"
+    pageBtnClass="btn"
+    [itemsPerPage]="10"
+    class="pull-left">
+  </pager>
 </div>

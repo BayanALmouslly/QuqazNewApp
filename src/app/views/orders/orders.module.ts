@@ -5,17 +5,21 @@ import { OrdersRoutingModule } from './orders-routing.module';
 import { ShowOrdersComponent } from './show-orders/show-orders.component';
 import { OrdersReportComponent } from './orders-report/orders-report.component';
 import { AddOrderComponent } from './add-order/add-order.component';
+import { ShowOrderComponent } from './show-order/show-order.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 @NgModule({
   declarations: [
     ShowOrdersComponent,
     OrdersReportComponent,
-    AddOrderComponent
+    AddOrderComponent,
+    ShowOrderComponent
   ],
   imports: [
     CommonModule,
-    OrdersRoutingModule
+    OrdersRoutingModule,
+    PaginationModule
   ]
 })
 export class OrdersModule { }
