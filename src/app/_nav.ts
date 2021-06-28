@@ -13,12 +13,12 @@ export const navItems: INavData[] = [
   },
   {
     name: 'كشف الطلبات',
-    url: '/theme/colors',
+    url: '/orders/report',
     icon: 'icon-social-dropbox'
   },
   {
     name: 'الطلبات',
-    url: '/theme/typography',
+    url: '/orders',
     icon: 'icon-social-dropbox',
     badge: {
       variant: 'info',
@@ -27,7 +27,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'اضافة طلب',
-    url: '/theme/typography',
+    url: '/orders/addorder',
     icon: 'icon-plus'
   },
   // {
