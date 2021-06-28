@@ -3,25 +3,36 @@
 <div class="card">
 <div class="card-body">
     <h1 class="card-title">الطلبات</h1>
+    <label >بحث على حسب </label>
+
     <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="cvv"></label>
+          <input type="text" class="form-control" id="cvv" placeholder="الكود">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label for="cvv"></label>
+          <input type="text" class="form-control" id="cvv" placeholder="اسم المستلم">
+        </div>
+      </div>
+    </div>
+    <div>
       <div class="col-12">
         <div class="form-group">
           <label for="cvv"></label>
-          <input type="text" class="form-control" id="cvv" placeholder="بحث على حسب اسم المستلم  ..">
+          <input type="text" class="form-control" id="cvv" placeholder="رقم الهاتف">
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-4">
-        <div class="form-group">
-          <label for="cvv">رقم الوصل</label>
-          <input type="text" class="form-control" id="cvv" placeholder="123">
-        </div>
-      </div>
-      <div class="form-group col-4">
+
+      <div class="form-group col-6">
         <label for="ccmonth">حالة الشحنة</label>
         <select class="form-control" id="ccmonth">
-          <option>مخزن</option>
+          <option>في المخزن</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
@@ -35,10 +46,10 @@
           <option>12</option>
         </select>
       </div>
-      <div class="form-group col-4">
-        <label for="ccyear">المحافظة </label>
+      <div class="form-group col-6">
+        <label for="ccyear">موقع المبلغ </label>
         <select class="form-control" id="ccyear">
-          <option>اربيل</option>
+          <option>داخل الشركة</option>
           <option>2015</option>
           <option>2016</option>
           <option>2017</option>
