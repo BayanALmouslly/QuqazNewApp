@@ -42,6 +42,10 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import { AuthGuard } from './views/auth/auth.guard';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './views/auth/jwt.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -59,6 +63,10 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+
   ],
   declarations: [
     AppComponent,
@@ -73,8 +81,11 @@ import { ChartsModule } from 'ng2-charts';
     //   provide: LocationStrategy,
     //   useClass: HashLocationStrategy
     // },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    AuthGuard,
     IconSetService,
   ],
-  bootstrap: [ AppComponent ]
+
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,11 +11,11 @@ export const navItems: INavData[] = [
     title: true,
     name: 'حول '
   },
-  {
-    name: 'كشف الطلبات',
-    url: '/orders/report',
-    icon: 'icon-social-dropbox'
-  },
+  // {
+  //   name: 'كشف الطلبات',
+  //   url: '/orders/report',
+  //   icon: 'icon-social-dropbox'
+  // },
   {
     name: 'الطلبات',
     url: '/orders',
