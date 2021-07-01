@@ -20,10 +20,10 @@ export const navItems: INavData[] = [
     name: 'الطلبات',
     url: '/orders',
     icon: 'icon-social-dropbox',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    }
+    // badge: {
+    //   variant: 'info',
+    //   text: 'NEW'
+    // }
   },
   {
     name: 'اضافة طلب',
