@@ -24,7 +24,7 @@ export class LoginComponent {
     // if (!this.loginForm.valid || this.buttonDisabled) {
     //   return;
     // }
-   console.log(this.loginForm)
+   console.log(this.loginForm.value)
     if (this.loginForm.value)
       this.authService.signIn(this.loginForm.value).subscribe(
         response => {

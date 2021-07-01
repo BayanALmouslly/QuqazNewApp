@@ -31,7 +31,7 @@ export class AuthService implements OnDestroy{
      // this.startTokenTimer()
     }
   baseUrl=environment.baseUrl+"api/";
-  signIn(user: user):Observable<any> {
+  signIn(user):Observable<any> {
     return this.http.post(this.baseUrl+'ClientAuth',user) ;
   }
  
