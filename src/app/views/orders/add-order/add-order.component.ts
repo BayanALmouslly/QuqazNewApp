@@ -18,7 +18,8 @@ export class AddOrderComponent implements OnInit {
   OrderTypes: IdAndName[] = []
   Order: AddOrder = new AddOrder
   OrderItem: OrderItem = new OrderItem
-  Phone=""
+  Phone = ""
+  client=JSON.parse(localStorage.getItem('kokazUser'))
   ngOnInit(): void {
     this.GetSettings()
     this.Order.OrderItem = []
@@ -46,29 +47,30 @@ export class AddOrderComponent implements OnInit {
     })
   }
   AddOrderItem() {
-    if(!this.OrderItem.Count||!this.OrderItem.OrderTypeId)return
+    if (!this.OrderItem.Count || !this.OrderItem.OrderTypeId) return
     this.Order.OrderItem.push(this.OrderItem)
     this.OrderItem = new OrderItem
-  } 
+  }
   RemoveOrderItem(order) {
     this.Order.OrderItem = this.Order.OrderItem.filter(o => o != order)
   }
   AddPhone() {
-    if(this.Phone.length<11||!this.Phone)return
+    if (this.Phone.length < 11 || !this.Phone) return
     this.Order.RecipientPhones.push(this.Phone)
-    this.Phone=""
+    this.Phone = ""
   }
   RemovePhone(phone) {
     this.Order.RecipientPhones = this.Order.RecipientPhones.filter(o => o != phone)
   }
   AddOrder() {
-    if (!this.Order.Code || this.Order.RecipientPhones.length==0
-      || this.Order.OrderItem.length==0|| !this.Order.RecipientName
-      || !this.Order.CountryId|| !this.Order.Address) {
+    if (!this.Order.Code || this.Order.RecipientPhones.length == 0
+      || this.Order.OrderItem.length == 0 || !this.Order.RecipientName
+      || !this.Order.CountryId || !this.Order.Address) {
       return
     }
+    this.Order.DateTime = new Date
     this.orderServies.Add(this.Order).subscribe(res => {
-
+      this.Order = new AddOrder
     })
   }
 }

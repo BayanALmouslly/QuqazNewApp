@@ -30,6 +30,11 @@ export const navItems: INavData[] = [
     url: '/orders/addorder',
     icon: 'icon-plus'
   },
+  {
+    name: 'تسجيل خروج ',
+    url: '/login',
+    icon: 'icon-logout'
+  },
   // {
   //   title: true,
   //   name: 'Components'

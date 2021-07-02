@@ -38,4 +38,7 @@ export class OrderService {
   Add(order) {
     return this.http.post(this.controler, order)
   }
+  codeExist(code){
+    
+  }
 }
