@@ -106,3 +106,11 @@
     [itemsPerPage]="10" class="pull-left">
   </pager>
 </div>
+<pagination [boundaryLinks]="true" [totalItems]="totalItems" (pageChanged)="pageChanged($event)"
+[(ngModel)]="paging.Page"
+ class="pagination-sm"
+ [maxSize]="paging.RowCount"
+previousText="&lsaquo;" 
+nextText="&rsaquo;" 
+firstText="&laquo;" 
+lastText="&raquo;"></pagination>
