@@ -99,18 +99,22 @@
     </div>
   </div>
 
+  <pagination [boundaryLinks]="showBoundaryLinks" 
+  [directionLinks]="showDirectionLinks" 
+  [totalItems]="totalItems"
+  [itemsPerPage]="5"
+  (pageChanged)="pageChanged($event)"></pagination>
+</div>
 
-</div>
-<div class="col-xs-12 col-12 col-md-6">
-  <pager [totalItems]="totalItems" [(ngModel)]="currentPager" (pageChanged)="pageChanged($event)" pageBtnClass="btn"
-    [itemsPerPage]="10" class="pull-left">
-  </pager>
-</div>
-<pagination [boundaryLinks]="true" [totalItems]="totalItems" (pageChanged)="pageChanged($event)"
-[(ngModel)]="paging.Page"
- class="pagination-sm"
- [maxSize]="paging.RowCount"
-previousText="&lsaquo;" 
-nextText="&rsaquo;" 
-firstText="&laquo;" 
-lastText="&raquo;"></pagination>
+<!-- <div class="row">
+  <div class="col-xs-12 col-12">
+     <div class="content-wrapper">
+        <p class="content-item" *ngFor="let content of returnedArray">{{content}}</p>
+     </div>
+     <pagination [boundaryLinks]="showBoundaryLinks" 
+        [directionLinks]="showDirectionLinks" 
+        [totalItems]="contentArray.length"
+        [itemsPerPage]="5"
+        (pageChanged)="pageChanged($event)"></pagination>
+  </div>
+</div> -->

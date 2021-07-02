@@ -20,7 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     OrdersRoutingModule,
-    PaginationModule,
+    PaginationModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
   ]

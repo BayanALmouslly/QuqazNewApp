@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { IdAndName } from '../../../Models/id-and-name.model';
 import { OrderFiltering } from '../../../Models/order/order-filtering.model';
 import { Paging } from '../../../Models/paging';
@@ -27,20 +28,14 @@ export class ShowOrdersComponent implements OnInit {
     this.GetSettings()
   }
   totalItems: number = 0;
-  currentPage: number = 4;
-  pageChanged(event: any): void {
-    console.log('Page changed to: ' + event.page);
-    console.log('Number items per page: ' + event.itemsPerPage);
-    this.GetOrders()
-  }
   GetOrders() {
     this.orderServies.get(this.paging, this.orderFilter).subscribe(res => {
       this.orders = res.data
-      this.totalItems=res.total
+      this.totalItems = res.total
       console.log(res)
     })
   }
-  GetSettings(){
+  GetSettings() {
     this.getRegion()
     this.getOrderPlaces()
     this.getCountries()
@@ -65,5 +60,13 @@ export class ShowOrdersComponent implements OnInit {
     this.settingservice.OrderPlaced().subscribe(res => {
       this.OrderPlaced = res
     })
+  }
+  showBoundaryLinks: boolean = true;
+  showDirectionLinks: boolean = true;
+  pageChanged(event: PageChangedEvent): void {
+    this.paging.allItemsLength = this.totalItems
+    this.paging.RowCount = event.itemsPerPage
+    this.paging.Page = event.page 
+    this.GetOrders()
   }
 }
