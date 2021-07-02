@@ -46,6 +46,7 @@ export class AddOrderComponent implements OnInit {
     })
   }
   AddOrderItem() {
+    if(!this.OrderItem.Count||!this.OrderItem.OrderTypeId)return
     this.Order.OrderItem.push(this.OrderItem)
     this.OrderItem = new OrderItem
   } 
@@ -53,6 +54,7 @@ export class AddOrderComponent implements OnInit {
     this.Order.OrderItem = this.Order.OrderItem.filter(o => o != order)
   }
   AddPhone() {
+    if(this.Phone.length<11||!this.Phone)return
     this.Order.RecipientPhones.push(this.Phone)
     this.Phone=""
   }
@@ -60,7 +62,9 @@ export class AddOrderComponent implements OnInit {
     this.Order.RecipientPhones = this.Order.RecipientPhones.filter(o => o != phone)
   }
   AddOrder() {
-    if (!this.Order.Code || !this.Order.RecipientPhones) {
+    if (!this.Order.Code || this.Order.RecipientPhones.length==0
+      || this.Order.OrderItem.length==0|| !this.Order.RecipientName
+      || !this.Order.CountryId|| !this.Order.Address) {
       return
     }
     this.orderServies.Add(this.Order).subscribe(res => {
