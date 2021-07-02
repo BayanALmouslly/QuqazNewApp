@@ -7,6 +7,7 @@ import { OrdersReportComponent } from './orders-report/orders-report.component';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { ShowOrderComponent } from './show-order/show-order.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
   imports: [
     CommonModule,
     OrdersRoutingModule,
-    PaginationModule
+    PaginationModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class OrdersModule { }
