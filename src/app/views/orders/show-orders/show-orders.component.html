@@ -35,14 +35,14 @@
 
           <div class="form-group col-6">
             <label for="ccmonth">حالة الشحنة</label>
-            <select class="form-control" (keyup)="GetOrders()" name="OrderplacedId"
+            <select class="form-control" (change)="GetOrders()" name="OrderplacedId"
               [(ngModel)]="orderFilter.OrderplacedId">
               <option *ngFor="let orderplace of OrderPlaced" [value]="orderplace.id">{{orderplace.name}}</option>
             </select>
           </div>
           <div class="form-group col-6">
             <label for="ccyear">موقع المبلغ </label>
-            <select class="form-control" (keyup)="GetOrders()" name="MonePlacedId"
+            <select class="form-control" (change)="GetOrders()" name="MonePlacedId"
               [(ngModel)]="orderFilter.MonePlacedId">
               <option *ngFor="let moenyPlaced of MoenyPlaced" [value]="moenyPlaced.id">{{moenyPlaced.name}}</option>
             </select>
@@ -54,14 +54,14 @@
 
           <div class="form-group col-6">
             <label for="ccmonth">المدينة</label>
-            <select class="form-control" (keyup)="GetOrders()" name="CountryId"
+            <select class="form-control" (change)="GetOrders()" name="CountryId"
               [(ngModel)]="orderFilter.CountryId">
               <option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</option>
             </select>
           </div>
           <div class="form-group col-6">
             <label for="ccyear">المنطقة </label>
-            <select class="form-control" (keyup)="GetOrders()" name="RegionId"
+            <select class="form-control" (change)="GetOrders()" name="RegionId"
               [(ngModel)]="orderFilter.RegionId">
               <option *ngFor="let Region of Regions" [value]="Region.id">{{Region.name}}</option>
             </select>

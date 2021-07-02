@@ -10,7 +10,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-pencil"></i></span>
             </div>
-            <input type="text" class="form-control" placeholder="رقم الوصل " autocomplete="username" required>
+            <input type="text" name="code" [(ngModel)]="Order.Code" class="form-control" placeholder="رقم الوصل "  required>
 
           </div>
 
@@ -18,14 +18,28 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-user"></i></span>
             </div>
-            <input type="text" class="form-control" placeholder="اسم المستلم" autocomplete="username" required>
+            <input type="text" name="RecipientName" [(ngModel)]="Order.RecipientName" class="form-control" placeholder="اسم المستلم"  required>
 
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-location-pin d-block"></i></span>
             </div>
-            <input type="text" class="form-control" placeholder="اربيل" autocomplete="new-password" required>
+            <select class="form-control"  name="CountryId"
+            [(ngModel)]="Order.CountryId">
+            <option style="background-color: rgb(207, 207, 207);">اختر مدينة</option>
+            <option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</option>
+          </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-location-pin d-block"></i></span>
+            </div>
+            <select class="form-control"  name="RegionId"
+            [(ngModel)]="Order.RegionId">
+            <option style="background-color: rgb(207, 207, 207);">اختر منطقة</option>
+            <option *ngFor="let Region of Regions" [value]="Region.id">{{Region.name}}</option>
+          </select>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -33,46 +47,48 @@
                 <li class="icon-location-pin d-block"></li>
               </span>
             </div>
-            <input type="text" class="form-control" placeholder="عنوان المستلم" autocomplete="email" required>
+            <input type="text" name="Address" [(ngModel)]="Order.Address" class="form-control" placeholder="عنوان المستلم" autocomplete="email" required>
           </div>
 
 
+         
+         
+          <div class="input-group mb-4">
+             <button type="button" style="width: 100%;" class="btn btn-info" data-toggle="modal" (click)="infoModal.show()">
+             نوع الطلبية
+            </button>
+        
+          </div>
+          <ng-container  *ngFor="let phones of Order.RecipientPhones;index as i">
+            <label for="phones+{{i}}"><a class="btn btn-info" (click)="RemovePhone(phones)">x </a></label>
+            <div class="input-group mb-4" >
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-phone"></i></span>
+              </div>
+              <input type="text" name="phones+{{i}}" [(ngModel)]="Order.RecipientPhones[i]" maxlength="11"
+              oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" 
+              class="form-control" placeholder=" رقم هاتف"  required>
+  
+            </div>
+          </ng-container>
+       
           <div class="input-group mb-4">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-phone"></i></span>
             </div>
-            <input type="text" class="form-control" placeholder=" رقم هاتف" autocomplete="new-password" required>
-
-          </div>
-          <div class="input-group mb-4">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="icon-phone"></i></span>
-            </div>
-            <input type="text" class="form-control" placeholder=" رقم هاتف اخر" autocomplete="new-password" required>
-
-          </div>
-          <div class="input-group mb-4">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="icon-pencil"></i></span>
-            </div>
-            <input type="text" class="form-control" placeholder=" النوع " autocomplete="new-password" required>
-
-          </div>
-          <div class="input-group mb-4">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="icon-pencil"></i></span>
-            </div>
-            <input type="text" class="form-control" placeholder=" العدد " autocomplete="new-password" required>
-
+            <input type="text" name="RecipientPhones" [(ngModel)]="Phone" maxlength="11"
+            oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" 
+            class="form-control" placeholder=" رقم هاتف"  required>
+            <a class="btn btn-info" (click)="AddPhone()">+ </a>
           </div>
           <div class="input-group ">
            
-              <textarea  style="width: 100%;" name="textarea-input" rows="3" class="form-control"
+              <textarea  name="ClientNote" [(ngModel)]="Order.ClientNote" style="width: 100%;" name="textarea-input" rows="3" class="form-control"
               placeholder="ملاحظات"></textarea>
            
           </div>
          <br>
-          <button type="button" class="btn btn-block btn-success">اضافة </button>
+          <button type="button" class="btn btn-block btn-info">اضافة </button>
         </form>
       </div>
       <div class="card-footer p-4">
@@ -88,3 +104,81 @@
     </div>
   </div>
 </div>
+    
+<div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> نوع الطلب</h4>
+        <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <thead>
+            <th>النوع</th>
+            <th>العدد</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let orderItem of Order.OrderItem;index as i">
+              <td>
+                <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-pencil"></i></span>
+                  </div>
+                  <select class="form-control"  name="OrderTypeId+{{i}}" 
+                  [(ngModel)]="orderItem.OrderTypeId">
+                  <option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</option>
+                </select>
+                </div>
+              </td>
+              <td>
+                <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-pencil"></i></span>
+                  </div>
+                  <input type="text" name="code" [(ngModel)]="orderItem.Count" class="form-control"
+                  oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" 
+                  placeholder=" العدد "  required>
+                </div>
+              </td>
+              <td><a class="btn btn-info" (click)="RemoveOrderItem(orderItem)">x</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-pencil"></i></span>
+                  </div>
+                  <select class="form-control"  
+                  [(ngModel)]="OrderItem.OrderTypeId">
+                  <option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</option>
+                </select>
+                </div>
+              </td>
+              <td>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-pencil"></i></span>
+                  </div>
+                  <input type="text" name="code" [(ngModel)]="OrderItem.Count" class="form-control" 
+                  oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" 
+                  placeholder=" العدد "  required>
+                </div>
+              </td>
+              <td><a class="btn btn-info" (click)="AddOrderItem()">+ </a></td>
+            </tr>
+          </tbody>
+        </table>
+       
+        
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="infoModal.hide()">Close</button>
+        <button type="button" class="btn btn-info">Save changes</button>
+      </div> -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

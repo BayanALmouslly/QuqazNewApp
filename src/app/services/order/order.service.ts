@@ -11,7 +11,7 @@ export class OrderService {
 
   constructor(public http: HttpClient) { }
   controler = environment.baseUrl + "api/COrder/"
-  get(paging:Paging,filter:OrderFiltering){
+  get(paging: Paging, filter: OrderFiltering) {
     let params = new HttpParams();
     if (filter.Code != undefined || filter.Code != null)
       params = params.append("Code", filter.Code);
@@ -33,5 +33,9 @@ export class OrderService {
       params = params.append("RowCount", paging.RowCount);
     if (paging.Page != undefined || paging.Page != null)
       params = params.append("Page", paging.Page);
-    return this.http.get<any>(this.controler, { params: params })  }
+    return this.http.get<any>(this.controler, { params: params })
+  }
+  Add(order) {
+    return this.http.post(this.controler, order)
+  }
 }

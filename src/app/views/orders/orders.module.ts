@@ -8,6 +8,7 @@ import { AddOrderComponent } from './add-order/add-order.component';
 import { ShowOrderComponent } from './show-order/show-order.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -23,6 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PaginationModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    ModalModule.forRoot()
+
   ]
 })
 export class OrdersModule { }
