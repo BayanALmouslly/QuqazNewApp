@@ -29,7 +29,7 @@
               <span class="input-group-text"><i class="icon-location-pin d-block"></i></span>
             </div>
             <select class="form-control"  name="CountryId"
-            [(ngModel)]="Order.CountryId">
+            [(ngModel)]="Order.CountryId" (change)="CountryChanged()">
             <option style="background-color: rgb(207, 207, 207);">اختر مدينة</option>
             <option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</option>
           </select>

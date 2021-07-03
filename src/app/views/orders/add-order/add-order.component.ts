@@ -15,19 +15,21 @@ export class AddOrderComponent implements OnInit {
   constructor(private orderServies: OrderService,
     private settingservice: SettingsService) { }
   Regions: IdAndName[] = []
-  Countries: IdAndName[] = []
+  Countries: any[] = []
   OrderTypes: IdAndName[] = []
   Order: AddOrder = new AddOrder
   OrderItem: OrderItem = new OrderItem
   Phone = ""
-  client:UserLogin=JSON.parse(localStorage.getItem('kokazUser'))
-  errorMessage:boolean=false
+  client: UserLogin = JSON.parse(localStorage.getItem('kokazUser'))
+  errorMessage: boolean = false
   ngOnInit(): void {
     this.GetSettings()
     this.Order.OrderItem = []
     this.Order.RecipientPhones = []
-    if(this.client.country)
-    this.Order.CountryId=this.client.country.id
+    if (this.client.country) {
+      this.Order.CountryId = this.client.country.id
+      this.Regions= this.client.country.regions
+    }
 
   }
   GetSettings() {
@@ -45,6 +47,10 @@ export class AddOrderComponent implements OnInit {
       this.Countries = res
     })
   }
+  CountryChanged() {
+    var country = this.Countries.find(c => c.id == this.Order.CountryId)
+    this.Regions = country.regions
+  }
   getOrderType() {
     this.settingservice.orderType().subscribe(res => {
       this.OrderTypes = res
@@ -58,14 +64,14 @@ export class AddOrderComponent implements OnInit {
   RemoveOrderItem(order) {
     this.Order.OrderItem = this.Order.OrderItem.filter(o => o != order)
   }
-  errorPhone=false
-  checkphone(){
+  errorPhone = false
+  checkphone() {
     if (this.Phone.length < 11 || !this.Phone) {
-      this.errorPhone=true
+      this.errorPhone = true
       return
     }
     else
-    this.errorPhone=false
+      this.errorPhone = false
   }
   AddPhone() {
     if (!this.Phone) {
@@ -81,7 +87,7 @@ export class AddOrderComponent implements OnInit {
     if (!this.Order.Code || this.Order.RecipientPhones.length == 0
       || this.Order.OrderItem.length == 0 || !this.Order.RecipientName
       || !this.Order.CountryId || !this.Order.Address) {
-        this.errorMessage=true
+      this.errorMessage = true
       return
     }
     this.Order.DateTime = new Date
