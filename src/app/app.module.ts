@@ -46,6 +46,7 @@ import { AuthGuard } from './views/auth/auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './views/auth/jwt.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToasterModule } from 'angular2-toaster';
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ToasterModule.forRoot()
 
   ],
   declarations: [
