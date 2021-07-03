@@ -57,7 +57,11 @@ export class AddOrderComponent implements OnInit {
     })
   }
   AddOrderItem() {
-    if (!this.OrderItem.Count || !this.OrderItem.OrderTypeId) return
+    if (!this.OrderItem.Count ) return
+    if (isNaN(this.OrderItem.OrderTypeId)) {
+      this.OrderItem.OrderTypeName = this.OrderItem.OrderTypeId.label;
+      this.OrderItem.OrderTypeId = null;
+    }
     this.Order.OrderItem.push(this.OrderItem)
     this.OrderItem = new OrderItem
   }
@@ -89,6 +93,10 @@ export class AddOrderComponent implements OnInit {
       || !this.Order.CountryId || !this.Order.Address) {
       this.errorMessage = true
       return
+    }
+    if (isNaN(this.Order.RegionId)) {
+      this.Order.RegioName = this.Order.RegionId.label;
+      this.Order.RegionId = null;
     }
     this.Order.DateTime = new Date
     this.orderServies.Add(this.Order).subscribe(res => {

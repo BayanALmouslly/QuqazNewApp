@@ -77,10 +77,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RegisterComponent
   ],
   providers: [
-    // {
-    //   provide: LocationStrategy,
-    //   useClass: HashLocationStrategy
-    // },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     AuthGuard,
     IconSetService,
