@@ -9,6 +9,8 @@ import { ShowOrderComponent } from './show-order/show-order.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { NotificationsRoutingModule } from '../notifications/notifications-routing.module';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     PaginationModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NotificationsRoutingModule,
+    AlertModule.forRoot(),
 
   ]
 })

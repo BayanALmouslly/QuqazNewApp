@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-md-6 mx-auto">
     <div class="card mx-4">
@@ -11,8 +12,8 @@
               <span class="input-group-text"><i class="icon-pencil"></i></span>
             </div>
             <input type="text" name="code" [(ngModel)]="Order.Code" class="form-control" placeholder="رقم الوصل "  required>
-
           </div>
+          <small *ngIf="!Order.Code&&errorMessage">رقم الوصل حقل مطلوب</small>
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -21,6 +22,8 @@
             <input type="text" name="RecipientName" [(ngModel)]="Order.RecipientName" class="form-control" placeholder="اسم المستلم"  required>
 
           </div>
+          <small *ngIf="!Order.RecipientName&&errorMessage">اسم المستلم  حقل مطلوب</small>
+
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-location-pin d-block"></i></span>
@@ -31,6 +34,8 @@
             <option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</option>
           </select>
           </div>
+          <small *ngIf="!Order.CountryId&&errorMessage">المدينة  حقل مطلوب</small>
+
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-location-pin d-block"></i></span>
@@ -49,6 +54,7 @@
             </div>
             <input type="text" name="Address" [(ngModel)]="Order.Address" class="form-control" placeholder="عنوان المستلم" autocomplete="email" required>
           </div>
+          <small *ngIf="!Order.Address&&errorMessage">العنوان  حقل مطلوب</small>
 
 
          
@@ -59,6 +65,8 @@
             </button>
         
           </div>
+          <small *ngIf="Order.OrderItem.length==0&&errorMessage"> نوع الطلبية حقل مطلوب</small>
+
           <ng-container  *ngFor="let phones of Order.RecipientPhones;index as i">
             <label for="phones+{{i}}"><a class="btn btn-info" (click)="RemovePhone(phones)">x </a></label>
             <div class="input-group mb-4" >
@@ -78,9 +86,12 @@
             </div>
             <input type="text" name="RecipientPhones" [(ngModel)]="Phone" maxlength="11"
             oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" 
-            class="form-control" placeholder=" رقم هاتف"  required>
-            <a class="btn btn-info" (click)="AddPhone()">+ </a>
+            class="form-control" placeholder=" رقم هاتف"  required (keyup)="checkphone()">
+            <a class="btn btn-info" (click)="AddPhone()" >+ </a>
           </div>
+          <small *ngIf="!Phone&&Order.RecipientPhones.length==0&&errorMessage">رقم الهاتف حقل مطلوب</small>
+          <small *ngIf="errorPhone">يجب ان يكون رقم الهاتف 11 حقل</small>
+
           <div class="input-group ">
            
               <textarea  name="ClientNote" [(ngModel)]="Order.ClientNote" style="width: 100%;" name="textarea-input" rows="3" class="form-control"
@@ -88,7 +99,7 @@
            
           </div>
          <br>
-          <button type="button" class="btn btn-block btn-info">اضافة </button>
+          <button type="button" class="btn btn-block btn-info" (click)="AddOrder()">اضافة </button>
         </form>
       </div>
       <div class="card-footer p-4">

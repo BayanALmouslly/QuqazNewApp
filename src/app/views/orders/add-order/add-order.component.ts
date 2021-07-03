@@ -3,6 +3,7 @@ import { IdAndName } from '../../../Models/id-and-name.model';
 import { AddOrder, OrderItem } from '../../../Models/order/add-order.model';
 import { OrderService } from '../../../services/order/order.service';
 import { SettingsService } from '../../../services/settings.service';
+import { UserLogin } from '../../auth/userlogin.model';
 
 @Component({
   selector: 'app-add-order',
@@ -19,11 +20,14 @@ export class AddOrderComponent implements OnInit {
   Order: AddOrder = new AddOrder
   OrderItem: OrderItem = new OrderItem
   Phone = ""
-  client=JSON.parse(localStorage.getItem('kokazUser'))
+  client:UserLogin=JSON.parse(localStorage.getItem('kokazUser'))
+  errorMessage:boolean=false
   ngOnInit(): void {
     this.GetSettings()
     this.Order.OrderItem = []
     this.Order.RecipientPhones = []
+    if(this.client.country)
+    this.Order.CountryId=this.client.country.id
 
   }
   GetSettings() {
@@ -54,8 +58,19 @@ export class AddOrderComponent implements OnInit {
   RemoveOrderItem(order) {
     this.Order.OrderItem = this.Order.OrderItem.filter(o => o != order)
   }
+  errorPhone=false
+  checkphone(){
+    if (this.Phone.length < 11 || !this.Phone) {
+      this.errorPhone=true
+      return
+    }
+    else
+    this.errorPhone=false
+  }
   AddPhone() {
-    if (this.Phone.length < 11 || !this.Phone) return
+    if (!this.Phone) {
+      return
+    }
     this.Order.RecipientPhones.push(this.Phone)
     this.Phone = ""
   }
@@ -66,6 +81,7 @@ export class AddOrderComponent implements OnInit {
     if (!this.Order.Code || this.Order.RecipientPhones.length == 0
       || this.Order.OrderItem.length == 0 || !this.Order.RecipientName
       || !this.Order.CountryId || !this.Order.Address) {
+        this.errorMessage=true
       return
     }
     this.Order.DateTime = new Date
