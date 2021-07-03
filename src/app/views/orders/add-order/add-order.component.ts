@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToasterService } from 'angular2-toaster';
 import { IdAndName } from '../../../Models/id-and-name.model';
 import { AddOrder, OrderItem } from '../../../Models/order/add-order.model';
 import { OrderService } from '../../../services/order/order.service';
@@ -13,7 +14,8 @@ import { UserLogin } from '../../auth/userlogin.model';
 export class AddOrderComponent implements OnInit {
 
   constructor(private orderServies: OrderService,
-    private settingservice: SettingsService) { }
+    private settingservice: SettingsService,
+   private toasterService: ToasterService) { }
   Regions: IdAndName[] = []
   Countries: any[] = []
   OrderTypes: IdAndName[] = []
@@ -88,6 +90,7 @@ export class AddOrderComponent implements OnInit {
     this.Order.RecipientPhones = this.Order.RecipientPhones.filter(o => o != phone)
   }
   AddOrder() {
+
     if (!this.Order.Code || this.Order.RecipientPhones.length == 0
       || this.Order.OrderItem.length == 0 || !this.Order.RecipientName
       || !this.Order.CountryId || !this.Order.Address) {
@@ -100,7 +103,12 @@ export class AddOrderComponent implements OnInit {
     }
     this.Order.DateTime = new Date
     this.orderServies.Add(this.Order).subscribe(res => {
+      this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
       this.Order = new AddOrder
+    },err=>{
+      this.toasterService.pop('error', '', err);
+
     })
   }
+  
 }

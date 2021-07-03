@@ -12,6 +12,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { NotificationsRoutingModule } from '../notifications/notifications-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {ToasterModule} from 'angular2-toaster';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ModalModule.forRoot(),
     NotificationsRoutingModule,
     AlertModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
+    ToasterModule.forRoot()
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class OrdersModule { }

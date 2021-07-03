@@ -76,7 +76,6 @@
           <small *ngIf="Order.OrderItem.length==0&&errorMessage"> نوع الطلبية حقل مطلوب</small>
 
           <ng-container *ngFor="let phones of Order.RecipientPhones;index as i">
-            <label for="phones+{{i}}"><a class="btn btn-info" (click)="RemovePhone(phones)">x </a></label>
             <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="icon-phone"></i></span>
@@ -84,7 +83,7 @@
               <input type="text" name="phones+{{i}}" [(ngModel)]="Order.RecipientPhones[i]" maxlength="11"
                 oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                 class="form-control" placeholder=" رقم هاتف" required>
-
+                <a class="btn btn-info" (click)="RemovePhone(phones)">x </a>
             </div>
           </ng-container>
 
@@ -204,3 +203,4 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<toaster-container></toaster-container>

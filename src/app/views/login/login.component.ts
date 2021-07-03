@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
 import { AuthService } from '../auth/auth.service';
 import { UserLogin } from '../auth/userlogin.model';
 
@@ -10,7 +11,8 @@ import { UserLogin } from '../auth/userlogin.model';
 })
 export class LoginComponent { 
   constructor(private router:Router,
-    private authService:AuthService){}
+    private authService:AuthService,
+    private toasterService: ToasterService){}
   login(){
     this.router.navigate(['/dashboard'])
   }
@@ -34,6 +36,8 @@ export class LoginComponent {
           this.router.navigate(['/dashboard'])
 
         }, error => {
+          this.toasterService.pop('error', '', error);
+
         }
 
       )
