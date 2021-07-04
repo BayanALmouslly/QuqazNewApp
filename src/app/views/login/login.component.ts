@@ -36,8 +36,9 @@ export class LoginComponent {
           this.router.navigate(['/dashboard'])
 
         }, error => {
-          this.toasterService.pop('error', '', error);
-
+          console.log(error)
+         // this.toasterService.pop('error', '', error.message);
+         this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
         }
 
       )

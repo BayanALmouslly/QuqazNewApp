@@ -41,18 +41,19 @@ export class JwtInterceptor implements HttpInterceptor {
                     return this.logoutUser();
                   }
                 case 0:
-                  this.router.navigate(['/noconnection']);
+                  this.router.navigate(['/dashboard']);
                 case 403:{
-                  var user=localStorage.getItem('user')
-                  if(user=='client')
-                  this.router.navigate(['/clienthome']);
-                  else if(user=='employee')
-                  this.router.navigate(['/unauthorized']);
+                  this.router.navigate(['/login']);
 
                 }
-                case 400:
-                case 409:
-                case 500:
+                case 404:{
+                  this.router.navigate(['/404']);
+
+                }
+                // case 400:
+                // case 409:
+                // case 500:
+                //   this.router.navigate(['/500']);
 
                 default:
                   return this.generalErrorHandling(error);
