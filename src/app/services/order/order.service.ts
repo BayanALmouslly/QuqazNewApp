@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 import { OrderFiltering } from '../../Models/order/order-filtering.model';
 import { Paging } from '../../Models/paging';
 

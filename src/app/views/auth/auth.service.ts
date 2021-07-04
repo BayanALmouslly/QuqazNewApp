@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { from, Observable, of, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 import { LocalStorageService } from './local-storage.service';
 export interface user {
   email: string;
