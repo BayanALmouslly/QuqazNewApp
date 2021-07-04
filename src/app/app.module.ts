@@ -47,6 +47,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './views/auth/jwt.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToasterModule } from 'angular2-toaster';
+import { ProfileComponent } from './views/profile/profile.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
@@ -67,7 +69,9 @@ import { ToasterModule } from 'angular2-toaster';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ToasterModule.forRoot()
+    ToasterModule.forRoot(),
+    ModalModule.forRoot(),
+
 
   ],
   declarations: [
@@ -76,7 +80,8 @@ import { ToasterModule } from 'angular2-toaster';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   providers: [
     {

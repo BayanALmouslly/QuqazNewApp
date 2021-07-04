@@ -7,6 +7,7 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
+import { ProfileComponent } from './views/profile/profile.component';
 import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
@@ -33,9 +34,10 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     data: {
-      title: 'Login Page'
+      title: 'تسجيل الدخول'
     }
   },
+  
   {
     path: 'register',
     component: RegisterComponent,
@@ -86,7 +88,14 @@ export const routes: Routes = [
       {
         path: 'orders',
         loadChildren: () => import('./views/orders/orders.module').then(m => m.OrdersModule)
-      }
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        data: {
+          title: 'معلومات شخصية'
+        }
+      },
     ]
   },
   { path: '**', component: P404Component }

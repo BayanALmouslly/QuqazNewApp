@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-lg-4 mx-auto">
+
+        <div class=" card-box ">
+            <li class="icon-pencil d-block" data-toggle="modal"*ngIf="!showEdit" (click)="infoModal.show()"></li>
+            <li class="fa fa-bookmark" data-toggle="modal" *ngIf="showEdit"(click)="saveEdit()"></li>
+
+            <div class="text-center member-card pt-2 pb-2">
+
+                <div class="thumb-lg member-thumb mx-auto"><img src="assets/img/brand/user.jfif"
+                        class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                <div class="" *ngIf="!showEdit">
+                    <h4>{{user.name}}</h4>
+                    <h6>{{user.userName}}</h6>
+                    <p class="text-muted" *ngFor="let phone of user.phones">
+                        <li class="icon icon-phone d-block"> <span>| </span>
+                            <span><a href="#" class="text-pink">{{phone.phone}}</a></span>
+                        </li>
+                    </p>
+                    <p class="text-muted" *ngIf="user.address!=' '&&user.address">
+                        <li class="icon icon-location-pin d-block"> <span>| </span>
+                            <span><a
+                                    class="text-pink">{{user.address}}{{user.country?'-'+user.country.name:null}}</a></span>
+                        </li>
+                    </p>
+                </div>
+                <div class="row" *ngIf="showEdit">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="icon-pencil"></i></span>
+                        </div>
+                        <input type="text" name="code" [(ngModel)]="user.name" class="form-control" placeholder="رقم الوصل "
+                          required>
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="icon-pencil"></i></span>
+                        </div>
+                        <input type="text" name="code" [(ngModel)]="user.userName" class="form-control" placeholder="رقم الوصل "
+                          required>
+                      </div>
+                    <ng-container *ngFor="let phones of user.phones;index as i">
+                        <div class="input-group mb-4">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-phone"></i></span>
+                          </div>
+                          <input type="text" name="phones+{{i}}" [(ngModel)]="user.phones[i].phone" maxlength="11"
+                            oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
+                            class="form-control" placeholder=" رقم هاتف" required>
+                        </div>
+                      </ng-container>
+            
+                </div>
+                <!-- <ul class="social-links list-inline">
+                    <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
+                            href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                    <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
+                            href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
+                            href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+                </ul> -->
+
+                <!-- <div class="mt-4">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mt-3">
+                                <h4>2563</h4>
+                                <p class="mb-0 text-muted">Wallets Balance</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mt-3">
+                                <h4>6952</h4>
+                                <p class="mb-0 text-muted">Income amounts</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mt-3">
+                                <h4>1125</h4>
+                                <p class="mb-0 text-muted">Total Transactions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-info" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> طلب تعديل</h4>
+                        <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        يجب موافق ادارة الموقع للسماح بتعديل معلوماتك
+                        <a class="text-pink">طلب تعديل</a> لتعديل معلوماتك يرجى الضغط على
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="infoModal.hide()">اغلاق</button>
+                        <button type="button" class="btn btn-info" (click)="infoModal.hide();CanEdit()">طلب
+                            تعديل</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <toaster-container></toaster-container>
+    </div>
+</div>

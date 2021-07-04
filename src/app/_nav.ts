@@ -4,7 +4,7 @@ import { UserLogin } from './views/auth/userlogin.model';
 export const navItems: INavData[] = [
   {
     name:user.name ,
-    url: '/dashboard',
+    url: '/profile',
     icon: 'icon-user',
     
   },
