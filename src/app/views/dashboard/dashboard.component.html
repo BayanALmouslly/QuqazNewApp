@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-4">
     <div class="callout callout-info">
       <small class="text-muted"> جميع الطلبات </small>
@@ -6,13 +6,13 @@
       <strong class="h4">{{CStatics.totalOrder}}</strong>
     </div>
   </div>
-  <!-- <div class="col-3">
+  <div class="col-3">
     <div class="callout callout-danger">
       <small class="text-muted">الطلبات الجديدة</small>
       <br>
       <strong class="h4">{{CStatics.orderInWay}}</strong>
     </div>
-  </div> -->
+  </div>
   <div class="col-4">
     <div class="callout callout-warning">
       <small class="text-muted">طلبات في المخزن </small>
@@ -27,7 +27,7 @@
       <strong class="h4">{{CStatics.orderInWay}}</strong>
     </div>
   </div>
-</div>
+</div> -->
 <div class="animated fadeIn">
   <div class="row">
     <div class="col-sm-6 col-lg-3">
@@ -38,7 +38,7 @@
           </button> -->
           <div class="h1 text-muted text-right mb-4">
             <i class="icon-social-dropbox"></i>
-          </div> 
+          </div>
           <div class="text-value">{{CStatics.totalOrder}}</div>
           <div>عدد الطرود الكلي</div>
         </div>
@@ -64,10 +64,10 @@
             </div>
           </div> -->
           <div class="h1 text-muted text-right mb-4">
-            <i class="icon-login"></i>
-          </div> 
-          <div class="text-value">{{CStatics.orderInCompany}}</div>
-          <div>عدد الطرود التي مبالغها في الشركة</div>
+        <b><i class="icon-login"></i></b>    
+          </div>
+          <div class="text-value">{{CStatics.orderMoneyInCompany}}</div>
+          <div>عدد الطرود التي مبالغها داخل الشركة</div>
         </div>
         <!-- <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
           <canvas baseChart class="chart" [datasets]="lineChart1Data" [labels]="lineChart1Labels"
@@ -80,52 +80,94 @@
       <div class="card text-white bg-warning">
         <div class="card-body ">
           <div class="h1 text-muted text-right mb-4">
-            <i class="icon-people"></i>
-          </div> 
-          <div class="text-value">{{CStatics.deliveredOrder}}</div>
-          <div>عدد الطرود   تم تسليمها</div>
+            <i class="fa fa-home fa-lg mt-4"></i>
+          </div>
+          <div class="text-value">{{CStatics.orderDeliverdToClient}}</div>
+          <div>عدد الطرود تم تسليمها الى الزبون</div>
         </div>
-        
-      </div>
-    </div>
-  
-    <div class="col-6 col-lg-3">
-      <div class="card text-white bg-facebook ">
-        <div class="card-body ">
-          <div class="h1 text-muted text-right mb-4">
-            <i class="icon-share-alt"></i>
-          </div> 
-          <div class="text-value">{{CStatics.completelyReturnedOrder}}</div>
-          <div>عدد الطرود  المرتجعة كليا</div>
-        </div>
-        
+
       </div>
     </div>
     <div class="col-6 col-lg-3">
-      <div class="card text-white bg-primary">
+      <div class="card text-white bg-facebook">
         <div class="card-body ">
+          <!-- <button type="button" class="btn btn-transparent p-0 float-right">
+            <i class="icon-location-pin"></i>
+          </button> -->
           <div class="h1 text-muted text-right mb-4">
-            <i class="icon-pie-chart"></i>
-          </div> 
-          <div class="text-value">{{CStatics.partialReturnedOrder}}</div>
-          <div>عدد الطرود المرتجعة جزئيا</div>
+            <i class="fa fa-credit-card fa-lg mt-4"></i>
+          </div>
+          <div class="text-value">{{CStatics.orderMoneyDelived}}</div>
+          <div>عدد الطرود تم استلام مبالغها</div>
         </div>
-        
+        <!-- <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+          <canvas baseChart class="chart" [datasets]="lineChart2Data" [labels]="lineChart2Labels"
+            [options]="lineChart2Options" [colors]="lineChart2Colours" [legend]="lineChart2Legend"
+            [chartType]="lineChart2Type"></canvas>
+        </div> -->
       </div>
     </div>
     <div class="col-6 col-lg-3">
       <div class="card text-white bg-danger">
         <div class="card-body ">
           <div class="h1 text-muted text-right mb-4">
-            <i class="icon-share-alt"></i>
-          </div> 
-          <div class="text-value">{{CStatics.delayedOrder}}</div>
-          <div>عدد الطرود   المؤجلة </div>
+            <i class="fa fa-car fa-lg mt-4"></i>
+          </div>
+          <div class="text-value">{{CStatics.orderInWat}}</div>
+          <div>عدد الطرود في الطريق</div>
         </div>
-        
+
       </div>
     </div>
     <div class="col-6 col-lg-3">
+      <div class="card text-white bg-info">
+        <div class="card-body ">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="fa fa-cubes fa-lg mt-4"></i>
+          </div>
+          <div class="text-value">{{CStatics.orderInStore}}</div>
+          <div>عدد الطرود في المخزن</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card text-white bg-primary">
+        <div class="card-body ">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="fa fa-hourglass-half fa-lg mt-4"></i>
+          </div>
+          <div class="text-value">{{CStatics.unacceptableOrder}}</div>
+          <div>عدد الطرود في انتظار استلامها من الشركة </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card text-white bg-warning">
+        <div class="card-body ">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="icon-login"></i>
+          </div>
+          <div class="text-value">{{CStatics.orderReurnedInCompany}}</div>
+          <div>عدد الطرود مرتجعة داخل الشركة</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card text-white bg-facebook ">
+        <div class="card-body ">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="fa fa-check-square fa-lg mt-4"></i>
+          </div>
+          <div class="text-value">{{CStatics.completelyReturnedOrder}}</div>
+          <div>عدد الطرود المرتجعة تم تسليمها</div>
+        </div>
+
+      </div>
+    </div>
+    <!-- <div class="col-6 col-lg-3">
       <div class="card text-white bg-primary">
         <div class="card-body ">
           <div class="h1 text-muted text-right mb-4">
@@ -137,8 +179,45 @@
         
       </div>
     </div>
+    -->
+    <div class="col-6 col-lg-3">
+      <div class="card text-white bg-info">
+        <div class="card-body ">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="icon-pie-chart"></i>
+          </div>
+          <div class="text-value">{{CStatics.partialReturnedOrder}}</div>
+          <div>عدد الطرود المرتجعة جزئيا</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card text-white bg-danger">
+        <div class="card-body ">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="fa fa-history fa-lg mt-4"></i>
+          </div>
+          <div class="text-value">{{CStatics.delayedOrder}}</div>
+          <div>عدد الطرود المؤجلة </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- <div class="col-6 col-lg-3">
+      <div class="card text-white bg-danger">
+        <div class="card-body ">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="icon-ban"></i>
+          </div>
+          <div class="text-value">{{CStatics.unacceptableOrder}}</div>
+          <div>عدد الطرود المرفوضة</div>
+        </div>
+
+      </div>
+    </div> -->
   </div>
- 
+
   <!-- <div class="card">
     <div class="card-body">
       <div class="row">
