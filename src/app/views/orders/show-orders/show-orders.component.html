@@ -4,7 +4,6 @@
       <div class="card-body">
         <h1 class="card-title">الطلبات</h1>
         <label>بحث على حسب </label>
-
         <div class="row">
           <div class="col-6 col-lg-4">
             <div class="form-group">
@@ -60,9 +59,6 @@
           </div>
 
         </div>
-        
-        
-     
       </div>
     </div>
   </div>
@@ -71,9 +67,12 @@
   <div class=" col-lg-3" *ngFor="let order of orders">
     <div class="card text-white bg-info">
       <div class="card-body pb-0">
+      
         <!-- <button type="button" class="btn btn-transparent p-0 float-right">
             </button> -->
-        <div class="text-value">{{order.code}}</div>
+        <div class="text-value">
+          <i class="icon-social-dropbox h1"></i>
+          {{order.code}}</div>
         
         <br>
         <div style="text-align: right;" *ngIf="order.recipientName">
