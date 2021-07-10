@@ -6,23 +6,21 @@
         <label>بحث على حسب </label>
 
         <div class="row">
-          <div class="col-6">
+          <div class="col-6 col-lg-4">
             <div class="form-group">
               <label for="cvv"></label>
               <input type="text" class="form-control" (keyup)="GetOrders()" name="code"
                 [(ngModel)]="orderFilter.Code" placeholder="الكود">
             </div>
           </div>
-          <div class="col-6">
+          <div class="col-6 col-lg-4">
             <div class="form-group">
               <label for="cvv"></label>
               <input type="text" class="form-control" (keyup)="GetOrders()" name="RecipientName"
                 [(ngModel)]="orderFilter.RecipientName" placeholder="اسم المستلم">
             </div>
           </div>
-        </div>
-        <div>
-          <div class="col-12">
+          <div class="col-12 col-lg-4">
             <div class="form-group">
               <label for="cvv"></label>
               <input type="text" class="form-control" maxlength="11"
@@ -30,36 +28,30 @@
                 (keyup)="GetOrders()" name="Phone" [(ngModel)]="orderFilter.Phone" placeholder="رقم الهاتف">
             </div>
           </div>
-        </div>
-        <div class="row">
-
-          <div class="form-group col-6">
+          
+          <div class="form-group col-6 col-lg-3">
             <label for="ccmonth">حالة الشحنة</label>
             <select class="form-control" (change)="GetOrders()" name="OrderplacedId"
               [(ngModel)]="orderFilter.OrderplacedId">
               <option *ngFor="let orderplace of OrderPlaced" [value]="orderplace.id">{{orderplace.name}}</option>
             </select>
           </div>
-          <div class="form-group col-6">
+          <div class="form-group col-6 col-lg-3">
             <label for="ccyear">موقع المبلغ </label>
             <select class="form-control" (change)="GetOrders()" name="MonePlacedId"
               [(ngModel)]="orderFilter.MonePlacedId">
               <option *ngFor="let moenyPlaced of MoenyPlaced" [value]="moenyPlaced.id">{{moenyPlaced.name}}</option>
             </select>
           </div>
-
-        </div>
-        <!--/.row-->
-        <div class="row">
-
-          <div class="form-group col-6">
+          
+          <div class="form-group col-6 col-lg-3">
             <label for="ccmonth">المدينة</label>
             <select class="form-control" (change)="GetOrders()" name="CountryId"
               [(ngModel)]="orderFilter.CountryId">
               <option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</option>
             </select>
           </div>
-          <div class="form-group col-6">
+          <div class="form-group col-6 col-lg-3">
             <label for="ccyear">المنطقة </label>
             <select class="form-control" (change)="GetOrders()" name="RegionId"
               [(ngModel)]="orderFilter.RegionId">
@@ -68,7 +60,9 @@
           </div>
 
         </div>
-        <!--/.row-->
+        
+        
+     
       </div>
     </div>
   </div>
@@ -80,16 +74,18 @@
         <!-- <button type="button" class="btn btn-transparent p-0 float-right">
             </button> -->
         <div class="text-value">{{order.code}}</div>
-        <div style="text-align: right;">
-          {{order.orderplaced.name}} {{" - "+order.monePlaced.name}}
-        </div>
+        
         <br>
-        <div style="text-align: right;">
+        <div style="text-align: right;" *ngIf="order.recipientName">
           <i class="icon-user icons  d-block">{{order.recipientName}}</i>
         </div>
         <br>
         <div style="text-align: right;">
           <i class="icon-phone icons  d-block "> {{order.recipientPhones}}</i>
+        </div>
+        <br>
+        <div style="text-align: center;">
+          {{order.orderplaced.name}} {{" - "+order.monePlaced.name}}
         </div>
       </div>
       <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
@@ -104,6 +100,11 @@
     <div class="col-5 ">
       <pagination [boundaryLinks]="showBoundaryLinks" 
       [directionLinks]="showDirectionLinks" 
+      [firstText]="'الاول'"
+      [previousText]="'السابق'"
+      [nextText]="'التالي'"
+      [lastText]="'الاخير'"
+      [rotate]="true"
       [totalItems]="totalItems"
       [itemsPerPage]="5"
       (pageChanged)="pageChanged($event)"></pagination>
