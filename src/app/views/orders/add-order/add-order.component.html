@@ -26,13 +26,18 @@
           <small *ngIf="!Order.RecipientName&&errorMessage">اسم المستلم حقل مطلوب</small>
 
           <div class="input-group mb-3">
-            <div class="input-group-prepend">
+            <!-- <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-location-pin d-block"></i></span>
-            </div>
-            <select class="form-control" name="CountryId" [(ngModel)]="Order.CountryId" (change)="CountryChanged()">
+            </div> -->
+            <!-- <select class="form-control" name="CountryId" [(ngModel)]="Order.CountryId" (change)="CountryChanged()">
               <option style="background-color: rgb(207, 207, 207);">اختر مدينة</option>
               <option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</option>
             </select>
+               -->
+            <ng-select appOnReturn [(ngModel)]="Order.CountryId"  (change)="CountryChanged()"[ngModelOptions]="{standalone: true}"
+            [closeOnSelect]="true" name="Country" style="width:100%;">
+            <ng-option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</ng-option>
+          </ng-select>
           </div>
           <small *ngIf="!Order.CountryId&&errorMessage">المدينة حقل مطلوب</small>
 
