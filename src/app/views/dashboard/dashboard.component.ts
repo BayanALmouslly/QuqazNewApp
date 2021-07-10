@@ -392,7 +392,6 @@ export class DashboardComponent implements OnInit {
   getStatics() {
     this.staticsService.get().subscribe(res => {
       this.CStatics = res as CStatics
-      console.log(res)
     })
   }
 }
