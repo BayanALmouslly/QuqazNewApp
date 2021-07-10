@@ -1,10 +1,13 @@
 export class CStatics {
     totalOrder
-    orderMoneyInCompany
+    delayedOrder
+    orderComplitlyReutrndDeliverd
+    orderComplitlyReutrndInCompany
     orderDeliverdToClient
-    orderMoneyDelived
     orderInWat
     orderInStore
-    orderReurnedInCompany
-    delayedOrder
+    orderMoneyDelived 
+    orderMoneyInCompany
+    orderPartialReturned
+    orderWithClient 
 }
