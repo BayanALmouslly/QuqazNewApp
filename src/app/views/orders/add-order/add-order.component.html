@@ -11,9 +11,10 @@
               <span class="input-group-text"><i class="icon-pencil"></i></span>
             </div>
             <input type="text" name="code" [(ngModel)]="Order.Code" class="form-control" placeholder="رقم الوصل "
-              required>
+           (keyup)="checkCode()"   required>
           </div>
           <small *ngIf="!Order.Code&&errorMessage">رقم الوصل حقل مطلوب</small>
+          <small *ngIf="codeError">رقم الوصل  مكرر</small>
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">

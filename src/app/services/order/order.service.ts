@@ -39,6 +39,8 @@ export class OrderService {
     return this.http.post(this.controler, order)
   }
   codeExist(code){
-    
+    let formData = new HttpParams();
+    formData.append("code",code);
+    return this.http.get(this.controler+"codeExist",{ params: formData })
   }
 }

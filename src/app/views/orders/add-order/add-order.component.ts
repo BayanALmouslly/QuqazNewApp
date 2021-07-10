@@ -15,7 +15,7 @@ export class AddOrderComponent implements OnInit {
 
   constructor(private orderServies: OrderService,
     private settingservice: SettingsService,
-   private toasterService: ToasterService) { }
+    private toasterService: ToasterService) { }
   Regions: IdAndName[] = []
   Countries: any[] = []
   OrderTypes: IdAndName[] = []
@@ -30,7 +30,7 @@ export class AddOrderComponent implements OnInit {
     this.Order.RecipientPhones = []
     if (this.client.country) {
       this.Order.CountryId = this.client.country.id
-      this.Regions= this.client.country.regions
+      this.Regions = this.client.country.regions
     }
 
   }
@@ -59,11 +59,12 @@ export class AddOrderComponent implements OnInit {
     })
   }
   AddOrderItem() {
-    if (!this.OrderItem.Count ) return
+    if (!this.OrderItem.Count) return
     if (isNaN(this.OrderItem.OrderTypeId)) {
       this.OrderItem.OrderTypeName = this.OrderItem.OrderTypeId.label;
       this.OrderItem.OrderTypeId = null;
     }
+    this.OrderItem.Count=(Number)(this.OrderItem.Count)
     this.Order.OrderItem.push(this.OrderItem)
     this.OrderItem = new OrderItem
   }
@@ -90,26 +91,44 @@ export class AddOrderComponent implements OnInit {
     this.Order.RecipientPhones = this.Order.RecipientPhones.filter(o => o != phone)
   }
   AddOrder() {
-
+    if (this.Phone && !this.errorPhone) {
+      this.Order.RecipientPhones.push(this.Phone)
+      this.Phone = ""
+    }
     if (!this.Order.Code || this.Order.RecipientPhones.length == 0
       || this.Order.OrderItem.length == 0 || !this.Order.RecipientName
-      || !this.Order.CountryId || !this.Order.Address) {
+      || !this.Order.CountryId || !this.Order.Address || this.codeError) {
       this.errorMessage = true
       return
     }
+    else
+      this.errorMessage = false
+
     // if (isNaN(this.Order.RegionId)) {
     //   this.Order.RegioName = this.Order.RegionId.label;
     //   this.Order.RegionId = null;
     // }
+    
     this.Order.DateTime = new Date
     this.orderServies.Add(this.Order).subscribe(res => {
       this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
       this.Order = new AddOrder
-    },err=>{
-       this.toasterService.pop('error', '', err.message);
+      this.errorMessage = false
+
+    }, err => {
+      this.toasterService.pop('error', '', err.message);
+      console.log(err)
       //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
 
     })
   }
-  
+  codeError: boolean
+  checkCode() {
+    this.orderServies.codeExist(this.Order.Code).subscribe(res => {
+      if (res)
+        this.codeError = true
+      else
+        this.codeError = false
+    })
+  }
 }

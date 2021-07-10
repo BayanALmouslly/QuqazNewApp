@@ -14,5 +14,5 @@ export class AddOrder {
 export class OrderItem {
     OrderTypeName
     OrderTypeId
-    Count
+    Count:number
 }
