@@ -24,6 +24,11 @@ export const navItems: INavData[] = [
     
   },
   {
+    name: 'اضافة طلب',
+    url: '/orders/addorder',
+    icon: 'icon-plus'
+  },
+  {
     name: 'الطلبات',
     url: '/orders',
     icon: 'icon-social-dropbox',
@@ -33,10 +38,12 @@ export const navItems: INavData[] = [
     // }
   },
   {
-    name: 'اضافة طلب',
+    name: ' كشف حساب حسب نوع الشحنة',
     url: '/orders/addorder',
-    icon: 'icon-plus'
+    icon: 'icon-layers'
   },
+ 
+  
   {
     name: 'تسجيل خروج ',
     url: '/login',

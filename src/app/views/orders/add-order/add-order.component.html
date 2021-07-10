@@ -36,22 +36,14 @@
           </div>
           <small *ngIf="!Order.CountryId&&errorMessage">المدينة حقل مطلوب</small>
 
-          <div class="input-group mb-3">
-            <!-- <div class="input-group-prepend">
-              <span class="input-group-text"><i class="icon-location-pin d-block"></i></span>
-             
-            </div> -->
+          <!-- <div class="input-group mb-3">
+            
             <ng-select appOnReturn [(ngModel)]="Order.RegionId" [ngModelOptions]="{standalone: true}"
             [closeOnSelect]="true" name="Region" [addTag]="true" style="width:100%;">
             <ng-option *ngFor="let Region of Regions" [value]="Region.id">{{Region.name}}</ng-option>
           </ng-select>
-            <!-- <select class="form-control"  name="RegionId"
-            [(ngModel)]="Order.RegionId">
-            <option style="background-color: rgb(207, 207, 207);">اختر منطقة</option>
-            <option *ngFor="let Region of Regions" [value]="Region.id">{{Region.name}}</option>
-          </select> -->
-          
-          </div>
+         
+          </div> -->
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">

@@ -97,10 +97,10 @@ export class AddOrderComponent implements OnInit {
       this.errorMessage = true
       return
     }
-    if (isNaN(this.Order.RegionId)) {
-      this.Order.RegioName = this.Order.RegionId.label;
-      this.Order.RegionId = null;
-    }
+    // if (isNaN(this.Order.RegionId)) {
+    //   this.Order.RegioName = this.Order.RegionId.label;
+    //   this.Order.RegionId = null;
+    // }
     this.Order.DateTime = new Date
     this.orderServies.Add(this.Order).subscribe(res => {
       this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
