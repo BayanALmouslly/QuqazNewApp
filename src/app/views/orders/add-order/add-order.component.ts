@@ -110,6 +110,7 @@ export class AddOrderComponent implements OnInit {
     }
     else
       this.errorMessage = false
+      this.Order.Cost=this.Order.Cost.replace(/,/g, "")*1;
 
     // if (isNaN(this.Order.RegionId)) {
     //   this.Order.RegioName = this.Order.RegionId.label;
@@ -120,6 +121,7 @@ export class AddOrderComponent implements OnInit {
     this.orderServies.Add(this.Order).subscribe(res => {
       this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
       this.Order = new AddOrder
+      this.Order.RecipientPhones=[]
       this.errorMessage = false
       // this.router.navigate(['/orders/sendorder'])
     }, err => {
@@ -133,7 +135,6 @@ export class AddOrderComponent implements OnInit {
   codeError: boolean
   checkCode() {
     this.orderServies.codeExist(this.Order.Code).subscribe(res => {
-      console.log(res)
       if (res)
         this.codeError = true
       else
