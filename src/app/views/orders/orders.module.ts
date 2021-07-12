@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 
 import { OrdersRoutingModule } from './orders-routing.module';
 import { ShowOrdersComponent } from './show-orders/show-orders.component';
@@ -34,7 +34,8 @@ import { SendordersComponent } from './sendorders/sendorders.component';
     NotificationsRoutingModule,
     AlertModule.forRoot(),
     NgSelectModule,
-    ToasterModule.forRoot()
-  ], schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    ToasterModule.forRoot(),
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers:[CurrencyPipe]
 })
 export class OrdersModule { }

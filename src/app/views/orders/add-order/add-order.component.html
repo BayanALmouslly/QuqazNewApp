@@ -55,7 +55,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-user"></i></span>
             </div>
-            <input type="text" name="Cost" [(ngModel)]="Order.Cost" class="form-control"
+            <input type="text" name="Cost" (change)="currency()" [(ngModel)]="Order.Cost" class="form-control"
               placeholder="كلفة التوصيل " required>
 
           </div>

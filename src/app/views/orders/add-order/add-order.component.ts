@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
@@ -17,7 +18,8 @@ export class AddOrderComponent implements OnInit {
   constructor(private orderServies: OrderService,
     private settingservice: SettingsService,
     private toasterService: ToasterService,
-    private router: Router) { }
+    private router: Router,
+    private currencyPipe : CurrencyPipe) { }
   Regions: IdAndName[] = []
   Countries: any[] = []
   OrderTypes: IdAndName[] = []
@@ -138,4 +140,9 @@ export class AddOrderComponent implements OnInit {
         this.codeError = false
     })
   }
+  formattedAmount
+  currency(){
+    this.formattedAmount = this.currencyPipe.transform(this.Order.Cost,' ');
+    this.Order.Cost = this.formattedAmount.split('.00')[0];
+}
 }
