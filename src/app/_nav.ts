@@ -38,6 +38,15 @@ export const navItems: INavData[] = [
     // }
   },
   {
+    name: 'ارسال الطلبات الى المندوب',
+    url: '/orders/sendorder',
+    icon: 'icon-social-dropbox',
+    // badge: {
+    //   variant: 'info',
+    //   text: 'NEW'
+    // }
+  },
+  {
     name: ' كشف حساب حسب نوع الشحنة',
     url: '/orders/addorder',
     icon: 'icon-layers'

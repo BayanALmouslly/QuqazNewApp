@@ -39,6 +39,7 @@
             [closeOnSelect]="true" name="Country" style="width:100%;">
             <ng-option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</ng-option>
           </ng-select>
+        كلفة التوصيل  :  {{deliveryCost}}
           </div>
           <small *ngIf="!Order.CountryId&&errorMessage">المدينة حقل مطلوب</small>
 

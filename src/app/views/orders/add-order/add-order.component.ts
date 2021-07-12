@@ -26,14 +26,12 @@ export class AddOrderComponent implements OnInit {
   Phone = ""
   client: UserLogin = JSON.parse(localStorage.getItem('kokazUser'))
   errorMessage: boolean = false
+  deliveryCost
   ngOnInit(): void {
     this.GetSettings()
     this.Order.OrderItem = []
     this.Order.RecipientPhones = []
-    if (this.client.country) {
-      this.Order.CountryId = this.client.country.id
-      this.Regions = this.client.country.regions
-    }
+    
 
   }
   GetSettings() {
@@ -49,10 +47,15 @@ export class AddOrderComponent implements OnInit {
   getCountries() {
     this.settingservice.Countries().subscribe(res => {
       this.Countries = res
+      if (this.client.country) {
+        this.Order.CountryId = this.client.country.id
+        this.CountryChanged()
+      }
     })
   }
   CountryChanged() {
     var country = this.Countries.find(c => c.id == this.Order.CountryId)
+    this.deliveryCost=country.deliveryCost
     this.Regions = country.regions
   }
   getOrderType() {
@@ -116,7 +119,7 @@ export class AddOrderComponent implements OnInit {
       this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
       this.Order = new AddOrder
       this.errorMessage = false
-      this.router.navigate(['/orders/sendorder'])
+      // this.router.navigate(['/orders/sendorder'])
     }, err => {
       this.toasterService.pop('error', '', err.message);
       console.log(err)
