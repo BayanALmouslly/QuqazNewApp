@@ -4,6 +4,8 @@
     <br>
     {{order.recipientName}}
     <br>
+    <!-- {{order.recipientPhones}}
+    <br> -->
     {{order.orderplaced.name}} {{" - "+order.monePlaced.name}}
     <br>
     {{order.country?order.country.name:null}}{{order.address?" - "+order.address:null}}
@@ -15,7 +17,7 @@
   <div class="modal-dialog modal-info" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title"> نوع الطلب</h4>
+        <h4 class="modal-title"> تأكيد </h4>
         <button type="button" class="close" (click)="hideinfoModal()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

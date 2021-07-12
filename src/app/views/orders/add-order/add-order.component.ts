@@ -128,6 +128,7 @@ export class AddOrderComponent implements OnInit {
   codeError: boolean
   checkCode() {
     this.orderServies.codeExist(this.Order.Code).subscribe(res => {
+      console.log(res)
       if (res)
         this.codeError = true
       else
