@@ -52,6 +52,16 @@
           </div> -->
           <div class="input-group mb-3">
             <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-user"></i></span>
+            </div>
+            <input type="text" name="Cost" [(ngModel)]="Order.Cost" class="form-control"
+              placeholder="كلفة التوصيل " required>
+
+          </div>
+          <small *ngIf="!Order.Cost&&errorMessage">كلفة التوصيل حقل مطلوب</small>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
               <span class="input-group-text">
                 <li class="icon-location-pin d-block"></li>
               </span>

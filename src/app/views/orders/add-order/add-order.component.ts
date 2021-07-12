@@ -98,7 +98,7 @@ export class AddOrderComponent implements OnInit {
       this.Phone = ""
     }
     if (!this.Order.Code || this.Order.RecipientPhones.length == 0
-       || !this.Order.RecipientName
+       || !this.Order.RecipientName || !this.Order.Cost
       || !this.Order.CountryId || !this.Order.Address || this.codeError) {
       this.errorMessage = true
       return

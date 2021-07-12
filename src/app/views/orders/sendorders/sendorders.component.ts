@@ -28,7 +28,6 @@ export class SendordersComponent implements OnInit {
   GetOrders() {
     this.orderService.NonSendOrder().subscribe(res => {
       this.orders = res
-      console.log(res)
       if (this.orders.length == 0)
         this.NotFoundMessage = true
       else
@@ -44,6 +43,7 @@ export class SendordersComponent implements OnInit {
   Send() {
     this.orderService.Sned(this.orders.map(o => o.id)).subscribe(res => {
       this.hideinfoModal()
+      this.NotFoundMessage = true
       this.toasterService.pop('success', '', 'تم  الارسال بنجاح');
 
     })
