@@ -1,0 +1,35 @@
+<ul class="list-group" *ngIf="!NotFoundMessage">
+  <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let order of orders">
+    {{order.code}}
+    <br>
+    {{order.recipientName}}
+    <br>
+    {{order.orderplaced.name}} {{" - "+order.monePlaced.name}}
+    <br>
+    {{order.country?order.country.name:null}}{{order.address?" - "+order.address:null}}
+    <span data-toggle="modal" (click)="showinfoModal()" class="badge badge-primary badge-pill btn">ارسال</span>
+  </li>
+</ul>
+<div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> نوع الطلب</h4>
+        <button type="button" class="close" (click)="hideinfoModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        اضافة كلفة 2000 دينار للمندوب
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="hideinfoModal()">قبول</button>
+        <button type="button" class="btn btn-info" (click)="hideinfoModal()"> رفض</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div *ngIf="NotFoundMessage">
+  لابوجد طلبات للعرض
+</div>

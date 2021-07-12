@@ -43,4 +43,7 @@ export class OrderService {
     formData.append("code",code);
     return this.http.get(this.controler+"codeExist",{ params: formData })
   }
+  NonSendOrder(){
+    return this.http.get<any>(this.controler+"NonSendOrder")
+  }
 }

@@ -8,5 +8,6 @@ export class OrderFiltering {
       OrderplacedId 
       IsClientDiliverdMoney 
       ClientPrintNumber 
+      Note
 }
 

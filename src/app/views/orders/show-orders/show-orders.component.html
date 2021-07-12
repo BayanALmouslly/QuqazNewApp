@@ -57,15 +57,19 @@
               <option *ngFor="let Region of Regions" [value]="Region.id">{{Region.name}}</option>
             </select>
           </div>
-
+          <div class="form-group col-12">
+            <label for="ccyear">الملاحظات </label>
+            <input type="text" class="form-control" (keyup)="GetOrders()" name="code"
+                [(ngModel)]="orderFilter.Note" placeholder="الكود">
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="row" style="text-align: center;">
-  <div class=" col-lg-3" *ngFor="let order of orders">
-    <div class="card text-white bg-info">
+<div class="row" style="text-align: center;" data-aos="fade-up">
+  <div class=" col-lg-3" *ngFor="let order of orders" >
+    <div class="card text-white bg-info" data-aos="zoom-in" data-aos-delay="100">
       <div class="card-body pb-0">
       
         <!-- <button type="button" class="btn btn-transparent p-0 float-right">
@@ -89,7 +93,7 @@
       </div>
       <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
         <i class="icon-location-pin"></i>
-        {{order.country?order.country.name:null}}{{order.region?" - "+order.region.name:null}}
+        {{order.country?order.country.name:null}}{{order.address?" - "+order.address:null}}
       </div>
     </div>
   </div>

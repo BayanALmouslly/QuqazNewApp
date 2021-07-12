@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { OrdersReportComponent } from './orders-report/orders-report.component';
+import { SendordersComponent } from './sendorders/sendorders.component';
 import { ShowOrdersComponent } from './show-orders/show-orders.component';
 
 const routes: Routes = [
@@ -35,6 +36,13 @@ const routes: Routes = [
         component: OrdersReportComponent,
         data: {
           title: 'كشف الطلبات '
+        }
+      },
+      {
+        path: 'sendorder',
+        component: SendordersComponent,
+        data: {
+          title: ' ارسال الطلبات الى المندوب '
         }
       },
     ]

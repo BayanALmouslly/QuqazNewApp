@@ -13,6 +13,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { NotificationsRoutingModule } from '../notifications/notifications-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {ToasterModule} from 'angular2-toaster';
+import { SendordersComponent } from './sendorders/sendorders.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {ToasterModule} from 'angular2-toaster';
     ShowOrdersComponent,
     OrdersReportComponent,
     AddOrderComponent,
-    ShowOrderComponent
+    ShowOrderComponent,
+    SendordersComponent
   ],
   imports: [
     CommonModule,
