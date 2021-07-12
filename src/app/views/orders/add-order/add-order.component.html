@@ -36,10 +36,10 @@
             </select>
                -->
             <ng-select appOnReturn [(ngModel)]="Order.CountryId"  (change)="CountryChanged()"[ngModelOptions]="{standalone: true}"
-            [closeOnSelect]="true" name="Country" style="width:100%;">
+            [closeOnSelect]="true" name="Country" style="width:80%;">
             <ng-option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</ng-option>
-          </ng-select>
-        كلفة التوصيل  :  {{deliveryCost}}
+          </ng-select>&nbsp; &nbsp;
+          <span style="height: 10%;" class="bg-info">{{deliveryCost|number}}</span>
           </div>
           <small *ngIf="!Order.CountryId&&errorMessage">المدينة حقل مطلوب</small>
 
