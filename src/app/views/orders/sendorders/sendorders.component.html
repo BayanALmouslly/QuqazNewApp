@@ -24,7 +24,7 @@
         اضافة كلفة 2000 دينار للمندوب
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="hideinfoModal()">قبول</button>
+        <button type="button" class="btn btn-secondary" (click)="Send()">قبول</button>
         <button type="button" class="btn btn-info" (click)="hideinfoModal()"> رفض</button>
       </div>
     </div><!-- /.modal-content -->
@@ -33,3 +33,4 @@
 <div *ngIf="NotFoundMessage">
   لابوجد طلبات للعرض
 </div>
+<toaster-container></toaster-container>

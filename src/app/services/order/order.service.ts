@@ -38,12 +38,15 @@ export class OrderService {
   Add(order) {
     return this.http.post(this.controler, order)
   }
-  codeExist(code){
+  codeExist(code) {
     let formData = new HttpParams();
-    formData.append("code",code);
-    return this.http.get(this.controler+"codeExist",{ params: formData })
+    formData.append("code", code);
+    return this.http.get(this.controler + "codeExist", { params: formData })
   }
-  NonSendOrder(){
-    return this.http.get<any>(this.controler+"NonSendOrder")
+  NonSendOrder() {
+    return this.http.get<any>(this.controler + "NonSendOrder")
+  }
+  Sned(ids) {
+    return this.http.post(this.controler + "Sned", ids)
   }
 }

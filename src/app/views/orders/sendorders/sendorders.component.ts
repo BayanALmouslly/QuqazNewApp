@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToasterService } from 'angular2-toaster';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { OrderService } from '../../../services/order/order.service';
 
@@ -10,7 +11,8 @@ import { OrderService } from '../../../services/order/order.service';
 export class SendordersComponent implements OnInit {
   @ViewChild('infoModal') public infoModal: ModalDirective;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService,
+    private toasterService: ToasterService,) { }
   orders: any[] = []
   NotFoundMessage: boolean
   ngOnInit(): void {
@@ -26,10 +28,24 @@ export class SendordersComponent implements OnInit {
   GetOrders() {
     this.orderService.NonSendOrder().subscribe(res => {
       this.orders = res
+      console.log(res)
       if (this.orders.length == 0)
         this.NotFoundMessage = true
-        else
-        this.NotFoundMessage=false
+      else
+        this.NotFoundMessage = false
+    })
+  }
+  canSend() {
+    if (this.orders.length == 1 || this.orders.length == 2)
+      this.showinfoModal()
+      else
+      this.Send()
+  }
+  Send() {
+    this.orderService.Sned(this.orders.map(o => o.id)).subscribe(res => {
+      this.hideinfoModal()
+      this.toasterService.pop('success', '', 'تم  الارسال بنجاح');
+
     })
   }
 }
