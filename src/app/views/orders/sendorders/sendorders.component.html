@@ -1,17 +1,39 @@
-<ul class="list-group" *ngIf="!NotFoundMessage">
-  <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let order of orders">
-    {{order.code}}
-    <br>
-    {{order.recipientName}}
-    <br>
-    <!-- {{order.recipientPhones}}
-    <br> -->
-    {{order.orderplaced.name}} {{" - "+order.monePlaced.name}}
-    <br>
-    {{order.country?order.country.name:null}}{{order.address?" - "+order.address:null}}
-    <span data-toggle="modal" (click)="showinfoModal()" class="badge badge-primary badge-pill btn">ارسال</span>
-  </li>
-</ul>
+<div class="row" style="text-align: center;" data-aos="fade-up">
+  <div class=" col-lg-3" *ngFor="let order of orders" >
+    <div class="card text-white bg-info" data-aos="zoom-in" data-aos-delay="100">
+      <div class="card-body pb-0">
+      
+        <!-- <button type="button" class="btn btn-transparent p-0 float-right">
+            </button> -->
+        <div class="text-value">
+          <i class="icon-social-dropbox h1"></i>
+          {{order.code}}</div>
+        
+        <br>
+        <div style="text-align: right;" *ngIf="order.recipientName">
+          <i class="icon-user icons  d-block">{{order.recipientName}}</i>
+        </div>
+        <br>
+        <div style="text-align: right;">
+          <i class="icon-phone icons  d-block "> {{order.recipientPhones}}</i>
+        </div>
+        <br>
+        <div style="text-align: center;">
+          <i class="fa fa-money fa-lg mt-4">  {{order.cost}}</i>
+        
+        </div>
+      </div>
+      <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+        <i class="icon-location-pin"></i>
+        {{order.country?order.country.name:null}}{{order.address?" - "+order.address:null}}
+      </div>
+    </div>
+  </div>
+<div class="col-12">
+  <button type="button" class="btn btn-info" style="width: 30%;" (click)="canSend()">ارسال</button>
+
+</div>
+</div>
 <div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-info" role="document">
@@ -35,4 +57,5 @@
 <div *ngIf="NotFoundMessage">
   لابوجد طلبات للعرض
 </div>
+
 <toaster-container></toaster-container>
