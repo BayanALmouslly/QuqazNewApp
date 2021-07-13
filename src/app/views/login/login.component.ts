@@ -20,7 +20,7 @@ export class LoginComponent {
     this.router.navigate(['/register'])
   }
   @ViewChild('loginForm') loginForm: NgForm;
-  user: UserLogin
+  user: UserLogin=new UserLogin
 
   onSubmit() {
     // if (!this.loginForm.valid || this.buttonDisabled) {
