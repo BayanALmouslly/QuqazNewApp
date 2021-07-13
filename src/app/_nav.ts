@@ -3,7 +3,7 @@ import { UserLogin } from './views/auth/userlogin.model';
  const user=JSON.parse(localStorage.getItem('kokazUser'))as UserLogin
 export const navItems: INavData[] = [
   {
-    name:user.name ,
+    name:user.name?user.name:'' ,
     url: '/profile',
     icon: 'icon-user',
     
