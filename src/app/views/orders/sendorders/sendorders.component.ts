@@ -14,7 +14,7 @@ export class SendordersComponent implements OnInit {
   constructor(private orderService: OrderService,
     private toasterService: ToasterService,) { }
   orders: any[] = []
-  NotFoundMessage: boolean
+  NotFoundMessage: boolean=true
   ngOnInit(): void {
     this.GetOrders()
   }
