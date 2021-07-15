@@ -52,9 +52,14 @@ export class OrderService {
   }
   OrdersDontFinished(orderDontFinishFilter: OrderDontFinishFilter) {
     let params = new HttpParams();
-    params.append("OrderPlacedId",orderDontFinishFilter.OrderPlacedId);
-    params.append("IsClientDeleviredMoney",orderDontFinishFilter.IsClientDeleviredMoney);
-    params.append("ClientDoNotDeleviredMoney",orderDontFinishFilter.ClientDoNotDeleviredMoney);
+   params=params.append("IsClientDeleviredMoney",orderDontFinishFilter.IsClientDeleviredMoney);
+   params=params.append("ClientDoNotDeleviredMoney",orderDontFinishFilter.ClientDoNotDeleviredMoney);
+   let index = 0
+   orderDontFinishFilter.OrderPlacedId.forEach(element => {
+        var key = "OrderPlacedId[" + index + "]"
+        params = params.append(key, element);
+        index++;
+      });
     return this.http.get(this.controler+"OrdersDontFinished",{params:params})
   }
 }

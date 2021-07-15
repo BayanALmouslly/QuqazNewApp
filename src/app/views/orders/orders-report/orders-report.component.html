@@ -1,11 +1,330 @@
-<section class="example-section">
-  
-  <input type="checkbox" class="example-margin" *ngFor="let orderplaced of orderPlace" [(ngModel)]="orderplaced.checked"
-    (change)="GetData()">&nbsp;{{orderplaced.name}}
-</section>
-<section class="example-section">
-  <input type="checkbox" class="example-margin" [(ngModel)]="orderDontFinishFilter.IsClientDeleviredMoney" (change)="GetData()">
-    &nbsp;تسديد المبلغ مسبقاً
-  <input type="checkbox" class="example-margin" [(ngModel)]="orderDontFinishFilter.ClientDoNotDeleviredMoney"
-    (change)="GetData()">&nbsp; لم يتم تسديد المبلغ مسبقاً
-</section>
+<div class="card">
+  <div class="card-body">
+
+    <div class="form-check">
+      <ng-container *ngFor="let orderplaced of orderPlace">
+        <input type="checkbox" class="form-check-input" (change)="GetData()" [(ngModel)]="orderplaced.checked"
+          id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1"
+          style="margin-right: 20px;">{{orderplaced.name}}&nbsp;&nbsp;</label>
+      </ng-container>
+    </div>
+    <hr style="width: 100%;height: 2px; background-color: gray;">
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" (change)="GetData()" [(ngModel)]="IsClientDeleviredMoney" [ngModelOptions]="{standalone: true}"
+        id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1" style="margin-right: 20px;">&nbsp;تسديد المبلغ</label>
+      <input type="checkbox" class="form-check-input" (change)="GetData()" [(ngModel)]="ClientDoNotDeleviredMoney" [ngModelOptions]="{standalone: true}"
+        id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1" style="margin-right: 20px;">&nbsp;لم يتم
+        تسديد المبلغ مسبقاً</label>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="card " style="direction:rtl" id="contentToConvert">
+  <div style="padding: 10px;">
+    <table style="font-size: 16px; width: 100%;">
+
+      <thead style="font-size: 16px;  background-color: rgb(218, 218, 219);">
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            ترقيم
+
+          </div>
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            رقم الوصل
+
+          </div>
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            المحافظة
+
+          </div>
+        </th>
+
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            تاريخ الطلب
+
+          </div>
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            الإجمالي
+
+          </div>
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            الرسوم
+          </div>
+
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            يدفع للعميل
+
+          </div>
+        </th>
+
+
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            المبلغ القديم
+
+          </div>
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            مـلاحظـــــات
+          </div>
+
+        </th>
+        <!--<th style="border: 1px black solid;padding: 5px;text-align: center;" *ngFor="let head of heads" style="font-size: 20px;">{{head}}</th>-->
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders;index as i">
+          <td>
+
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{i+1}}
+
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{order.code}}
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{order.country?order.country.name:'-'}}
+            </div>
+          </td>
+
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{order.date| date: 'yyyy/MM/dd'}}{{order.date?null:'-'}}
+
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{order.cost| number}}
+
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{order.deliveryCost| number}}
+
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{payForCleint(order)| number}}
+
+            </div>
+          </td>
+
+          <!--   <td>
+                      {{order.monePlaced.name}}
+                  </td>
+                  <td>
+                      {{order.orderplaced.name}}
+                  </td>-->
+
+
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{order.oldCost|number}}{{order.oldCost?null:'-'}}
+
+            </div>
+          </td>
+          <td style="width:25%;">
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+
+              {{order.note?order.note:"-"}}
+
+
+            </div>
+          </td>
+        </tr>
+
+
+        <tr style="font-size: 16px;  background-color: rgb(218, 218, 219);">
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{orders.length}}
+
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              العدد
+            </div>
+          </td>
+
+          <td colspan="2">
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              اجمالي كلفة الطلبات
+
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{ count| number}}
+
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{ deliveryCostCount| number}}
+
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{clientCalc| number}}
+
+            </div>
+          </td>
+          <td colspan="4"></td>
+        </tr>
+
+        <tr *ngIf="reports.length!=0" style="text-align: center;background-color: rgba(144, 177, 240, 0.877);">
+          <td colspan="9" style="text-align: center;font-size: 18px;">
+            السندات
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table style="font-size: 16px; width: 100%;" *ngIf="reports.length!=0">
+      <thead style="font-size: 16px;  background-color: rgb(218, 218, 219);">
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            ترقيم
+          </div>
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            رقم السند
+          </div>
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            تاريخ
+          </div>
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            حالة السند
+          </div>
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            كلفة السند
+          </div>
+        </th>
+
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            وذلك عن
+          </div>
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+            ملاحظات
+          </div>
+        </th>
+
+      </thead>
+      <tbody>
+        <tr class="tr" *ngFor="let report of reports;index as i" style="margin-bottom: 10%;">
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{i+1}}
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{report.id}}
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{report.date| date: 'yyyy/MM/dd'}}
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{report.isPay?'صرف':'قبض'}}
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{report.amount| number}}
+            </div>
+          </td>
+
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{report.about?report.about:'-'}}
+            </div>
+          </td>
+          <td style="width:25%;">
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{report.note?report.note:'-'}}
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="reports.length!=0" style="font-size: 16px;background-color: rgb(224, 221, 221);">
+
+          <td colspan="4">
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              اجمالي كلفة السندات
+
+            </div>
+          </td>
+
+
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{reportstotal| number}}
+
+            </div>
+          </td>
+          <td colspan="4"></td>
+        </tr>
+        <tr *ngIf="reports.length!=0" style="font-size: 16px;background-color: rgb(224, 221, 221);">
+
+          <td colspan="4">
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              المبلغ النهائي
+
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+              {{clientCalc+reportstotal| number}}
+
+            </div>
+          </td>
+          <td colspan="4"></td>
+
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="footer"
+    style="text-align: center;position: fixed; bottom: 0;;width: 100%;height:19px;background-color: rgb(212, 212, 212);">
+    <h6>{{address}} &nbsp; {{companyPhone}}</h6>
+  </div>
+</div>
