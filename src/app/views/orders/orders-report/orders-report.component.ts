@@ -12,8 +12,8 @@ export class OrdersReportComponent implements OnInit {
 
   constructor(private service: OrderService) { }
   orderDontFinishFilter: OrderDontFinishFilter = new OrderDontFinishFilter();
-  IsClientDeleviredMoney: boolean;
-  ClientDoNotDeleviredMoney: boolean;
+  IsClientDeleviredMoney: boolean=false;
+  ClientDoNotDeleviredMoney: boolean=false;
   orderPlace: any[] = [
     { id: 3, name: "في الطريق" },
     { id: 4, name: "تم التسليم" },
