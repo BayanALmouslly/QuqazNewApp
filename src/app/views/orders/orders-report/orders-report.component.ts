@@ -26,10 +26,9 @@ export class OrdersReportComponent implements OnInit {
     this.GetData()
   }
   GetData() {
-    this.orderDontFinishFilter.ClientDoNotDeleviredMoney=this.ClientDoNotDeleviredMoney
-    this.orderDontFinishFilter.IsClientDeleviredMoney=this.IsClientDeleviredMoney
-    this.orderDontFinishFilter.OrderPlacedId=this.orderPlace.filter(o=>o.checked==true).map(c=>c.id);
-    console.log(this.orderDontFinishFilter)
+    this.orderDontFinishFilter.ClientDoNotDeleviredMoney = this.ClientDoNotDeleviredMoney
+    this.orderDontFinishFilter.IsClientDeleviredMoney = this.IsClientDeleviredMoney
+    this.orderDontFinishFilter.OrderPlacedId = this.orderPlace.filter(o => o.checked == true).map(c => c.id);
     this.service.OrdersDontFinished(this.orderDontFinishFilter).subscribe(res => {
       this.orders = res as []
       this.sumCost();
@@ -58,8 +57,8 @@ export class OrdersReportComponent implements OnInit {
     }
 
   }
-  deliveryCostCount
-  count
+  deliveryCostCount=0
+  count=0
   reports: any[] = []
 
   sumCost() {
@@ -101,7 +100,12 @@ export class OrdersReportComponent implements OnInit {
           }
         }
       })
-    
+
     return this.count
+  }
+  Report() {
+    this.service.UnPaidRecipt().subscribe(res => {
+      this.reports = res
+    })
   }
 }

@@ -62,4 +62,8 @@ export class OrderService {
       });
     return this.http.get(this.controler+"OrdersDontFinished",{params:params})
   }
+  UnPaidRecipt(){
+    return this.http.get<any>(this.controler+"UnPaidRecipt")
+
+  }
 }

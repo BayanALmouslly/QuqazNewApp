@@ -15,8 +15,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import {ToasterModule} from 'angular2-toaster';
 import { SendordersComponent } from './sendorders/sendorders.component';
 
-import { MatCheckboxModule } from '@angular/material/checkbox';
-
 @NgModule({
   declarations: [
     ShowOrdersComponent,
@@ -36,7 +34,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AlertModule.forRoot(),
     NgSelectModule,
     ToasterModule.forRoot(),
-    MatCheckboxModule,
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers:[CurrencyPipe]
 })
