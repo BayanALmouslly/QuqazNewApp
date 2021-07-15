@@ -45,6 +45,13 @@ const routes: Routes = [
           title: ' ارسال الطلبات الى المندوب '
         }
       },
+      {
+        path: 'Report',
+        component: OrdersReportComponent,
+        data: {
+          title: ' طلب كشف '
+        }
+      }
     ]
   }
 ];

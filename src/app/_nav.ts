@@ -49,7 +49,7 @@ export const navItems: INavData[] = [
   },
   {
     name: ' كشف حساب حسب نوع الشحنة',
-    url: '/orders/addorder',
+    url: '/orders/Report',
     icon: 'icon-layers'
   },
  

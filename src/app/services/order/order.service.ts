@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { OrderFiltering } from '../../Models/order/order-filtering.model';
+import { OrderDontFinishFilter } from '../../Models/order/OrderDontFinishFilter';
 import { Paging } from '../../Models/paging';
 
 @Injectable({
@@ -41,12 +42,19 @@ export class OrderService {
   codeExist(code) {
     // let formData = new HttpParams();
     // formData.append("code", code);
-    return this.http.get(this.controler + "codeExist?code="+code)
+    return this.http.get(this.controler + "codeExist?code=" + code)
   }
   NonSendOrder() {
     return this.http.get<any>(this.controler + "NonSendOrder")
   }
   Sned(ids) {
     return this.http.post(this.controler + "Sned", ids)
+  }
+  OrdersDontFinished(orderDontFinishFilter: OrderDontFinishFilter) {
+    let params = new HttpParams();
+    params.append("OrderPlacedId",orderDontFinishFilter.OrderPlacedId);
+    params.append("IsClientDeleviredMoney",orderDontFinishFilter.IsClientDeleviredMoney);
+    params.append("ClientDoNotDeleviredMoney",orderDontFinishFilter.ClientDoNotDeleviredMoney);
+    return this.http.get(this.controler+"OrdersDontFinished",{params:params})
   }
 }

@@ -1,1 +1,11 @@
-<p>orders-report works!</p>
+<section class="example-section">
+  
+  <input type="checkbox" class="example-margin" *ngFor="let orderplaced of orderPlace" [(ngModel)]="orderplaced.checked"
+    (change)="GetData()">&nbsp;{{orderplaced.name}}
+</section>
+<section class="example-section">
+  <input type="checkbox" class="example-margin" [(ngModel)]="orderDontFinishFilter.IsClientDeleviredMoney" (change)="GetData()">
+    &nbsp;تسديد المبلغ مسبقاً
+  <input type="checkbox" class="example-margin" [(ngModel)]="orderDontFinishFilter.ClientDoNotDeleviredMoney"
+    (change)="GetData()">&nbsp; لم يتم تسديد المبلغ مسبقاً
+</section>
