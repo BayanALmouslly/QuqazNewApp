@@ -36,30 +36,30 @@
             </select>
                -->
             <ng-select appOnReturn [(ngModel)]="Order.CountryId"  (change)="CountryChanged()"[ngModelOptions]="{standalone: true}"
-            [closeOnSelect]="true" name="Country" style="width:80%;">
+            [closeOnSelect]="true" name="Country" style="width:100%;margin: 1px;">
             <ng-option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</ng-option>
-          </ng-select>&nbsp; &nbsp;
-          <span style="height: 10%;" class="bg-info">{{deliveryCost|number}}</span>
+          </ng-select>
           </div>
           <small *ngIf="!Order.CountryId&&errorMessage">المدينة حقل مطلوب</small>
 
-          <!-- <div class="input-group mb-3">
-            
-            <ng-select appOnReturn [(ngModel)]="Order.RegionId" [ngModelOptions]="{standalone: true}"
+          <div class="input-group mb-3">
+                      كلفة توصيل  :  &nbsp;<span style="height: 10%;padding: 3px;width: 20%;" class="bg-info">{{deliveryCost|number}}</span>
+
+            <!-- <ng-select appOnReturn [(ngModel)]="Order.RegionId" [ngModelOptions]="{standalone: true}"
             [closeOnSelect]="true" name="Region" [addTag]="true" style="width:100%;">
             <ng-option *ngFor="let Region of Regions" [value]="Region.id">{{Region.name}}</ng-option>
-          </ng-select>
+          </ng-select> -->
          
-          </div> -->
+          </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-user"></i></span>
             </div>
             <input type="text" name="Cost" (change)="currency()" [(ngModel)]="Order.Cost" class="form-control"
-              placeholder="كلفة التوصيل " required>
+              placeholder="كلفة الطلب " required>
 
           </div>
-          <small *ngIf="!Order.Cost&&errorMessage">كلفة التوصيل حقل مطلوب</small>
+          <small *ngIf="!Order.Cost&&errorMessage">كلفة الطلب حقل مطلوب</small>
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
