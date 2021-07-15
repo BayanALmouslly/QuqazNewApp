@@ -23,7 +23,7 @@ export class OrdersReportComponent implements OnInit {
   ]
   orders: any[] = []
   ngOnInit(): void {
-    this.GetData()
+    // this.GetData()
   }
   GetData() {
     this.orderDontFinishFilter.ClientDoNotDeleviredMoney = this.ClientDoNotDeleviredMoney
@@ -104,6 +104,7 @@ export class OrdersReportComponent implements OnInit {
     return this.count
   }
   Report() {
+    if(this.orderPlace.filter(o=>o.id==OrderplacedEnum.Unacceptable||o.id==OrderplacedEnum.CompletelyReturned).length>0)return
     this.service.UnPaidRecipt().subscribe(res => {
       this.reports = res
     })
