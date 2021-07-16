@@ -8,4 +8,5 @@ export class UserLogin {
     country
     phones
     address
+    mail
 }

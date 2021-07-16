@@ -12,6 +12,7 @@
                 <div class="" *ngIf="!showEdit">
                     <h4>{{user.name}}</h4>
                     <h6>{{user.userName}}</h6>
+                    <h6>{{user.mail}}</h6>
                     <p class="text-muted" *ngFor="let phone of user.phones">
                         <li class="icon icon-phone d-block"> <span>| </span>
                             <span><a href="#" class="text-pink">{{phone.phone}}</a></span>
@@ -37,6 +38,13 @@
                           <span class="input-group-text"><i class="icon-pencil"></i></span>
                         </div>
                         <input type="text" name="code" [(ngModel)]="user.userName" class="form-control" placeholder="رقم الوصل "
+                          required>
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="icon-pencil"></i></span>
+                        </div>
+                        <input type="email" name="mail" [(ngModel)]="user.mail" class="form-control" placeholder="الايميل  "
                           required>
                       </div>
                     <ng-container *ngFor="let phones of user.phones;index as i">
