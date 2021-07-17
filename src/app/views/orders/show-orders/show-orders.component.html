@@ -68,34 +68,37 @@
   </div>
 </div>
 <div class="row" style="text-align: center;" data-aos="fade-up">
+ 
   <div class=" col-lg-3" *ngFor="let order of orders" >
-    <div class="card text-white bg-info" data-aos="zoom-in" data-aos-delay="100">
-      <div class="card-body pb-0">
-      
-        <!-- <button type="button" class="btn btn-transparent p-0 float-right">
-            </button> -->
-        <div class="text-value">
-          <i class="icon-social-dropbox h1"></i>
-          {{order.code}}</div>
+    <a (click)="edit(order)" >
+      <div class="card text-white bg-info" data-aos="zoom-in" data-aos-delay="100">
+        <div class="card-body pb-0">
         
-        <br>
-        <div style="text-align: right;" *ngIf="order.recipientName">
-          <i class="icon-user icons  d-block">{{order.recipientName}}</i>
+          <!-- <button type="button" class="btn btn-transparent p-0 float-right">
+              </button> -->
+          <div class="text-value">
+            <i class="icon-social-dropbox h1"></i>
+            {{order.code}}</div>
+          
+          <br>
+          <div style="text-align: right;" *ngIf="order.recipientName">
+            <i class="icon-user icons  d-block">{{order.recipientName}}</i>
+          </div>
+          <br>
+          <div style="text-align: right;">
+            <i class="icon-phone icons  d-block "> {{order.recipientPhones}}</i>
+          </div>
+          <br>
+          <div style="text-align: center;">
+            {{order.orderplaced.name}} {{" - "+order.monePlaced.name}}
+          </div>
         </div>
-        <br>
-        <div style="text-align: right;">
-          <i class="icon-phone icons  d-block "> {{order.recipientPhones}}</i>
-        </div>
-        <br>
-        <div style="text-align: center;">
-          {{order.orderplaced.name}} {{" - "+order.monePlaced.name}}
+        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+          <i class="icon-location-pin"></i>
+          {{order.country?order.country.name:null}}{{order.address?" - "+order.address:null}}
         </div>
       </div>
-      <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-        <i class="icon-location-pin"></i>
-        {{order.country?order.country.name:null}}{{order.address?" - "+order.address:null}}
-      </div>
-    </div>
+    </a>
   </div>
 
 </div>

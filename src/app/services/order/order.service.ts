@@ -66,4 +66,7 @@ export class OrderService {
     return this.http.get<any>(this.controler+"UnPaidRecipt")
 
   }
+  getById(id){
+    return this.http.get<any>(this.controler+id)
+  }
 }

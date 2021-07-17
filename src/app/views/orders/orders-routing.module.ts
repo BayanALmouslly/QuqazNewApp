@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { OrdersReportComponent } from './orders-report/orders-report.component';
 import { SendordersComponent } from './sendorders/sendorders.component';
+import { ShowOrderComponent } from './show-order/show-order.component';
 import { ShowOrdersComponent } from './show-orders/show-orders.component';
 
 const routes: Routes = [
@@ -27,6 +28,13 @@ const routes: Routes = [
       {
         path: 'show',
         component: ShowOrdersComponent,
+        data: {
+          title: ' الطلبات '
+        }
+      },
+      {
+        path: 'edit/:id',
+        component: ShowOrderComponent,
         data: {
           title: ' الطلبات '
         }

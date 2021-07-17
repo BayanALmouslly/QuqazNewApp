@@ -10,6 +10,8 @@ export class AddOrder {
     DateTime: Date
     OrderItem: OrderItem[]
     RecipientPhones: string[]
+    monePlaced
+    orderplaced
 }
 export class OrderItem {
     OrderTypeName

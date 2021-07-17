@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { IdAndName } from '../../../Models/id-and-name.model';
 import { OrderFiltering } from '../../../Models/order/order-filtering.model';
@@ -14,7 +15,8 @@ import { SettingsService } from '../../../services/settings.service';
 export class ShowOrdersComponent implements OnInit {
 
   constructor(private orderServies: OrderService,
-    private settingservice: SettingsService) { }
+    private settingservice: SettingsService,
+    private router:Router) { }
   paging: Paging = new Paging
   orderFilter: OrderFiltering = new OrderFiltering
   orders: any[] = []
@@ -68,5 +70,9 @@ export class ShowOrdersComponent implements OnInit {
     this.paging.RowCount = event.itemsPerPage
     this.paging.Page = event.page 
     this.GetOrders()
+  }
+  edit(element){
+    this.router.navigate(['/orders/edit',element.id])
+
   }
 }
