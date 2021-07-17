@@ -65,10 +65,10 @@ export class ShowOrderComponent implements OnInit {
       this.Order.monePlaced = res.monePlaced
       this.Order.orderplaced = res.orderplaced
       this.Order.isSend = res.isSend
-      // if(this.Order.isSend==false)
+      if(this.Order.isSend==false)
       this.CanEdit = false
-      // else
-      // this.CanEdit=true
+      else
+      this.CanEdit=true
 
     })
   }
