@@ -51,7 +51,7 @@ export class ShowOrderComponent implements OnInit {
       this.tempCode=this.Order.Code
       this.Order.Cost = res.cost
       this. currency()
-      this.Order.CountryId = res.countryId
+      this.Order.CountryId = res.country.id
       this.Order.DateTime = res.date
       this.Order.OrderItem = res.orderItems
       this.Order.OrderItem.forEach(item => {
