@@ -67,7 +67,6 @@ export class AddOrderComponent implements OnInit {
   }
   AddOrderItem() {
     if (!this.OrderItem.Count) return
-    this.OrderItem.orderTpye = new orderTpye
     var find = this.OrderTypes.find(o => o.name == this.OrderItem.OrderTypeName)
     if (!find) {
       this.OrderItem.OrderTypeId = null

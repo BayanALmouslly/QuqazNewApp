@@ -38,27 +38,33 @@ export class ShowOrderComponent implements OnInit {
 
   }
   id
-  CanEdit:boolean
+  CanEdit: boolean
   GetOrder() {
     this.getroute.params.subscribe(par => {
       this.id = par['id'] as string
     });
     this.orderServies.getById(this.id).subscribe(res => {
       console.log(res)
-      this.Order.Address=res.address
-      this.Order.ClientNote=res.clientNote
-      this.Order.Code=res.code
-      this.Order.Cost=res.cost
-      this.Order.CountryId=res.countryId
-      this.Order.DateTime=res.date
-      this.Order.OrderItem=res.orderItems
-      this.Order.RecipientName=res.recipientName
-      this.Order.RecipientPhones=res.recipientPhones.split(',')
-      this.Order.monePlaced=res.monePlaced
-      this.Order.orderplaced=res.orderplaced
-      this.Order.isSend=res.isSend
+      this.Order.Address = res.address
+      this.Order.ClientNote = res.clientNote
+      this.Order.Code = res.code
+      this.Order.Cost = res.cost
+      this.Order.CountryId = res.countryId
+      this.Order.DateTime = res.date
+      this.Order.OrderItem = res.orderItems
+      this.Order.OrderItem.forEach(item => {
+        item.OrderTypeName = item.orderTpye.name
+        item.OrderTypeId = item.orderTpye.id
+        item.Count=item.count
+
+      })
+      this.Order.RecipientName = res.recipientName
+      this.Order.RecipientPhones = res.recipientPhones.split(',')
+      this.Order.monePlaced = res.monePlaced
+      this.Order.orderplaced = res.orderplaced
+      this.Order.isSend = res.isSend
       // if(this.Order.isSend==false)
-      this.CanEdit=false
+      this.CanEdit = false
       // else
       // this.CanEdit=true
 
@@ -94,16 +100,14 @@ export class ShowOrderComponent implements OnInit {
     })
   }
   AddOrderItem() {
-    if (!this.OrderItem.count) return
-    if (isNaN(this.OrderItem.OrderTypeId)) {
-      console.log(this.OrderItem.OrderTypeId.label)
-      this.OrderItem.OrderTypeName = this.OrderItem.OrderTypeId.label;
-      this.OrderItem.OrderTypeId = null;
-     // this.OrderItem.orderTpye.id= this.OrderItem.OrderTypeId
-      // this.OrderItem.orderTpye.name= this.OrderItem.OrderTypeName
-    }else
-    this.OrderItem.orderTpye= this.OrderTypes.find(o=>o.id==this.OrderItem.OrderTypeId)
-    this.OrderItem.count = (Number)(this.OrderItem.count)
+    if (!this.OrderItem.Count) return
+    var find = this.OrderTypes.find(o => o.name == this.OrderItem.OrderTypeName)
+    if (!find) {
+      this.OrderItem.OrderTypeId = null
+      this.OrderTypes.push({ id: this.OrderItem.OrderTypeId, name: this.OrderItem.OrderTypeName.label })
+    } else
+      this.OrderItem.OrderTypeId = find.id
+    this.OrderItem.Count = (Number)(this.OrderItem.Count)
     this.Order.OrderItem.push(this.OrderItem)
     this.OrderItem = new OrderItem
   }
