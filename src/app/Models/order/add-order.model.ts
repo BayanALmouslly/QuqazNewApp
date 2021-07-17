@@ -12,9 +12,16 @@ export class AddOrder {
     RecipientPhones: string[]
     monePlaced
     orderplaced
+    isSend
 }
 export class OrderItem {
     OrderTypeName
     OrderTypeId
-    Count:number
+    Count: number
+    orderTpye
+    count: number
+}
+export class orderTpye {
+    id
+    name
 }

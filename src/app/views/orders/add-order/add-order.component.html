@@ -157,9 +157,9 @@
                   <!-- <select class="form-control" name="OrderTypeId+{{i}}" [(ngModel)]="orderItem.OrderTypeId">
                     <option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</option>
                   </select> -->
-                  <ng-select  appOnReturn [(ngModel)]="orderItem.OrderTypeId" [ngModelOptions]="{standalone: true}"
+                  <ng-select  appOnReturn [(ngModel)]="orderItem.OrderTypeName" [ngModelOptions]="{standalone: true}"
                   [closeOnSelect]="true" name="orderType" [addTag]="true" style="width: 100%;">
-                  <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</ng-option>
+                  <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.name">{{orderType.name}}</ng-option>
                 </ng-select>
                 </div>
               </td>
@@ -182,9 +182,9 @@
                   <!-- <select class="form-control" [(ngModel)]="OrderItem.OrderTypeId">
                     <option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</option>
                   </select> -->
-                  <ng-select appOnReturn [(ngModel)]="OrderItem.OrderTypeId" [ngModelOptions]="{standalone: true}"
+                  <ng-select appOnReturn [(ngModel)]="OrderItem.OrderTypeName" [ngModelOptions]="{standalone: true}"
                   [closeOnSelect]="true" name="orderType" [addTag]="true" style="width: 100%;">
-                  <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</ng-option>
+                  <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.name">{{orderType.name}}</ng-option>
                 </ng-select>
                 </div>
               </td>

@@ -6,7 +6,8 @@
           <h1>عرض الطلب</h1>
           <p class="text-muted"></p>
           <div class="input-group mb-3">
-            <div style="border: 1px gray solid;border-radius: 5px; padding: 5px;text-align: center;">
+            <div
+              style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px; padding: 5px;text-align: center;width: 100%;">
               {{Order.orderplaced.name}} - {{Order.monePlaced.name}}
             </div>
 
@@ -15,8 +16,8 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-pencil"></i></span>
             </div>
-            <input type="text" name="code" [(ngModel)]="Order.Code" class="form-control" placeholder="رقم الوصل "
-              (keyup)="checkCode()" required>
+            <input type="text" [disabled]="CanEdit" name="code" [(ngModel)]="Order.Code" class="form-control"
+              placeholder="رقم الوصل " (keyup)="checkCode()" required>
           </div>
           <small *ngIf="!Order.Code&&errorMessage">رقم الوصل حقل مطلوب</small>
           <small *ngIf="codeError">رقم الوصل مكرر</small>
@@ -25,8 +26,8 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-user"></i></span>
             </div>
-            <input type="text" name="RecipientName" [(ngModel)]="Order.RecipientName" class="form-control"
-              placeholder="اسم المستلم" required>
+            <input type="text" [disabled]="CanEdit" name="RecipientName" [(ngModel)]="Order.RecipientName"
+              class="form-control" placeholder="اسم المستلم" required>
 
           </div>
           <small *ngIf="!Order.RecipientName&&errorMessage">اسم المستلم حقل مطلوب</small>
@@ -40,7 +41,7 @@
                 <option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</option>
               </select>
                  -->
-            <ng-select appOnReturn [(ngModel)]="Order.CountryId" (change)="CountryChanged()"
+            <ng-select [disabled]="CanEdit" appOnReturn [(ngModel)]="Order.CountryId" (change)="CountryChanged()"
               [ngModelOptions]="{standalone: true}" [closeOnSelect]="true" name="Country"
               style="width:100%;margin: 1px;">
               <ng-option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</ng-option>
@@ -49,8 +50,11 @@
           <small *ngIf="!Order.CountryId&&errorMessage">المدينة حقل مطلوب</small>
 
           <div class="input-group mb-3">
-            كلفة توصيل : &nbsp;<span style="height: 10%;padding: 3px;width: 20%;"
-              class="bg-info">{{deliveryCost|number}}</span>
+            <div
+              style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px; padding: 5px;text-align: right;width: 100%;">
+              كلفة توصيل : &nbsp;<span style="height: 10%;padding: 3px;width: 20%;"
+                class="bg-info">{{deliveryCost|number}}</span> </div>
+
 
             <!-- <ng-select appOnReturn [(ngModel)]="Order.RegionId" [ngModelOptions]="{standalone: true}"
               [closeOnSelect]="true" name="Region" [addTag]="true" style="width:100%;">
@@ -62,8 +66,8 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-user"></i></span>
             </div>
-            <input type="text" name="Cost" (change)="currency()" [(ngModel)]="Order.Cost" class="form-control"
-              placeholder="كلفة الطلب " required>
+            <input type="text" [disabled]="CanEdit" name="Cost" (change)="currency()" [(ngModel)]="Order.Cost"
+              class="form-control" placeholder="كلفة الطلب " required>
 
           </div>
           <small *ngIf="!Order.Cost&&errorMessage">كلفة الطلب حقل مطلوب</small>
@@ -74,7 +78,7 @@
                 <li class="icon-location-pin d-block"></li>
               </span>
             </div>
-            <input type="text" name="Address" [(ngModel)]="Order.Address" class="form-control"
+            <input type="text" [disabled]="CanEdit" name="Address" [(ngModel)]="Order.Address" class="form-control"
               placeholder="عنوان المستلم" autocomplete="email" required>
           </div>
           <small *ngIf="!Order.Address&&errorMessage">العنوان حقل مطلوب</small>
@@ -96,33 +100,33 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="icon-phone"></i></span>
               </div>
-              <input type="text" name="phones+{{i}}" [(ngModel)]="Order.RecipientPhones[i]" maxlength="11"
-                oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
+              <input type="text" [disabled]="CanEdit" name="phones+{{i}}" [(ngModel)]="Order.RecipientPhones[i]"
+                maxlength="11" oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                 class="form-control" placeholder=" رقم هاتف" required>
-              <a class="btn btn-info" (click)="RemovePhone(phones)">x </a>
+              <a class="btn btn-info" [hidden]="CanEdit" (click)="RemovePhone(phones)">x </a>
             </div>
           </ng-container>
 
-          <div class="input-group mb-4">
+          <div class="input-group mb-4" [hidden]="CanEdit">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-phone"></i></span>
             </div>
             <input type="text" name="RecipientPhones" [(ngModel)]="Phone" maxlength="11"
               oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" class="form-control"
               placeholder=" رقم هاتف" required (keyup)="checkphone()">
-            <a class="btn btn-info" (click)="AddPhone()">+ </a>
+            <a class="btn btn-info" [hidden]="CanEdit" (click)="AddPhone()">+ </a>
           </div>
           <small *ngIf="!Phone&&Order.RecipientPhones.length==0&&errorMessage">رقم الهاتف حقل مطلوب</small>
           <small *ngIf="errorPhone">يجب ان يكون رقم الهاتف 11 حقل</small>
 
           <div class="input-group ">
 
-            <textarea name="ClientNote" [(ngModel)]="Order.ClientNote" style="width: 100%;" name="textarea-input"
-              rows="3" class="form-control" placeholder="ملاحظات"></textarea>
+            <textarea [disabled]="CanEdit" name="ClientNote" [(ngModel)]="Order.ClientNote" style="width: 100%;"
+              name="textarea-input" rows="3" class="form-control" placeholder="ملاحظات"></textarea>
 
           </div>
           <br>
-          <button type="button" class="btn btn-block btn-info" (click)="AddOrder()">حفظ </button>
+          <button type="button" class="btn btn-block btn-info" [hidden]="CanEdit" (click)="AddOrder()">حفظ </button>
         </form>
       </div>
       <div class="card-footer p-4">
@@ -164,7 +168,7 @@
                   <!-- <select class="form-control" name="OrderTypeId+{{i}}" [(ngModel)]="orderItem.OrderTypeId">
                       <option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</option>
                     </select> -->
-                  <ng-select appOnReturn [(ngModel)]="orderItem.OrderTypeId" [ngModelOptions]="{standalone: true}"
+                  <ng-select appOnReturn [(ngModel)]="orderItem.orderTpye.id" [ngModelOptions]="{standalone: true}"
                     [closeOnSelect]="true" name="orderType" [addTag]="true" style="width: 100%;">
                     <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}
                     </ng-option>
@@ -176,14 +180,14 @@
                   <!-- <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-pencil"></i></span>
                     </div> -->
-                  <input type="text" name="code" [(ngModel)]="orderItem.Count" class="form-control"
+                  <input type="text" name="code" [(ngModel)]="orderItem.count" class="form-control"
                     oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                     placeholder=" العدد " required>
                 </div>
               </td>
-              <td><a class="btn btn-info" (click)="RemoveOrderItem(orderItem)">x</a></td>
+              <td><a class="btn btn-info" (click)="RemoveOrderItem(orderItem)" [hidden]="CanEdit">x</a></td>
             </tr>
-            <tr>
+            <tr [hidden]="CanEdit">
               <td>
                 <div class="input-group " style="width: 100px;">
 
@@ -202,12 +206,12 @@
                   <!-- <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-pencil"></i></span>
                     </div> -->
-                  <input type="text" name="code" [(ngModel)]="OrderItem.Count" class="form-control"
+                  <input type="text" [disabled]="CanEdit" name="code" [(ngModel)]="OrderItem.count" class="form-control"
                     oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                     placeholder=" العدد " required>
                 </div>
               </td>
-              <td><a class="btn btn-info" (click)="AddOrderItem()">+ </a></td>
+              <td><a class="btn btn-info" [hidden]="CanEdit" (click)="AddOrderItem()">+ </a></td>
             </tr>
           </tbody>
         </table>

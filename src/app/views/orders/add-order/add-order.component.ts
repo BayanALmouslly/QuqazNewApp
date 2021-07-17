@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { IdAndName } from '../../../Models/id-and-name.model';
-import { AddOrder, OrderItem } from '../../../Models/order/add-order.model';
+import { AddOrder, OrderItem, orderTpye } from '../../../Models/order/add-order.model';
 import { OrderService } from '../../../services/order/order.service';
 import { SettingsService } from '../../../services/settings.service';
 import { UserLogin } from '../../auth/userlogin.model';
@@ -19,7 +19,7 @@ export class AddOrderComponent implements OnInit {
     private settingservice: SettingsService,
     private toasterService: ToasterService,
     private router: Router,
-    private currencyPipe : CurrencyPipe) { }
+    private currencyPipe: CurrencyPipe) { }
   Regions: IdAndName[] = []
   Countries: any[] = []
   OrderTypes: IdAndName[] = []
@@ -33,7 +33,7 @@ export class AddOrderComponent implements OnInit {
     this.GetSettings()
     this.Order.OrderItem = []
     this.Order.RecipientPhones = []
-    
+
 
   }
   GetSettings() {
@@ -57,7 +57,7 @@ export class AddOrderComponent implements OnInit {
   }
   CountryChanged() {
     var country = this.Countries.find(c => c.id == this.Order.CountryId)
-    this.deliveryCost=country.deliveryCost
+    this.deliveryCost = country.deliveryCost
     this.Regions = country.regions
   }
   getOrderType() {
@@ -67,10 +67,13 @@ export class AddOrderComponent implements OnInit {
   }
   AddOrderItem() {
     if (!this.OrderItem.Count) return
-    if (isNaN(this.OrderItem.OrderTypeId)) {
-      this.OrderItem.OrderTypeName = this.OrderItem.OrderTypeId.label;
-      this.OrderItem.OrderTypeId = null;
-    }
+    this.OrderItem.orderTpye = new orderTpye
+    var find = this.OrderTypes.find(o => o.name == this.OrderItem.OrderTypeName)
+    if (!find) {
+      this.OrderItem.OrderTypeId = null
+      this.OrderTypes.push({id:this.OrderItem.OrderTypeId,name:this.OrderItem.OrderTypeName.label})
+    } else
+      this.OrderItem.OrderTypeId = find.id
     this.OrderItem.Count = (Number)(this.OrderItem.Count)
     this.Order.OrderItem.push(this.OrderItem)
     this.OrderItem = new OrderItem
@@ -103,14 +106,14 @@ export class AddOrderComponent implements OnInit {
       this.Phone = ""
     }
     if (!this.Order.Code || this.Order.RecipientPhones.length == 0
-       || !this.Order.RecipientName || !this.Order.Cost
+      || !this.Order.RecipientName || !this.Order.Cost
       || !this.Order.CountryId || !this.Order.Address || this.codeError) {
       this.errorMessage = true
       return
     }
     else
       this.errorMessage = false
-      this.Order.Cost=this.Order.Cost.replace(/,/g, "")*1;
+    this.Order.Cost = this.Order.Cost.replace(/,/g, "") * 1;
 
     // if (isNaN(this.Order.RegionId)) {
     //   this.Order.RegioName = this.Order.RegionId.label;
@@ -121,7 +124,7 @@ export class AddOrderComponent implements OnInit {
     this.orderServies.Add(this.Order).subscribe(res => {
       this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
       this.Order = new AddOrder
-      this.Order.RecipientPhones=[]
+      this.Order.RecipientPhones = []
       this.errorMessage = false
       // this.router.navigate(['/orders/sendorder'])
     }, err => {
@@ -142,8 +145,8 @@ export class AddOrderComponent implements OnInit {
     })
   }
   formattedAmount
-  currency(){
-    this.formattedAmount = this.currencyPipe.transform(this.Order.Cost,' ');
+  currency() {
+    this.formattedAmount = this.currencyPipe.transform(this.Order.Cost, ' ');
     this.Order.Cost = this.formattedAmount.split('.00')[0];
-}
+  }
 }

@@ -38,6 +38,7 @@ export class ShowOrderComponent implements OnInit {
 
   }
   id
+  CanEdit:boolean
   GetOrder() {
     this.getroute.params.subscribe(par => {
       this.id = par['id'] as string
@@ -55,6 +56,12 @@ export class ShowOrderComponent implements OnInit {
       this.Order.RecipientPhones=res.recipientPhones.split(',')
       this.Order.monePlaced=res.monePlaced
       this.Order.orderplaced=res.orderplaced
+      this.Order.isSend=res.isSend
+      // if(this.Order.isSend==false)
+      this.CanEdit=false
+      // else
+      // this.CanEdit=true
+
     })
   }
   GetSettings() {
@@ -87,12 +94,16 @@ export class ShowOrderComponent implements OnInit {
     })
   }
   AddOrderItem() {
-    if (!this.OrderItem.Count) return
+    if (!this.OrderItem.count) return
     if (isNaN(this.OrderItem.OrderTypeId)) {
+      console.log(this.OrderItem.OrderTypeId.label)
       this.OrderItem.OrderTypeName = this.OrderItem.OrderTypeId.label;
       this.OrderItem.OrderTypeId = null;
-    }
-    this.OrderItem.Count = (Number)(this.OrderItem.Count)
+     // this.OrderItem.orderTpye.id= this.OrderItem.OrderTypeId
+      // this.OrderItem.orderTpye.name= this.OrderItem.OrderTypeName
+    }else
+    this.OrderItem.orderTpye= this.OrderTypes.find(o=>o.id==this.OrderItem.OrderTypeId)
+    this.OrderItem.count = (Number)(this.OrderItem.count)
     this.Order.OrderItem.push(this.OrderItem)
     this.OrderItem = new OrderItem
   }
