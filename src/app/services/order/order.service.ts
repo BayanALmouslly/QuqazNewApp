@@ -69,4 +69,7 @@ export class OrderService {
   getById(id){
     return this.http.get<any>(this.controler+id)
   }
+  edit(order){
+    return this.http.put(this.controler,order)
+  }
 }

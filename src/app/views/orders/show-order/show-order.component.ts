@@ -48,7 +48,9 @@ export class ShowOrderComponent implements OnInit {
       this.Order.Address = res.address
       this.Order.ClientNote = res.clientNote
       this.Order.Code = res.code
+      this.tempCode=this.Order.Code
       this.Order.Cost = res.cost
+      this. currency()
       this.Order.CountryId = res.countryId
       this.Order.DateTime = res.date
       this.Order.OrderItem = res.orderItems
@@ -153,11 +155,11 @@ export class ShowOrderComponent implements OnInit {
     //   this.Order.RegionId = null;
     // }
 
-    this.Order.DateTime = new Date
-    this.orderServies.Add(this.Order).subscribe(res => {
-      this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
-      this.Order = new AddOrder
-      this.Order.RecipientPhones = []
+    this.Order.Date = new Date
+    this.orderServies.edit(this.Order).subscribe(res => {
+      this.toasterService.pop('success', '', 'تمت تعديل الطلب بنجاح');
+      // this.Order = new AddOrder
+      // this.Order.RecipientPhones = []
       this.errorMessage = false
       // this.router.navigate(['/orders/sendorder'])
     }, err => {
@@ -169,7 +171,11 @@ export class ShowOrderComponent implements OnInit {
 
   }
   codeError: boolean
+  tempCode
   checkCode() {
+    if(this.Order.Code==this.tempCode){
+      this.codeError = false
+      return}
     this.orderServies.codeExist(this.Order.Code).subscribe(res => {
       if (res)
         this.codeError = true

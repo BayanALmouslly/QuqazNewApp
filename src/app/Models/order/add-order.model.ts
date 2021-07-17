@@ -8,6 +8,7 @@ export class AddOrder {
     ClientNote
     Cost
     DateTime: Date
+    Date: Date
     OrderItem: OrderItem[]
     RecipientPhones: string[]
     monePlaced
