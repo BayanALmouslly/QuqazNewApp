@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { IdAndName } from '../../../Models/id-and-name.model';
 import { AddOrder, OrderItem } from '../../../Models/order/add-order.model';
+import { UpdateOrder } from '../../../Models/order/Update-order';
 import { OrderService } from '../../../services/order/order.service';
 import { SettingsService } from '../../../services/settings.service';
 import { UserLogin } from '../../auth/userlogin.model';
@@ -24,7 +25,7 @@ export class ShowOrderComponent implements OnInit {
   Regions: IdAndName[] = []
   Countries: any[] = []
   OrderTypes: IdAndName[] = []
-  Order: AddOrder = new AddOrder
+  Order: UpdateOrder = new UpdateOrder;
   OrderItem: OrderItem = new OrderItem
   Phone = ""
   client: UserLogin = JSON.parse(localStorage.getItem('kokazUser'))
@@ -37,27 +38,27 @@ export class ShowOrderComponent implements OnInit {
     this.GetOrder()
 
   }
-  id
+  id: number;
   CanEdit: boolean
   GetOrder() {
     this.getroute.params.subscribe(par => {
-      this.id = par['id'] as string
+      this.id = par['id'] as number;
+      this.Order.id = Number(this.id);
     });
     this.orderServies.getById(this.id).subscribe(res => {
-      console.log(res)
       this.Order.Address = res.address
       this.Order.ClientNote = res.clientNote
       this.Order.Code = res.code
-      this.tempCode=this.Order.Code
+      this.tempCode = this.Order.Code
       this.Order.Cost = res.cost
-      this. currency()
+      this.currency()
       this.Order.CountryId = res.country.id
       this.Order.DateTime = res.date
       this.Order.OrderItem = res.orderItems
       this.Order.OrderItem.forEach(item => {
         item.OrderTypeName = item.orderTpye.name
         item.OrderTypeId = item.orderTpye.id
-        item.Count=item.count
+        item.Count = item.count
 
       })
       this.Order.RecipientName = res.recipientName
@@ -65,10 +66,10 @@ export class ShowOrderComponent implements OnInit {
       this.Order.monePlaced = res.monePlaced
       this.Order.orderplaced = res.orderplaced
       this.Order.isSend = res.isSend
-      if(this.Order.isSend==false)
-      this.CanEdit = false
+      if (this.Order.isSend == false)
+        this.CanEdit = false
       else
-      this.CanEdit=true
+        this.CanEdit = true
 
     })
   }
@@ -181,6 +182,7 @@ export class ShowOrderComponent implements OnInit {
     // }
 
     this.Order.Date = new Date
+    console.log(this.Order);
     this.orderServies.edit(this.Order).subscribe(res => {
       this.toasterService.pop('success', '', 'تمت تعديل الطلب بنجاح');
       // this.Order = new AddOrder
@@ -189,7 +191,6 @@ export class ShowOrderComponent implements OnInit {
       // this.router.navigate(['/orders/sendorder'])
     }, err => {
       this.toasterService.pop('error', '', err.message);
-      console.log(err)
       //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
 
     })
@@ -198,9 +199,10 @@ export class ShowOrderComponent implements OnInit {
   codeError: boolean
   tempCode
   checkCode() {
-    if(this.Order.Code==this.tempCode){
+    if (this.Order.Code == this.tempCode) {
       this.codeError = false
-      return}
+      return
+    }
     this.orderServies.codeExist(this.Order.Code).subscribe(res => {
       if (res)
         this.codeError = true
