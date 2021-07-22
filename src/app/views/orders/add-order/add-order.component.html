@@ -43,13 +43,10 @@
           <small *ngIf="!Order.CountryId&&errorMessage">المدينة حقل مطلوب</small>
 
           <div class="input-group mb-3">
-                      كلفة توصيل  :  &nbsp;<span style="height: 10%;padding: 3px;width: 20%;" class="bg-info">{{deliveryCost|number}}</span>
-
-            <!-- <ng-select appOnReturn [(ngModel)]="Order.RegionId" [ngModelOptions]="{standalone: true}"
-            [closeOnSelect]="true" name="Region" [addTag]="true" style="width:100%;">
-            <ng-option *ngFor="let Region of Regions" [value]="Region.id">{{Region.name}}</ng-option>
-          </ng-select> -->
-         
+            <div
+              style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px; padding: 5px;text-align: right;width: 100%;">
+              كلفة توصيل : &nbsp;<span style="height: 10%;padding: 3px;width: 20%;"
+                class="bg-info">{{deliveryCost|number}}</span> </div>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -84,15 +81,16 @@
           </div>
           <!-- <small *ngIf="Order.OrderItem.length==0&&errorMessage"> نوع الطلبية حقل مطلوب</small> -->
 
-          <ng-container *ngFor="let phones of Order.RecipientPhones;index as i">
+          <ng-container *ngFor="let phones of Order.RecipientPhones;let i=index;trackBy: onTrackBy">
             <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="icon-phone"></i></span>
               </div>
               <input type="text" name="phones+{{i}}" [(ngModel)]="Order.RecipientPhones[i]" maxlength="11"
                 oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
-                class="form-control" placeholder=" رقم هاتف" required>
+                class="form-control" placeholder=" رقم هاتف" (keyup)="checkphone(Order.RecipientPhones[i],i)" required>
                 <a class="btn btn-info" (click)="RemovePhone(phones)">x </a>
+
             </div>
           </ng-container>
 
@@ -102,12 +100,12 @@
             </div>
             <input type="text" name="RecipientPhones" [(ngModel)]="Phone" maxlength="11"
               oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" class="form-control"
-              placeholder=" رقم هاتف" required (keyup)="checkphone()">
+              placeholder=" رقم هاتف" required (keyup)="checkphone(Phone)">
             <a class="btn btn-info" (click)="AddPhone()">+ </a>
           </div>
           <small *ngIf="!Phone&&Order.RecipientPhones.length==0&&errorMessage">رقم الهاتف حقل مطلوب</small>
           <small *ngIf="errorPhone">يجب ان يكون رقم الهاتف 11 حقل</small>
-
+          <small *ngIf="errorRepeatPhone">رقم الهاتف مكرر</small>
           <div class="input-group ">
 
             <textarea name="ClientNote" [(ngModel)]="Order.ClientNote" style="width: 100%;" name="textarea-input"
@@ -183,7 +181,7 @@
                     <option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</option>
                   </select> -->
                   <ng-select appOnReturn [(ngModel)]="OrderItem.OrderTypeName" [ngModelOptions]="{standalone: true}"
-                  [closeOnSelect]="true" name="orderType" [addTag]="true" style="width: 100%;">
+                  [clearable]="true"  [closeOnSelect]="true" name="orderType" [addTag]="true" style="width: 100%;">
                   <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.name">{{orderType.name}}</ng-option>
                 </ng-select>
                 </div>

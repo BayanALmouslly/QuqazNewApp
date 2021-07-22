@@ -70,9 +70,11 @@ export class AddOrderComponent implements OnInit {
     var find = this.OrderTypes.find(o => o.name == this.OrderItem.OrderTypeName)
     if (!find) {
       this.OrderItem.OrderTypeId = null
-      this.OrderTypes.push({id:this.OrderItem.OrderTypeId,name:this.OrderItem.OrderTypeName.label})
-    } else
+      //  this.OrderTypes.push({ id: this.OrderItem.OrderTypeId, name: this.OrderItem.OrderTypeName.label })
+    } else {
       this.OrderItem.OrderTypeId = find.id
+    }
+    this.OrderTypes=this.OrderTypes.filter(o=>o.name!=this.OrderItem.OrderTypeName )
     this.OrderItem.Count = (Number)(this.OrderItem.Count)
     this.Order.OrderItem.push(this.OrderItem)
     this.OrderItem = new OrderItem
@@ -81,16 +83,35 @@ export class AddOrderComponent implements OnInit {
     this.Order.OrderItem = this.Order.OrderItem.filter(o => o != order)
   }
   errorPhone = false
-  checkphone() {
-    if (this.Phone.length < 11 || !this.Phone) {
+  errorRepeatPhone = false
+
+  checkphone(phone, index?) {
+    console.log(index)
+    if (phone.length < 11 || !phone) {
       this.errorPhone = true
-      return
     }
-    else
+    else {
       this.errorPhone = false
+    }
+    if (index) {
+      if (this.Order.RecipientPhones.filter(p => p == phone && this.Order.RecipientPhones.indexOf(p) != index).length > 0) {
+        this.errorRepeatPhone = true
+      }
+      else {
+        this.errorRepeatPhone = false
+      }
+    }
+    else if (index == undefined) {
+      if (this.Order.RecipientPhones.filter(p => p == phone).length > 0) {
+        this.errorRepeatPhone = true
+      } else {
+        this.errorRepeatPhone = false
+      }
+    }
+
   }
   AddPhone() {
-    if (!this.Phone) {
+    if (!this.Phone || this.errorPhone || this.errorRepeatPhone) {
       return
     }
     this.Order.RecipientPhones.push(this.Phone)
@@ -99,6 +120,9 @@ export class AddOrderComponent implements OnInit {
   RemovePhone(phone) {
     this.Order.RecipientPhones = this.Order.RecipientPhones.filter(o => o != phone)
   }
+  onTrackBy(index) {
+    return index;
+  }
   AddOrder() {
     if (this.Phone && !this.errorPhone) {
       this.Order.RecipientPhones.push(this.Phone)
@@ -106,7 +130,7 @@ export class AddOrderComponent implements OnInit {
     }
     if (!this.Order.Code || this.Order.RecipientPhones.length == 0
       || !this.Order.RecipientName || !this.Order.Cost
-      || !this.Order.CountryId || !this.Order.Address || this.codeError) {
+      || !this.Order.CountryId || !this.Order.Address || this.codeError || this.errorPhone) {
       this.errorMessage = true
       return
     }

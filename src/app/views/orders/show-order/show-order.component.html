@@ -95,14 +95,14 @@
           </div>
           <!-- <small *ngIf="Order.OrderItem.length==0&&errorMessage"> نوع الطلبية حقل مطلوب</small> -->
 
-          <ng-container *ngFor="let phones of Order.RecipientPhones;index as i">
+          <ng-container *ngFor="let phones of Order.RecipientPhones;let i=index;trackBy: onTrackBy">
             <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="icon-phone"></i></span>
               </div>
               <input type="text" [disabled]="CanEdit" name="phones+{{i}}" [(ngModel)]="Order.RecipientPhones[i]"
                 maxlength="11" oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
-                class="form-control" placeholder=" رقم هاتف" required>
+                class="form-control" placeholder=" رقم هاتف"  (keyup)="checkphone(Order.RecipientPhones[i],i)"  required>
               <a class="btn btn-info" [hidden]="CanEdit" (click)="RemovePhone(phones)">x </a>
             </div>
           </ng-container>
@@ -118,6 +118,7 @@
           </div>
           <small *ngIf="!Phone&&Order.RecipientPhones.length==0&&errorMessage">رقم الهاتف حقل مطلوب</small>
           <small *ngIf="errorPhone">يجب ان يكون رقم الهاتف 11 حقل</small>
+          <small *ngIf="errorRepeatPhone">رقم الهاتف مكرر</small>
 
           <div class="input-group ">
 
