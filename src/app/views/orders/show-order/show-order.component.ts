@@ -28,7 +28,7 @@ export class ShowOrderComponent implements OnInit {
   Order: UpdateOrder = new UpdateOrder;
   OrderItem: OrderItem = new OrderItem
   Phone = ""
-  client: UserLogin = JSON.parse(localStorage.getItem('kokazUser'))
+  client: UserLogin = JSON.parse(localStorage.getItem('kokazClient'))
   errorMessage: boolean = false
   deliveryCost
   ngOnInit(): void {
@@ -124,8 +124,7 @@ export class ShowOrderComponent implements OnInit {
   errorRepeatPhone = false
 
   checkphone(phone, index?) {
-    console.log(index)
-    if (phone.length < 11 || !phone) {
+    if (phone.length < 11 && phone) {
       this.errorPhone = true
     }
     else {

@@ -26,7 +26,7 @@ export class AddOrderComponent implements OnInit {
   Order: AddOrder = new AddOrder
   OrderItem: OrderItem = new OrderItem
   Phone = ""
-  client: UserLogin = JSON.parse(localStorage.getItem('kokazUser'))
+  client: UserLogin = JSON.parse(localStorage.getItem('kokazClient'))
   errorMessage: boolean = false
   deliveryCost
   ngOnInit(): void {
@@ -86,8 +86,7 @@ export class AddOrderComponent implements OnInit {
   errorRepeatPhone = false
 
   checkphone(phone, index?) {
-    console.log(index)
-    if (phone.length < 11 || !phone) {
+    if (phone.length < 11 && phone) {
       this.errorPhone = true
     }
     else {
@@ -142,8 +141,9 @@ export class AddOrderComponent implements OnInit {
     //   this.Order.RegioName = this.Order.RegionId.label;
     //   this.Order.RegionId = null;
     // }
+    console.log(this.Order)
 
-    this.Order.DateTime = new Date
+    this.Order.Date = new Date
     this.orderServies.Add(this.Order).subscribe(res => {
       this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
       this.Order = new AddOrder

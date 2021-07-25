@@ -11,7 +11,7 @@ export class ProfileComponent implements OnInit {
 
   constructor( private toasterService: ToasterService) { }
 
-  user = JSON.parse(localStorage.getItem('kokazUser')) as UserLogin
+  user = JSON.parse(localStorage.getItem('kokazClient')) as UserLogin
   Order
   showEdit=false
   ngOnInit(): void {

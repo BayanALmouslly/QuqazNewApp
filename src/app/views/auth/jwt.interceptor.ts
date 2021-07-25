@@ -72,7 +72,7 @@ export class JwtInterceptor implements HttpInterceptor {
   // ExpiryTime() {
   //   var user = this.authenticationService.authenticatedUser
   //   if (user == null || (user.expiry && (new Date().getTime() - user.expiry > 7 * 60 * 60 * 1000))) {
-  //     localStorage.removeItem('kokazUser')
+  //     localStorage.removeItem('kokazClient')
   //     localStorage.removeItem('token')
   //     return this.logoutUser();
   //   }

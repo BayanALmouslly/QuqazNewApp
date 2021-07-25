@@ -45,8 +45,8 @@
           <div class="input-group mb-3">
             <div
               style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px; padding: 5px;text-align: right;width: 100%;">
-              كلفة توصيل : &nbsp;<span style="height: 10%;padding: 3px;width: 20%;"
-                class="bg-info">{{deliveryCost|number}}</span> </div>
+              كلفة توصيل : &nbsp;<span style="height: 10%;padding: 3px;width: 20%;border-radius: 3px;"
+                class="bg-info"*ngIf="deliveryCost">{{deliveryCost|number}}</span> </div>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">

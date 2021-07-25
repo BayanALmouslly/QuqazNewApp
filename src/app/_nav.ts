@@ -1,6 +1,6 @@
 import { INavData } from '@coreui/angular';
 // import { UserLogin } from './views/auth/userlogin.model';
-//  const user=JSON.parse(localStorage.getItem('kokazUser'))as UserLogin
+//  const user=JSON.parse(localStorage.getItem('kokazClient'))as UserLogin
 export const navItems: INavData[] = [
   {
     // user?user.name:''

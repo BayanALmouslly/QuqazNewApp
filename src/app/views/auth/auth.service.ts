@@ -21,7 +21,7 @@ export interface IPasswordReset {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnDestroy{
-  private localStorageKey: string = 'kokazUser';
+  private localStorageKey: string = 'kokazClient';
   private permissionlocalStorageKey: string = 'permissions';
   ngOnDestroy(): void {
   }
@@ -38,7 +38,7 @@ export class AuthService implements OnDestroy{
   signOut() {
     this.resetAuthenticated();
     localStorage.removeItem('token')
-    localStorage.removeItem("kokazUser");
+    localStorage.removeItem("kokazClient");
     //localStorage.clear();
     this.rout.navigate(['/login']);  
   }
