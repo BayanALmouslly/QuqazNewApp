@@ -46,10 +46,10 @@ export class JwtInterceptor implements HttpInterceptor {
                   this.router.navigate(['/login']);
 
                 }
-                case 404:{
-                  this.router.navigate(['/404']);
+                // case 404:{
+                //   this.router.navigate(['/404']);
 
-                }
+                // }
                 // case 400:
                 // case 409:
                 // case 500:

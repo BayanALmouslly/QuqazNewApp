@@ -9,4 +9,5 @@ export class UserLogin {
     phones
     address
     mail
+    password
 }

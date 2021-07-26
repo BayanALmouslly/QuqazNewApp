@@ -2,17 +2,25 @@
     <div class="col-lg-4 mx-auto">
 
         <div class=" card-box ">
-            <li class="icon-pencil d-block" data-toggle="modal"*ngIf="!showEdit" (click)="infoModal.show()"></li>
-            <li class="fa fa-bookmark" data-toggle="modal" *ngIf="showEdit"(click)="saveEdit()"></li>
+            <li class="icon-pencil d-block" *ngIf="!showEdit" (click)="CanEdit()"></li>
+            <li class="fa fa-bookmark" *ngIf="showEdit" (click)="saveEdit()"></li>
 
             <div class="text-center member-card pt-2 pb-2">
 
                 <div class="thumb-lg member-thumb mx-auto"><img src="assets/img/brand/user.jfif"
                         class="rounded-circle img-thumbnail" alt="profile-image"></div>
                 <div class="" *ngIf="!showEdit">
-                    <h4>{{user.name}}</h4>
-                    <h6>{{user.userName}}</h6>
-                    <h6>{{user.mail}}</h6>
+                    <h4>{{user.name}}</h4>   
+                    <p class="text-muted" >
+                        <i class="icon-user icons  d-block mt-4"> <span>| </span>
+                        <span><a href="#" class="text-pink">{{user.userName}}</a></span>
+                    </i>
+                    </p>
+                    <p class="text-muted" *ngIf="user.mail">
+                        <i class="icon-envelope icons  d-block mt-4"> <span>| </span>
+                        <span><a href="#" class="text-pink">{{user.mail}}</a></span>
+                    </i>
+                    </p>
                     <p class="text-muted" *ngFor="let phone of user.phones">
                         <li class="icon icon-phone d-block"> <span>| </span>
                             <span><a href="#" class="text-pink">{{phone.phone}}</a></span>
@@ -28,37 +36,74 @@
                 <div class="row" *ngIf="showEdit">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="icon-pencil"></i></span>
+                            <span class="input-group-text"><i class="icon-pencil"></i></span>
                         </div>
-                        <input type="text" name="code" [(ngModel)]="user.name" class="form-control" placeholder="رقم الوصل "
-                          required>
-                      </div>
-                      <div class="input-group mb-3">
+                        <input type="text" name="code" [(ngModel)]="user.name" class="form-control"
+                            placeholder="الاسم " required maxlength="50" (ngModelChange)="CheckName()">
+                    </div>
+                    <small style="color: red;" *ngIf="errorName">الاسم مكرر</small><br>
+                    <small style="color: red;" *ngIf="!user.name&&errorRequierd">الاسم حقل مطلوب</small>
+
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="icon-pencil"></i></span>
+                            <span class="input-group-text"><i class="icon-user"></i></span>
                         </div>
-                        <input type="text" name="code" [(ngModel)]="user.userName" class="form-control" placeholder="رقم الوصل "
-                          required>
-                      </div>
-                      <div class="input-group mb-3">
+                        <input type="text" name="code" [(ngModel)]="user.userName" class="form-control"
+                            placeholder="اسم المستخدم " required maxlength="50" (ngModelChange)="CheckUserName()">
+                    </div>
+                    <small style="color: red;" *ngIf="errorUserName">اسم المستخدم مكرر</small><br>
+                    <small style="color: red;" *ngIf="!user.userName&&errorRequierd">اسم المستخدم حقل مطلوب</small>
+
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="icon-pencil"></i></span>
+                            <span class="input-group-text">@</span>
                         </div>
-                        <input type="email" name="mail" [(ngModel)]="user.mail" class="form-control" placeholder="الايميل  "
-                          required>
-                      </div>
-                    <ng-container *ngFor="let phones of user.phones;index as i">
+                        <input type="email" name="mail" [(ngModel)]="user.mail" class="form-control"
+                            placeholder="الايميل  " required>
+                    </div>
+
+                  
+                    <ng-container *ngFor="let phones of user.phones;let i=index;trackBy: onTrackBy">
                         <div class="input-group mb-4">
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-phone"></i></span>
                           </div>
                           <input type="text" name="phones+{{i}}" [(ngModel)]="user.phones[i].phone" maxlength="11"
                             oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
-                            class="form-control" placeholder=" رقم هاتف" required>
+                            class="form-control" placeholder=" رقم هاتف" (keyup)="checkphone(user.phones[i],i)" required>
+                            <a class="btn btn-info" (click)="RemovePhone(phones)">x </a>
+            
                         </div>
                       </ng-container>
             
+                      <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="icon-phone"></i></span>
+                        </div>
+                        <input type="text" name="RecipientPhones" [(ngModel)]="Phone" maxlength="11"
+                          oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" class="form-control"
+                          placeholder=" رقم هاتف جديد" required (keyup)="checkphone(Phone)">
+                        <a class="btn btn-info" (click)="AddPhone()">+ </a>
+                      </div>
+                      <small *ngIf="!Phone&&user.phones.length==0&&errorRequierd">رقم الهاتف حقل مطلوب</small>
+                      <small *ngIf="errorPhone">يجب ان يكون رقم الهاتف 11 حقل</small>
+                      <small *ngIf="errorRepeatPhone">رقم الهاتف مكرر</small>
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-lock"></i></span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="كلمة المرور الجديدة" name="Password"
+                            autocomplete="current-password" [(ngModel)]="user.password" required>
+                    </div>
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-lock"></i></span>
+                        </div>
+                        <input type="password" class="form-control" placeholder=" تأكيد كلمة المرور " name="Password"
+                            autocomplete="current-password" [(ngModel)]="tempPassword" required>
+                    </div>
                 </div>
+                <small *ngIf="errorPassword">كلمة المرور غير مطابقة</small>
                 <!-- <ul class="social-links list-inline">
                     <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
                             href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
