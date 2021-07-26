@@ -24,6 +24,8 @@ export class ClientService {
     return this.http.put(this.controler + "deletePhone/"+id,fromdata)
   }
   addPhone(phone) {
-    return this.http.put(this.controler + "addPhone/"+phone,phone)
+    let fromdata=new FormData
+    fromdata.append("phone",phone)
+    return this.http.put(this.controler + "addPhone/"+phone,fromdata)
   }
 }

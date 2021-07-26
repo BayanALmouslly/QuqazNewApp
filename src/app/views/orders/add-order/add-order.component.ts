@@ -1,6 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgSelectComponent } from '@ng-select/ng-select';
 import { ToasterService } from 'angular2-toaster';
 import { IdAndName } from '../../../Models/id-and-name.model';
 import { AddOrder, OrderItem, orderTpye } from '../../../Models/order/add-order.model';
@@ -29,11 +30,11 @@ export class AddOrderComponent implements OnInit {
   client: UserLogin = JSON.parse(localStorage.getItem('kokazClient'))
   errorMessage: boolean = false
   deliveryCost
+
   ngOnInit(): void {
     this.GetSettings()
     this.Order.OrderItem = []
     this.Order.RecipientPhones = []
-
 
   }
   GetSettings() {
@@ -60,9 +61,11 @@ export class AddOrderComponent implements OnInit {
     this.deliveryCost = country.deliveryCost
     this.Regions = country.regions
   }
+  tempOrderTypes
   getOrderType() {
     this.settingservice.orderType().subscribe(res => {
       this.OrderTypes = res
+      this.tempOrderTypes=res
     })
   }
   AddOrderItem() {
@@ -70,11 +73,14 @@ export class AddOrderComponent implements OnInit {
     var find = this.OrderTypes.find(o => o.name == this.OrderItem.OrderTypeName)
     if (!find) {
       this.OrderItem.OrderTypeId = null
+      // this.OrderItem.OrderTypeName=JSON.stringify(this.OrderItem.OrderTypeName)
       //  this.OrderTypes.push({ id: this.OrderItem.OrderTypeId, name: this.OrderItem.OrderTypeName.label })
     } else {
       this.OrderItem.OrderTypeId = find.id
     }
-    this.OrderTypes=this.OrderTypes.filter(o=>o.name!=this.OrderItem.OrderTypeName )
+    this.tempOrderTypes=this.OrderTypes
+    this.OrderTypes=[]
+    this.OrderTypes=this.tempOrderTypes.filter(o=>o.name!=this.OrderItem.OrderTypeName )
     this.OrderItem.Count = (Number)(this.OrderItem.Count)
     this.Order.OrderItem.push(this.OrderItem)
     this.OrderItem = new OrderItem
@@ -137,12 +143,10 @@ export class AddOrderComponent implements OnInit {
       this.errorMessage = false
     this.Order.Cost = this.Order.Cost.replace(/,/g, "") * 1;
 
-    // if (isNaN(this.Order.RegionId)) {
-    //   this.Order.RegioName = this.Order.RegionId.label;
-    //   this.Order.RegionId = null;
-    // }
-    console.log(this.Order)
-
+    this.Order.OrderItem.forEach(o=>{
+      o.OrderTypeName=JSON.stringify(o.OrderTypeName)
+      console.log( o.OrderTypeName)
+    })
     this.Order.Date = new Date
     this.orderServies.Add(this.Order).subscribe(res => {
       this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
