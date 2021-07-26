@@ -169,7 +169,7 @@
                   <!-- <select class="form-control" name="OrderTypeId+{{i}}" [(ngModel)]="orderItem.OrderTypeId">
                     <option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</option>
                   </select> -->
-                  <ng-select [disabled]="CanEdit" appOnReturn [(ngModel)]="orderItem.OrderTypeName" [ngModelOptions]="{standalone: true}"
+                  <ng-select [disabled]="true" appOnReturn [(ngModel)]="orderItem.OrderTypeName" [ngModelOptions]="{standalone: true}"
                   [closeOnSelect]="true" name="orderType" [addTag]="true" style="width: 100%;" >
                   <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.name">{{orderType.name}}</ng-option>
                 </ng-select>
