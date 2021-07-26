@@ -61,28 +61,24 @@ export class AddOrderComponent implements OnInit {
     this.deliveryCost = country.deliveryCost
     this.Regions = country.regions
   }
-  tempOrderTypes
   getOrderType() {
     this.settingservice.orderType().subscribe(res => {
       this.OrderTypes = res
-      this.tempOrderTypes=res
     })
   }
   AddOrderItem() {
-    if (!this.OrderItem.Count) return
-    var orderTypeName = this.OrderItem.OrderTypeName.label;
-    console.log(orderTypeName);
+    if (!this.OrderItem.Count||!this.OrderItem.OrderTypeName) return
+    if (this.OrderItem.OrderTypeName.label)
+      var orderTypeName = this.OrderItem.OrderTypeName.label;
+    else
+      var orderTypeName = this.OrderItem.OrderTypeName;
     var find = this.OrderTypes.find(o => o.name == orderTypeName)
     if (!find) {
       this.OrderItem.OrderTypeId = null
-      // this.OrderItem.OrderTypeName=JSON.stringify(this.OrderItem.OrderTypeName)
-      //  this.OrderTypes.push({ id: this.OrderItem.OrderTypeId, name: this.OrderItem.OrderTypeName.label })
     } else {
       this.OrderItem.OrderTypeId = find.id
     }
-    // this.tempOrderTypes=this.OrderTypes
-    // this.OrderTypes=[]
-    this.OrderTypes=this.OrderTypes.filter(o=>o.name!=this.OrderItem.OrderTypeName )
+    this.OrderTypes = this.OrderTypes.filter(o => o.name != this.OrderItem.OrderTypeName)
     this.OrderItem.Count = (Number)(this.OrderItem.Count)
     this.OrderItem.OrderTypeName = orderTypeName;
     this.Order.OrderItem.push(this.OrderItem)
@@ -145,25 +141,21 @@ export class AddOrderComponent implements OnInit {
     else
       this.errorMessage = false
     this.Order.Cost = this.Order.Cost.replace(/,/g, "") * 1;
-
-    // this.Order.OrderItem.forEach(o=>{
-    //   o.OrderTypeName=JSON.stringify(o.OrderTypeName)
-    //   console.log( o.OrderTypeName)
-    // })
+    this.AddOrderItem()
     this.Order.Date = new Date
     console.log(this.Order);
-    // this.orderServies.Add(this.Order).subscribe(res => {
-    //   this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
-    //   this.Order = new AddOrder
-    //   this.Order.RecipientPhones = []
-    //   this.errorMessage = false
-    //   // this.router.navigate(['/orders/sendorder'])
-    // }, err => {
-    //   this.toasterService.pop('error', '', err.message);
-    //   console.log(err)
-    //   //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
+    this.orderServies.Add(this.Order).subscribe(res => {
+      this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
+      this.Order = new AddOrder
+      this.Order.RecipientPhones = []
+      this.errorMessage = false
+      // this.router.navigate(['/orders/sendorder'])
+    }, err => {
+      this.toasterService.pop('error', '', 'يجب ادخال جميع الحقول');
+      console.log(err)
+      //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
 
-    // })
+    })
 
   }
   codeError: boolean
