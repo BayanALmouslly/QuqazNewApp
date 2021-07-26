@@ -70,7 +70,9 @@ export class AddOrderComponent implements OnInit {
   }
   AddOrderItem() {
     if (!this.OrderItem.Count) return
-    var find = this.OrderTypes.find(o => o.name == this.OrderItem.OrderTypeName)
+    var orderTypeName = this.OrderItem.OrderTypeName.label;
+    console.log(orderTypeName);
+    var find = this.OrderTypes.find(o => o.name == orderTypeName)
     if (!find) {
       this.OrderItem.OrderTypeId = null
       // this.OrderItem.OrderTypeName=JSON.stringify(this.OrderItem.OrderTypeName)
@@ -78,10 +80,11 @@ export class AddOrderComponent implements OnInit {
     } else {
       this.OrderItem.OrderTypeId = find.id
     }
-    this.tempOrderTypes=this.OrderTypes
-    this.OrderTypes=[]
-    this.OrderTypes=this.tempOrderTypes.filter(o=>o.name!=this.OrderItem.OrderTypeName )
+    // this.tempOrderTypes=this.OrderTypes
+    // this.OrderTypes=[]
+    this.OrderTypes=this.OrderTypes.filter(o=>o.name!=this.OrderItem.OrderTypeName )
     this.OrderItem.Count = (Number)(this.OrderItem.Count)
+    this.OrderItem.OrderTypeName = orderTypeName;
     this.Order.OrderItem.push(this.OrderItem)
     this.OrderItem = new OrderItem
   }
@@ -143,23 +146,24 @@ export class AddOrderComponent implements OnInit {
       this.errorMessage = false
     this.Order.Cost = this.Order.Cost.replace(/,/g, "") * 1;
 
-    this.Order.OrderItem.forEach(o=>{
-      o.OrderTypeName=JSON.stringify(o.OrderTypeName)
-      console.log( o.OrderTypeName)
-    })
+    // this.Order.OrderItem.forEach(o=>{
+    //   o.OrderTypeName=JSON.stringify(o.OrderTypeName)
+    //   console.log( o.OrderTypeName)
+    // })
     this.Order.Date = new Date
-    this.orderServies.Add(this.Order).subscribe(res => {
-      this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
-      this.Order = new AddOrder
-      this.Order.RecipientPhones = []
-      this.errorMessage = false
-      // this.router.navigate(['/orders/sendorder'])
-    }, err => {
-      this.toasterService.pop('error', '', err.message);
-      console.log(err)
-      //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
+    console.log(this.Order);
+    // this.orderServies.Add(this.Order).subscribe(res => {
+    //   this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
+    //   this.Order = new AddOrder
+    //   this.Order.RecipientPhones = []
+    //   this.errorMessage = false
+    //   // this.router.navigate(['/orders/sendorder'])
+    // }, err => {
+    //   this.toasterService.pop('error', '', err.message);
+    //   console.log(err)
+    //   //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
 
-    })
+    // })
 
   }
   codeError: boolean
