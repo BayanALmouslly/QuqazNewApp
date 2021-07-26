@@ -59,7 +59,7 @@ export class ShowOrderComponent implements OnInit {
         item.OrderTypeName = item.orderTpye.name
         item.OrderTypeId = item.orderTpye.id
         item.Count = item.count
-
+        this.OrderTypes = this.OrderTypes.filter(o => o.name != item.orderTpye.name)
       })
       this.Order.RecipientName = res.recipientName
       this.Order.RecipientPhones = res.recipientPhones.split(',')
@@ -97,28 +97,50 @@ export class ShowOrderComponent implements OnInit {
     this.deliveryCost = country.deliveryCost
     this.Regions = country.regions
   }
+  tempOrderTypes
   getOrderType() {
     this.settingservice.orderType().subscribe(res => {
       this.OrderTypes = res
+      this.tempOrderTypes = res
     })
   }
+  changeOrderType() {
+    if (this.Order.OrderItem.length == 0)
+    this.OrderTypes = this.tempOrderTypes
+  else {
+    console.log(  this.Order.OrderItem)
+    this.Order.OrderItem.forEach(item => {
+      this.OrderTypes = this.tempOrderTypes.filter(o => o.name != item.OrderTypeName)
+    })
+  }
+  }
   AddOrderItem() {
-    if (!this.OrderItem.Count) return
-    var find = this.OrderTypes.find(o => o.name == this.OrderItem.OrderTypeName)
+    if (!this.OrderItem.Count || !this.OrderItem.OrderTypeName) return
+    if (this.OrderItem.OrderTypeName.label)
+      var orderTypeName = this.OrderItem.OrderTypeName.label;
+    else
+      var orderTypeName = this.OrderItem.OrderTypeName;
+    var find = this.OrderTypes.find(o => o.name == orderTypeName)
     if (!find) {
       this.OrderItem.OrderTypeId = null
-      //  this.OrderTypes.push({ id: this.OrderItem.OrderTypeId, name: this.OrderItem.OrderTypeName.label })
     } else {
       this.OrderItem.OrderTypeId = find.id
     }
-    this.OrderTypes=this.OrderTypes.filter(o=>o.name!=this.OrderItem.OrderTypeName )
-      this.OrderItem.OrderTypeId = find.id
+    this.OrderTypes = this.OrderTypes.filter(o => o.name != this.OrderItem.OrderTypeName)
     this.OrderItem.Count = (Number)(this.OrderItem.Count)
+    this.OrderItem.OrderTypeName = orderTypeName;
     this.Order.OrderItem.push(this.OrderItem)
     this.OrderItem = new OrderItem
   }
   RemoveOrderItem(order) {
     this.Order.OrderItem = this.Order.OrderItem.filter(o => o != order)
+    if (this.Order.OrderItem.length == 0)
+      this.OrderTypes = this.tempOrderTypes
+    else {
+      this.Order.OrderItem.forEach(item => {
+        this.OrderTypes = this.tempOrderTypes.filter(o => o.name != item.OrderTypeName)
+      })
+    }
   }
   errorPhone = false
   errorRepeatPhone = false
@@ -138,17 +160,17 @@ export class ShowOrderComponent implements OnInit {
         this.errorRepeatPhone = false
       }
     }
-    else if (index==undefined) {
+    else if (index == undefined) {
       if (this.Order.RecipientPhones.filter(p => p == phone).length > 0) {
         this.errorRepeatPhone = true
       } else {
         this.errorRepeatPhone = false
       }
     }
-   
+
   }
   AddPhone() {
-    if (!this.Phone) {
+    if (!this.Phone || this.errorPhone || this.errorRepeatPhone) {
       return
     }
     this.Order.RecipientPhones.push(this.Phone)
@@ -167,7 +189,7 @@ export class ShowOrderComponent implements OnInit {
     }
     if (!this.Order.Code || this.Order.RecipientPhones.length == 0
       || !this.Order.RecipientName || !this.Order.Cost
-      || !this.Order.CountryId || !this.Order.Address || this.codeError||this.errorPhone) {
+      || !this.Order.CountryId || !this.Order.Address || this.codeError || this.errorPhone) {
       this.errorMessage = true
       return
     }
@@ -179,7 +201,7 @@ export class ShowOrderComponent implements OnInit {
     //   this.Order.RegioName = this.Order.RegionId.label;
     //   this.Order.RegionId = null;
     // }
-
+    this.AddOrderItem()
     this.Order.Date = new Date
     console.log(this.Order);
     this.orderServies.edit(this.Order).subscribe(res => {

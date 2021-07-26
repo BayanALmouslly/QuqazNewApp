@@ -61,9 +61,11 @@ export class AddOrderComponent implements OnInit {
     this.deliveryCost = country.deliveryCost
     this.Regions = country.regions
   }
+  tempOrderTypes
   getOrderType() {
     this.settingservice.orderType().subscribe(res => {
       this.OrderTypes = res
+      this.tempOrderTypes=res
     })
   }
   AddOrderItem() {
@@ -86,6 +88,13 @@ export class AddOrderComponent implements OnInit {
   }
   RemoveOrderItem(order) {
     this.Order.OrderItem = this.Order.OrderItem.filter(o => o != order)
+    if (this.Order.OrderItem.length == 0)
+    this.OrderTypes = this.tempOrderTypes
+  else {
+    this.Order.OrderItem.forEach(item => {
+      this.OrderTypes = this.tempOrderTypes.filter(o => o.name != item.OrderTypeName)
+    })
+  }
   }
   errorPhone = false
   errorRepeatPhone = false

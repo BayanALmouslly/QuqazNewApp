@@ -113,7 +113,7 @@
             </div>
             <input type="text" name="RecipientPhones" [(ngModel)]="Phone" maxlength="11"
               oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" class="form-control"
-              placeholder=" رقم هاتف" required (keyup)="checkphone()">
+              placeholder=" رقم هاتف" required (keyup)="checkphone(Phone)">
             <a class="btn btn-info" [hidden]="CanEdit" (click)="AddPhone()">+ </a>
           </div>
           <small *ngIf="!Phone&&Order.RecipientPhones.length==0&&errorMessage">رقم الهاتف حقل مطلوب</small>
@@ -170,7 +170,7 @@
                     <option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</option>
                   </select> -->
                   <ng-select [disabled]="CanEdit" appOnReturn [(ngModel)]="orderItem.OrderTypeName" [ngModelOptions]="{standalone: true}"
-                  [closeOnSelect]="true" name="orderType" [addTag]="true" style="width: 100%;">
+                  [closeOnSelect]="true" name="orderType" [addTag]="true" style="width: 100%;" >
                   <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.name">{{orderType.name}}</ng-option>
                 </ng-select>
                 </div>
