@@ -211,7 +211,7 @@ export class ShowOrderComponent implements OnInit {
       this.errorMessage = false
       // this.router.navigate(['/orders/sendorder'])
     }, err => {
-      this.toasterService.pop('error', '', err.message);
+      this.toasterService.pop('error', '', 'يجب التأكد من ادخال جميع الحقول بشكل صحيح');
       //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
 
     })
