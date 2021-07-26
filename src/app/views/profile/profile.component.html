@@ -7,23 +7,23 @@
 
             <div class="text-center member-card pt-2 pb-2">
 
-                <div class="thumb-lg member-thumb mx-auto"><img src="assets/img/brand/user.jfif"
+                <div class="thumb-lg member-thumb mx-auto"><img src="assets/img/brand/user.png"
                         class="rounded-circle img-thumbnail" alt="profile-image"></div>
                 <div class="" *ngIf="!showEdit">
                     <h4>{{user.name}}</h4>   
                     <p class="text-muted" >
                         <i class="icon-user icons  d-block mt-4"> <span>| </span>
-                        <span><a href="#" class="text-pink">{{user.userName}}</a></span>
+                        <span><a  class="text-info">{{user.userName}}</a></span>
                     </i>
                     </p>
                     <p class="text-muted" *ngIf="user.mail">
                         <i class="icon-envelope icons  d-block mt-4"> <span>| </span>
-                        <span><a href="#" class="text-pink">{{user.mail}}</a></span>
+                        <span><a  class="text-info">{{user.mail}}</a></span>
                     </i>
                     </p>
                     <p class="text-muted" *ngFor="let phone of user.phones">
                         <li class="icon icon-phone d-block"> <span>| </span>
-                            <span><a href="#" class="text-pink">{{phone.phone}}</a></span>
+                            <span><a  class="text-info">{{phone.phone}}</a></span>
                         </li>
                     </p>
                     <p class="text-muted" *ngIf="user.address!=' '&&user.address">
