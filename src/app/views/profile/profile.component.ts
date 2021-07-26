@@ -28,7 +28,6 @@ export class ProfileComponent implements OnInit {
   errorRequierd: boolean
 
   ngOnInit(): void {
-    console.log(this.user)
     this.tempName = this.user.name
     this.tempUserName = this.user.userName
   }
@@ -80,6 +79,9 @@ export class ProfileComponent implements OnInit {
         this.toasterService.pop('success', '', 'تم التعديل بنجاح');
       this.user.name = this.tempName
       this.user.userName = this.tempUserName
+      this.clientService.GetByToken().subscribe(res=>{
+        this.user=res
+      })
     })
   }
   Phone

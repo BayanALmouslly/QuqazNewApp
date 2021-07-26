@@ -28,4 +28,7 @@ export class ClientService {
     fromdata.append("phone",phone)
     return this.http.put(this.controler + "addPhone/"+phone,fromdata)
   }
+  GetByToken(){
+    return this.http.get<any>(this.controler + "GetByToken" )
+  }
 }
