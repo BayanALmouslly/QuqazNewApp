@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
     private clientService: ClientService) { }
   @ViewChild('infoModal') public infoModal: ModalDirective;
 
-  user = JSON.parse(localStorage.getItem('kokazClient')) as UserLogin
+  user 
   Order
   showEdit = false
   tempName
@@ -28,6 +28,9 @@ export class ProfileComponent implements OnInit {
   errorRequierd: boolean
 
   ngOnInit(): void {
+    this.clientService.GetByToken().subscribe(res=>{
+      this.user=res
+    })
     this.tempName = this.user.name
     this.tempUserName = this.user.userName
   }
