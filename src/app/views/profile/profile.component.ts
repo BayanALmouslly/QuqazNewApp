@@ -125,4 +125,13 @@ export class ProfileComponent implements OnInit {
   RemovePhone(phone) {
     this.user.phones = this.user.phones.filter(o => o != phone)
   }
+   keyPressNumbers(event) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    // console.log(charCode)
+    if (charCode == 32) {
+      return false
+    }
+    else
+      return true
+  }
 }

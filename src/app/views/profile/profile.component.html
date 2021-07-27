@@ -47,7 +47,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-user"></i></span>
                         </div>
-                        <input type="text" name="code" [(ngModel)]="user.userName" class="form-control"
+                        <input type="text" name="code" [(ngModel)]="user.userName" class="form-control"(keypress)="keyPressNumbers($event)"
                             placeholder="اسم المستخدم " required maxlength="50" (ngModelChange)="CheckUserName()">
                     </div>
                     <small style="color: red;" *ngIf="errorUserName">اسم المستخدم مكرر</small><br>
@@ -92,14 +92,14 @@
                             <span class="input-group-text"><i class="icon-lock"></i></span>
                         </div>
                         <input type="password" class="form-control" placeholder="كلمة المرور الجديدة" name="Password"
-                            autocomplete="current-password" [(ngModel)]="user.password" required>
+                            autocomplete="current-password" [(ngModel)]="user.password" required autocomplete="off">
                     </div>
                     <div class="input-group mb-4">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-lock"></i></span>
                         </div>
                         <input type="password" class="form-control" placeholder=" تأكيد كلمة المرور " name="Password"
-                            autocomplete="current-password" [(ngModel)]="tempPassword" required>
+                            autocomplete="current-password" [(ngModel)]="tempPassword" required autocomplete="off">
                     </div>
                 </div>
                 <small *ngIf="errorPassword">كلمة المرور غير مطابقة</small>
