@@ -30,9 +30,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.clientService.GetByToken().subscribe(res=>{
       this.user=res
+      this.tempName = this.user.name
+      this.tempUserName = this.user.userName
     })
-    this.tempName = this.user.name
-    this.tempUserName = this.user.userName
   }
   CheckUserName() {
     if (this.user.userName == this.tempUserName) return
