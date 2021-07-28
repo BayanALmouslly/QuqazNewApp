@@ -114,15 +114,22 @@ export class ShowOrderComponent implements OnInit {
     })
   }
   }
+  onSearch($event) {
+    this.OrderItem.OrderTypeName = $event.term
+  }
   AddOrderItem() {
     if (!this.OrderItem.Count || !this.OrderItem.OrderTypeName) return
-    if (this.OrderItem.OrderTypeName.label)
-      var orderTypeName = this.OrderItem.OrderTypeName.label;
-    else
-      var orderTypeName = this.OrderItem.OrderTypeName;
+    // console.log(this.OrderItem.OrderTypeName)
+    // if (this.OrderItem.OrderTypeName.label)
+    //   var orderTypeName = this.OrderItem.OrderTypeName.label;
+    // else
+    var orderTypeName = this.OrderItem.OrderTypeName;
     var find = this.OrderTypes.find(o => o.name == orderTypeName)
     if (!find) {
-      this.OrderItem.OrderTypeId = null
+      {
+        this.OrderItem.OrderTypeId = null
+
+      }
     } else {
       this.OrderItem.OrderTypeId = find.id
     }
@@ -133,14 +140,14 @@ export class ShowOrderComponent implements OnInit {
     this.OrderItem = new OrderItem
   }
   RemoveOrderItem(order) {
+    // console.log(order)
+    var find = this.OrderTypes.find(o => o.name == order.OrderTypeName)
+    if (!find)
+      this.OrderTypes.push({ name: order.OrderTypeName, id: order.OrderTypeId })
     this.Order.OrderItem = this.Order.OrderItem.filter(o => o != order)
-    if (this.Order.OrderItem.length == 0)
-      this.OrderTypes = this.tempOrderTypes
-    else {
-      this.Order.OrderItem.forEach(item => {
-        this.OrderTypes = this.tempOrderTypes.filter(o => o.name != item.OrderTypeName)
-      })
-    }
+    this.Order.OrderItem.forEach(item => {
+      this.OrderTypes = this.OrderTypes.filter(o => o.name != item.OrderTypeName)
+    })
   }
   errorPhone = false
   errorRepeatPhone = false

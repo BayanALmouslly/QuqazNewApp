@@ -150,26 +150,28 @@
           <tbody>
             <tr *ngFor="let orderItem of Order.OrderItem;index as i">
               <td>
-                <div class="input-group "style="width: 100px;">
+                {{orderItem.OrderTypeName}}
+                <!-- <div class="input-group "style="width: 100px;">
                  
-                  <!-- <select class="form-control" name="OrderTypeId+{{i}}" [(ngModel)]="orderItem.OrderTypeId">
+                  <select class="form-control" name="OrderTypeId+{{i}}" [(ngModel)]="orderItem.OrderTypeId">
                     <option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</option>
-                  </select> -->
+                  </select>
                   <ng-select #ngSelectComponent appOnReturn  [disabled]="true" [(ngModel)]="orderItem.OrderTypeName" [ngModelOptions]="{standalone: true}"
                   [closeOnSelect]="true" name="orderType" [addTag]="true" style="width: 100%;">
                   <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.name">{{orderType.name}}</ng-option>
                 </ng-select>
-                </div>
+                </div> -->
               </td>
               <td>
-                <div class="input-group ">
-                  <!-- <div class="input-group-prepend">
+                {{orderItem.Count}}
+                <!-- <div class="input-group ">
+                  <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-pencil"></i></span>
-                  </div> -->
+                  </div>
                   <input type="text" name="code" [(ngModel)]="orderItem.Count" class="form-control"
                     oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                     placeholder=" العدد " required>
-                </div>
+                </div> -->
               </td>
               <td><a class="btn btn-info" (click)="RemoveOrderItem(orderItem)">x</a></td>
             </tr>
@@ -181,7 +183,7 @@
                     <option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</option>
                   </select> -->
                   <ng-select appOnReturn [(ngModel)]="OrderItem.OrderTypeName" [ngModelOptions]="{standalone: true}"
-                  [clearable]="true"  [closeOnSelect]="true" name="orderType" [addTag]="true" style="width: 100%;">
+                  [clearable]="true"  [closeOnSelect]="true" name="orderType"    (search)="onSearch($event)"style="width: 100%;">
                   <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.name">{{orderType.name}}</ng-option>
                 </ng-select>
                 </div>
