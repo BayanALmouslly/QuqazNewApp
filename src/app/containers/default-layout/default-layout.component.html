@@ -89,23 +89,25 @@
     </div><!-- /.container-fluid -->
   </main>
   <!--الاشعارات-->
-  <app-aside [fixed]="true" [display]="false" [ngClass]="'test'" (click)="getNotfiaction()">
-    <tabset>
-      <tab>
-        <ng-template tabHeading><i class="icon-bell"></i></ng-template>
+  <app-aside [fixed]="true" [display]="false" [ngClass]="'test'" >
+    <tabset >
+      <tab >
+        <ng-template tabHeading><i class="icon-bell" (click)="getNotfiaction()"><span class="badge badge-info" style="color: white;">{{count}}</span></i></ng-template>
         <div class="list-group list-group-accent">
        
      
-          <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">الاشعارات</div>
+          <!-- <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">الاشعارات</div> -->
          
           <div class="list-group-item list-group-item-accent-success list-group-item-divider"
           *ngFor="let Notfiaction of Notfiactions">
-            <div>
-              <strong>{{Notfiaction}}</strong> </div>
-            <small class="text-muted mr-3">
-              <i class="icon-calendar"></i>  1 - 3pm</small>
+            <div> لديك 
+              <strong>{{Notfiaction.orderCount}}</strong> من الطلبات </div>
+            <!-- <small class="text-muted mr-3">
+              <i class="icon-calendar"></i>  1 - 3pm</small> -->
             <small class="text-muted">
-              <i class="icon-location-pin"></i>  Palo Alto, CA</small>
+              <i class="icon-location-pin"></i>{{Notfiaction.orderplaced?Notfiaction.orderplaced.name:''}}  {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
+              <br>
+              <small>{{Notfiaction.note}}</small>
           </div>
           <strong style="text-align: center;" (click)="MoreNotfiaction()" *ngIf="Notfiactions.length==10">المزيد ...</strong> 
           <!-- <div class="list-group-item list-group-item-accent-primary list-group-item-divider">
