@@ -89,74 +89,26 @@
     </div><!-- /.container-fluid -->
   </main>
   <!--الاشعارات-->
-  <!-- <app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
+  <app-aside [fixed]="true" [display]="false" [ngClass]="'test'" (click)="getNotfiaction()">
     <tabset>
       <tab>
-        <ng-template tabHeading><i class="icon-list"></i></ng-template>
+        <ng-template tabHeading><i class="icon-bell"></i></ng-template>
         <div class="list-group list-group-accent">
-          <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">Today</div>
-          <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
-            <div class="avatar float-right">
-              <img class="img-avatar" src="assets/img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
-            </div>
-            <div>لديك 
-              <strong>50</strong>
-              طلب داخل الشركة
-            </div>
-            <small class="text-muted mr-3">
-              <i class="icon-calendar"></i>  1 - 3pm</small>
-            <small class="text-muted">
-              <i class="icon-location-pin"></i>  Palo Alto, CA</small>
-          </div>
-          <div class="list-group-item list-group-item-accent-info">
-            <div class="avatar float-right">
-              <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
-            </div>
-            <div>لديك
-              <strong>10</strong>
-              طلبات مرتجعات
-            </div>
-            <small class="text-muted mr-3">
-              <i class="icon-calendar"></i>  4 - 5pm</small>
-            <small class="text-muted">
-              <i class="icon-social-skype"></i>  On-line</small>
-          </div>
-          <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">Tomorrow</div>
-          <div class="list-group-item list-group-item-accent-danger list-group-item-divider">
-            <div>لديك طلبات جديدة
-              <strong></strong>
-            </div>
-            <small class="text-muted mr-3">
-              <i class="icon-calendar"></i>  10 - 11pm</small>
-            <small class="text-muted">
-              <i class="icon-home"></i>  creativeLabs HQ</small>
-            <div class="avatars-stack mt-2">
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/2.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/3.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/5.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-            </div>
-          </div>
-          <div class="list-group-item list-group-item-accent-success list-group-item-divider">
+       
+     
+          <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">الاشعارات</div>
+         
+          <div class="list-group-item list-group-item-accent-success list-group-item-divider"
+          *ngFor="let Notfiaction of Notfiactions">
             <div>
-              <strong>يرجى استلام الطلب من الشركة</strong> </div>
+              <strong>{{Notfiaction}}</strong> </div>
             <small class="text-muted mr-3">
               <i class="icon-calendar"></i>  1 - 3pm</small>
             <small class="text-muted">
               <i class="icon-location-pin"></i>  Palo Alto, CA</small>
           </div>
-          <div class="list-group-item list-group-item-accent-primary list-group-item-divider">
+          <strong style="text-align: center;" (click)="MoreNotfiaction()" *ngIf="Notfiactions.length==10">المزيد ...</strong> 
+          <!-- <div class="list-group-item list-group-item-accent-primary list-group-item-divider">
             <div>
               <strong>Team meeting</strong>
             </div>
@@ -187,10 +139,10 @@
                 <img class="img-avatar" src="assets/img/avatars/8.jpg" alt="admin@bootstrapmaster.com">
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </tab>
-      <tab>
+      <!-- <tab>
         <ng-template tabHeading><i class="icon-speech"></i></ng-template>
         <div class="p-3">
           <div class="message">
@@ -268,8 +220,8 @@
             <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
           </div>
         </div>
-      </tab>
-      <tab>
+      </tab> -->
+      <!-- <tab>
         <ng-template tabHeading><i class="icon-settings"></i></ng-template>
         <div class="p-3">
           <h6>Settings</h6>
@@ -339,9 +291,9 @@
           </div>
           <small class="text-muted">25GB/256GB</small>
         </div>
-      </tab>
+      </tab> -->
     </tabset>
-  </app-aside> -->
+  </app-aside>
 </div>
 <app-footer>
   <span><a >شركة القوقز للتوصيل السريع</a></span>

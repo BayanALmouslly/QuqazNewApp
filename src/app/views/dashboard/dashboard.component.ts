@@ -3,6 +3,8 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { StaticsService } from '../../services/statics.service';
 import { CStatics } from '../../Models/cstatics.model';
+import { OrderService } from '../../services/order/order.service';
+import { ToasterService } from 'angular2-toaster';
 
 @Component({
   templateUrl: 'dashboard.component.html'
@@ -378,7 +380,8 @@ export class DashboardComponent implements OnInit {
   public random(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
-  constructor(private staticsService: StaticsService) { }
+  constructor(private staticsService: StaticsService,
+    ) { }
   CStatics: CStatics = new CStatics
   ngOnInit(): void {
     // generate random values for mainChart
@@ -388,6 +391,7 @@ export class DashboardComponent implements OnInit {
       this.mainChartData3.push(65);
     }
     this.getStatics()
+   
   }
   getStatics() {
     this.staticsService.get().subscribe(res => {

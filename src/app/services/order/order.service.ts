@@ -72,4 +72,10 @@ export class OrderService {
   edit(order){
     return this.http.put(this.controler,order)
   }
+  NewNotfiaction(){
+    return this.http.get<any>(this.controler+"NewNotfiaction")
+  }
+  Notifcation(pageNumber){
+    return this.http.get<any>(this.controler+"Notifcation/"+pageNumber)
+  }
 }
