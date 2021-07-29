@@ -166,6 +166,7 @@ export class AddOrderComponent implements OnInit {
       this.Order.RecipientPhones = []
       this.Order.OrderItem = []
       this.errorMessage = false
+      this.getCountries()
       // this.router.navigate(['/orders/sendorder'])
     }, err => {
       this.toasterService.pop('error', '', 'يجب ادخال جميع الحقول');
