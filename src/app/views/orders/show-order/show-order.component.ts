@@ -28,14 +28,13 @@ export class ShowOrderComponent implements OnInit {
   Order: UpdateOrder = new UpdateOrder;
   OrderItem: OrderItem = new OrderItem
   Phone = ""
-  client: UserLogin = JSON.parse(localStorage.getItem('kokazClient'))
+  // client: UserLogin = JSON.parse(localStorage.getItem('kokazClient'))
   errorMessage: boolean = false
   deliveryCost
   ngOnInit(): void {
     this.GetSettings()
     this.Order.OrderItem = []
     this.Order.RecipientPhones = []
-    this.GetOrder()
 
   }
   id: number;
@@ -77,6 +76,8 @@ export class ShowOrderComponent implements OnInit {
     this.getRegion()
     this.getCountries()
     this.getOrderType()
+    this.GetOrder()
+
   }
   getRegion() {
     this.settingservice.Regions().subscribe(res => {
@@ -86,10 +87,10 @@ export class ShowOrderComponent implements OnInit {
   getCountries() {
     this.settingservice.Countries().subscribe(res => {
       this.Countries = res
-      if (this.client.country) {
-        this.Order.CountryId = this.client.country.id
-        this.CountryChanged()
-      }
+      // if (this.client.country) {
+      //   this.Order.CountryId = this.client.country.id
+      // }
+      this.CountryChanged()
     })
   }
   CountryChanged() {
@@ -189,7 +190,9 @@ export class ShowOrderComponent implements OnInit {
   onTrackBy(index) {
     return index;
   }
-  AddOrder() {
+  buttonDisabled=false
+  EditOrder() {
+    this.buttonDisabled=true
     if (this.Phone && !this.errorPhone) {
       this.Order.RecipientPhones.push(this.Phone)
       this.Phone = ""
@@ -198,6 +201,7 @@ export class ShowOrderComponent implements OnInit {
       || !this.Order.RecipientName || !this.Order.Cost
       || !this.Order.CountryId || !this.Order.Address || this.codeError || this.errorPhone) {
       this.errorMessage = true
+      this.buttonDisabled=false
       return
     }
     else
@@ -212,7 +216,9 @@ export class ShowOrderComponent implements OnInit {
     this.Order.Date = new Date
     console.log(this.Order);
     this.orderServies.edit(this.Order).subscribe(res => {
-      this.toasterService.pop('success', '', 'تمت تعديل الطلب بنجاح');
+      this.toasterService.pop('success', '', 'تم تعديل الطلب بنجاح');
+      this.buttonDisabled=false
+
       // this.Order = new AddOrder
       // this.Order.RecipientPhones = []
       this.errorMessage = false
@@ -220,6 +226,7 @@ export class ShowOrderComponent implements OnInit {
     }, err => {
       this.toasterService.pop('error', '', 'يجب التأكد من ادخال جميع الحقول بشكل صحيح');
       //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
+      this.buttonDisabled=false
 
     })
 

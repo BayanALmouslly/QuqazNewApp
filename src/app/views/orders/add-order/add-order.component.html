@@ -46,7 +46,7 @@
             <div
               style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px; padding: 5px;text-align: right;width: 100%;">
               كلفة توصيل : &nbsp;<span style="height: 10%;padding: 3px;width: 20%;border-radius: 3px;"
-                class="bg-info"*ngIf="deliveryCost">{{deliveryCost|number}}</span> </div>
+                class="bg-primary"*ngIf="deliveryCost">{{deliveryCost|number}}</span> </div>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -74,7 +74,7 @@
 
           <div class="input-group mb-4">
             <button type="button" style="width: 100%;" class="btn btn-primary" data-toggle="modal"
-              (click)="infoModal.show()">
+              (click)="primaryModal.show()">
               نوع الطلبية
             </button>
 
@@ -113,7 +113,7 @@
 
           </div>
           <br>
-          <div class="col-12 w-100 p-3">
+          <div class="col-12 ">
             <button type="button" class="btn btn-primary "(click)="AddOrder()"
             style="width: 100%;" [disabled]="buttonDisabled">
           
@@ -125,7 +125,7 @@
           </div>
           </button>
           </div>
-          <!-- <button type="button" class="btn btn-block btn-info" (click)="AddOrder()">اضافة </button> -->
+          <!-- <button type="button" class="btn btn-block btn-primary" (click)="AddOrder()">اضافة </button> -->
         </form>
       </div>
       <div class="card-footer p-4">
@@ -142,13 +142,13 @@
   </div>
 </div>
 
-<div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
-  <div class="modal-dialog modal-info" role="document">
+  <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title"> نوع الطلب</h4>
-        <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
+        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -218,8 +218,8 @@
 
       </div>
       <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="infoModal.hide()">Close</button>
-        <button type="button" class="btn btn-info">Save changes</button>
+        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div> -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
