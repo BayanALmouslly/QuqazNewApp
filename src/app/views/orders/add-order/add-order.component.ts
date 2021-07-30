@@ -143,7 +143,9 @@ export class AddOrderComponent implements OnInit {
   onTrackBy(index) {
     return index;
   }
+  buttonDisabled=false
   AddOrder() {
+    this.buttonDisabled=true
     if (this.Phone && !this.errorPhone) {
       this.Order.RecipientPhones.push(this.Phone)
       this.Phone = ""
@@ -152,6 +154,7 @@ export class AddOrderComponent implements OnInit {
       || !this.Order.RecipientName || !this.Order.Cost
       || !this.Order.CountryId || !this.Order.Address || this.codeError || this.errorPhone) {
       this.errorMessage = true
+      this.buttonDisabled=false
       return
     }
     else
@@ -161,6 +164,7 @@ export class AddOrderComponent implements OnInit {
     this.Order.Date = new Date
     console.log(this.Order);
     this.orderServies.Add(this.Order).subscribe(res => {
+      this.buttonDisabled=false
       this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
       this.Order = new AddOrder
       this.Order.RecipientPhones = []
@@ -171,6 +175,7 @@ export class AddOrderComponent implements OnInit {
     }, err => {
       this.toasterService.pop('error', '', 'يجب ادخال جميع الحقول');
       console.log(err)
+      this.buttonDisabled=false
       this.currency()
       //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
 

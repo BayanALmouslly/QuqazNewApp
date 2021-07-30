@@ -7,7 +7,7 @@
             <div class="card p-4">
               <div class="card-body">
                 <form #loginForm="ngForm">
-                  <h1 style="text-align: center;">Login</h1>
+                  <h1 style="text-align: center;">تسجيل الدخول</h1>
                   <p class="text-muted"></p>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -25,8 +25,17 @@
                     autocomplete="current-password" ngModel #Password="ngModel" required>
                   </div>
                   <div class="row">
-                    <div class="col-12" mx-auto>
-                      <button type="button" class="btn btn-primary "(click)="onSubmit()">تسجيل الدخول</button>
+                    <div class="col-12 w-100 p-3">
+                      <button type="button" class="btn btn-primary "(click)="onSubmit()"
+                      style="width: 100%;" [disabled]="buttonDisabled">
+                    
+                    <div *ngIf="!buttonDisabled">تسجيل الدخول </div>  
+                    <div *ngIf="buttonDisabled">
+                      <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    </div>
+                    </button>
                     </div>
                     <!-- <div class="col-6 text-right">
                       <button type="button" class="btn btn-link px-0">Forgot password?</button>

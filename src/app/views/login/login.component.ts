@@ -21,14 +21,13 @@ export class LoginComponent {
   }
   @ViewChild('loginForm') loginForm: NgForm;
   user: UserLogin=new UserLogin
-
+  buttonDisabled=false
   onSubmit() {
-    // if (!this.loginForm.valid || this.buttonDisabled) {
-    //   return;
-    // }
+    this.buttonDisabled=true
     if (this.loginForm.value)
       this.authService.signIn(this.loginForm.value).subscribe(
         response => {
+          this.buttonDisabled=false
           this.user = response as UserLogin
           this.user.expiry = new Date().getTime()
           localStorage.setItem('token', this.user.token)
@@ -37,6 +36,7 @@ export class LoginComponent {
 
         }, error => {
           console.log(error)
+          this.buttonDisabled=false
          // this.toasterService.pop('error', '', error.message);
          this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
         }
