@@ -9,36 +9,36 @@ import { UserLogin } from '../auth/userlogin.model';
   selector: 'app-dashboard',
   templateUrl: 'login.component.html'
 })
-export class LoginComponent { 
-  constructor(private router:Router,
-    private authService:AuthService,
-    private toasterService: ToasterService){}
-  login(){
+export class LoginComponent {
+  constructor(private router: Router,
+    private authService: AuthService,
+    private toasterService: ToasterService) { }
+  login() {
     this.router.navigate(['/dashboard'])
   }
-  Register(){
+  Register() {
     this.router.navigate(['/register'])
   }
   @ViewChild('loginForm') loginForm: NgForm;
-  user: UserLogin=new UserLogin
-  buttonDisabled=false
+  user: UserLogin = new UserLogin
+  buttonDisabled = false
   onSubmit() {
-    this.buttonDisabled=true
+    this.buttonDisabled = true
     if (this.loginForm.value)
       this.authService.signIn(this.loginForm.value).subscribe(
         response => {
-          this.buttonDisabled=false
           this.user = response as UserLogin
           this.user.expiry = new Date().getTime()
           localStorage.setItem('token', this.user.token)
           this.authService.setAuthenticatedUser(this.user);
           this.router.navigate(['/dashboard'])
+          this.buttonDisabled = false
 
         }, error => {
           console.log(error)
-          this.buttonDisabled=false
-         // this.toasterService.pop('error', '', error.message);
-         this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
+          this.buttonDisabled = false
+          // this.toasterService.pop('error', '', error.message);
+          this.toasterService.pop('error', '', "اسم المستخدم او كلمة المرور غير صحيحة");
         }
 
       )
