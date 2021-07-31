@@ -16,4 +16,24 @@
 .card-body{
     margin-top: 20%;
 }
+.car {
+    position: relative;
+    animation-name: car;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  
+  }
+  
+  @keyframes car {
+    from {
+   
+    left:0%; top:0px;
+  }
+
+  to {
+  
+    left:75%; top:0px;
+  }
+  }
 
