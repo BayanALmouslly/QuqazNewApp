@@ -7,7 +7,7 @@
             <div class="card p-4">
               <div class="card-body">
                 <form #loginForm="ngForm">
-                  <h1 style="text-align: center;">تسجيل الدخول</h1>
+                  <h1 style="text-align: center;font-size: 25px;">تسجيل الدخول</h1>
                   <p class="text-muted"></p>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -29,7 +29,7 @@
                       <button type="button" class="btn  "(click)="onSubmit()"
                       style="width: 100%;" [disabled]="buttonDisabled">
                     
-                    <div *ngIf="!buttonDisabled">تسجيل الدخول </div>  
+                    <div *ngIf="!buttonDisabled" style="font-weight: bold;font-size: 20px;">تسجيل الدخول </div>  
                     <div *ngIf="buttonDisabled">
                       <div class="spinner-border" role="status">
                         <span class="sr-only">Loading...</span>
@@ -51,7 +51,9 @@
                   </div> -->
                   
                 </form>
-              
+              <div>
+                <img src="assets/img/brand/vanlogin.png" width="225px" height="225px">
+              </div>
               </div>
             </div>
          
