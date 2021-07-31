@@ -7,7 +7,8 @@ import { UserLogin } from '../auth/userlogin.model';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: 'login.component.html'
+  templateUrl: 'login.component.html',
+  styleUrls:['./login.component.scss']
 })
 export class LoginComponent {
   constructor(private router: Router,
