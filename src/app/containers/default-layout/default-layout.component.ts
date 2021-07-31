@@ -23,37 +23,52 @@ export class DefaultLayoutComponent implements OnInit {
   count
   ngOnInit() {
     this.orderService.NewNotfiaction().subscribe(res => {
-      if(res != 0){
-        this.count=res
-        this.toasterService.pop('info', '', 'لديك ' + res + ' من الاشعارات'); 
+      if (res != 0) {
+        this.count = res
+        this.toasterService.pop('info', '', 'لديك ' + res + ' من الاشعارات');
       }
     })
     setInterval(() => {
       this.orderService.NewNotfiaction().subscribe(res => {
-        if (res != 0&&this.count!=res) {
-           this.toasterService.pop('info', '', 'لديك ' + res + ' من الاشعارات'); 
+        if (res != 0 && this.count != res) {
+          this.toasterService.pop('info', '', 'لديك ' + res + ' من الاشعارات');
           //  this.pageNumber=1
           //  this.getNotfiaction()
-          }
-          this.count=res
+        }
+        this.count = res
         // console.log(res)
       })
     }, 10000);
   }
   pageNumber = 1
-  Notfiactions:Notifcation[]=[]
+  Notfiactions: Notifcation[] = []
+  NewNotfiaction() {
+    this.orderService.NewNotfiaction().subscribe(res => {
+      if (res != 0) {
+        this.count = res
+      }
+    })
+  }
   getNotfiaction() {
     this.pageNumber = 1
     this.orderService.Notifcation(this.pageNumber).subscribe(res => {
       console.log(res)
-      this.Notfiactions=res
+      this.Notfiactions = res
+      this.SeeNotifaction()
     })
   }
-  MoreNotfiaction(){
+  MoreNotfiaction() {
     this.pageNumber += 1
     this.orderService.Notifcation(this.pageNumber).subscribe(res => {
       console.log(res)
-      this.Notfiactions=res
+      this.Notfiactions = res
+      this.SeeNotifaction()
+    })
+  }
+  SeeNotifaction() {
+    console.log(this.Notfiactions.map(n => n.id))
+    this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
+      this.NewNotfiaction()
     })
   }
 }

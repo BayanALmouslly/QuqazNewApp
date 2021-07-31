@@ -78,4 +78,7 @@ export class OrderService {
   Notifcation(pageNumber){
     return this.http.get<any>(this.controler+"Notifcation/"+pageNumber)
   }
+  SeeNotifaction(ids){
+    return this.http.put(this.controler+"SeeNotifaction",ids)
+  }
 }
