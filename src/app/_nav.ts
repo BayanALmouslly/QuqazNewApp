@@ -52,6 +52,11 @@ export const navItems: INavData[] = [
     url: '/orders/Report',
     icon: 'icon-layers'
   },
+  {
+    name: 'طلب حساب',
+    url: '/orders/payment',
+    icon: 'icon-paypal'
+  },
  
   
   {

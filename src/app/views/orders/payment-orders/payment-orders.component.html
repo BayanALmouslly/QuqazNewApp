@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <ng-select #ngSelectComponent appOnReturn [(ngModel)]="createPayment.PaymentWayId"
+          [ngModelOptions]="{standalone: true}" [closeOnSelect]="true" name="payment" style="width: 100%;">
+          <ng-option *ngFor="let payment of PaymentWay" [value]="payment.id">{{payment.name}}</ng-option>
+        </ng-select>
+        <br>
+      </div>
+      <div class="col-12 col-md-6">
+        <textarea name="ClientNote" [(ngModel)]="createPayment.Note" style="width: 100%;" name="textarea-input" rows="2"
+          class="form-control" placeholder="ملاحظات"></textarea>
+      </div>
+      <div class="col-12 col-md-2">
+        <button class="btn btn-primary" (click)="AddPayment()">اضافة</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card table-responsive-lg">
+  <table class="table table-striped">
+<thead>
+  <th>طريقة الدفع</th>
+  <th> ملاحظات</th>
+</thead>
+<tbody>
+  <tr *ngFor="let payment of Payments">
+    <td>{{payment.PaymentWayName}}</td>
+    <td>{{payment.Note}}</td>
+  </tr>
+</tbody>
+  </table>
+</div>

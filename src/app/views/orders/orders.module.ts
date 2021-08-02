@@ -14,6 +14,7 @@ import { NotificationsRoutingModule } from '../notifications/notifications-routi
 import { NgSelectModule } from '@ng-select/ng-select';
 import {ToasterModule} from 'angular2-toaster';
 import { SendordersComponent } from './sendorders/sendorders.component';
+import { PaymentOrdersComponent } from './payment-orders/payment-orders.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SendordersComponent } from './sendorders/sendorders.component';
     OrdersReportComponent,
     AddOrderComponent,
     ShowOrderComponent,
-    SendordersComponent
+    SendordersComponent,
+    PaymentOrdersComponent
   ],
   imports: [
     CommonModule,
