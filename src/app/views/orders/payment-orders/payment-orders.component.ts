@@ -26,18 +26,22 @@ export class PaymentOrdersComponent implements OnInit {
     })
   }
   AddPayment() {
+    if (!this.createPayment.PaymentWayId) {
+      this.toasterService.pop('error', '', 'يجب اختيار طريقة الدفع');
+      return
+    } else
+      this.createPayment.PaymentWayName = this.PaymentWay.find(p => p.id == this.createPayment.PaymentWayId).name
     this.createPayment.Date = new Date
-    this.createPayment.PaymentWayName = this.PaymentWay.find(p => p.id == this.createPayment.PaymentWayId).name
     this.paymentService.CanRequest().subscribe(res => {
       if (res) {
-        this.paymentService.Add(this.createPayment).subscribe(res=>{
+        this.paymentService.Add(this.createPayment).subscribe(res => {
           this.Payments.push(this.createPayment)
-          this.createPayment=new CreatePayment()
+          this.createPayment = new CreatePayment()
           this.toasterService.pop('success', '', 'تمت الاضافة  بنجاح');
 
           // this.GetPayment()
         })
-      }else{
+      } else {
         this.toasterService.pop('error', '', 'لايمكن الإضافة');
       }
     })

@@ -30,6 +30,9 @@
     <td>{{payment.PaymentWayName}}</td>
     <td>{{payment.Note}}</td>
   </tr>
+  <tr *ngIf="Payments.length==0">
+    <td colspan="2">لا يوجد عناصر </td>
+  </tr>
 </tbody>
   </table>
 </div>
