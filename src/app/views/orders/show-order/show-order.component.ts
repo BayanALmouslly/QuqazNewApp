@@ -45,6 +45,7 @@ export class ShowOrderComponent implements OnInit {
       this.Order.id = Number(this.id);
     });
     this.orderServies.getById(this.id).subscribe(res => {
+      this.Order.clientPrint=res.clientPrint
       this.Order.Address = res.address
       this.Order.ClientNote = res.clientNote
       this.Order.Code = res.code

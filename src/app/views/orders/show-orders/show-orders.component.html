@@ -8,8 +8,8 @@
           <div class="col-6 col-lg-4">
             <div class="form-group">
               <label for="cvv"></label>
-              <input type="text" class="form-control" (keyup)="GetOrders()" name="code"
-                [(ngModel)]="orderFilter.Code" placeholder="الكود">
+              <input type="text" class="form-control" (keyup)="GetOrders()" name="code" [(ngModel)]="orderFilter.Code"
+                placeholder="الكود">
             </div>
           </div>
           <div class="col-6 col-lg-4">
@@ -27,7 +27,7 @@
                 (keyup)="GetOrders()" name="Phone" [(ngModel)]="orderFilter.Phone" placeholder="رقم الهاتف">
             </div>
           </div>
-          
+
           <div class="form-group col-6 col-lg-3">
             <label for="ccmonth">حالة الشحنة</label>
             <select class="form-control" (change)="GetOrders()" name="OrderplacedId"
@@ -42,18 +42,16 @@
               <option *ngFor="let moenyPlaced of MoenyPlaced" [value]="moenyPlaced.id">{{moenyPlaced.name}}</option>
             </select>
           </div>
-          
+
           <div class="form-group col-6 col-lg-3">
             <label for="ccmonth">المدينة</label>
-            <select class="form-control" (change)="GetOrders()" name="CountryId"
-              [(ngModel)]="orderFilter.CountryId">
+            <select class="form-control" (change)="GetOrders()" name="CountryId" [(ngModel)]="orderFilter.CountryId">
               <option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</option>
             </select>
           </div>
           <div class="form-group col-6 col-lg-3">
             <label for="ccyear">المنطقة </label>
-            <select class="form-control" (change)="GetOrders()" name="RegionId"
-              [(ngModel)]="orderFilter.RegionId">
+            <select class="form-control" (change)="GetOrders()" name="RegionId" [(ngModel)]="orderFilter.RegionId">
               <option *ngFor="let Region of Regions" [value]="Region.id">{{Region.name}}</option>
             </select>
           </div>
@@ -68,21 +66,29 @@
   </div>
 </div>
 <div class="row" style="text-align: center;" data-aos="fade-up">
- 
-  <div class=" col-lg-3" *ngFor="let order of orders" >
-    <a (click)="edit(order)" >
+
+  <div class=" col-lg-3" *ngFor="let order of orders">
+    <a (click)="edit(order)">
       <div class="card text-white bg-info" data-aos="zoom-in" data-aos-delay="100">
         <div class="card-body pb-0">
-        
+
           <!-- <button type="button" class="btn btn-transparent p-0 float-right">
               </button> -->
           <div class="text-value">
             <i class="icon-social-dropbox h1"></i>
-            {{order.code}}</div>
-          
+            {{order.code}}
+          </div>
+
           <br>
           <div style="text-align: right;" *ngIf="order.recipientName">
             <i class="icon-user icons  d-block">{{order.recipientName}}</i>
+          </div>
+          <br>
+          <div style="text-align: right;direction: rtl;">
+            <a *ngFor="let printnumber of order.clientPrint">
+              {{printnumber.printNmber}} {{order.clientPrint.length>1?' - ':''}}
+            </a>
+            <i class="icon-printer"></i>
           </div>
           <br>
           <div style="text-align: right;">
@@ -92,31 +98,25 @@
           <div style="text-align: center;">
             {{order.orderplaced.name}} {{" - "+order.monePlaced.name}}
           </div>
+      
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
           <i class="icon-location-pin"></i>
           {{order.country?order.country.name:null}}{{order.address?" - "+order.address:null}}
         </div>
+       
       </div>
     </a>
   </div>
 
 </div>
-  <div class="row ">
-    <div class="col-5 ">
-      <pagination [boundaryLinks]="showBoundaryLinks" 
-      [directionLinks]="showDirectionLinks" 
-      [firstText]="'الاول'"
-      [previousText]="'السابق'"
-      [nextText]="'التالي'"
-      [lastText]="'الاخير'"
-      [rotate]="true"
-      [totalItems]="totalItems"
-      [itemsPerPage]="4"
-      [maxSize]="1"
-      (pageChanged)="pageChanged($event)"></pagination>
-      </div>
-  </div>  
+<div class="row ">
+  <div class="col-5 ">
+    <pagination [boundaryLinks]="showBoundaryLinks" [directionLinks]="showDirectionLinks" [firstText]="'الاول'"
+      [previousText]="'السابق'" [nextText]="'التالي'" [lastText]="'الاخير'" [rotate]="true" [totalItems]="totalItems"
+      [itemsPerPage]="4" [maxSize]="1" (pageChanged)="pageChanged($event)"></pagination>
+  </div>
+</div>
 
 <!-- <div class="row">
   <div class="col-xs-12 col-12">

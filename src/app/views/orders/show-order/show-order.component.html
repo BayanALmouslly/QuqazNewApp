@@ -10,7 +10,16 @@
               style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px; padding: 5px;text-align: center;width: 100%;">
               {{Order.orderplaced?Order.orderplaced.name:null}}  {{Order.monePlaced?"-"+Order.monePlaced.name:null}}
             </div>
-
+          </div>
+          <div class="input-group mb-3" *ngIf="Order.clientPrint&&Order.clientPrint.length!=0">
+            <div
+              style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px;
+               padding: 5px;text-align: center;width: 100%;">
+            <a *ngFor="let clientPrint of Order.clientPrint">
+              <i class="icon-printer"></i>
+              {{clientPrint.printNmber}} {{Order.clientPrint.length>1?' - ':''}}
+            </a>  
+            </div>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
