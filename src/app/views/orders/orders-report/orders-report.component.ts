@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { OrderplacedEnum } from '../../../Models/Enum/OrderplacedEnum';
 import { OrderDontFinishFilter } from '../../../Models/order/OrderDontFinishFilter';
 import { OrderService } from '../../../services/order/order.service';
+import { UserLogin } from '../../auth/userlogin.model';
 
 @Component({
   selector: 'app-orders-report',
@@ -10,7 +12,8 @@ import { OrderService } from '../../../services/order/order.service';
 })
 export class OrdersReportComponent implements OnInit {
 
-  constructor(private service: OrderService) { }
+  constructor(private service: OrderService,
+    public sanitizer: DomSanitizer,) { }
   orderDontFinishFilter: OrderDontFinishFilter = new OrderDontFinishFilter();
   IsClientDeleviredMoney: boolean=false;
   ClientDoNotDeleviredMoney: boolean=false;
@@ -21,6 +24,12 @@ export class OrdersReportComponent implements OnInit {
     { id: 6, name: "مرتجع جزئي" },
     { id: 7, name: "مرفوض" },
   ]
+  client
+  dateOfPrint = new Date()
+  userName: any = JSON.parse(localStorage.getItem('kokazClient')) as UserLogin
+  printnumber
+  address = "أربيل - شارع 40 - قرب تقاطع كوك"
+  companyPhone = "07514550880 - 07700890880"
   orders: any[] = []
   ngOnInit(): void {
     // this.GetData()
@@ -109,5 +118,23 @@ export class OrdersReportComponent implements OnInit {
     this.service.UnPaidRecipt().subscribe(res => {
       this.reports = res
     })
+  }
+  print() {
+    var divToPrint = document.getElementById('contentToConvert');
+    var css = '@page { size: A4 landscape }',
+      style = document.createElement('style');
+    style.type = 'text/css';
+    style.media = 'print';
+    style.appendChild(document.createTextNode(css));
+    divToPrint.appendChild(style);
+    var newWin = window.open('', 'Print-Window');
+    newWin?.document.open();
+    newWin?.document.write('<html dir="rtl"><head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></head><body onload="window.print()">' + divToPrint?.innerHTML + '</body></html>');
+    newWin?.document.close();
+    setTimeout(function () {
+      newWin?.close();
+      // location.reload();
+
+    }, 10);
   }
 }
