@@ -2,18 +2,19 @@
   <div class="card-body">
     <div class="row">
       <div class="col-12 col-md-4">
-        <ng-select #ngSelectComponent appOnReturn [(ngModel)]="createPayment.PaymentWayId"
+        <ng-select #ngSelectComponent appOnReturn [(ngModel)]="createPayment.PaymentWayId" placeholder="طريقة الدفع"
           [ngModelOptions]="{standalone: true}" [closeOnSelect]="true" name="payment" style="width: 100%;">
           <ng-option *ngFor="let payment of PaymentWay" [value]="payment.id">{{payment.name}}</ng-option>
         </ng-select>
         <br>
       </div>
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-8">
         <textarea name="ClientNote" [(ngModel)]="createPayment.Note" style="width: 100%;" name="textarea-input" rows="2"
           class="form-control" placeholder="ملاحظات"></textarea>
       </div>
-      <div class="col-12 col-md-2">
-        <button class="btn btn-primary" (click)="AddPayment()">اضافة</button>
+      <div class="col-12 col-md-2" style="text-align: center;">
+        <br>
+        <button class="btn btn-primary" (click)="AddPayment()" style="width: 90%;">اضافة</button>
       </div>
     </div>
   </div>
@@ -32,3 +33,4 @@
 </tbody>
   </table>
 </div>
+<toaster-container></toaster-container>

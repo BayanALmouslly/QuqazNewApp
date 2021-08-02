@@ -19,4 +19,7 @@ export class PaymentService {
     return this.http.get<any>(this.controler+"GetPaymentWay")
 
   }
+  CanRequest(){
+    return this.http.get<any>(this.controler+"CanRequest")
+  }
 }
