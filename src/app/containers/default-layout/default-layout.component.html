@@ -1,10 +1,7 @@
-<app-header
-  [navbarBrandRouterLink]="['/dashboard']"
-  [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/kokaz.PNG', width: 50, height: 35}"
-  [sidebarToggler]="'lg'"
+<app-header [navbarBrandRouterLink]="['/dashboard']" [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/brand/kokaz.PNG', width: 50, height: 35}" [sidebarToggler]="'lg'"
   [asideMenuToggler]="'lg'">
-    <!-- [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}" -->
+  <!-- [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}" -->
 
   <ul class="nav navbar-nav ml-auto">
     <!-- <li class="nav-item px-3">
@@ -16,7 +13,7 @@
     <li class="nav-item px-3">
       <a class="nav-link" href="#">Settings</a>
     </li> -->
-   
+
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <!-- <li class="nav-item d-md-down-none">
@@ -28,33 +25,41 @@
     <!-- <li class="nav-item d-md-down-none">
       <a class="nav-link" href="#">تسجيل الدخول</a>
     </li> -->
-    <!-- <li class="nav-item dropdown" dropdown placement="bottom right">
-      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-        <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"/>
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+        dropdownToggle (click)="false">
+        <i class="fa fa-bell-o" (click)="getNotfiaction()"><span class="badge badge-info" style="color: white;"
+            *ngIf="count&&count!=0">{{count}}</span></i>
       </a>
-      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-        <div class="dropdown-header text-center"><strong>Account</strong></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comment<span class="badge badge-warning">42</span></a>
-        
-        <div class="dropdown-header text-center"><strong>Settings</strong></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-        
-        <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-usd"></i> Payments<span class="badge badge-dark">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
-        <div class="divider"></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock account</a>
-        
-        <a class="dropdown-item" (click)="logout()"><i class="fa fa-lock"></i> Logout</a>
-      </div>
-    </li> -->
+      <div class="dropdown-menu dropdown-menu-left" style="overflow-y: scroll;
+height: 500px;width: 200px;" *dropdownMenu aria-labelledby="simple-dropdown">
+        <div class="dropdown-header text-center"><strong>الاشعارات</strong></div>
+    <li *ngFor="let Notfiaction of Notfiactions">
+      <a class="dropdown-item" href="#">
+        <div> لديك
+          <strong>{{Notfiaction.orderCount}}</strong> من الطلبات
+        </div>
+        <!-- <small class="text-muted mr-3">
+              <i class="icon-calendar"></i>  1 - 3pm</small> -->
+        <small class="text-muted">
+          <i class="icon-location-pin"></i>{{Notfiaction.orderplaced?Notfiaction.orderplaced.name:''}}
+          {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
+        <br>
+        <small>{{Notfiaction.note}}</small>
+        <strong style="text-align: center;" (click)="MoreNotfiaction()" *ngIf="Notfiactions.length==10">المزيد
+          ...</strong>
+
+      </a>
+    </li>
+
+
+    </div>
+    </li>
   </ul>
 </app-header>
 <div class="app-body">
-  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized"
+    (minimizedChange)="toggleMinimize($event)">
     <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
@@ -74,43 +79,43 @@
     </cui-breadcrumb>
     <!-- deprecation warning for 'app-breadcrumb' -->
     <!--<ol class="breadcrumb">-->
-      <!--<app-breadcrumb></app-breadcrumb>-->
-      <!--&lt;!&ndash; Breadcrumb Menu&ndash;&gt;-->
-      <!--<li class="breadcrumb-menu d-md-down-none">-->
-        <!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">-->
-          <!--<a class="btn" href="#"><i class="icon-speech"></i></a>-->
-          <!--<a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>-->
-          <!--<a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>-->
-        <!--</div>-->
-      <!--</li>-->
+    <!--<app-breadcrumb></app-breadcrumb>-->
+    <!--&lt;!&ndash; Breadcrumb Menu&ndash;&gt;-->
+    <!--<li class="breadcrumb-menu d-md-down-none">-->
+    <!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">-->
+    <!--<a class="btn" href="#"><i class="icon-speech"></i></a>-->
+    <!--<a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>-->
+    <!--<a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>-->
+    <!--</div>-->
+    <!--</li>-->
     <!--</ol>-->
     <div class="container-fluid">
       <router-outlet></router-outlet>
     </div><!-- /.container-fluid -->
   </main>
   <!--الاشعارات-->
-  <app-aside [fixed]="true" [display]="false" [ngClass]="'test'" >
-    <tabset >
-      <tab >
+  <!-- <app-aside [fixed]="true" [display]="false" [ngClass]="'test'" > -->
+  <!-- <tabset > -->
+  <!-- <tab >
         <ng-template tabHeading><i class="icon-bell" (click)="getNotfiaction()"><span class="badge badge-info" style="color: white;">{{count}}</span></i></ng-template>
         <div class="list-group list-group-accent">
        
      
-          <!-- <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">الاشعارات</div> -->
+          <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">الاشعارات</div>
          
           <div class="list-group-item list-group-item-accent-success list-group-item-divider"
           *ngFor="let Notfiaction of Notfiactions">
             <div> لديك 
               <strong>{{Notfiaction.orderCount}}</strong> من الطلبات </div>
-            <!-- <small class="text-muted mr-3">
-              <i class="icon-calendar"></i>  1 - 3pm</small> -->
+            <small class="text-muted mr-3">
+              <i class="icon-calendar"></i>  1 - 3pm</small>
             <small class="text-muted">
               <i class="icon-location-pin"></i>{{Notfiaction.orderplaced?Notfiaction.orderplaced.name:''}}  {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
               <br>
               <small>{{Notfiaction.note}}</small>
           </div>
           <strong style="text-align: center;" (click)="MoreNotfiaction()" *ngIf="Notfiactions.length==10">المزيد ...</strong> 
-          <!-- <div class="list-group-item list-group-item-accent-primary list-group-item-divider">
+          <div class="list-group-item list-group-item-accent-primary list-group-item-divider">
             <div>
               <strong>Team meeting</strong>
             </div>
@@ -141,10 +146,10 @@
                 <img class="img-avatar" src="assets/img/avatars/8.jpg" alt="admin@bootstrapmaster.com">
               </div>
             </div>
-          </div> -->
+          </div>
         </div>
-      </tab>
-      <!-- <tab>
+      </tab> -->
+  <!-- <tab>
         <ng-template tabHeading><i class="icon-speech"></i></ng-template>
         <div class="p-3">
           <div class="message">
@@ -223,7 +228,7 @@
           </div>
         </div>
       </tab> -->
-      <!-- <tab>
+  <!-- <tab>
         <ng-template tabHeading><i class="icon-settings"></i></ng-template>
         <div class="p-3">
           <h6>Settings</h6>
@@ -294,10 +299,10 @@
           <small class="text-muted">25GB/256GB</small>
         </div>
       </tab> -->
-    </tabset>
-  </app-aside>
+  <!-- </tabset> -->
+  <!-- </app-aside> -->
 </div>
 <app-footer>
-  <span><a >شركة القوقز للتوصيل السريع</a></span>
+  <span><a>شركة القوقز للتوصيل السريع</a></span>
   <!-- <span class="ml-auto">Powered by <a href="https://coreui.io/angular">CoreUI for Angular</a></span> -->
 </app-footer>
