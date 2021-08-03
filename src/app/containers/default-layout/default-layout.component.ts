@@ -1,7 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { Notifcation } from '../../Models/notifcation.model';
+import { Paging } from '../../Models/paging';
 import { OrderService } from '../../services/order/order.service';
 import { navItems } from '../../_nav';
 
@@ -57,7 +59,8 @@ export class DefaultLayoutComponent implements OnInit {
     
     this.orderService.Notifcation(this.pageNumber).subscribe(res => {
       console.log(res)
-      this.Notfiactions = res
+      this.Notfiactions = res.data
+      this.totalItems=res.total
       this.SeeNotifaction()
     })
   }
@@ -77,4 +80,17 @@ export class DefaultLayoutComponent implements OnInit {
       this.NewNotfiaction()
     })
   }
+  totalItems
+  paging: Paging = new Paging
+
+  pageChanged(event: PageChangedEvent): void {
+    this.paging.allItemsLength = this.totalItems
+    this.paging.RowCount = event.itemsPerPage
+    this.paging.Page = event.page 
+    this.getNotfiaction()
+  }
+  @HostListener('window:scroll', ['$event']) 
+    scrollHandler(event) {
+      console.log(event);
+    }
 }

@@ -52,35 +52,40 @@ export class OrderService {
   }
   OrdersDontFinished(orderDontFinishFilter: OrderDontFinishFilter) {
     let params = new HttpParams();
-   params=params.append("IsClientDeleviredMoney",orderDontFinishFilter.IsClientDeleviredMoney);
-   params=params.append("ClientDoNotDeleviredMoney",orderDontFinishFilter.ClientDoNotDeleviredMoney);
-   let index = 0
-   orderDontFinishFilter.OrderPlacedId.forEach(element => {
-        var key = "OrderPlacedId[" + index + "]"
-        params = params.append(key, element);
-        index++;
-      });
-    return this.http.get(this.controler+"OrdersDontFinished",{params:params})
+    params = params.append("IsClientDeleviredMoney", orderDontFinishFilter.IsClientDeleviredMoney);
+    params = params.append("ClientDoNotDeleviredMoney", orderDontFinishFilter.ClientDoNotDeleviredMoney);
+    let index = 0
+    orderDontFinishFilter.OrderPlacedId.forEach(element => {
+      var key = "OrderPlacedId[" + index + "]"
+      params = params.append(key, element);
+      index++;
+    });
+    return this.http.get(this.controler + "OrdersDontFinished", { params: params })
   }
-  UnPaidRecipt(){
-    return this.http.get<any>(this.controler+"UnPaidRecipt")
+  UnPaidRecipt() {
+    return this.http.get<any>(this.controler + "UnPaidRecipt")
 
   }
-  getById(id){
-    return this.http.get<any>(this.controler+id)
+  getById(id) {
+    return this.http.get<any>(this.controler + id)
   }
-  edit(order){
-    return this.http.put(this.controler,order)
+  edit(order) {
+    return this.http.put(this.controler, order)
   }
-  NewNotfiaction(){
-    return this.http.get<any>(this.controler+"NewNotfiaction")
+  NewNotfiaction() {
+    return this.http.get<any>(this.controler + "NewNotfiaction")
   }
-  Notifcation(pageNumber){
-    return this.http.get<any>(this.controler+"Notifcation/"+pageNumber)
+  Notifcation(paging) {
+    let params = new HttpParams();
+    if (paging.RowCount != undefined || paging.RowCount != null)
+      params = params.append("RowCount", paging.RowCount);
+    if (paging.Page != undefined || paging.Page != null)
+      params = params.append("Page", paging.Page);
+    return this.http.get<any>(this.controler + "Notifcation" , { params: params })
   }
-  SeeNotifaction(ids){
-    let params = new FormData();
-    params.append('ids', ids);
-    return this.http.put(this.controler+"SeeNotifactions",params)
+  SeeNotifaction(ids) {
+    // let params = new FormData();
+    // params.append('ids', ids);
+    return this.http.put(this.controler + "SeeNotifactions", ids)
   }
 }
