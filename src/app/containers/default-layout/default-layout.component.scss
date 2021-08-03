@@ -1,18 +1,25 @@
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
   }
   
   ::-webkit-scrollbar-track {
-    background-color: transparent;
+    background-color:#f0f0f0 ;
   }
   
   ::-webkit-scrollbar-thumb {
-    background-color: #d6dee1;
+    background-color: #aaa9a9;
     border-radius: 20px;
-    border: 6px solid transparent;
+    border: 6px solid ;
     background-clip: content-box;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #a8bbbf;
+    background-color: #a8a8a8;
+  }
+  .visibility {
+    display: none;
+  }
+  .scroll{
+ overflow-y: scroll;
+    height: 500px;width: 200px;
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { Notifcation } from '../../Models/notifcation.model';
@@ -21,6 +21,8 @@ export class DefaultLayoutComponent implements OnInit {
   logout() {
     this.router.navigate(['/login'])
   }
+  @ViewChild('navdrop') navdrop: ElementRef;
+  
   count
   ngOnInit() {
     this.orderService.NewNotfiaction().subscribe(res => {
@@ -52,6 +54,7 @@ export class DefaultLayoutComponent implements OnInit {
   }
   getNotfiaction() {
     this.pageNumber = 1
+    
     this.orderService.Notifcation(this.pageNumber).subscribe(res => {
       console.log(res)
       this.Notfiactions = res
@@ -60,6 +63,8 @@ export class DefaultLayoutComponent implements OnInit {
   }
   MoreNotfiaction() {
     this.pageNumber += 1
+    if( this.navdrop)
+    this.navdrop.nativeElement.classList.toggle("visibility");
     this.orderService.Notifcation(this.pageNumber).subscribe(res => {
       console.log(res)
       this.Notfiactions = res
