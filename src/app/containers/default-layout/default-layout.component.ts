@@ -55,7 +55,7 @@ export class DefaultLayoutComponent implements OnInit {
     })
   }
   getNotfiaction() {
-    this.paging.RowCount = 10
+    this.paging.RowCount = 100
     this.paging.Page = 1
     this.orderService.Notifcation(this.paging).subscribe(res => {
       console.log(res)
@@ -65,7 +65,7 @@ export class DefaultLayoutComponent implements OnInit {
     })
   }
   MoreNotfiaction() {
-    this.paging.RowCount = 10
+    this.paging.RowCount = 100
     this.paging.Page += 1
     if (this.navdrop)
       this.navdrop.nativeElement.classList.toggle("visibility");
@@ -91,14 +91,15 @@ export class DefaultLayoutComponent implements OnInit {
     this.paging.Page = event.page
     this.getNotfiaction()
   }
-  @HostListener("window:scroll", ["$event"])
-  scrollHandler(event) {
-    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
-    let max = document.documentElement.scrollHeight;
-    // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
-     if(pos == max )   {
-    console.log(event)
-     }
+  // @HostListener("window:scroll", ["$event"])
+  // scrollHandler(event) {
+  //   var elem = $(e.currentTarget);
+  //   console.log(elem[0].scrollHeight-elem.scrollTop());
+  //   console.log(elem.outerHeight());
+  //   if (elem[0].scrollHeight - elem.scrollTop() <= elem.outerH
+  //     console.log(event)
 
-  }
+  
+
+  // }
 }
