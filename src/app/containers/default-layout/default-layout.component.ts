@@ -55,8 +55,8 @@ export class DefaultLayoutComponent implements OnInit {
     })
   }
   getNotfiaction() {
-    this.paging.RowCount = 1
-
+    this.paging.RowCount = 10
+    this.paging.Page =1
     this.orderService.Notifcation(this.paging).subscribe(res => {
       console.log(res)
       this.Notfiactions = res.data
@@ -65,7 +65,8 @@ export class DefaultLayoutComponent implements OnInit {
     })
   }
   MoreNotfiaction() {
-    this.paging.RowCount += 1
+    this.paging.RowCount = 10
+    this.paging.Page +=1
     if (this.navdrop)
       this.navdrop.nativeElement.classList.toggle("visibility");
     this.orderService.Notifcation(this.paging).subscribe(res => {
