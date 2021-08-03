@@ -10,14 +10,13 @@ import { PrintService } from '../../../services/print.service';
 export class ClientPrintComponent implements OnInit {
 
   constructor(private printService: PrintService) { }
-  printNumber=1094
+  printNumber
   printOrders: Print=new Print()
   address = "أربيل - شارع 40 - قرب تقاطع كوك"
   companyPhone = "07514550880 - 07700890880"
   ngOnInit(): void {
     this.printOrders.orders=[]
     this.printOrders.receipts=[]
-    this.Get()
   }
   Get() {
     this.printService.Get(this.printNumber).subscribe(res => {
