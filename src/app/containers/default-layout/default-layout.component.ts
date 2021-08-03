@@ -66,7 +66,7 @@ export class DefaultLayoutComponent implements OnInit {
     })
   }
   SeeNotifaction() {
-    console.log(this.Notfiactions.map(n => n.id))
+    // console.log(this.Notfiactions.map(n => n.id))
     this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
       this.NewNotfiaction()
     })

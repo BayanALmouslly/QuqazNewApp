@@ -86,7 +86,6 @@ export class OrderService {
       params = params.append(key, element);
       index++;
     });
-    console.log(params)
     return this.http.put(this.controler+"SeeNotifactions",{params:params})
   }
 }
