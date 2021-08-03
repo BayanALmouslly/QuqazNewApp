@@ -57,7 +57,11 @@ export const navItems: INavData[] = [
     url: '/orders/payment',
     icon: 'icon-paypal'
   },
- 
+  {
+    name: 'الكشوفات',
+    url: '/orders/clientPrint',
+    icon: 'icon-layers'
+  },
   
   {
     name: 'تسجيل خروج ',

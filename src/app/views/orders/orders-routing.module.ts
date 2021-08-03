@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddOrderComponent } from './add-order/add-order.component';
+import { ClientPrintComponent } from './client-print/client-print.component';
 import { OrdersReportComponent } from './orders-report/orders-report.component';
 import { PaymentOrdersComponent } from './payment-orders/payment-orders.component';
 import { SendordersComponent } from './sendorders/sendorders.component';
@@ -66,6 +67,13 @@ const routes: Routes = [
         component: PaymentOrdersComponent,
         data: {
           title: ' طلب حساب '
+        }
+      },
+      {
+        path: 'clientPrint',
+        component: ClientPrintComponent,
+        data: {
+          title: ' الكشوفات  '
         }
       }
     ]

@@ -15,6 +15,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import {ToasterModule} from 'angular2-toaster';
 import { SendordersComponent } from './sendorders/sendorders.component';
 import { PaymentOrdersComponent } from './payment-orders/payment-orders.component';
+import { ClientPrintComponent } from './client-print/client-print.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PaymentOrdersComponent } from './payment-orders/payment-orders.componen
     AddOrderComponent,
     ShowOrderComponent,
     SendordersComponent,
-    PaymentOrdersComponent
+    PaymentOrdersComponent,
+    ClientPrintComponent
   ],
   imports: [
     CommonModule,
