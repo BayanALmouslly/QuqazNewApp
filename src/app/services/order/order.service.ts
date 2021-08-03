@@ -79,6 +79,14 @@ export class OrderService {
     return this.http.get<any>(this.controler+"Notifcation/"+pageNumber)
   }
   SeeNotifaction(ids){
-    return this.http.put(this.controler+"SeeNotifaction",ids)
+    let index = 0
+    let params = new HttpParams();
+    ids.forEach(element => {
+      var key = "ids[" + index + "]"
+      params = params.append(key, element);
+      index++;
+    });
+    console.log(params)
+    return this.http.put(this.controler+"SeeNotifactions",{params:params})
   }
 }
