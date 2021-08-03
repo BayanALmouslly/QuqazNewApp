@@ -93,6 +93,6 @@ export class DefaultLayoutComponent implements OnInit {
   }
   @HostListener('scroll', ['$event'])
   scrollHandler(event) {
-    console.log("Scroll Event");
+    console.log(event);
   }
 }
