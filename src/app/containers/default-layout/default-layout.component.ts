@@ -10,7 +10,7 @@ import { navItems } from '../../_nav';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html',
-  styleUrls:['./default-layout.component.scss']
+  styleUrls: ['./default-layout.component.scss']
 })
 export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
@@ -24,7 +24,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.router.navigate(['/login'])
   }
   @ViewChild('navdrop') navdrop: ElementRef;
-  
+
   count
   ngOnInit() {
     this.orderService.NewNotfiaction().subscribe(res => {
@@ -56,21 +56,22 @@ export class DefaultLayoutComponent implements OnInit {
   }
   getNotfiaction() {
     this.paging.RowCount = 1
-    
+
     this.orderService.Notifcation(this.paging).subscribe(res => {
       console.log(res)
       this.Notfiactions = res.data
-      this.totalItems=res.total
+      this.totalItems = res.total
       this.SeeNotifaction()
     })
   }
   MoreNotfiaction() {
     this.paging.RowCount += 1
-    if( this.navdrop)
-    this.navdrop.nativeElement.classList.toggle("visibility");
+    if (this.navdrop)
+      this.navdrop.nativeElement.classList.toggle("visibility");
     this.orderService.Notifcation(this.paging).subscribe(res => {
       console.log(res)
-      this.Notfiactions = res
+      this.Notfiactions = res.data
+      this.totalItems = res.total
       this.SeeNotifaction()
     })
   }
@@ -86,11 +87,11 @@ export class DefaultLayoutComponent implements OnInit {
   pageChanged(event: PageChangedEvent): void {
     this.paging.allItemsLength = this.totalItems
     this.paging.RowCount = event.itemsPerPage
-    this.paging.Page = event.page 
+    this.paging.Page = event.page
     this.getNotfiaction()
   }
-  @HostListener('window:scroll', ['$event']) 
-    scrollHandler(event) {
-      console.log(event);
-    }
+  @HostListener('window:scroll', ['$event'])
+  scrollHandler(event) {
+    console.log(event);
+  }
 }
