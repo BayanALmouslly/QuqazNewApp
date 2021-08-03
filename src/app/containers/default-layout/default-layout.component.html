@@ -26,9 +26,9 @@
       <a class="nav-link" href="#">تسجيل الدخول</a>
     </li> -->
     <li class="nav-item dropdown" #navdrop dropdown placement="bottom right">
-      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
-        dropdownToggle (click)="false">
-        <i class="fa fa-bell-o" (click)="getNotfiaction()"><span class="badge badge-info" style="color: white;"
+      <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+        dropdownToggle (click)="getNotfiaction()">
+        <i class="fa fa-bell-o" ><span class="badge badge-info" style="color: white;"
             *ngIf="count&&count!=0">{{count}}</span></i>
       </a>
       <div class="dropdown-menu dropdown-menu-left scroll" (scroll)="scrollHandler($event)"   *dropdownMenu aria-labelledby="simple-dropdown">
@@ -49,10 +49,10 @@
 
       </a>
     </li>
-    <a class="dropdown-item">
+    <!-- <a class="dropdown-item">
       <strong style="text-align: center;"  (click)="MoreNotfiaction()" *ngIf="Notfiactions.length!=totalItems&&Notfiactions.length!=0">المزيد
         ...</strong>
-    </a>
+    </a> -->
 
     </div>
     </li>
