@@ -35,21 +35,21 @@
         <div class="dropdown-header text-center"><strong>الاشعارات</strong></div>
     <li *ngFor="let Notfiaction of Notfiactions">
       <a class="dropdown-item" >
-        <div> لديك
+        <div *ngIf="Notfiaction.orderCount"> لديك
           <strong>{{Notfiaction.orderCount}}</strong> من الطلبات
         </div>
         <!-- <small class="text-muted mr-3">
               <i class="icon-calendar"></i>  1 - 3pm</small> -->
-        <small class="text-muted">
+        <small class="text-muted" *ngIf="Notfiaction.orderplaced||Notfiaction.monePlaced">
           <i class="icon-location-pin"></i>{{Notfiaction.orderplaced?Notfiaction.orderplaced.name:''}}
           {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
         <br>
-        <small>{{Notfiaction.note}}</small>
+        <div>{{Notfiaction.note}}</div>
         
 
       </a>
     </li>
-    <a class="dropdown-item" href="#">
+    <a class="dropdown-item">
       <strong style="text-align: center;"  (click)="MoreNotfiaction()" *ngIf="Notfiactions.length!=totalItems&&Notfiactions.length!=0">المزيد
         ...</strong>
     </a>
