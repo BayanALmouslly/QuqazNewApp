@@ -46,12 +46,14 @@ height: 500px;width: 200px;" *dropdownMenu aria-labelledby="simple-dropdown">
           {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
         <br>
         <small>{{Notfiaction.note}}</small>
-        <strong style="text-align: center;" (click)="MoreNotfiaction()" *ngIf="Notfiactions.length==10">المزيد
-          ...</strong>
+        
 
       </a>
     </li>
-
+    <a class="dropdown-item" *ngIf="Notfiactions.length>=10"  (click)="MoreNotfiaction()">
+      <strong style="text-align: center;" >المزيد
+        ...</strong>
+    </a>
 
     </div>
     </li>
