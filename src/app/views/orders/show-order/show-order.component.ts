@@ -35,6 +35,7 @@ export class ShowOrderComponent implements OnInit {
     this.GetSettings()
     this.Order.OrderItem = []
     this.Order.RecipientPhones = []
+    localStorage.removeItem('printnumber')
 
   }
   id: number;
@@ -45,7 +46,7 @@ export class ShowOrderComponent implements OnInit {
       this.Order.id = Number(this.id);
     });
     this.orderServies.getById(this.id).subscribe(res => {
-      this.Order.clientPrint=res.clientPrint
+      this.Order.clientPrint = res.clientPrint
       this.Order.Address = res.address
       this.Order.ClientNote = res.clientNote
       this.Order.Code = res.code
@@ -108,13 +109,13 @@ export class ShowOrderComponent implements OnInit {
   }
   changeOrderType() {
     if (this.Order.OrderItem.length == 0)
-    this.OrderTypes = this.tempOrderTypes
-  else {
-    console.log(  this.Order.OrderItem)
-    this.Order.OrderItem.forEach(item => {
-      this.OrderTypes = this.tempOrderTypes.filter(o => o.name != item.OrderTypeName)
-    })
-  }
+      this.OrderTypes = this.tempOrderTypes
+    else {
+      console.log(this.Order.OrderItem)
+      this.Order.OrderItem.forEach(item => {
+        this.OrderTypes = this.tempOrderTypes.filter(o => o.name != item.OrderTypeName)
+      })
+    }
   }
   onSearch($event) {
     this.OrderItem.OrderTypeName = $event.term
@@ -191,9 +192,9 @@ export class ShowOrderComponent implements OnInit {
   onTrackBy(index) {
     return index;
   }
-  buttonDisabled=false
+  buttonDisabled = false
   EditOrder() {
-    this.buttonDisabled=true
+    this.buttonDisabled = true
     if (this.Phone && !this.errorPhone) {
       this.Order.RecipientPhones.push(this.Phone)
       this.Phone = ""
@@ -202,7 +203,7 @@ export class ShowOrderComponent implements OnInit {
       || !this.Order.RecipientName || !this.Order.Cost
       || !this.Order.CountryId || !this.Order.Address || this.codeError || this.errorPhone) {
       this.errorMessage = true
-      this.buttonDisabled=false
+      this.buttonDisabled = false
       return
     }
     else
@@ -218,7 +219,7 @@ export class ShowOrderComponent implements OnInit {
     console.log(this.Order);
     this.orderServies.edit(this.Order).subscribe(res => {
       this.toasterService.pop('success', '', 'تم تعديل الطلب بنجاح');
-      this.buttonDisabled=false
+      this.buttonDisabled = false
 
       // this.Order = new AddOrder
       // this.Order.RecipientPhones = []
@@ -227,7 +228,7 @@ export class ShowOrderComponent implements OnInit {
     }, err => {
       this.toasterService.pop('error', '', 'يجب التأكد من ادخال جميع الحقول بشكل صحيح');
       //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
-      this.buttonDisabled=false
+      this.buttonDisabled = false
 
     })
 
@@ -250,5 +251,9 @@ export class ShowOrderComponent implements OnInit {
   currency() {
     this.formattedAmount = this.currencyPipe.transform(this.Order.Cost, ' ');
     this.Order.Cost = this.formattedAmount.split('.00')[0];
+  }
+  print(printNumber) {
+    localStorage.setItem('printnumber', printNumber)
+    this.router.navigate(['/orders/clientPrint'])
   }
 }

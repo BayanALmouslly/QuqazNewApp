@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12 col-md-4">
         <ng-select #ngSelectComponent appOnReturn [(ngModel)]="createPayment.PaymentWayId" placeholder="طريقة الدفع"
-          [ngModelOptions]="{standalone: true}" [closeOnSelect]="true" name="payment" style="width: 100%;">
+          [ngModelOptions]="{standalone: true}" [closeOnSelect]="true" name="payment"   (search)="onSearch($event)"style="width: 100%;">
           <ng-option *ngFor="let payment of PaymentWay" [value]="payment.id">{{payment.name}}</ng-option>
         </ng-select>
         <br>

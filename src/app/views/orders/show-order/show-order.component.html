@@ -15,9 +15,10 @@
             <div
               style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px;
                padding: 5px;text-align: center;width: 100%;">
+                 <i class="icon-printer"></i>
             <a *ngFor="let clientPrint of Order.clientPrint">
-              <i class="icon-printer"></i>
-              {{clientPrint.printNmber}} {{Order.clientPrint.length>1?' - ':''}}
+            
+           <a class="btn" (click)="print(clientPrint.printNmber)"> {{clientPrint.printNmber}} {{Order.clientPrint.length>1?' - ':''}}</a>  
             </a>  
             </div>
           </div>

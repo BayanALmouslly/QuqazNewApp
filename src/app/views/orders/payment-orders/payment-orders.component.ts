@@ -65,4 +65,7 @@ export class PaymentOrdersComponent implements OnInit {
     this.paging.Page = event.page 
     this.  GetPayment() 
   }
+  onSearch($event) {
+    // this.createPayment.PaymentWayName = $event.term
+  }
 }
