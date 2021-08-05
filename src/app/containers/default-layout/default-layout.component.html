@@ -25,7 +25,7 @@
     <!-- <li class="nav-item d-md-down-none">
       <a class="nav-link" href="#">تسجيل الدخول</a>
     </li> -->
-    <li class="nav-item dropdown" #navdrop dropdown placement="bottom right">
+    <!-- <li class="nav-item dropdown" #navdrop dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
         dropdownToggle (click)="getNotfiaction()">
         <i class="fa fa-bell-o" ><span class="badge badge-info" style="color: white;"
@@ -38,8 +38,8 @@
         <div *ngIf="Notfiaction.orderCount"> لديك
           <strong>{{Notfiaction.orderCount}}</strong> من الطلبات
         </div>
-        <!-- <small class="text-muted mr-3">
-              <i class="icon-calendar"></i>  1 - 3pm</small> -->
+        <small class="text-muted mr-3">
+              <i class="icon-calendar"></i>  1 - 3pm</small>
         <small class="text-muted" *ngIf="Notfiaction.orderplaced||Notfiaction.monePlaced">
           <i class="icon-location-pin"></i>{{Notfiaction.orderplaced?Notfiaction.orderplaced.name:''}}
           {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
@@ -49,15 +49,38 @@
 
       </a>
     </li>
-    <!-- <a class="dropdown-item">
+    <a class="dropdown-item">
       <strong style="text-align: center;"  (click)="MoreNotfiaction()" *ngIf="Notfiactions.length!=totalItems&&Notfiactions.length!=0">المزيد
         ...</strong>
-    </a> -->
+    </a>
 
     </div>
-    </li>
+    </li> -->
+    <div class="subtask-li">
+      <span class="main-tlist" (click)="getNotfiaction()"> 
+        <i class="fa fa-bell-o" ><span class="badge badge-info" style="color: white;"
+          *ngIf="count&&count!=0">{{count}}</span></i>
+        </span>
+      <ul class="subtask-pick">
+        <li *ngFor="let Notfiaction of Notfiactions">
+          <a class="tooltip1 tooltipstered" id="12" href="javascript:;">
+            <div *ngIf="Notfiaction.orderCount"> لديك
+              <strong>{{Notfiaction.orderCount}}</strong> من الطلبات
+            </div>
+            <!-- <small class="text-muted mr-3">
+                  <i class="icon-calendar"></i>  1 - 3pm</small> -->
+            <small class="text-muted" *ngIf="Notfiaction.orderplaced||Notfiaction.monePlaced">
+              <i class="icon-location-pin"></i>{{Notfiaction.orderplaced?Notfiaction.orderplaced.name:''}}
+              {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
+            <br>
+            <div>{{Notfiaction.note}}</div>
+            
+          </a></li></ul>
+      </div>
   </ul>
+
 </app-header>
+
 <div class="app-body">
   <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized"
     (minimizedChange)="toggleMinimize($event)">
@@ -92,6 +115,7 @@
     <!--</ol>-->
     <div class="container-fluid">
       <router-outlet></router-outlet>
+    
     </div><!-- /.container-fluid -->
   </main>
   <!--الاشعارات-->
@@ -302,6 +326,7 @@
       </tab> -->
   <!-- </tabset> -->
   <!-- </app-aside> -->
+  
 </div>
 <app-footer>
   <span><a>شركة القوقز للتوصيل السريع</a></span>

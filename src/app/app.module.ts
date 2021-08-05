@@ -28,7 +28,7 @@ const APP_CONTAINERS = [
 ];
 
 import {
-  AppAsideModule,
+  // AppAsideModule,
   AppBreadcrumbModule,
   AppHeaderModule,
   AppFooterModule,
@@ -55,7 +55,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AppAsideModule,
+    // AppAsideModule,
     AppBreadcrumbModule.forRoot(),
     AppFooterModule,
     AppHeaderModule,
