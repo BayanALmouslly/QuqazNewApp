@@ -25,7 +25,7 @@
     <!-- <li class="nav-item d-md-down-none">
       <a class="nav-link" href="#">تسجيل الدخول</a>
     </li> -->
-    <!-- <li class="nav-item dropdown" #navdrop dropdown placement="bottom right">
+    <li class="nav-item dropdown" #navdrop dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
         dropdownToggle (click)="getNotfiaction()">
         <i class="fa fa-bell-o" ><span class="badge badge-info" style="color: white;"
@@ -38,8 +38,6 @@
         <div *ngIf="Notfiaction.orderCount"> لديك
           <strong>{{Notfiaction.orderCount}}</strong> من الطلبات
         </div>
-        <small class="text-muted mr-3">
-              <i class="icon-calendar"></i>  1 - 3pm</small>
         <small class="text-muted" *ngIf="Notfiaction.orderplaced||Notfiaction.monePlaced">
           <i class="icon-location-pin"></i>{{Notfiaction.orderplaced?Notfiaction.orderplaced.name:''}}
           {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
@@ -49,14 +47,10 @@
 
       </a>
     </li>
-    <a class="dropdown-item">
-      <strong style="text-align: center;"  (click)="MoreNotfiaction()" *ngIf="Notfiactions.length!=totalItems&&Notfiactions.length!=0">المزيد
-        ...</strong>
-    </a>
 
     </div>
-    </li> -->
-    <div class="subtask-li">
+    </li>
+    <!-- <div class="subtask-li">
       <span class="main-tlist" (click)="getNotfiaction()"> 
         <i class="fa fa-bell-o" ><span class="badge badge-info" style="color: white;"
           *ngIf="count&&count!=0">{{count}}</span></i>
@@ -67,8 +61,7 @@
             <div *ngIf="Notfiaction.orderCount"> لديك
               <strong>{{Notfiaction.orderCount}}</strong> من الطلبات
             </div>
-            <!-- <small class="text-muted mr-3">
-                  <i class="icon-calendar"></i>  1 - 3pm</small> -->
+         
             <small class="text-muted" *ngIf="Notfiaction.orderplaced||Notfiaction.monePlaced">
               <i class="icon-location-pin"></i>{{Notfiaction.orderplaced?Notfiaction.orderplaced.name:''}}
               {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
@@ -76,7 +69,7 @@
             <div>{{Notfiaction.note}}</div>
             
           </a></li></ul>
-      </div>
+      </div> -->
   </ul>
 
 </app-header>
