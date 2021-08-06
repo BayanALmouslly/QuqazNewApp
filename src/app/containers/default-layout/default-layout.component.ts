@@ -91,13 +91,9 @@ export class DefaultLayoutComponent implements OnInit {
     this.paging.Page = event.page
     this.getNotfiaction()
   }
-  @HostListener("window:scroll", ["$event"])
-  scrollHandler(event) {
-    // if ((event.target as Element).scrollTop)
-    console.log(event)
-   
-
-
-
-  }
+  // @HostListener("window:scroll", ["$event"])
+  // scrollHandler(event) {
+  //   // if ((event.target as Element).scrollTop)
+  //   console.log(event)
+  // }
 }
