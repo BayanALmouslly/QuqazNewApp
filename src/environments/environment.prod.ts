@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: "http://backend.quqaz.com/",
+  baseUrl: "https://backend.quqaz.com/",
 
 };
