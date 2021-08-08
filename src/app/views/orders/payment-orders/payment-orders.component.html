@@ -33,7 +33,7 @@
       <tr *ngFor="let payment of Payments">
         <td>{{payment.id}}</td>
         <td>{{payment.paymentWay.name}}</td>
-        <td>{{payment.accept?'مقبول':!payment.accept?'قيد المعالجة':'مرفوض'}}</td>
+        <td>{{payment.accept?'مقبول':payment.accept==null?'قيد المعالجة':'مرفوض'}}</td>
         <td>{{payment.createDate| date:"dd/MM/yyyy"}}</td>
         <td>{{payment.note}}</td>
       </tr>
