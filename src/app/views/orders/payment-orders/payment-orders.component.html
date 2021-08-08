@@ -26,13 +26,15 @@
       <th>الرقم</th>
       <th>طريقة الدفع</th>
       <th>الحالة</th>
+      <th>التاريخ</th>
       <th> ملاحظات</th>
     </thead>
     <tbody>
       <tr *ngFor="let payment of Payments">
         <td>{{payment.id}}</td>
         <td>{{payment.paymentWay.name}}</td>
-        <td>{{payment.accept?'مقبول':'مرفوض'}}</td>
+        <td>{{payment.accept?'مقبول':!payment.accept?'قيد المعالجة':'مرفوض'}}</td>
+        <td>{{payment.createDate| date:"dd/MM/yyyy"}}</td>
         <td>{{payment.note}}</td>
       </tr>
       <tr *ngIf="Payments.length==0">
