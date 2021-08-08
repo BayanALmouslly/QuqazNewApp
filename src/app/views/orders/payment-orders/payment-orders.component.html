@@ -3,7 +3,8 @@
     <div class="row">
       <div class="col-12 col-md-4">
         <ng-select #ngSelectComponent appOnReturn [(ngModel)]="createPayment.PaymentWayId" placeholder="طريقة الدفع"
-          [ngModelOptions]="{standalone: true}" [closeOnSelect]="true" name="payment"   (search)="onSearch($event)"style="width: 100%;">
+          [ngModelOptions]="{standalone: true}" [closeOnSelect]="true" name="payment" (search)="onSearch($event)"
+          style="width: 100%;">
           <ng-option *ngFor="let payment of PaymentWay" [value]="payment.id">{{payment.name}}</ng-option>
         </ng-select>
         <br>
@@ -21,21 +22,23 @@
 </div>
 <div class="card table-responsive-lg">
   <table class="table table-striped">
-<thead  class="table-info">
-  <th>الرقم</th>
-  <th>طريقة الدفع</th>
-  <th> ملاحظات</th>
-</thead>
-<tbody>
-  <tr *ngFor="let payment of Payments">
-    <td>{{payment.id}}</td>
-    <td>{{payment.paymentWay.name}}</td>
-    <td>{{payment.note}}</td>
-  </tr>
-  <tr *ngIf="Payments.length==0">
-    <td colspan="3">لا يوجد عناصر </td>
-  </tr>
-</tbody>
+    <thead class="table-info">
+      <th>الرقم</th>
+      <th>طريقة الدفع</th>
+      <th>الحالة</th>
+      <th> ملاحظات</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payment of Payments">
+        <td>{{payment.id}}</td>
+        <td>{{payment.paymentWay.name}}</td>
+        <td>{{payment.accept?'مقبول':'مرفوض'}}</td>
+        <td>{{payment.note}}</td>
+      </tr>
+      <tr *ngIf="Payments.length==0">
+        <td colspan="3">لا يوجد عناصر </td>
+      </tr>
+    </tbody>
   </table>
 </div>
 <div class="row ">
