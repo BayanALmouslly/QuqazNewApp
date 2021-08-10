@@ -47,6 +47,7 @@ export class DefaultLayoutComponent implements OnInit {
   }
   pageNumber = 1
   Notfiactions: Notifcation[] = []
+  oldNotfiactions: Notifcation[] = []
   NewNotfiaction() {
     this.orderService.NewNotfiaction().subscribe(res => {
       if (res != 0) {
@@ -67,13 +68,26 @@ export class DefaultLayoutComponent implements OnInit {
   MoreNotfiaction() {
     this.paging.RowCount = 10
     this.paging.Page += 1
-    if (this.navdrop)
-      this.navdrop.nativeElement.classList.toggle("visibility");
+    // if (this.navdrop)
+    //   this.navdrop.nativeElement.classList.toggle("visibility");
+    this.showSpinner=true
     this.orderService.Notifcation(this.paging).subscribe(res => {
-      console.log(res)
+      this.showSpinner=false
+      // console.log(res)
+      this.Notfiactions.forEach(item=>{
+        this.oldNotfiactions.push(item)
+      })
+    
       this.Notfiactions = res.data
+      // console.log(this.Notfiactions)
+      this.oldNotfiactions.forEach(item=>{
+        this.Notfiactions.unshift(item)
+      })
+      // console.log(this.Notfiactions)
       this.totalItems = res.total
       this.SeeNotifaction()
+    },err=>{
+      this.showSpinner=false
     })
   }
   SeeNotifaction() {
@@ -91,9 +105,11 @@ export class DefaultLayoutComponent implements OnInit {
     this.paging.Page = event.page
     this.getNotfiaction()
   }
-  // @HostListener("window:scroll", ["$event"])
-  // scrollHandler(event) {
-  //   // if ((event.target as Element).scrollTop)
-  //   console.log(event)
-  // }
+  showSpinner:boolean
+@HostListener('scroll', ['$event'])
+onScroll(event: any) {
+    if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight&&this.Notfiactions.length==10) {
+      this.MoreNotfiaction()
+    }
+}
 }
