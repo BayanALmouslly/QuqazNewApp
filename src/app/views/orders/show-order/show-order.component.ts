@@ -94,7 +94,7 @@ export class ShowOrderComponent implements OnInit {
       // if (this.client.country) {
       //   this.Order.CountryId = this.client.country.id
       // }
-      this.CountryChanged()
+      // this.CountryChanged()
     })
   }
   CountryChanged() {
