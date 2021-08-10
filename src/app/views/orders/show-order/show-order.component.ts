@@ -46,6 +46,7 @@ export class ShowOrderComponent implements OnInit {
       this.Order.id = Number(this.id);
     });
     this.orderServies.getById(this.id).subscribe(res => {
+      // console.log(res)
       this.Order.clientPrint = res.clientPrint
       this.Order.Address = res.address
       this.Order.ClientNote = res.clientNote
@@ -53,6 +54,7 @@ export class ShowOrderComponent implements OnInit {
       this.tempCode = this.Order.Code
       this.Order.Cost = res.cost
       this.currency()
+      this.deliveryCost=res.deliveryCost
       this.Order.CountryId = res.country.id
       this.Order.DateTime = res.date
       this.Order.OrderItem = res.orderItems
