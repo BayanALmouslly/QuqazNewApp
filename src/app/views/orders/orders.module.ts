@@ -16,6 +16,7 @@ import {ToasterModule} from 'angular2-toaster';
 import { SendordersComponent } from './sendorders/sendorders.component';
 import { PaymentOrdersComponent } from './payment-orders/payment-orders.component';
 import { ClientPrintComponent } from './client-print/client-print.component';
+import { PrintOrderComponent } from './print-order/print-order.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ClientPrintComponent } from './client-print/client-print.component';
     ShowOrderComponent,
     SendordersComponent,
     PaymentOrdersComponent,
-    ClientPrintComponent
+    ClientPrintComponent,
+    PrintOrderComponent
   ],
   imports: [
     CommonModule,

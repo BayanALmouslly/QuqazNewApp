@@ -40,6 +40,7 @@ export class ShowOrderComponent implements OnInit {
   }
   id: number;
   CanEdit: boolean
+  printOrder
   GetOrder() {
     this.getroute.params.subscribe(par => {
       this.id = par['id'] as number;
@@ -47,6 +48,8 @@ export class ShowOrderComponent implements OnInit {
     });
     this.orderServies.getById(this.id).subscribe(res => {
       // console.log(res)
+      this.printOrder=res
+      this.printOrder.recipientPhones =   this.printOrder.recipientPhones.split(',')
       this.Order.clientPrint = res.clientPrint
       this.Order.Address = res.address
       this.Order.ClientNote = res.clientNote
@@ -65,7 +68,7 @@ export class ShowOrderComponent implements OnInit {
         this.OrderTypes = this.OrderTypes.filter(o => o.name != item.orderTpye.name)
       })
       this.Order.RecipientName = res.recipientName
-      this.Order.RecipientPhones = res.recipientPhones.split(',')
+      this.Order.RecipientPhones =  this.printOrder.recipientPhones
       this.Order.monePlaced = res.monePlaced
       this.Order.orderplaced = res.orderplaced
       this.Order.isSend = res.isSend
@@ -257,5 +260,23 @@ export class ShowOrderComponent implements OnInit {
   print(printNumber) {
     localStorage.setItem('printnumber', printNumber)
     this.router.navigate(['/orders/clientPrint'])
+  }
+  printorder() {
+    var divToPrint = document.getElementById('contentToConvert');
+    var css = '@page { size: A4 landscape }',
+      style = document.createElement('style');
+    style.type = 'text/css';
+    style.media = 'print';
+    style.appendChild(document.createTextNode(css));
+    divToPrint.appendChild(style);
+    var newWin = window.open('', 'Print-Window');
+    newWin?.document.open();
+    newWin?.document.write('<html dir="rtl"><head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></head><body onload="window.print()">' + divToPrint?.innerHTML + '</body></html>');
+    newWin?.document.close();
+    setTimeout(function () {
+      newWin?.close();
+      // location.reload();
+
+    }, 10);
   }
 }

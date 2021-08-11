@@ -4,7 +4,10 @@
       <div class="card-body p-4">
         <form>
           <h1>عرض الطلب</h1>
-          <p class="text-muted"></p>
+          <p class="text-muted" style="text-align: left;">
+          <button class="btn btn-primary" (click)="printorder()">   <i class="icon-printer"></i> طباعة</button>
+          <app-print-order [order]="printOrder" *ngIf="printOrder" [hidden]="true" id="contentToConvert"></app-print-order>
+          </p>
           <div class="input-group mb-3">
             <div
               style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px; padding: 5px;text-align: center;width: 100%;">

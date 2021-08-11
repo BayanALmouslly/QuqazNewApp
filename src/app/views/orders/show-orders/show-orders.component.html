@@ -88,7 +88,7 @@
             <a *ngFor="let printnumber of order.clientPrint">
               {{printnumber.printNmber}} {{order.clientPrint.length>1?' - ':''}}
             </a>
-            <i class="icon-printer"></i>
+            <i class="icon-printer" *ngIf="order.clientPrint.length!=0"></i>
           </div>
           <br>
           <div style="text-align: right;">
