@@ -40,6 +40,7 @@ export class OrdersReportComponent implements OnInit {
     this.orderDontFinishFilter.OrderPlacedId = this.orderPlace.filter(o => o.checked == true).map(c => c.id);
     this.service.OrdersDontFinished(this.orderDontFinishFilter).subscribe(res => {
       this.orders = res as []
+      // console.log(this.orders)
       this.sumCost();
     });
   }
