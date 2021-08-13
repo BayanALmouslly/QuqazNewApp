@@ -94,7 +94,12 @@ export class DefaultLayoutComponent implements OnInit {
     if(seen)
     return "white"
     else
-    return "rgb(233, 231, 231)"
+   { 
+    setTimeout(() => {
+   this.getNotfiaction()
+    }, 1000);
+     return "rgb(233, 231, 231)"
+    }
   }
   SeeNotifaction() {
     // console.log(this.Notfiactions.map(n => n.id))
