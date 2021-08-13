@@ -35,7 +35,7 @@
       <div class="dropdown-menu dropdown-menu-left scroll"  (scroll)="onScroll($event)"  *dropdownMenu aria-labelledby="simple-dropdown">
         <div class="dropdown-header text-center"><strong>الاشعارات</strong></div>
     <li *ngFor="let Notfiaction of Notfiactions">
-      <a class="dropdown-item" >
+      <a class="dropdown-item" [ngStyle]="{'background':style(Notfiaction.isSeen)}">
         <div *ngIf="Notfiaction.orderCount"> لديك
           <strong>{{Notfiaction.orderCount}}</strong> من الطلبات
         </div>

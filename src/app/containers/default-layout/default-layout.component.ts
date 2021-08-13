@@ -59,7 +59,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.paging.RowCount = 10
     this.paging.Page = 1
     this.orderService.Notifcation(this.paging).subscribe(res => {
-      console.log(res)
+      // console.log(res)
       this.Notfiactions = res.data
       this.totalItems = res.total
       this.SeeNotifaction()
@@ -89,6 +89,12 @@ export class DefaultLayoutComponent implements OnInit {
     },err=>{
       this.showSpinner=false
     })
+  }
+  style(seen){
+    if(seen)
+    return "white"
+    else
+    return "rgb(233, 231, 231)"
   }
   SeeNotifaction() {
     // console.log(this.Notfiactions.map(n => n.id))
