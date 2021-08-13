@@ -34,7 +34,7 @@ export class ShowOrdersComponent implements OnInit {
     this.orderServies.get(this.paging, this.orderFilter).subscribe(res => {
       this.orders = res.data
       this.totalItems = res.total
-      console.log(res)
+      // console.log(res)
     })
   }
   GetSettings() {
