@@ -51,7 +51,7 @@ export class PaymentOrdersComponent implements OnInit {
   }
   GetPayment() {
     this.paymentService.Get(this.paging).subscribe(res => {
-      // console.log(res)
+      console.log(res)
       this.Payments = res.dto
       this.totalItems = res.total
     })
