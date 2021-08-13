@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { retry } from 'rxjs/operators';
 import { OrderplacedEnum } from '../../../Models/Enum/OrderplacedEnum';
 import { OrderDontFinishFilter } from '../../../Models/order/OrderDontFinishFilter';
 import { OrderService } from '../../../services/order/order.service';
@@ -38,11 +39,14 @@ export class OrdersReportComponent implements OnInit {
     this.orderDontFinishFilter.ClientDoNotDeleviredMoney = this.ClientDoNotDeleviredMoney
     this.orderDontFinishFilter.IsClientDeleviredMoney = this.IsClientDeleviredMoney
     this.orderDontFinishFilter.OrderPlacedId = this.orderPlace.filter(o => o.checked == true).map(c => c.id);
+    if(this.orderDontFinishFilter.OrderPlacedId.length!=0&&( this.orderDontFinishFilter.ClientDoNotDeleviredMoney ||
+      this.orderDontFinishFilter.IsClientDeleviredMoney))
     this.service.OrdersDontFinished(this.orderDontFinishFilter).subscribe(res => {
       this.orders = res as []
       // console.log(this.orders)
       this.sumCost();
     });
+    else return
   }
   clientCalc = 0
   payForCleint(element): number {

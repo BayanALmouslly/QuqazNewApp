@@ -29,6 +29,7 @@ export class ClientPrintComponent implements OnInit {
     this.printService.Get(this.printNumber).subscribe(res => {
       if(res!=null)
       this.printOrders = res
+       this.printOrders.orders = this.printOrders.orders.sort((a, b) => a.code - b.code)
       console.log(res)
     })
   }

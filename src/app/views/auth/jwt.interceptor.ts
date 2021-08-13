@@ -40,12 +40,12 @@ export class JwtInterceptor implements HttpInterceptor {
                   else {
                     return this.logoutUser();
                   }
-                case 0:
-                  // this.router.navigate(['/dashboard']);
-                case 403:{
-                  this.router.navigate(['/login']);
+                // case 0:
+                //   // this.router.navigate(['/dashboard']);
+                // case 403:{
+                //   this.router.navigate(['/login']);
 
-                }
+                // }
                 // case 404:{
                 //   this.router.navigate(['/404']);
 
