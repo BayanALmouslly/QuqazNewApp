@@ -71,6 +71,7 @@ export class PaymentOrdersComponent implements OnInit {
   delete(id) {
     this.paymentService.Delete(id).subscribe(res => {
       this.GetPayment()
+      this.toasterService.pop('success', '', 'تم الحذف بنجاح');
     })
   }
 }
