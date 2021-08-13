@@ -28,6 +28,7 @@
       <th>الحالة</th>
       <th>التاريخ</th>
       <th> ملاحظات</th>
+      <th></th>
     </thead>
     <tbody>
       <tr *ngFor="let payment of Payments">
@@ -36,9 +37,10 @@
         <td>{{payment.accept?'مقبول':payment.accept==null?'قيد المعالجة':'مرفوض'}}</td>
         <td>{{payment.createDate| date:"dd/MM/yyyy"}}</td>
         <td>{{payment.note}}</td>
+        <td> <i class="icon-trash icons font-2xl d-block mt-4" *ngIf="payment.accept==null" (click)="delete(payment.id)"></i></td>
       </tr>
       <tr *ngIf="Payments.length==0">
-        <td colspan="5">لا يوجد عناصر </td>
+        <td colspan="6">لا يوجد عناصر </td>
       </tr>
     </tbody>
   </table>

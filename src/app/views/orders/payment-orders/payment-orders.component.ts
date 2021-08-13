@@ -41,7 +41,7 @@ export class PaymentOrdersComponent implements OnInit {
         this.paymentService.Add(this.createPayment).subscribe(res => {
           this.createPayment = new CreatePayment()
           this.toasterService.pop('success', '', 'تمت الاضافة  بنجاح');
-           this.GetPayment()
+          this.GetPayment()
         })
       } else {
         this.toasterService.pop('error', '', 'لايمكن الإضافة');
@@ -51,9 +51,9 @@ export class PaymentOrdersComponent implements OnInit {
   }
   GetPayment() {
     this.paymentService.Get(this.paging).subscribe(res => {
-      console.log(res)
-      this.Payments=res.dto
-      this.totalItems=res.total
+      // console.log(res)
+      this.Payments = res.dto
+      this.totalItems = res.total
     })
   }
   showBoundaryLinks: boolean = true;
@@ -62,10 +62,15 @@ export class PaymentOrdersComponent implements OnInit {
   pageChanged(event: PageChangedEvent): void {
     this.paging.allItemsLength = this.totalItems
     this.paging.RowCount = event.itemsPerPage
-    this.paging.Page = event.page 
-    this.  GetPayment() 
+    this.paging.Page = event.page
+    this.GetPayment()
   }
   onSearch($event) {
     // this.createPayment.PaymentWayName = $event.term
+  }
+  delete(id) {
+    this.paymentService.Delete(id).subscribe(res => {
+      this.GetPayment()
+    })
   }
 }

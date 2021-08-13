@@ -27,4 +27,7 @@ export class PaymentService {
   CanRequest() {
     return this.http.get<any>(this.controler + "/CanRequest")
   }
+  Delete(id){
+   return this.http.delete(this.controler+"/"+id)
+  }
 }
