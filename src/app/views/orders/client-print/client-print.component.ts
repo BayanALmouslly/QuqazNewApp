@@ -27,6 +27,7 @@ export class ClientPrintComponent implements OnInit {
   }
   Get() {
     this.printService.Get(this.printNumber).subscribe(res => {
+      if(res!=null)
       this.printOrders = res
       console.log(res)
     })
