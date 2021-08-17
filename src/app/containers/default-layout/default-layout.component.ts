@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { environment } from '../../../environments/environment';
 import { Notifcation } from '../../Models/notifcation.model';
 import { Paging } from '../../Models/paging';
 import { OrderService } from '../../services/order/order.service';
@@ -17,6 +18,8 @@ export class DefaultLayoutComponent implements OnInit {
   public navItems = navItems;
   constructor(private router: Router, private orderService: OrderService,
     private toasterService: ToasterService,) { }
+    titleAR=environment.appNameAR
+    titleEN=environment.appNameEN
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }

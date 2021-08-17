@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { environment } from '../environments/environment';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
@@ -9,7 +10,7 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { RegisterComponent } from './views/register/register.component';
-
+const title=environment.appNameAR
 export const routes: Routes = [
   {
     path: '',
@@ -49,7 +50,7 @@ export const routes: Routes = [
     path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'شركة الأجنحة الذهبية'
+      title: title
     },
     children: [
       {

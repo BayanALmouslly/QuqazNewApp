@@ -5,5 +5,9 @@
 
 export const environment = {
   production: false,
-  baseUrl:"https://localhost:44333/"
+  baseUrl:"https://localhost:44333/",
+   // appNameAR:"شركة القوقز للتوصيل السريع",
+  // appNameEN:"Quqaz"
+  appNameAR:"شركة الأجنحة الذهبية",
+  appNameEN:"Golden Wings",
 };
