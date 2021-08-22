@@ -43,6 +43,7 @@ export class OrdersReportComponent implements OnInit {
       this.orderDontFinishFilter.IsClientDeleviredMoney))
     this.service.OrdersDontFinished(this.orderDontFinishFilter).subscribe(res => {
       this.orders = res as []
+      this.orders = this.orders.sort((a, b) => a.code - b.code)
       // console.log(this.orders)
       this.sumCost();
     });
@@ -118,6 +119,7 @@ export class OrdersReportComponent implements OnInit {
     return this.count
   }
   Report() {
+    this.orderPlace=this.orderPlace.filter(op => this.orders.filter(o=>o.orderplaced.id==op.id).length>0)
     if(this.orderPlace.filter(o=>(o.id==OrderplacedEnum.Unacceptable||
       o.id==OrderplacedEnum.CompletelyReturned)&&o.checked==true).length>0)return
     this.service.UnPaidRecipt().subscribe(res => {
