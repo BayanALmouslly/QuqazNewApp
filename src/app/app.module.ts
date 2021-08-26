@@ -49,6 +49,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToasterModule } from 'angular2-toaster';
 import { ProfileComponent } from './views/profile/profile.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PointsComponent } from './views/points/points.component';
 
 @NgModule({
   imports: [
@@ -81,7 +82,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     P500Component,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    PointsComponent
   ],
   providers: [
     {

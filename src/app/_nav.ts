@@ -9,10 +9,10 @@ export const navItems: INavData[] = [
     icon: 'icon-user',
     
   },
-  {
-    title: true,
-    name: 'حول '
-  },
+  // {
+  //   title: true,
+  //   name: 'حول '
+  // },
   // {
   //   name: 'كشف الطلبات',
   //   url: '/orders/report',
@@ -62,7 +62,11 @@ export const navItems: INavData[] = [
     url: '/orders/clientPrint',
     icon: 'icon-layers'
   },
-  
+  {
+    name: 'نقاطي',
+    url: '/points',
+    icon: 'icon-energy'
+  },
   {
     name: 'تسجيل خروج ',
     url: '/login',
