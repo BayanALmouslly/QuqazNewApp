@@ -28,7 +28,7 @@ h1 {
 .cc,
 .cc-back {
   //background: linear-gradient(to left, #70257b, #8a2c94);
-  background-color: #002e6b;
+  background-color: #53add6;
   border-radius: 10px;
   display: block;
   height: 195px;
@@ -69,9 +69,7 @@ h1 {
 }
 
 .cc-number {
-  background: linear-gradient(#eee, #999);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+ 
   bottom: 75px;
   font-size: 20px;
   left: 90px;
@@ -79,9 +77,7 @@ h1 {
 }
 
 .cc-date {
-  background: linear-gradient(#eee, #999);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+ 
   bottom: 40px;
   left: 90px;
   font-size: 20px;
