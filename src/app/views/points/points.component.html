@@ -1,4 +1,4 @@
-<h3 style="text-align: center;font-size: 22px; color: rgb(0, 0, 104);"> نقاطي </h3>
+<h3 style="text-align: center;font-size: 22px; color: rgb(54, 112, 160);"> نقاطي <span class="badge badge-info" style="color: white;">{{pointCount}}</span>  </h3>
 
 <div class="row">
     <div class="col-12 col-md-3 col-lg-4" *ngFor="let point of points">
@@ -6,8 +6,8 @@
             <span class="chip"></span>
             <span class="nubank-logo"></span>
             <span class="mastercard"></span>
-            <span class="cc-number"> النقاط 5032 </span>
-            <span class="cc-date expedition"> كلفة التحويل 5032 </span>
+            <span class="cc-number"> النقاط {{point.points}} </span>
+            <span class="cc-date expedition"> كلفة التحويل {{point.money}} </span>
             <!-- 
         <span class="cc-date expedition">01/14</span>
         <span class="cc-date expiry">01/99</span>
@@ -20,10 +20,10 @@
         </div>
     </div>
 </div>
-<h3 style="text-align: center;font-size: 22px; color: rgb(0, 0, 104);">النقاط في المدن </h3>
+<h3 style="text-align: center;font-size: 22px;color: rgb(54, 112, 160);">النقاط في المدن </h3>
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card table-responsive-lg">
             <div class="card-body">
                 <table class="table table-striped">
                     <thead class="table-info">
@@ -33,10 +33,10 @@
                     <tbody>
                         <tr *ngFor="let countriesPoint of countriesPoints">
                             <td>
-                                {{countriesPoint}}
+                                {{countriesPoint.name}}
                             </td>
                             <td>
-                                {{countriesPoint}}
+                                {{countriesPoint.points}}
                             </td>
                         </tr>
                     </tbody>

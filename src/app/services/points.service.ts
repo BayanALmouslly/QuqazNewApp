@@ -8,11 +8,11 @@ import { environment } from '../../environments/environment';
 export class PointsService {
 
   constructor(public http:HttpClient) { }
-  controler=environment.baseUrl+"api/CPoints/"
-  get(){
-   return this.http.get(this.controler)
+  controler=environment.baseUrl+"api/CPoint/"
+  MyPoints(){
+   return this.http.get<any>(this.controler+"MyPoints")
   }
   getPoints(){
-    return this.http.get(this.controler)
+    return this.http.get<any>(this.controler)
    }
 }

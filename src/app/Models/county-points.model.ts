@@ -1,5 +1,5 @@
 export class CountyPoints {
     points
-    country
+    name
     id
 }
