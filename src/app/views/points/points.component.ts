@@ -33,7 +33,11 @@ export class PointsComponent implements OnInit {
   }
   GetCountryPoint() {
     this.settingsService.Countries().subscribe(res => {
-      this.countriesPoints=res
+      this.countriesPoints = res
     })
+  }
+  money: number=0
+  moneypoint(): number {
+    return this.money
   }
 }

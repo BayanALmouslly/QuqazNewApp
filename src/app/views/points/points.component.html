@@ -1,13 +1,13 @@
 <h3 style="text-align: center;font-size: 22px; color: rgb(54, 112, 160);"> 
     نقاطي 
-    <span class="badge badge-info" style="color: white;">{{pointCount}}</span> 
+    <!-- <span class="badge badge-info" style="color: white;">{{pointCount}}</span>  -->
     <!-- المبلغ <span class="badge badge-info" style="color: white;">{{pointCount}}</span> دينار عراقي -->
 
 </h3>
-<!-- <div class="row">
+<div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-2 col-3">
-        <div class="circle btn btn-light">
+        <div class="circle bg-info btn btn-light">
        <h2> {{pointCount}}  </h2>  
        <h3>
         نقاط
@@ -24,15 +24,15 @@
     
     </div>
     <div class="col-md-2 col-3">
-        <div class="circle btn btn-light">
-     <h2>{{pointCount|number}}000</h2>
-    <h3> دينار عراقي</h3> 
+        <div class="circle bg-info btn btn-light">
+     <h2>{{moneypoint()|number}}</h2>
+    دينار 
     
         </div>
     
     </div>
     <div class="col-md-1"></div>
-</div> -->
+</div>
 
 
 <div class="row">
@@ -53,7 +53,7 @@
                 </span>
               </div> -->
               <div class="text-value" style="text-align: center;" >  
-                معادلة الحساب كل  {{point.points}} نقطة
+                  كل  {{point.points}} نقطة
                 <br><br>
                 تحصل على  {{point.money|number}} دينار عراقي
             </div>
