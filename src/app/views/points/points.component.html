@@ -5,7 +5,6 @@
 
 </h3>
 <div class="row">
-    <div class="col-md-3"></div>
     <div class="col-md-2 col-3">
         <div class="circle bg-info btn btn-light">
        <h2> {{pointCount}}  </h2>  
@@ -17,9 +16,11 @@
     </div>
     <div class="col-md-1 col-3">
         <div class="arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-view-stacked" viewBox="0 0 16 16">
-                <path d="M3 0h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3zm0 8h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H3z"/>
-              </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+            fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+        </svg>
         </div>
     
     </div>
@@ -31,7 +32,24 @@
         </div>
     
     </div>
-    <div class="col-md-1"></div>
+    <div class="col-md-1 col-3">
+        <div class="arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+            fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+        </svg>
+        </div>
+    
+    </div>
+    <div class="col-md-2 col-3">
+        <div class="circle bg-info btn btn-light">
+     <h2>{{Rest|number}}</h2>
+    الباقي 
+    
+        </div>
+    
+    </div>
 </div>
 
 

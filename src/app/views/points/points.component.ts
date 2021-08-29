@@ -37,6 +37,7 @@ export class PointsComponent implements OnInit {
     })
   }
   money: number=0
+  Rest: number=0
   moneypoint(): number {
     return this.money
   }
