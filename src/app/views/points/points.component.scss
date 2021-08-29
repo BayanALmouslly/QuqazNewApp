@@ -236,3 +236,19 @@ $mcd-height: $mcd-width * 3/5;
 .col-12.col-md-3.col-lg-4{
 margin-bottom: 10px;
 }
+.circle{
+  background-color:  #2b619b;
+  border-radius: 50%;
+  width:150px;
+  height:150px;
+  color: white;
+  padding: 30px  20px 15px  25px;
+  text-align: center;
+  }
+  .arrow{
+    text-align: right;
+    margin-left:50%;
+    margin-right: 20%;
+    padding: 15px  0px  0px  25px;
+    color:   #2b619b;
+}

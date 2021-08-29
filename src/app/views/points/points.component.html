@@ -1,4 +1,39 @@
-<h3 style="text-align: center;font-size: 22px; color: rgb(54, 112, 160);"> نقاطي <span class="badge badge-info" style="color: white;">{{pointCount}}</span>  </h3>
+<h3 style="text-align: center;font-size: 22px; color: rgb(54, 112, 160);"> 
+    نقاطي 
+    <span class="badge badge-info" style="color: white;">{{pointCount}}</span> 
+    <!-- المبلغ <span class="badge badge-info" style="color: white;">{{pointCount}}</span> دينار عراقي -->
+
+</h3>
+<!-- <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-2 col-3">
+        <div class="circle btn btn-light">
+       <h2> {{pointCount}}  </h2>  
+       <h3>
+        نقاط
+       </h3>    
+        </div>
+    
+    </div>
+    <div class="col-md-1 col-3">
+        <div class="arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-view-stacked" viewBox="0 0 16 16">
+                <path d="M3 0h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3zm0 8h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H3z"/>
+              </svg>
+        </div>
+    
+    </div>
+    <div class="col-md-2 col-3">
+        <div class="circle btn btn-light">
+     <h2>{{pointCount|number}}000</h2>
+    <h3> دينار عراقي</h3> 
+    
+        </div>
+    
+    </div>
+    <div class="col-md-1"></div>
+</div> -->
+
 
 <div class="row">
     <div class="col-12 col-md-3 col-lg-4" *ngFor="let point of points">
@@ -8,15 +43,20 @@
                 <i class="icon-location-pin"></i>
               </button> -->
               <div class="h1 text-muted text-right mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
-                    <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
-                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                    <path fill-rule="evenodd" d="M8 13.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                    <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                    <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
                   </svg>
               </div>
-              <div class="text-value"> <span class="cc-date expedition"> المبلغ المكافئ  {{point.money}} </span>
-              </div>
-              <div class="text-value" > النقاط {{point.points}} </div>
+              <!-- <div class="text-value"> <span class="cc-date expedition"> 
+                  معادلة الحساب 
+                </span>
+              </div> -->
+              <div class="text-value" style="text-align: center;" >  
+                معادلة الحساب كل  {{point.points}} نقطة
+                <br><br>
+                تحصل على  {{point.money|number}} دينار عراقي
+            </div>
 
             </div>
             <!-- <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
@@ -33,7 +73,7 @@
         </div>
     </div>
 </div>
-<h3 style="text-align: center;font-size: 22px;color: rgb(54, 112, 160);">النقاط في المدن </h3>
+<h3 style="text-align: center;font-size: 22px;color: rgb(54, 112, 160);">نقاط  المدن </h3>
 <div class="row">
     <div class="col-12">
         <div class="card table-responsive-lg">

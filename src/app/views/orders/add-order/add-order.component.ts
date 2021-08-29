@@ -162,7 +162,7 @@ export class AddOrderComponent implements OnInit {
     this.Order.Cost = this.Order.Cost.replace(/,/g, "") * 1;
     this.AddOrderItem()
     this.Order.Date = new Date
-    console.log(this.Order);
+    // console.log(this.Order);
     this.orderServies.Add(this.Order).subscribe(res => {
       this.buttonDisabled=false
       this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
@@ -174,7 +174,7 @@ export class AddOrderComponent implements OnInit {
       // this.router.navigate(['/orders/sendorder'])
     }, err => {
       this.toasterService.pop('error', '', 'يجب ادخال جميع الحقول');
-      console.log(err)
+      // console.log(err)
       this.buttonDisabled=false
       this.currency()
       //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
