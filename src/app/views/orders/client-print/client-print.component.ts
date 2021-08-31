@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment.prod';
 import { Print } from '../../../Models/print.model';
 import { PrintService } from '../../../services/print.service';
 
@@ -14,8 +15,8 @@ export class ClientPrintComponent implements OnInit {
     public sanitizer: DomSanitizer,) { }
   printNumber
   printOrders: Print = new Print()
-  address = "أربيل - شارع 40 - قرب تقاطع كوك"
-  companyPhone = "07514550880 - 07700890880"
+  address = environment.Address
+  companyPhone = environment.companyPhones[0]+" - "+ environment.companyPhones[1]
   ngOnInit(): void {
     this.printOrders.orders = []
     this.printOrders.receipts = []

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { retry } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment.prod';
 import { OrderplacedEnum } from '../../../Models/Enum/OrderplacedEnum';
 import { OrderDontFinishFilter } from '../../../Models/order/OrderDontFinishFilter';
 import { OrderService } from '../../../services/order/order.service';
@@ -29,8 +30,8 @@ export class OrdersReportComponent implements OnInit {
   dateOfPrint = new Date()
   userName: any = JSON.parse(localStorage.getItem('kokazClient')) as UserLogin
   printnumber
-  address = "أربيل - شارع 40 - قرب تقاطع كوك"
-  companyPhone = "07514550880 - 07700890880"
+  address = environment.Address
+  companyPhone = environment.companyPhones[0]+" - "+ environment.companyPhones[1]
   orders: any[] = []
   ngOnInit(): void {
     // this.GetData()
