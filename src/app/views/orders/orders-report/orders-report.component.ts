@@ -143,6 +143,6 @@ export class OrdersReportComponent implements OnInit {
       newWin?.close();
       // location.reload();
 
-    }, 10);
+    }, 1000);
   }
 }
