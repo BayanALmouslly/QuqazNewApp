@@ -3,8 +3,9 @@
     <div class="card text-white bg-info" data-aos="zoom-in" data-aos-delay="100">
       <div class="card-body pb-0">
       
-        <!-- <button type="button" class="btn btn-transparent p-0 float-right">
-            </button> -->
+        <button type="button" class="btn btn-transparent p-0 float-right">
+          <i class="icon-trash icons font-1xl " (click)="delete(order.id)"></i>
+            </button>
         <div class="text-value">
           <i class="icon-social-dropbox h1"></i>
           {{order.code}}</div>

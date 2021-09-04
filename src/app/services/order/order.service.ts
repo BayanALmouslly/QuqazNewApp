@@ -88,4 +88,8 @@ export class OrderService {
     // params.append('ids', ids);
     return this.http.put(this.controler + "SeeNotifactions", ids)
   }
+  Delete(id){
+    return this.http.delete(this.controler + id)
+
+  }
 }
