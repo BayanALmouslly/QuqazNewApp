@@ -51,6 +51,7 @@ export class SendordersComponent implements OnInit {
   delete(id){
     this.orderService.Delete(id).subscribe(res => {
       this.toasterService.pop('success', '', 'تم  الحذف بنجاح');
+      this.GetOrders()
     })
   }
 }
