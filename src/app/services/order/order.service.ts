@@ -75,13 +75,13 @@ export class OrderService {
   NewNotfiaction() {
     return this.http.get<any>(this.controler + "NewNotfiaction")
   }
-  Notifcation(paging) {
-    let params = new HttpParams();
-    if (paging.RowCount != undefined || paging.RowCount != null)
-      params = params.append("RowCount", paging.RowCount);
-    if (paging.Page != undefined || paging.Page != null)
-      params = params.append("Page", paging.Page);
-    return this.http.get<any>(this.controler + "Notifcation" , { params: params })
+  Notifcation() {
+    // let params = new HttpParams();
+    // if (paging.RowCount != undefined || paging.RowCount != null)
+    //   params = params.append("RowCount", paging.RowCount);
+    // if (paging.Page != undefined || paging.Page != null)
+    //   params = params.append("Page", paging.Page);
+    return this.http.get<any>(this.controler + "Notifcation")
   }
   SeeNotifaction(ids) {
     // let params = new FormData();

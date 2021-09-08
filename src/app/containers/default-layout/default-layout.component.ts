@@ -61,38 +61,38 @@ export class DefaultLayoutComponent implements OnInit {
   getNotfiaction() {
     this.paging.RowCount = 10
     this.paging.Page = 1
-    this.orderService.Notifcation(this.paging).subscribe(res => {
+    this.orderService.Notifcation().subscribe(res => {
       // console.log(res)
-      this.Notfiactions = res.data
-      this.totalItems = res.total
+      this.Notfiactions = res
+      // this.totalItems = res.total
       this.SeeNotifaction()
     })
   }
-  MoreNotfiaction() {
-    this.paging.RowCount = 10
-    this.paging.Page += 1
-    // if (this.navdrop)
-    //   this.navdrop.nativeElement.classList.toggle("visibility");
-    this.showSpinner=true
-    this.orderService.Notifcation(this.paging).subscribe(res => {
-      this.showSpinner=false
-      // console.log(res)
-      this.Notfiactions.forEach(item=>{
-        this.oldNotfiactions.push(item)
-      })
+  // MoreNotfiaction() {
+  //   this.paging.RowCount = 10
+  //   this.paging.Page += 1
+  //   // if (this.navdrop)
+  //   //   this.navdrop.nativeElement.classList.toggle("visibility");
+  //   this.showSpinner=true
+  //   this.orderService.Notifcation().subscribe(res => {
+  //     this.showSpinner=false
+  //     // console.log(res)
+  //     this.Notfiactions.forEach(item=>{
+  //       this.oldNotfiactions.push(item)
+  //     })
     
-      this.Notfiactions = res.data
-      // console.log(this.Notfiactions)
-      this.oldNotfiactions.forEach(item=>{
-        this.Notfiactions.unshift(item)
-      })
-      // console.log(this.Notfiactions)
-      this.totalItems = res.total
-      this.SeeNotifaction()
-    },err=>{
-      this.showSpinner=false
-    })
-  }
+  //     this.Notfiactions = res.data
+  //     // console.log(this.Notfiactions)
+  //     this.oldNotfiactions.forEach(item=>{
+  //       this.Notfiactions.unshift(item)
+  //     })
+  //     // console.log(this.Notfiactions)
+  //     this.totalItems = res.total
+  //     this.SeeNotifaction()
+  //   },err=>{
+  //     this.showSpinner=false
+  //   })
+  // }
   style(seen){
     if(seen)
     return "white"
@@ -106,6 +106,7 @@ export class DefaultLayoutComponent implements OnInit {
   }
   SeeNotifaction() {
     // console.log(this.Notfiactions.map(n => n.id))
+    if(this.Notfiactions.length!=0)
     this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
       this.NewNotfiaction()
     })
@@ -113,17 +114,17 @@ export class DefaultLayoutComponent implements OnInit {
   totalItems
   paging: Paging = new Paging
 
-  pageChanged(event: PageChangedEvent): void {
-    this.paging.allItemsLength = this.totalItems
-    this.paging.RowCount = event.itemsPerPage
-    this.paging.Page = event.page
-    this.getNotfiaction()
-  }
+  // pageChanged(event: PageChangedEvent): void {
+  //   this.paging.allItemsLength = this.totalItems
+  //   this.paging.RowCount = event.itemsPerPage
+  //   this.paging.Page = event.page
+  //   this.getNotfiaction()
+  // }
   showSpinner:boolean
-@HostListener('scroll', ['$event'])
-onScroll(event: any) {
-    if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight&&this.Notfiactions.length==10) {
-      this.MoreNotfiaction()
-    }
-}
+// @HostListener('scroll', ['$event'])
+// onScroll(event: any) {
+//     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight&&this.Notfiactions.length==10) {
+//       this.MoreNotfiaction()
+//     }
+// }
 }

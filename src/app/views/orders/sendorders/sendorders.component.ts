@@ -10,6 +10,7 @@ import { OrderService } from '../../../services/order/order.service';
 })
 export class SendordersComponent implements OnInit {
   @ViewChild('infoModal') public infoModal: ModalDirective;
+  @ViewChild('DeleteModal') public DeleteModal: ModalDirective;
 
   constructor(private orderService: OrderService,
     private toasterService: ToasterService,) { }
@@ -25,9 +26,17 @@ export class SendordersComponent implements OnInit {
   hideinfoModal(): void {
     this.infoModal.hide();
   }
+  showDeleteModal(): void {
+    this.DeleteModal.show();
+  }
+
+  hideDeleteModal(): void {
+    this.DeleteModal.hide();
+  }
   GetOrders() {
     this.orderService.NonSendOrder().subscribe(res => {
       this.orders = res
+      // console.log(res)
       if (this.orders.length == 0)
         this.NotFoundMessage = true
       else
@@ -48,10 +57,16 @@ export class SendordersComponent implements OnInit {
 
     })
   }
-  delete(id){
-    this.orderService.Delete(id).subscribe(res => {
+  deleteid
+  canDelete(id){
+    this.showDeleteModal()
+    this.deleteid=id
+  }
+  delete(){
+    this.orderService.Delete(this.deleteid).subscribe(res => {
       this.toasterService.pop('success', '', 'تم  الحذف بنجاح');
       this.GetOrders()
+      this.hideDeleteModal()
     })
   }
 }

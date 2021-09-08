@@ -4,7 +4,7 @@
       <div class="card-body pb-0">
       
         <button type="button" class="btn btn-transparent p-0 float-right">
-          <i class="icon-trash icons font-1xl " (click)="delete(order.id)"></i>
+          <i class="icon-trash icons font-1xl " (click)="canDelete(order.id)"></i>
             </button>
         <div class="text-value">
           <i class="icon-social-dropbox h1"></i>
@@ -51,6 +51,26 @@
       <div class="modal-footer" >
         <button type="button" class="btn btn-info" (click)="Send()">قبول</button> &nbsp;
         <button type="button" class="btn btn-secondary" (click)="hideinfoModal()"> رفض</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div bsModal #DeleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> تأكيد قبل الحذف </h4>
+        <button type="button" class="close" (click)="hideinfoModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        هل أنت متاكد من حذف الطلب
+      </div>
+      <div class="modal-footer" >
+        <button type="button" class="btn btn-info" (click)="delete()">تأكيد</button> &nbsp;
+        <button type="button" class="btn btn-secondary" (click)="hideDeleteModal()"> رفض</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
