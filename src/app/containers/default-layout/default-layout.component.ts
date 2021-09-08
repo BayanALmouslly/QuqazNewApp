@@ -46,7 +46,7 @@ export class DefaultLayoutComponent implements OnInit {
         this.count = res
         // console.log(res)
       })
-    }, 10000);
+    }, 5000);
   }
   pageNumber = 1
   Notfiactions: Notifcation[] = []
