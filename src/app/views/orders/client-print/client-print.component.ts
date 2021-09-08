@@ -16,7 +16,7 @@ export class ClientPrintComponent implements OnInit {
   printNumber
   printOrders: Print = new Print()
   address = environment.Address
-  companyPhone = environment.companyPhones[0]+" - "+ environment.companyPhones[1]
+  companyPhone = environment.companyPhones[0] + " - " + environment.companyPhones[1]
   ngOnInit(): void {
     this.printOrders.orders = []
     this.printOrders.receipts = []
@@ -26,11 +26,19 @@ export class ClientPrintComponent implements OnInit {
       this.Get()
     }
   }
+  count = 0
+  deliveryCostCount = 0
+  clientCalc = 0
   Get() {
     this.printService.Get(this.printNumber).subscribe(res => {
-      if(res!=null)
-      this.printOrders = res
-       this.printOrders.orders = this.printOrders.orders.sort((a, b) => a.code - b.code)
+      if (res != null)
+        this.printOrders = res
+      this.printOrders.orders = this.printOrders.orders.sort((a, b) => a.code - b.code)
+      this.printOrders.orders.forEach(item => {
+        this.count += item.total
+        this.deliveryCostCount+=item.deliveCost
+        this.clientCalc+=item.payForClient
+      })
       console.log(res)
     })
   }
