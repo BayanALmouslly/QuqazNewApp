@@ -7,5 +7,5 @@ export class Print {
     destinationPhone
     receiptstotal
     orders:any[]=[]
-    receipts:[]=[]
+    receipts:any[]=[]
 }
