@@ -62,7 +62,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.paging.RowCount = 10
     this.paging.Page = 1
     this.orderService.Notifcation().subscribe(res => {
-      console.log(res)
+      // console.log(res)
       this.Notfiactions = res
       // this.totalItems = res.total
       this.SeeNotifaction()
