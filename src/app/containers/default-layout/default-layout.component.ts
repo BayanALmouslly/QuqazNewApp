@@ -99,7 +99,7 @@ export class DefaultLayoutComponent implements OnInit {
     else
    { 
     setTimeout(() => {
-   this.getNotfiaction()
+  //  this.getNotfiaction()
     }, 1000);
      return "rgb(233, 231, 231)"
     }

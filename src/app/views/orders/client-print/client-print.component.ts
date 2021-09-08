@@ -39,7 +39,7 @@ export class ClientPrintComponent implements OnInit {
         this.deliveryCostCount+=item.deliveCost
         this.clientCalc+=item.payForClient
       })
-      console.log(res)
+      // console.log(res)
     })
   }
   print() {

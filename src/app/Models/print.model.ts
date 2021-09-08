@@ -5,6 +5,7 @@ export class Print {
     date
     destinationName
     destinationPhone
+    receiptstotal
     orders:any[]=[]
     receipts:[]=[]
 }
