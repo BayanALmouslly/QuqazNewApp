@@ -123,12 +123,14 @@ export class OrdersReportComponent implements OnInit {
   temporderPlace
   Report() {
     this.temporderPlace=this.orderPlace.filter(op => this.orders.filter(o=>o.orderplaced.id==op.id).length>0)
-    if(this.temporderPlace.filter(o=>(o.id==OrderplacedEnum.Unacceptable||
-      o.id==OrderplacedEnum.CompletelyReturned)&&o.checked==true).length>0)return
-    this.service.UnPaidRecipt().subscribe(res => {
-      this.reports = res
-      // console.log(res)
-    })
+    if (this.temporderPlace.filter(o => o.id == OrderplacedEnum.Way || o.id == OrderplacedEnum.PartialReturned
+      || o.id == OrderplacedEnum.Delivered).length > 0) {
+        this.service.UnPaidRecipt().subscribe(res => {
+          this.reports = res
+          // console.log(res)
+        })
+      }else return
+   
   }
   print() {
     var divToPrint = document.getElementById('contentToConvert');
