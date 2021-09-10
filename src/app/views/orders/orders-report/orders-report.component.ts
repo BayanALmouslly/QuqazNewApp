@@ -121,12 +121,17 @@ export class OrdersReportComponent implements OnInit {
     return this.count
   }
   temporderPlace
+  reportstotal=0
+
   Report() {
     this.temporderPlace=this.orderPlace.filter(op => this.orders.filter(o=>o.orderplaced.id==op.id).length>0)
     if (this.temporderPlace.filter(o => o.id == OrderplacedEnum.Way || o.id == OrderplacedEnum.PartialReturned
       || o.id == OrderplacedEnum.Delivered).length > 0) {
         this.service.UnPaidRecipt().subscribe(res => {
           this.reports = res
+          this.reports.forEach(r => {
+            this.reportstotal += r.amount
+          })
           // console.log(res)
         })
       }else return
