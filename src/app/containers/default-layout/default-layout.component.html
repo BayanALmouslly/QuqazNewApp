@@ -30,7 +30,7 @@
       <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
         dropdownToggle (click)="getNotfiaction()">
         <i class="fa fa-bell-o" ><span class="badge badge-info" style="color: white;"
-            *ngIf="count&&count!=0">{{count}}</span></i>
+            *ngIf="count&&count!=0&&showbadge">{{count}}</span></i>
       </a>
       <!-- (scroll)="onScroll($event)"  -->
       <div class="dropdown-menu dropdown-menu-left scroll"   *dropdownMenu aria-labelledby="simple-dropdown">

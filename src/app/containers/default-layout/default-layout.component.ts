@@ -29,11 +29,13 @@ export class DefaultLayoutComponent implements OnInit {
   @ViewChild('navdrop') navdrop: ElementRef;
 
   count
+  showbadge:boolean=false
   ngOnInit() {
     this.orderService.NewNotfiaction().subscribe(res => {
       if (res != 0) {
         this.count = res
         this.toasterService.pop('info', '', 'لديك ' + res + ' من الاشعارات');
+        this.showbadge=true
       }
     })
     setInterval(() => {
@@ -42,6 +44,8 @@ export class DefaultLayoutComponent implements OnInit {
           this.toasterService.pop('info', '', 'لديك ' + res + ' من الاشعارات');
           //  this.pageNumber=1
           //  this.getNotfiaction()
+          this.showbadge=true
+
         }
         this.count = res
         // console.log(res)
@@ -55,15 +59,18 @@ export class DefaultLayoutComponent implements OnInit {
     this.orderService.NewNotfiaction().subscribe(res => {
       if (res != 0) {
         this.count = res
+        this.showbadge=true
       }
     })
   }
   getNotfiaction() {
-    this.paging.RowCount = 10
-    this.paging.Page = 1
+    // this.paging.RowCount = 10
+    // this.paging.Page = 1
     this.orderService.Notifcation().subscribe(res => {
-      console.log(res)
+      // console.log(res)
       this.Notfiactions = res
+      this.showbadge=false
+
       // this.totalItems = res.total
       this.SeeNotifaction()
     })
