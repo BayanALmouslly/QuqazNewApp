@@ -150,7 +150,7 @@
   <div style="padding: 10px;width: 100%;">
     <table style=" width: 100%;" >
 
-      <thead style="  background-color: rgb(218, 218, 219);">
+      <thead style=" font-size: 14px; background-color: rgb(218, 218, 219);">
         <th>
           <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
             ترقيم
@@ -199,6 +199,12 @@
         <th>
           <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
             المبلغ القديم
+
+          </div>
+        </th>
+        <th>
+          <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+         ملاحظات العميل
 
           </div>
         </th>
@@ -266,6 +272,14 @@
           <td>
             <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
               {{order.oldCost|number}}{{order.oldCost?null:'-'}}
+
+            </div>
+          </td>
+          <td>
+            <div style="margin: 1px;border: 1px black solid;padding: 5px;text-align: center;">
+
+              {{order.clientNote?order.clientNote:"-"}}
+
 
             </div>
           </td>

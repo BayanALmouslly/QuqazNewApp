@@ -44,7 +44,7 @@ export class ClientPrintComponent implements OnInit {
       this.printOrders.receipts .forEach(r => {
         this.reportstotal += r.amount
       })
-      // console.log(res)
+      console.log(res)
     })
   }
   print() {
