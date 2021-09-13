@@ -53,7 +53,7 @@
               <span class="input-group-text"><i class="icon-user"></i></span>
             </div>
             <input type="text" name="Cost" (change)="currency()" [(ngModel)]="Order.Cost" class="form-control"
-              placeholder="كلفة الطلب مع التوصيل " required>
+              placeholder="كلفة الطلب مع التوصيل " required (keypress)="keyPressNumbers($event,Order.Cost)">
 
           </div>
           <small *ngIf="!Order.Cost&&errorMessage">كلفة الطلب حقل مطلوب</small>
