@@ -31,6 +31,9 @@ export class ClientPrintComponent implements OnInit {
   clientCalc = 0
   reportstotal=0
   Get() {
+    this.count=0
+    this.deliveryCostCount=0
+    this.clientCalc=0
     this.printService.Get(this.printNumber).subscribe(res => {
       if (res != null)
         this.printOrders = res
@@ -44,7 +47,7 @@ export class ClientPrintComponent implements OnInit {
       this.printOrders.receipts .forEach(r => {
         this.reportstotal += r.amount
       })
-      console.log(res)
+      // console.log(res)
     })
   }
   print() {
