@@ -43,7 +43,7 @@
               class="form-control" placeholder="اسم المستلم" required>
 
           </div>
-          <small *ngIf="!Order.RecipientName&&errorMessage">اسم المستلم حقل مطلوب</small>
+          <!-- <small *ngIf="!Order.RecipientName&&errorMessage">اسم المستلم حقل مطلوب</small> -->
 
           <div class="input-group mb-3">
             <!-- <div class="input-group-prepend">
@@ -135,7 +135,7 @@
 
           <div class="input-group ">
 
-            <textarea [disabled]="CanEdit" name="ClientNote" [(ngModel)]="Order.ClientNote" style="width: 100%;"
+            <textarea [disabled]="CanEdit" name="ClientNote" [(ngModel)]="Order.ClientNote" style="width: 100%;font-size: 18px;"
               name="textarea-input" rows="3" class="form-control" placeholder="ملاحظات"></textarea>
 
           </div>

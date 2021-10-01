@@ -150,8 +150,9 @@ export class AddOrderComponent implements OnInit {
       this.Order.RecipientPhones.push(this.Phone)
       this.Phone = ""
     }
+    // || !this.Order.RecipientName
     if (!this.Order.Code || this.Order.RecipientPhones.length == 0
-      || !this.Order.RecipientName || !this.Order.Cost
+      || !this.Order.Cost
       || !this.Order.CountryId || !this.Order.Address || this.codeError || this.errorPhone) {
       this.errorMessage = true
       this.buttonDisabled=false
