@@ -18,7 +18,7 @@ export class SignalRService {
     public addTransferChartDataListener = () => {
       this.hubConnection.on('RM', (data)     => {
         // this.data = data;
-        console.log(data);
+        console.log(JSON.parse(data));
       });
     }
   constructor() { }
