@@ -4,16 +4,20 @@ import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { AuthService } from '../auth/auth.service';
 import { UserLogin } from '../auth/userlogin.model';
+import { SignalRService } from "../../services/signal-r.service";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'login.component.html',
-  styleUrls:['./login.component.scss']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   constructor(private router: Router,
     private authService: AuthService,
-    private toasterService: ToasterService) { }
+    private toasterService: ToasterService,
+    private signalRService: SignalRService) {
+
+  }
   login() {
     this.router.navigate(['/dashboard'])
   }
@@ -32,6 +36,8 @@ export class LoginComponent {
           this.user.expiry = new Date().getTime()
           localStorage.setItem('token', this.user.token)
           this.authService.setAuthenticatedUser(this.user);
+          this.signalRService.startConnection();
+          this.signalRService.addTransferChartDataListener();
           this.router.navigate(['/dashboard'])
           this.buttonDisabled = false
 

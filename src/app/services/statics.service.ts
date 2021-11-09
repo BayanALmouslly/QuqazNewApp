@@ -12,4 +12,7 @@ export class StaticsService {
   get(){
    return this.http.get(this.controler)
   }
+  GetNo(){
+    return this.http.get(this.controler+"GetNo");
+  }
 }
