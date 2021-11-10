@@ -32,8 +32,8 @@ export class DefaultLayoutComponent implements OnInit {
   count
   showbadge: boolean = false
   ngOnInit() {
-    this.SinglarService.startConnection()
-    this.SinglarService.addTransferChartDataListener()
+    // this.SinglarService.startConnection()
+    // this.SinglarService.addTransferChartDataListener()
     // setInterval(() => {
     //   this.count = this.SinglarService.countdata
     //   if (this.count != 0) {
@@ -123,12 +123,12 @@ export class DefaultLayoutComponent implements OnInit {
   tempcount
   SeeNotifaction() {
     // console.log(this.Notfiactions.map(n => n.id))
-    if (this.Notfiactions.length != 0)
-      // this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
-      //   // this.NewNotfiaction()
-      //   // this.tempcount = this.count
-      //   // this.SinglarService.countdata=0
-      // })
+    // if (this.Notfiactions.length != 0)
+    //   this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
+    //     // this.NewNotfiaction()
+    //     // this.tempcount = this.count
+    //     // this.SinglarService.countdata=0
+    //   })
   }
   totalItems
   paging: Paging = new Paging
