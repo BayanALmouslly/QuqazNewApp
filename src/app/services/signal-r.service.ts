@@ -24,10 +24,12 @@ export class SignalRService {
       data = JSON.parse(data);
       // this.data = data;
       console.log(data);
-      this.data.push(data);
+      data.forEach(element => {
+        this.data.push(element)
+      });
       // this.countdata=JSON.parse(data).length
-      // // console.log(this.countdata)
-      // this.toasterService.pop('info', '', 'لديك ' + this.countdata + ' من الاشعارات الجديدة');
+      console.log(this.data)
+      this.toasterService.pop('info', '', 'لديك ' + data.length + ' من الاشعارات الجديدة');
     });
   }
   constructor(public toasterService: ToasterService) { }
