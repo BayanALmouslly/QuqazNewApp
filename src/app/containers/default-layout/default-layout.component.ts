@@ -34,7 +34,11 @@ export class DefaultLayoutComponent implements OnInit {
   ngOnInit() {
     this.SinglarService.startConnection()
     this.SinglarService.addTransferChartDataListener()
-    setInterval(() => { this.NewNotfiaction()}, 1000);
+    setInterval(() => { 
+      this.count=this.SinglarService.countdata
+      if(this.count!=0)this.showbadge=true
+      // console.log(this.SinglarService.countdata)
+    }, 0);
     // this.orderService.NewNotfiaction().subscribe(res => {
     //   if (res != 0) {
     //     this.count = res
@@ -119,7 +123,7 @@ export class DefaultLayoutComponent implements OnInit {
     // console.log(this.Notfiactions.map(n => n.id))
     if(this.Notfiactions.length!=0)
     this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
-      this.NewNotfiaction()
+      // this.NewNotfiaction()
     })
   }
   totalItems
