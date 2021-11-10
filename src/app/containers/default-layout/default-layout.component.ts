@@ -60,7 +60,6 @@ export class DefaultLayoutComponent implements OnInit {
   Notfiaction() {
     this.Notfiactions = this.signalRService.data
     this.count = this.Notfiactions.length
-    console.log(this.count)
     if (this.count != 0) {
       this.showbadge = true
     }
