@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 })
 export class SignalRService {
   controler = environment.baseUrl + "NotificationHub"
-  countdata:number=0
+  countdata:number
   private hubConnection: signalR.HubConnection
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
@@ -23,8 +23,8 @@ export class SignalRService {
       // this.data = data;
       // console.log(JSON.parse(data));
       this.countdata=JSON.parse(data).length
+      // console.log(this.countdata)
       this.toasterService.pop('info', '', 'لديك ' + this.countdata + ' من الاشعارات الجديدة');
-      return data
     });
   }
   constructor(  public toasterService: ToasterService) { }

@@ -18,9 +18,9 @@ export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
   constructor(private router: Router, private orderService: OrderService,
-    private toasterService: ToasterService,private SinglarService:SignalRService) { }
-    titleAR=environment.appNameAR
-    titleEN=environment.appNameEN
+    private toasterService: ToasterService, private SinglarService: SignalRService) { }
+  titleAR = environment.appNameAR
+  titleEN = environment.appNameEN
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
@@ -30,13 +30,13 @@ export class DefaultLayoutComponent implements OnInit {
   @ViewChild('navdrop') navdrop: ElementRef;
 
   count
-  showbadge:boolean=false
+  showbadge: boolean = false
   ngOnInit() {
     this.SinglarService.startConnection()
     this.SinglarService.addTransferChartDataListener()
-    setInterval(() => { 
-      this.count=this.SinglarService.countdata
-      if(this.count!=0)this.showbadge=true
+    setInterval(() => {
+      this.count = this.SinglarService.countdata
+      if (this.count != 0) this.showbadge = true
       // console.log(this.SinglarService.countdata)
     }, 0);
     // this.orderService.NewNotfiaction().subscribe(res => {
@@ -67,7 +67,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.orderService.NewNotfiaction().subscribe(res => {
       if (res != 0) {
         this.count = res
-        this.showbadge=true
+        this.showbadge = true
       }
     })
   }
@@ -77,8 +77,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.orderService.Notifcation().subscribe(res => {
       // console.log(res)
       this.Notfiactions = res
-      this.showbadge=false
-
+      this.showbadge = false
       // this.totalItems = res.total
       this.SeeNotifaction()
     })
@@ -95,7 +94,7 @@ export class DefaultLayoutComponent implements OnInit {
   //     this.Notfiactions.forEach(item=>{
   //       this.oldNotfiactions.push(item)
   //     })
-    
+
   //     this.Notfiactions = res.data
   //     // console.log(this.Notfiactions)
   //     this.oldNotfiactions.forEach(item=>{
@@ -108,23 +107,24 @@ export class DefaultLayoutComponent implements OnInit {
   //     this.showSpinner=false
   //   })
   // }
-  style(seen){
-    if(seen)
-    return "white"
-    else
-   { 
-    setTimeout(() => {
-  //  this.getNotfiaction()
-    }, 1000);
-     return "rgb(233, 231, 231)"
+  style(seen) {
+    if (seen)
+      return "white"
+    else {
+      setTimeout(() => {
+        //  this.getNotfiaction()
+      }, 1000);
+      return "rgb(233, 231, 231)"
     }
   }
+  tempcount
   SeeNotifaction() {
     // console.log(this.Notfiactions.map(n => n.id))
-    if(this.Notfiactions.length!=0)
-    this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
-      // this.NewNotfiaction()
-    })
+    if (this.Notfiactions.length != 0)
+      this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
+        // this.NewNotfiaction()
+        this.tempcount = this.count
+      })
   }
   totalItems
   paging: Paging = new Paging
@@ -135,11 +135,11 @@ export class DefaultLayoutComponent implements OnInit {
   //   this.paging.Page = event.page
   //   this.getNotfiaction()
   // }
-  showSpinner:boolean
-// @HostListener('scroll', ['$event'])
-// onScroll(event: any) {
-//     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight&&this.Notfiactions.length==10) {
-//       this.MoreNotfiaction()
-//     }
-// }
+  showSpinner: boolean
+  // @HostListener('scroll', ['$event'])
+  // onScroll(event: any) {
+  //     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight&&this.Notfiactions.length==10) {
+  //       this.MoreNotfiaction()
+  //     }
+  // }
 }
