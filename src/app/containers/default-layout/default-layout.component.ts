@@ -35,12 +35,35 @@ export class DefaultLayoutComponent implements OnInit {
   count
   showbadge: boolean = false
   ngOnInit() {
+
     this.signalRService.startConnection();
-    this.signalRService.addTransferChartDataListener();
+
+    // this.signalRService.addTransferChartDataListener();
+    this.signalRService.hubConnection.on('RM', (data) => {
+      data = JSON.parse(data);
+      console.log(data);
+      this.Notfiactions.push(...data);
+      this.count = this.Notfiactions.length;
+      console.log(this.count);
+      if (this.count != 0) {
+        this.showbadge = true
+      }
+      else
+        this.showbadge = false
+      if (data.length != 0)
+        this.toasterService.pop('info', '', 'لديك ' + data.length + ' من الاشعارات الجديدة');
+    });
     setTimeout(() => {
       this.staticsService.GetNo().subscribe();
     }, 1000);
-    this.Notfiaction()
+
+    // setTimeout(() => {
+    //   this.staticsService.GetNo().subscribe(res=>{
+    //     this.Notfiaction()  
+    //   });
+
+    // }, 1000);
+
   }
 
   pageNumber = 1
@@ -57,26 +80,26 @@ export class DefaultLayoutComponent implements OnInit {
       return "rgb(233, 231, 231)"
     }
   }
-  Notfiaction() {
-    this.Notfiactions=[]
-    this.Notfiactions = this.signalRService.data
-    this.count = this.Notfiactions.length
-    if (this.count != 0) {
-      this.showbadge = true
-    }
-    else
-      this.showbadge = false
-      console.log(this.Notfiactions)
-  }
+  // Notfiaction() {
+  //   this.Notfiactions=[]
+  //   this.Notfiactions = this.signalRService.data
+  //   this.count = this.Notfiactions.length
+  //   if (this.count != 0) {
+  //     this.showbadge = true
+  //   }
+  //   else
+  //     this.showbadge = false
+  //     console.log(this.Notfiactions)
+  // }  
   getNotfiaction() {
-    this.Notfiaction()
+    // this.Notfiaction()
     this.SeeNotifaction()
   }
   SeeNotifaction() {
-    if (this.Notfiactions.length != 0)
-      this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.Id)).subscribe(res => {
-        this.signalRService.data=this.signalRService.data.filter(d=>this.Notfiactions.indexOf(d)>0)
-      })
+    // if (this.Notfiactions.length != 0)
+    //   this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.Id)).subscribe(res => {
+    //     this.signalRService.data = this.signalRService.data.filter(d => this.Notfiactions.indexOf(d) > 0)
+    //   })
   }
   totalItems
   paging: Paging = new Paging

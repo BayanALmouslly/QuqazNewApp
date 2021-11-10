@@ -9,7 +9,7 @@ export class SignalRService {
   controler = environment.baseUrl + "NotificationHub"
   // countdata:number
   data: any[]=[];
-  private hubConnection: signalR.HubConnection
+  public hubConnection: signalR.HubConnection
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('https://localhost:44333/NotificationHub', { accessTokenFactory: () => localStorage.getItem('token') })
