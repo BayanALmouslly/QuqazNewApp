@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { Notifcation } from '../../Models/notifcation.model';
 import { Paging } from '../../Models/paging';
 import { OrderService } from '../../services/order/order.service';
+import { SignalRService } from '../../services/signal-r.service';
 import { navItems } from '../../_nav';
 
 @Component({
@@ -17,7 +18,7 @@ export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
   constructor(private router: Router, private orderService: OrderService,
-    private toasterService: ToasterService,) { }
+    private toasterService: ToasterService,private SinglarService:SignalRService) { }
     titleAR=environment.appNameAR
     titleEN=environment.appNameEN
   toggleMinimize(e) {
@@ -31,26 +32,29 @@ export class DefaultLayoutComponent implements OnInit {
   count
   showbadge:boolean=false
   ngOnInit() {
-    this.orderService.NewNotfiaction().subscribe(res => {
-      if (res != 0) {
-        this.count = res
-        this.toasterService.pop('info', '', 'لديك ' + res + ' من الاشعارات');
-        this.showbadge=true
-      }
-    })
-    setInterval(() => {
-      this.orderService.NewNotfiaction().subscribe(res => {
-        if (res != 0 && this.count != res) {
-          this.toasterService.pop('info', '', 'لديك ' + res + ' من الاشعارات');
-          //  this.pageNumber=1
-          //  this.getNotfiaction()
-          this.showbadge=true
+    this.SinglarService.startConnection()
+    this.SinglarService.addTransferChartDataListener()
+    setInterval(() => { this.NewNotfiaction()}, 1000);
+    // this.orderService.NewNotfiaction().subscribe(res => {
+    //   if (res != 0) {
+    //     this.count = res
+    //     this.toasterService.pop('info', '', 'لديك ' + res + ' من الاشعارات');
+    //     this.showbadge=true
+    //   }
+    // })
+    // setInterval(() => {
+    //   this.orderService.NewNotfiaction().subscribe(res => {
+    //     if (res != 0 && this.count != res) {
+    //       this.toasterService.pop('info', '', 'لديك ' + res + ' من الاشعارات');
+    //       //  this.pageNumber=1
+    //       //  this.getNotfiaction()
+    //       this.showbadge=true
 
-        }
-        this.count = res
-        // console.log(res)
-      })
-    }, 5000);
+    //     }
+    //     this.count = res
+    //     // console.log(res)
+    //   })
+    // }, 5000);
   }
   pageNumber = 1
   Notfiactions: Notifcation[] = []
