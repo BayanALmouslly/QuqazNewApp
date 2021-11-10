@@ -7,7 +7,8 @@ import { environment } from '../../environments/environment';
 })
 export class SignalRService {
   controler = environment.baseUrl + "NotificationHub"
-  countdata:number
+  // countdata:number
+  data: any[];
   private hubConnection: signalR.HubConnection
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
@@ -20,12 +21,14 @@ export class SignalRService {
   }
   public addTransferChartDataListener = () => {
     this.hubConnection.on('RM', (data) => {
+      data = JSON.parse(data);
       // this.data = data;
-      // console.log(JSON.parse(data));
-      this.countdata=JSON.parse(data).length
-      // console.log(this.countdata)
-      this.toasterService.pop('info', '', 'لديك ' + this.countdata + ' من الاشعارات الجديدة');
+      console.log(data);
+      this.data.push(data);
+      // this.countdata=JSON.parse(data).length
+      // // console.log(this.countdata)
+      // this.toasterService.pop('info', '', 'لديك ' + this.countdata + ' من الاشعارات الجديدة');
     });
   }
-  constructor(  public toasterService: ToasterService) { }
+  constructor(public toasterService: ToasterService) { }
 }
