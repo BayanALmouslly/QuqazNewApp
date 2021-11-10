@@ -390,7 +390,7 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
-    this.getStatics()
+    this.getStatics() 
     this.staticsService.GetNo().subscribe();
   }
   getStatics() {

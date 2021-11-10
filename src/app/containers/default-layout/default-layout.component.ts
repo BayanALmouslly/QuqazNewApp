@@ -124,11 +124,11 @@ export class DefaultLayoutComponent implements OnInit {
   SeeNotifaction() {
     // console.log(this.Notfiactions.map(n => n.id))
     if (this.Notfiactions.length != 0)
-      this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
-        // this.NewNotfiaction()
-        // this.tempcount = this.count
-        // this.SinglarService.countdata=0
-      })
+      // this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
+      //   // this.NewNotfiaction()
+      //   // this.tempcount = this.count
+      //   // this.SinglarService.countdata=0
+      // })
   }
   totalItems
   paging: Paging = new Paging

@@ -83,11 +83,11 @@ export class OrderService {
     //   params = params.append("Page", paging.Page);
     return this.http.get<any>(this.controler + "Notifcation")
   }
-  SeeNotifaction(ids) {
-    // let params = new FormData();
-    // params.append('ids', ids);
-    return this.http.put(this.controler + "SeeNotifactions", ids)
-  }
+  // SeeNotifaction(ids) {
+  //   // let params = new FormData();
+  //   // params.append('ids', ids);
+  //   return this.http.put(this.controler + "SeeNotifactions", ids)
+  // }
   Delete(id){
     return this.http.delete(this.controler + id)
 
