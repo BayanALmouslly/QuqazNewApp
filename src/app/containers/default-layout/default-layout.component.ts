@@ -75,9 +75,7 @@ export class DefaultLayoutComponent implements OnInit {
   SeeNotifaction() {
     if (this.Notfiactions.length != 0)
       this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.Id)).subscribe(res => {
-        // this.Notfiaction()
-      
-       
+        this.signalRService.data=this.signalRService.data.filter(d=>this.Notfiactions.indexOf(d)>0)
       })
   }
   totalItems
