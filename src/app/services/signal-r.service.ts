@@ -12,7 +12,7 @@ export class SignalRService {
   public hubConnection: signalR.HubConnection
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:44333/NotificationHub', { accessTokenFactory: () => localStorage.getItem('token') })
+      .withUrl(this.controler, { accessTokenFactory: () => localStorage.getItem('token') })
       .build();
     this.hubConnection
       .start()
