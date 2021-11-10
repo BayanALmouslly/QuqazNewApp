@@ -36,7 +36,10 @@ export class DefaultLayoutComponent implements OnInit {
     this.SinglarService.addTransferChartDataListener()
     setInterval(() => {
       this.count = this.SinglarService.countdata
-      if (this.count != 0) this.showbadge = true
+      if (this.count != 0) {
+         this.showbadge = true 
+        
+        }
       // console.log(this.SinglarService.countdata)
     }, 0);
     // this.orderService.NewNotfiaction().subscribe(res => {
@@ -123,7 +126,8 @@ export class DefaultLayoutComponent implements OnInit {
     if (this.Notfiactions.length != 0)
       this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
         // this.NewNotfiaction()
-        this.tempcount = this.count
+        // this.tempcount = this.count
+        this.SinglarService.countdata=0
       })
   }
   totalItems
