@@ -58,6 +58,7 @@ export class DefaultLayoutComponent implements OnInit {
     }
   }
   Notfiaction() {
+    this.Notfiactions=[]
     this.Notfiactions = this.signalRService.data
     this.count = this.Notfiactions.length
     if (this.count != 0) {
@@ -65,6 +66,7 @@ export class DefaultLayoutComponent implements OnInit {
     }
     else
       this.showbadge = false
+      console.log(this.Notfiactions)
   }
   getNotfiaction() {
     this.Notfiaction()
@@ -74,7 +76,8 @@ export class DefaultLayoutComponent implements OnInit {
     if (this.Notfiactions.length != 0)
       this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.Id)).subscribe(res => {
         // this.Notfiaction()
-        this.Notfiactions=[]
+      
+       
       })
   }
   totalItems
