@@ -36,8 +36,6 @@ export class LoginComponent {
           this.user.expiry = new Date().getTime()
           localStorage.setItem('token', this.user.token)
           this.authService.setAuthenticatedUser(this.user);
-          this.signalRService.startConnection();
-          this.signalRService.addTransferChartDataListener();
           this.router.navigate(['/dashboard'])
           this.buttonDisabled = false
 

@@ -22,13 +22,11 @@ export class SignalRService {
   public addTransferChartDataListener = () => {
     this.hubConnection.on('RM', (data) => {
       data = JSON.parse(data);
-      // this.data = data;
-      console.log(data);
       data.forEach(element => {
         this.data.push(element)
       });
-      // this.countdata=JSON.parse(data).length
-      console.log(this.data)
+      // console.log(this.data)
+      if(data.length!=0)
       this.toasterService.pop('info', '', 'لديك ' + data.length + ' من الاشعارات الجديدة');
     });
   }

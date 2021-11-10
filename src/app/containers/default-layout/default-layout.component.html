@@ -37,14 +37,14 @@
         <div class="dropdown-header text-center"><strong>الاشعارات</strong></div>
     <li *ngFor="let Notfiaction of Notfiactions">
       <a class="dropdown-item" [ngStyle]="{'background':style(Notfiaction.isSeen)}">
-        <div *ngIf="Notfiaction.orderCount"> لديك
-          <strong>{{Notfiaction.orderCount}}</strong> من الطلبات
+        <div *ngIf="Notfiaction.OrderCount"> لديك
+          <strong>{{Notfiaction.OrderCount}}</strong> من الطلبات
         </div>
-        <small class="text-muted" *ngIf="Notfiaction.orderplaced||Notfiaction.monePlaced">
-          <i class="icon-location-pin"></i>{{Notfiaction.orderplaced?Notfiaction.orderplaced.name:''}}
-          {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
+        <small class="text-muted" *ngIf="Notfiaction.Orderplaced||Notfiaction.MonePlaced">
+          <i class="icon-location-pin"></i>{{Notfiaction.Orderplaced?Notfiaction.Orderplaced.name:''}}
+          {{Notfiaction.MonePlaced?' - '+Notfiaction.MonePlaced.name:''}} </small>
         <br>
-        <div>{{Notfiaction.note}}</div>
+        <div>{{Notfiaction.Note}}</div>
         
 
       </a>

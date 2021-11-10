@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { element } from 'protractor';
 import { environment } from '../../../environments/environment';
 import { Notifcation } from '../../Models/notifcation.model';
 import { Paging } from '../../Models/paging';
@@ -19,7 +20,7 @@ export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
   constructor(private router: Router, private orderService: OrderService,
-    private toasterService: ToasterService, private SinglarService: SignalRService,
+    private toasterService: ToasterService, private signalRService: SignalRService,
     private staticsService: StaticsService,) { }
   titleAR = environment.appNameAR
   titleEN = environment.appNameEN
@@ -34,12 +35,16 @@ export class DefaultLayoutComponent implements OnInit {
   count
   showbadge: boolean = false
   ngOnInit() {
-    this.staticsService.GetNo().subscribe();
-
+    this.signalRService.startConnection();
+    this.signalRService.addTransferChartDataListener();
+    setTimeout(() => {
+      this.staticsService.GetNo().subscribe();
+    }, 1000);
+    this.Notfiaction()
   }
 
   pageNumber = 1
-  Notfiactions: Notifcation[] = []
+  Notfiactions: any[] = []
   oldNotfiactions: Notifcation[] = []
 
   style(seen) {
@@ -52,12 +57,25 @@ export class DefaultLayoutComponent implements OnInit {
       return "rgb(233, 231, 231)"
     }
   }
+  Notfiaction() {
+    this.Notfiactions = this.signalRService.data
+    this.count = this.Notfiactions.length
+    console.log(this.count)
+    if (this.count != 0) {
+      this.showbadge = true
+    }
+    else
+      this.showbadge = false
+  }
   getNotfiaction() {
-    console.log(this.SinglarService.data)
+    this.Notfiaction()
+    this.SeeNotifaction()
   }
   SeeNotifaction() {
     if (this.Notfiactions.length != 0)
-      this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.id)).subscribe(res => {
+      this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.Id)).subscribe(res => {
+        // this.Notfiaction()
+        this.Notfiactions=[]
       })
   }
   totalItems
