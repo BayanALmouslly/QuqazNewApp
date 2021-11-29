@@ -40,9 +40,9 @@
         <div *ngIf="Notfiaction.OrderCount"> لديك
           <strong>{{Notfiaction.OrderCount}}</strong> من الطلبات
         </div>
-        <small class="text-muted" *ngIf="Notfiaction.Orderplaced||Notfiaction.MonePlaced">
-          <i class="icon-location-pin"></i>{{Notfiaction.Orderplaced?Notfiaction.Orderplaced.name:''}}
-          {{Notfiaction.MonePlaced?' - '+Notfiaction.MonePlaced.name:''}} </small>
+        <small class="text-muted" *ngIf="Notfiaction.OrderPlaced||Notfiaction.MoneyPlaced">
+          <i class="icon-location-pin"></i>{{Notfiaction.OrderPlaced?Notfiaction.OrderPlaced.name:''}}
+          {{Notfiaction.MoneyPlaced?' - '+Notfiaction.MoneyPlaced.name:''}} </small>
         <br>
         <div>{{Notfiaction.Note}}</div>
         

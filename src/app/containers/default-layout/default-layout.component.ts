@@ -42,7 +42,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.signalRService.hubConnection.on('RM', (data) => {
       data = JSON.parse(data);
       console.log(data);
-      this.Notfiactions.push(...data);
+      this.Notfiactions=[...data.notifications];
       this.count = this.Notfiactions.length;
       console.log(this.count);
       if (this.count != 0) {
