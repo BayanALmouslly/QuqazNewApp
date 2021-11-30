@@ -25,8 +25,9 @@ export class SignalRService {
       data.forEach(element => {
         this.data.push(element)
       });
-      if(data.length!=0)
-      this.toasterService.pop('info', '', 'لديك ' + data.notifications.length + ' من الاشعارات الجديدة');
+      // if(data&&data.length!=0)
+      // this.toasterService.pop('info', '', 'لديك ' + data.length + ' من الاشعارات الجديدة');
+      // console.log(this.data)
     });
   }
   constructor(public toasterService: ToasterService) { }

@@ -21,6 +21,7 @@
 }
 .scroll {
   overflow-y: scroll;
+  // overflow-x: hidden;
   height: 500px;
   width:300px;
   word-wrap:break-word
@@ -130,4 +131,7 @@ color: #4c4c4c;
   animation-delay: 0.2s;
 }
 
-
+.dropdown-item{
+  padding: 10px;
+    word-wrap: break-word;
+}

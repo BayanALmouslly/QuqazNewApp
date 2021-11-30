@@ -41,17 +41,19 @@ export class DefaultLayoutComponent implements OnInit {
     // this.signalRService.addTransferChartDataListener();
     this.signalRService.hubConnection.on('RM', (data) => {
       data = JSON.parse(data);
-      console.log(data);
-      this.Notfiactions=[...data.notifications];
+      // console.log(data);
+      data.notifications.forEach(element => {
+        this.Notfiactions.push(element)
+      });
       this.count = this.Notfiactions.length;
-      console.log(this.count);
+      // console.log(this.count);
       if (this.count != 0) {
         this.showbadge = true
       }
       else
         this.showbadge = false
-      if (data.length != 0)
-        this.toasterService.pop('info', '', 'لديك ' + data.length + ' من الاشعارات الجديدة');
+      if (data.notifications.length > 0)
+        this.toasterService.pop('info', '', 'لديك ' + data.notifications.length + ' من الاشعارات الجديدة');
     });
     setTimeout(() => {
       this.staticsService.GetNo().subscribe();
@@ -96,10 +98,10 @@ export class DefaultLayoutComponent implements OnInit {
     this.SeeNotifaction()
   }
   SeeNotifaction() {
-    if (this.Notfiactions.length != 0)
-      this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.Id)).subscribe(res => {
-        this.signalRService.data = this.signalRService.data.filter(d => this.Notfiactions.indexOf(d) > 0)
-      })
+    // if (this.Notfiactions.length != 0)
+    //   this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.Id)).subscribe(res => {
+    //     this.signalRService.data = this.signalRService.data.filter(d => this.Notfiactions.indexOf(d) > 0)
+    //   })
   }
   totalItems
   paging: Paging = new Paging
