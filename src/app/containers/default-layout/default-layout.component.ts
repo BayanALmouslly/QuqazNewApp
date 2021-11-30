@@ -36,14 +36,40 @@ export class DefaultLayoutComponent implements OnInit {
   showbadge: boolean = false
   ngOnInit() {
 
-    this.signalRService.startConnection();
+    this.Notfiaction()
+    // setTimeout(() => {
+    //   this.staticsService.GetNo().subscribe(res=>{
+    //     this.Notfiaction()  
+    //   });
 
+    // }, 1000);
+
+  }
+
+  pageNumber = 1
+  Notfiactions: any[] = []
+  oldNotfiactions: Notifcation[] = []
+
+  style(seen) {
+    var color="white"
+    if (seen)
+    color="white"
+    else {
+      // setTimeout(() => {
+        color="rgb(233, 231, 231)"
+      // }, 1000);
+      // color="white"
+    }
+    return color
+  }
+  Notfiaction() {
+    this.signalRService.startConnection();
     // this.signalRService.addTransferChartDataListener();
     this.signalRService.hubConnection.on('RM', (data) => {
       data = JSON.parse(data);
-      // console.log(data);
+      console.log(data);
       data.notifications.forEach(element => {
-        this.Notfiactions.push(element)
+        this.Notfiactions.unshift(element)
       });
       this.count = this.Notfiactions.length;
       // console.log(this.count);
@@ -59,49 +85,21 @@ export class DefaultLayoutComponent implements OnInit {
       this.staticsService.GetNo().subscribe();
     }, 1000);
 
-    // setTimeout(() => {
-    //   this.staticsService.GetNo().subscribe(res=>{
-    //     this.Notfiaction()  
-    //   });
-
-    // }, 1000);
-
-  }
-
-  pageNumber = 1
-  Notfiactions: any[] = []
-  oldNotfiactions: Notifcation[] = []
-
-  style(seen) {
-    if (seen)
-      return "white"
-    else {
-      setTimeout(() => {
-        //  this.getNotfiaction()
-      }, 1000);
-      return "rgb(233, 231, 231)"
-    }
-  }
-  // Notfiaction() {
-  //   this.Notfiactions=[]
-  //   this.Notfiactions = this.signalRService.data
-  //   this.count = this.Notfiactions.length
-  //   if (this.count != 0) {
-  //     this.showbadge = true
-  //   }
-  //   else
-  //     this.showbadge = false
-  //     console.log(this.Notfiactions)
-  // }  
+  }  
   getNotfiaction() {
-    // this.Notfiaction()
     this.SeeNotifaction()
   }
   SeeNotifaction() {
-    // if (this.Notfiactions.length != 0)
-    //   this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.Id)).subscribe(res => {
-    //     this.signalRService.data = this.signalRService.data.filter(d => this.Notfiactions.indexOf(d) > 0)
-    //   })
+    if (this.Notfiactions.length != 0)
+      this.orderService.SeeNotifaction(this.Notfiactions.map(n => n.Id)).subscribe(res => {
+        // this.signalRService.data = this.signalRService.data.filter(d => this.Notfiactions.indexOf(d) > 0)
+        setTimeout(() => {
+          // this.Notfiactions=[]
+          this.Notfiactions.forEach(n=>{
+            n.IsSeen=true
+          })
+        }, 1000);
+      })
   }
   totalItems
   paging: Paging = new Paging
