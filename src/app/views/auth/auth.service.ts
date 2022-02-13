@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { from, Observable, of, Subscription } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { LocalStorageService } from './local-storage.service';
@@ -20,29 +20,32 @@ export interface IPasswordReset {
 }
 
 @Injectable({ providedIn: 'root' })
-export class AuthService implements OnDestroy{
+export class AuthService implements OnDestroy {
   private localStorageKey: string = 'kokazClient';
   private permissionlocalStorageKey: string = 'permissions';
   ngOnDestroy(): void {
   }
- 
-  constructor(private http:HttpClient,private localStorageService:LocalStorageService,
-    private rout:Router) {
-     // this.startTokenTimer()
-    }
-  baseUrl=environment.baseUrl+"api/";
-  signIn(user):Observable<any> {
-    return this.http.post(this.baseUrl+'ClientAuth',user) ;
+
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService,
+    private rout: Router) {
+    // this.startTokenTimer()
   }
- 
+  baseUrl = environment.baseUrl + "api/";
+  signIn(user): Observable<any> {
+    let headers = new HttpHeaders({
+      'app-v': '2'
+    });
+    return this.http.post(this.baseUrl + 'ClientAuth', user,{ headers: headers });
+  }
+
   signOut() {
     this.resetAuthenticated();
     localStorage.removeItem('token')
     localStorage.removeItem("kokazClient");
     //localStorage.clear();
-    this.rout.navigate(['/login']);  
+    this.rout.navigate(['/login']);
   }
- 
+
   public get authenticatedUser(): any {
     var auth: any = this.localStorageService.getItem(this.localStorageKey);
     if (Object.keys(auth).length === 0 && auth.constructor === Object) {
@@ -51,9 +54,9 @@ export class AuthService implements OnDestroy{
       return auth;
     }
   }
-  IsExpire(){
-    var user= this.authenticatedUser;
-    
+  IsExpire() {
+    var user = this.authenticatedUser;
+
   }
 
   register(credentials: ICreateCredentials) {
@@ -74,10 +77,10 @@ export class AuthService implements OnDestroy{
   private resetAuthenticated(): void {
     this.localStorageService.removeItem(this.localStorageKey);
   }
-   getUser() {
+  getUser() {
   }
-  setPermission(permission){
-    localStorage.setItem( this.permissionlocalStorageKey,JSON.stringify(permission));
+  setPermission(permission) {
+    localStorage.setItem(this.permissionlocalStorageKey, JSON.stringify(permission));
 
   }
   private getTokenRemainingTime() {
@@ -85,13 +88,13 @@ export class AuthService implements OnDestroy{
     if (!accessToken) {
       return 0;
     }
-    return  60 * 60 * 1000 *14
+    return 60 * 60 * 1000 * 14
   }
   public startTokenTimer() {
     const timeout = this.getTokenRemainingTime()
-  
-    setTimeout(() =>{alert('log out'); this.signOut();},  timeout)
-   
+
+    setTimeout(() => { alert('log out'); this.signOut(); }, timeout)
+
   }
- 
+
 }
