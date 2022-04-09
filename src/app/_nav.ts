@@ -68,6 +68,11 @@ export const navItems: INavData[] = [
     icon: 'icon-energy'
   },
   {
+    name: 'تحميل ملف',
+    url: '/upload/show',
+    icon: 'icon-layers'
+  },
+  {
     name: 'تسجيل خروج ',
     url: '/login',
     icon: 'icon-logout'

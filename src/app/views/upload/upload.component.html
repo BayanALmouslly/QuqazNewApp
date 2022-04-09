@@ -1,0 +1,19 @@
+<toaster-container></toaster-container>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-10 col-md-4">
+                <input type="file"
+                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    (change)="selectFile($event)" />
+            </div>
+
+            <div class="col-2">
+
+                <button class="btn btn-primary" *ngIf="canUpload" (click)="upload()">
+                    حفظ
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -92,6 +92,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/orders/orders.module').then(m => m.OrdersModule)
       },
       {
+        path: 'upload',
+        loadChildren: () => import('./views/upload/upload.module').then(m => m.UploadModule)
+      },
+      {
         path: 'profile',
         component: ProfileComponent,
         data: {
