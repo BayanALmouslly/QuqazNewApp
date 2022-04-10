@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ToasterService } from 'angular2-toaster';
-
+import * as XLSX from 'xlsx';
+import { UploadOrder } from '../../Models/upload-order.model';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -10,6 +11,7 @@ export class UploadComponent implements OnInit {
 
   constructor(private toasterService: ToasterService,) { }
   canUpload: boolean
+  src: string = "assets/img/brand/xls.png"
   ngOnInit(): void {
     this.dragAreaClass = "dragarea";
   }
@@ -57,6 +59,7 @@ export class UploadComponent implements OnInit {
   dragAreaClass: string;
   onFileChange(event: any) {
     let files: FileList = event.target.files;
+    this.addfile(event, 'click');
     this.saveFiles(files);
   }
 
@@ -77,8 +80,8 @@ export class UploadComponent implements OnInit {
     event.preventDefault();
   }
   @HostListener("drop", ["$event"]) onDrop(event: any) {
-    console.log(event)
-    this.dragAreaClass = "dragarea";
+    this.dragAreaClass = "droparea";
+    this.src = "assets/img/brand/excel.png"
     event.preventDefault();
     event.stopPropagation();
     if (event.dataTransfer.files) {
@@ -89,6 +92,7 @@ export class UploadComponent implements OnInit {
         return false;
       }
       else {
+        this.addfile(event, 'drop');
         this.saveFiles(files);
       }
 
@@ -104,7 +108,47 @@ export class UploadComponent implements OnInit {
     else {
       this.error = "";
       this.fileName = files[0].name + ""
+      this.dragAreaClass = "droparea";
+      this.src = "assets/img/brand/excel.png"
       console.log(files[0].size, files[0].name, files[0].type);
+    }
+  }
+  file
+  arrayBuffer
+  filelist: UploadOrder[] = []
+  addfile(event, name) {
+    if (name == 'click')
+      this.file = event.target.files[0];
+    else
+      this.file = event.dataTransfer.files[0];
+    let fileReader = new FileReader();
+    fileReader.readAsArrayBuffer(this.file);
+    fileReader.onload = (e) => {
+      this.arrayBuffer = fileReader.result;
+      var data = new Uint8Array(this.arrayBuffer);
+      var arr = new Array();
+      for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+      var bstr = arr.join("");
+      var workbook = XLSX.read(bstr, { type: "binary" });
+      var first_sheet_name = workbook.SheetNames[0];
+      var worksheet = workbook.Sheets[first_sheet_name];
+      this.filelist = []
+      this.filelist = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+      console.log(this.filelist)
+      this.ordersValidation()
+    }
+  }
+  ordersValidation() {
+    this.filelist.forEach(element => {
+      this.orderValidation(element);
+    });
+    if (this.filelist.map(o => o.ValidationError == true).length > 0) {
+      this.toasterService.pop('error', '', 'يوجد حقول مطلوبة لم يتم ادخالها');
+    }
+  }
+  orderValidation(order: UploadOrder) {
+    if (!order.Code || !order.CountryId || !order.Cost || order.RecipientPhones.length == 0 || !order.Address) {
+      order.ValidationError = true;
     }
   }
 }
