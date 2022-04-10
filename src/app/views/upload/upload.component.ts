@@ -54,6 +54,8 @@ export class UploadComponent implements OnInit {
     else {
       this.dragAreaClass = "dragarea";
       this.src = "assets/img/brand/xls.png"
+      this.filelist=[]
+      this.fileName=""
       return false;
     }
   }
