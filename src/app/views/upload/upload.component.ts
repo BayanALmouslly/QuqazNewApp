@@ -160,6 +160,7 @@ export class UploadComponent implements OnInit {
   }
   errors:string[]=[]
   UploadExcel(){
+    this.errors=[]
     this.orderService.UploadExcel(this.orderFile,new Date()).subscribe(res=>{
       this.toasterService.pop('success', '', 'تم تحميل الملف بنجاح');
       this.dragAreaClass = "dragarea";
