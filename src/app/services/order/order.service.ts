@@ -92,7 +92,10 @@ export class OrderService {
     return this.http.delete(this.controler + id)
   }
   UploadExcel(file, date) {
-    return this.http.post(this.controler + "UploadExcel", file, date)
+    let params = new FormData();
+    params.append("file", file);
+    params.append("dateTime", date);
+    return this.http.post(this.controler + "UploadExcel", params)
   }
   OrdersNeedToRevision() {
     return this.http.get<any>(this.controler + "OrdersNeedToRevision")
