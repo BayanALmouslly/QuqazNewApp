@@ -17,6 +17,7 @@
                     </td>
                     <td>{{order.recipientName}}</td>
                     <td>
+                        <h5>{{order.country}}</h5>
                         <ng-select appOnReturn [(ngModel)]="order.countryId" [ngModelOptions]="{standalone: true}"
                         [closeOnSelect]="true" name="Country" style="width:100%;margin: 1px;">
                         <ng-option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</ng-option>

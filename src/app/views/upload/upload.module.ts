@@ -5,6 +5,7 @@ import { UploadRoutingModule } from './upload-routing.module';
 import { UploadComponent } from './upload.component';
 import { ToasterModule } from 'angular2-toaster';
 import { ShowOrderFilesComponent } from './show-order-files/show-order-files.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ShowOrderFilesComponent } from './show-order-files/show-order-files.com
     CommonModule,
     UploadRoutingModule,
     ToasterModule.forRoot(),
+    NgSelectModule
   ]
 })
 export class UploadModule { }
