@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import * as XLSX from 'xlsx';
 import { UploadOrder } from '../../Models/upload-order.model';
@@ -11,7 +12,8 @@ import { OrderService } from '../../services/order/order.service';
 export class UploadComponent implements OnInit {
 
   constructor(private toasterService: ToasterService,
-    private orderService: OrderService) { }
+    private orderService: OrderService,
+    private router: Router) { }
   canUpload: boolean
   src: string = "assets/img/brand/xls.png"
   ngOnInit(): void {
@@ -114,7 +116,7 @@ export class UploadComponent implements OnInit {
     }
     else {
       this.error = "";
-      this.orderFile= files[0]
+      this.orderFile = files[0]
       this.fileName = files[0].name + ""
       this.dragAreaClass = "droparea";
       this.src = "assets/img/brand/excel.png"
@@ -158,18 +160,20 @@ export class UploadComponent implements OnInit {
       order.ValidationError = true;
     }
   }
-  errors:string[]=[]
-  UploadExcel(){
-    this.errors=[]
-    this.orderService.UploadExcel(this.orderFile,new Date()).subscribe(res=>{
-      this.toasterService.pop('success', '', 'تم تحميل الملف بنجاح');
-      this.dragAreaClass = "dragarea";
-      this.src = "assets/img/brand/xls.png"
-      this.filelist = []
-      this.fileName = ""
-    },err=>{
-      console.log(err)
-      this.errors=err.error
+  errors: string[] = []
+  UploadExcel() {
+    this.errors = []
+    this.orderService.UploadExcel(this.orderFile, new Date()).subscribe(res => {
+      if (res == true) {
+        this.router.navigate(['/upload/show'])
+        this.toasterService.pop('success', '', 'تم تحميل الملف بنجاح');
+        this.dragAreaClass = "dragarea";
+        this.src = "assets/img/brand/xls.png"
+        this.filelist = []
+        this.fileName = ""
+      }
+    }, err => {
+      this.errors = err.error
       // this.toasterService.pop('error', '', err.error);
     })
   }
