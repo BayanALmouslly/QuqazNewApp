@@ -29,7 +29,9 @@ export class ShowOrderFilesComponent implements OnInit {
       this.Countries = res
     })
   }
-  send(){
-
+  send() {
+    this.orderService.CorrectOrderCountry(this.filelist.map(f => f.code && f.countryId)).subscribe(res=>{
+      
+    })
   }
 }

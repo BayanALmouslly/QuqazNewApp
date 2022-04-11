@@ -100,5 +100,8 @@ export class OrderService {
   OrdersNeedToRevision() {
     return this.http.get<any>(this.controler + "OrdersNeedToRevision")
   }
+  CorrectOrderCountry(orders){
+    return this.http.put(this.controler + "CorrectOrderCountry", orders)
+  }
 }
 
