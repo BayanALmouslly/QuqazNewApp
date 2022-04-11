@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
@@ -163,7 +164,7 @@ export class UploadComponent implements OnInit {
   errors: string[] = []
   UploadExcel() {
     this.errors = []
-    this.orderService.UploadExcel(this.orderFile, new Date()).subscribe(res => {
+    this.orderService.UploadExcel(this.orderFile, formatDate(new Date() ,  'yyyy-MM-dd', 'en-US')).subscribe(res => {
       if (res == true) {
         this.router.navigate(['/upload/show'])
         this.toasterService.pop('success', '', 'تم تحميل الملف بنجاح');
