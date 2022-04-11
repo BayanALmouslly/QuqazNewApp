@@ -88,8 +88,20 @@ export class OrderService {
     // params.append('ids', ids);
     return this.http.put(this.controler + "SeeNotifactions", ids)
   }
-  Delete(id){
+  Delete(id) {
     return this.http.delete(this.controler + id)
-
+  }
+  UploadExcel(file, date) {
+    let params = new FormData();
+    params.append("file", file);
+    params.append("dateTime", date);
+    return this.http.post(this.controler + "UploadExcel", params)
+  }
+  OrdersNeedToRevision() {
+    return this.http.get<any>(this.controler + "OrdersNeedToRevision")
+  }
+  CorrectOrderCountry(orders){
+    return this.http.put(this.controler + "CorrectOrderCountry", orders)
   }
 }
+
