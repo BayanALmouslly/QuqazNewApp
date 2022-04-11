@@ -21,7 +21,6 @@ export class ShowOrderFilesComponent implements OnInit {
   get() {
     this.orderService.OrdersNeedToRevision().subscribe(res => {
       this.filelist = res
-      console.log(res)
     })
   }
   getCountries() {
@@ -30,11 +29,10 @@ export class ShowOrderFilesComponent implements OnInit {
     })
   }
   send() {
-
     var dto = this.filelist.map(t => ({ Key: t.id, Value: t.countryId }));
     dto = dto.filter(c => c.Value != null)
     this.orderService.CorrectOrderCountry(dto).subscribe(res => {
-      console.log(res);
+      this.get();
     });
   }
 }
