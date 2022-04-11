@@ -164,7 +164,9 @@ export class UploadComponent implements OnInit {
   errors: string[] = []
   UploadExcel() {
     this.errors = []
-    this.orderService.UploadExcel(this.orderFile, formatDate(new Date() ,  'yyyy-MM-dd', 'en-US')).subscribe(res => {
+    var d = formatDate(new Date() ,  'yyyy-MM-dd', 'en-US');
+    console.log(d);
+    this.orderService.UploadExcel(this.orderFile, d).subscribe(res => {
       if (res == true) {
         this.router.navigate(['/upload/show'])
         this.toasterService.pop('success', '', 'تم تحميل الملف بنجاح');
