@@ -30,8 +30,10 @@ export class ShowOrderFilesComponent implements OnInit {
     })
   }
   send() {
-    this.orderService.CorrectOrderCountry(this.filelist.map(f => f.code && f.countryId)).subscribe(res=>{
-      
-    })
+    
+    var dto=  this.filelist.map(t=>({Key:t.id,Value:t.countryId}));
+    this.orderService.CorrectOrderCountry(dto).subscribe(res=>{
+      console.log(res);
+    });
   }
 }
