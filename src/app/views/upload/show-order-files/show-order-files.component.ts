@@ -21,6 +21,7 @@ export class ShowOrderFilesComponent implements OnInit {
   get() {
     this.orderService.OrdersNeedToRevision().subscribe(res => {
       this.filelist = res
+      console.log(res)
     })
   }
   getCountries() {
@@ -28,7 +29,7 @@ export class ShowOrderFilesComponent implements OnInit {
       this.Countries = res
     })
   }
-  send(order){
+  send(){
 
   }
 }

@@ -1,23 +1,30 @@
 <div class="card">
     <div class="card-body">
-        <h3>تصحيح الملفات</h3>
+        <div class="row">
+            <div class="col-8">
+                <h3>تصحيح الملفات</h3>
+            </div>
+            <div class="col-4">
+                <button class="btn btn-primary" (click)="send()">ارسال</button>
+            </div>
+        </div>
         <table class="table">
             <thead class="table-info">
                 <th>الكود</th>
                 <th>اسم المستلم</th>
                 <th>المدينة </th>
+                <th>تأكيد المدينة </th>
                 <th>كلفة الطلب</th>
                 <th>عنوان المستلم</th>
                 <th>رقم الهاتف</th>
-                <th>ارسال</th>
             </thead>
             <tbody>
                 <tr *ngFor="let order of filelist">
                     <td>{{order.code}}
                     </td>
                     <td>{{order.recipientName}}</td>
+                    <td>{{order.country}}</td>
                     <td>
-                        <h5>{{order.country}}</h5>
                         <ng-select appOnReturn [(ngModel)]="order.countryId" [ngModelOptions]="{standalone: true}"
                         [closeOnSelect]="true" name="Country" style="width:100%;margin: 1px;">
                         <ng-option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</ng-option>
@@ -27,10 +34,7 @@
                     </td>
                     <td>{{order.address}}
                     </td>
-                    <td>{{order.recipientPhones}}
-                    </td>
-                    <td>
-                        <button class="btn btn-primary" (click)="send(order)">ارسال</button>
+                    <td>{{order.phone}}
                     </td>
                 </tr>
             </tbody>
