@@ -158,6 +158,7 @@ export class UploadComponent implements OnInit {
       order.ValidationError = true;
     }
   }
+  errors:string[]=[]
   UploadExcel(){
     this.orderService.UploadExcel(this.orderFile,new Date()).subscribe(res=>{
       this.toasterService.pop('success', '', 'تم تحميل الملف بنجاح');
@@ -166,7 +167,9 @@ export class UploadComponent implements OnInit {
       this.filelist = []
       this.fileName = ""
     },err=>{
-      this.toasterService.pop('error', '', err.message);
+      console.log(err)
+      this.errors=err.error
+      // this.toasterService.pop('error', '', err.error);
     })
   }
 }

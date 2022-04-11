@@ -55,6 +55,14 @@
         </div>
     </div>
 </div>
+<br>
+<div class="card error" *ngIf="errors.length>0">
+    <div class="card-body">
+        <ul>
+            <li *ngFor="let err of errors">{{err}}</li>
+        </ul>
+    </div>
+</div>
 <!-- <div class="card" *ngIf="filelist.length>0">
     <div class="card-body">
         <table class="table">
