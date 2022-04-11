@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../../services/order/order.service';
+import { SettingsService } from '../../../services/settings.service';
 
 @Component({
   selector: 'app-show-order-files',
@@ -8,14 +9,26 @@ import { OrderService } from '../../../services/order/order.service';
 })
 export class ShowOrderFilesComponent implements OnInit {
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService,
+    private settingservice: SettingsService,) { }
   filelist: any[] = []
+  Countries: any[] = []
+
   ngOnInit(): void {
     this.get()
+    this.getCountries()
   }
   get() {
     this.orderService.OrdersNeedToRevision().subscribe(res => {
       this.filelist = res
     })
+  }
+  getCountries() {
+    this.settingservice.Countries().subscribe(res => {
+      this.Countries = res
+    })
+  }
+  send(order){
+
   }
 }

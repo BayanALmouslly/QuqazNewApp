@@ -1,31 +1,35 @@
-<div class="card" *ngIf="filelist.length>0">
+<div class="card">
     <div class="card-body">
+        <h3>تصحيح الملفات</h3>
         <table class="table">
-            <thead>
+            <thead class="table-info">
                 <th>الكود</th>
                 <th>اسم المستلم</th>
                 <th>المدينة </th>
                 <th>كلفة الطلب</th>
                 <th>عنوان المستلم</th>
                 <th>رقم الهاتف</th>
+                <th>ارسال</th>
             </thead>
             <tbody>
                 <tr *ngFor="let order of filelist">
-                    <td>{{order.Code}}
-                        <h4 class="CRed" *ngIf="!order.Code">ـــــ</h4>
+                    <td>{{order.code}}
                     </td>
-                    <td>{{order.RecipientName}}</td>
-                    <td>{{order.CountryId}}
-                        <h4 class="CRed" *ngIf="!order.CountryId">ـــــ</h4>
+                    <td>{{order.recipientName}}</td>
+                    <td>
+                        <ng-select appOnReturn [(ngModel)]="order.countryId" [ngModelOptions]="{standalone: true}"
+                        [closeOnSelect]="true" name="Country" style="width:100%;margin: 1px;">
+                        <ng-option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</ng-option>
+                      </ng-select>
                     </td>
-                    <td>{{order.Cost}}
-                        <h4 class="CRed" *ngIf="!order.Cost">ـــــ</h4>
+                    <td>{{order.cost}}
                     </td>
-                    <td>{{order.Address}}
-                        <h4 class="CRed" *ngIf="!order.Address">ـــــ</h4>
+                    <td>{{order.address}}
                     </td>
-                    <td>{{order.RecipientPhones}}
-                        <h4 class="CRed" *ngIf="!order.RecipientPhones">ـــــ</h4>
+                    <td>{{order.recipientPhones}}
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" (click)="send(order)">ارسال</button>
                     </td>
                 </tr>
             </tbody>
