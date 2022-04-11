@@ -69,6 +69,11 @@ export const navItems: INavData[] = [
   },
   {
     name: 'تحميل ملف',
+    url: '/upload/add',
+    icon: 'icon-layers'
+  },
+  {
+    name: 'تصحيح الملفات',
     url: '/upload/show',
     icon: 'icon-layers'
   },

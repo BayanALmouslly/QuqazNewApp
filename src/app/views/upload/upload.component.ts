@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ToasterService } from 'angular2-toaster';
 import * as XLSX from 'xlsx';
 import { UploadOrder } from '../../Models/upload-order.model';
+import { OrderService } from '../../services/order/order.service';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -9,7 +10,8 @@ import { UploadOrder } from '../../Models/upload-order.model';
 })
 export class UploadComponent implements OnInit {
 
-  constructor(private toasterService: ToasterService,) { }
+  constructor(private toasterService: ToasterService,
+    private orderService: OrderService) { }
   canUpload: boolean
   src: string = "assets/img/brand/xls.png"
   ngOnInit(): void {
@@ -54,8 +56,8 @@ export class UploadComponent implements OnInit {
     else {
       this.dragAreaClass = "dragarea";
       this.src = "assets/img/brand/xls.png"
-      this.filelist=[]
-      this.fileName=""
+      this.filelist = []
+      this.fileName = ""
       return false;
     }
   }
@@ -103,6 +105,7 @@ export class UploadComponent implements OnInit {
     }
   }
   fileName: string = ""
+  orderFile
   saveFiles(files: FileList) {
 
     if (files.length > 1) {
@@ -111,10 +114,10 @@ export class UploadComponent implements OnInit {
     }
     else {
       this.error = "";
+      this.orderFile= files[0]
       this.fileName = files[0].name + ""
       this.dragAreaClass = "droparea";
       this.src = "assets/img/brand/excel.png"
-      console.log(files[0].size, files[0].name, files[0].type);
     }
   }
   file
@@ -138,8 +141,8 @@ export class UploadComponent implements OnInit {
       var worksheet = workbook.Sheets[first_sheet_name];
       this.filelist = []
       this.filelist = XLSX.utils.sheet_to_json(worksheet, { raw: true });
-      console.log(this.filelist)
-      this.ordersValidation()
+      // console.log(this.filelist)
+      // this.ordersValidation()
     }
   }
   ordersValidation() {
@@ -154,5 +157,16 @@ export class UploadComponent implements OnInit {
     if (!order.Code || !order.CountryId || !order.Cost || order.RecipientPhones.length == 0 || !order.Address) {
       order.ValidationError = true;
     }
+  }
+  UploadExcel(){
+    this.orderService.UploadExcel(this.orderFile,new Date()).subscribe(res=>{
+      this.toasterService.pop('success', '', 'تم تحميل الملف بنجاح');
+      this.dragAreaClass = "dragarea";
+      this.src = "assets/img/brand/xls.png"
+      this.filelist = []
+      this.fileName = ""
+    },err=>{
+      this.toasterService.pop('error', '', err.message);
+    })
   }
 }

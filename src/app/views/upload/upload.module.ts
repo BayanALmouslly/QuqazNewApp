@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { UploadRoutingModule } from './upload-routing.module';
 import { UploadComponent } from './upload.component';
 import { ToasterModule } from 'angular2-toaster';
+import { ShowOrderFilesComponent } from './show-order-files/show-order-files.component';
 
 
 @NgModule({
   declarations: [
-    UploadComponent
+    UploadComponent,
+    ShowOrderFilesComponent
   ],
   imports: [
     CommonModule,
