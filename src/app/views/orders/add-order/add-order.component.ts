@@ -166,12 +166,15 @@ export class AddOrderComponent implements OnInit {
       this.errorMessage = false
       this.GetSettings()
     }, err => {
-      err.error.messages.forEach(error => {
-        this.errors += error + " , ";
-      });
-      this.toasterService.pop('error', '', this.errors);
-      this.buttonDisabled = false
-      this.currency()
+      this.buttonDisabled = false;
+      this.currency();
+      if (err?.error?.messages) {
+        err.error.messages.forEach(error => {
+          this.errors += error + " , ";
+        });
+        this.toasterService.pop('error', '', this.errors);
+      }else
+      this.toasterService.pop('error', '','يجب التأكد من الحقول المدخلة');
     })
 
   }
