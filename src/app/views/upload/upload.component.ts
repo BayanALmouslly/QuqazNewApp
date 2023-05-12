@@ -165,7 +165,6 @@ export class UploadComponent implements OnInit {
   UploadExcel() {
     this.errors = []
     var d = formatDate(new Date() ,  'yyyy-MM-dd', 'en-US');
-    console.log(d);
     this.orderService.UploadExcel(this.orderFile, d).subscribe(res => {
       if (res == true) {
         this.router.navigate(['/upload/show'])
@@ -176,8 +175,7 @@ export class UploadComponent implements OnInit {
         this.fileName = ""
       }
     }, err => {
-      this.errors = err.error
-      // this.toasterService.pop('error', '', err.error);
+      this.errors =  err.error.errors;
     })
   }
 }

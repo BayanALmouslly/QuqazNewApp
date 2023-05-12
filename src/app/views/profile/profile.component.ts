@@ -30,13 +30,15 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.clientService.GetByToken().subscribe(res=>{
       this.user=res
-      this.tempName = this.user.name
-      this.tempUserName = this.user.userName
+      this.tempName = this.user?.name
+      this.tempUserName = this.user?.userName
+    },err=>{
+      this.toasterService.pop('error', 'Error', err.error.message)
     })
   }
   CheckUserName() {
-    if (this.user.userName == this.tempUserName) return
-    this.clientService.CheckUserName(this.user.userName).subscribe(res => {
+    if (this.user?.userName == this.tempUserName) return
+    this.clientService.CheckUserName(this.user?.userName).subscribe(res => {
       if (res) {
         this.errorUserName = true
       }
@@ -45,8 +47,8 @@ export class ProfileComponent implements OnInit {
     })
   }
   CheckName() {
-    if (this.user.name == this.tempName) return
-    this.clientService.CheckName(this.user.name).subscribe(res => {
+    if (this.user?.name == this.tempName) return
+    this.clientService.CheckName(this.user?.name).subscribe(res => {
       if (res) {
         this.errorName = true
       }
