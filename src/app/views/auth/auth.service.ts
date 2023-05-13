@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { from, Observable, of, Subscription } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { from, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { LocalStorageService } from './local-storage.service';
@@ -32,10 +32,7 @@ export class AuthService implements OnDestroy {
   }
   baseUrl = environment.baseUrl + "api/";
   signIn(user): Observable<any> {
-    let headers = new HttpHeaders({
-      'app-v': '2'
-    });
-    return this.http.post(this.baseUrl + 'ClientAuth', user,{ headers: headers });
+    return this.http.post(this.baseUrl + 'ClientAuth', user);
   }
 
   signOut() {

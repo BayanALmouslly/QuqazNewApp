@@ -1,10 +1,9 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgSelectComponent } from '@ng-select/ng-select';
 import { ToasterService } from 'angular2-toaster';
 import { IdAndName } from '../../../Models/id-and-name.model';
-import { AddOrder, OrderItem, orderTpye } from '../../../Models/order/add-order.model';
+import { AddOrder, OrderItem } from '../../../Models/order/add-order.model';
 import { OrderService } from '../../../services/order/order.service';
 import { SettingsService } from '../../../services/settings.service';
 import { UserLogin } from '../../auth/userlogin.model';
@@ -73,10 +72,6 @@ export class AddOrderComponent implements OnInit {
   }
   AddOrderItem() {
     if (!this.OrderItem.Count || !this.OrderItem.OrderTypeName) return
-    // console.log(this.OrderItem.OrderTypeName)
-    // if (this.OrderItem.OrderTypeName.label)
-    //   var orderTypeName = this.OrderItem.OrderTypeName.label;
-    // else
     var orderTypeName = this.OrderItem.OrderTypeName;
     var find = this.OrderTypes.find(o => o.name == orderTypeName)
     if (!find) {
@@ -94,7 +89,6 @@ export class AddOrderComponent implements OnInit {
     this.OrderItem = new OrderItem
   }
   RemoveOrderItem(order) {
-    // console.log(order)
     var find = this.OrderTypes.find(o => o.name == order.OrderTypeName)
     if (!find)
       this.OrderTypes.push({ name: order.OrderTypeName, id: order.OrderTypeId })
@@ -143,19 +137,19 @@ export class AddOrderComponent implements OnInit {
   onTrackBy(index) {
     return index;
   }
-  buttonDisabled=false
+  buttonDisabled = false
+  errors: string = "";
   AddOrder() {
-    this.buttonDisabled=true
+    this.buttonDisabled = true
     if (this.Phone && !this.errorPhone) {
       this.Order.RecipientPhones.push(this.Phone)
       this.Phone = ""
     }
-    // || !this.Order.RecipientName
     if (!this.Order.Code || this.Order.RecipientPhones.length == 0
       || !this.Order.Cost
       || !this.Order.CountryId || !this.Order.Address || this.codeError || this.errorPhone) {
       this.errorMessage = true
-      this.buttonDisabled=false
+      this.buttonDisabled = false
       return
     }
     else
@@ -163,23 +157,24 @@ export class AddOrderComponent implements OnInit {
     this.Order.Cost = this.Order.Cost.replace(/,/g, "") * 1;
     this.AddOrderItem()
     this.Order.Date = new Date
-    // console.log(this.Order);
     this.orderServies.Add(this.Order).subscribe(res => {
-      this.buttonDisabled=false
+      this.buttonDisabled = false
       this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
       this.Order = new AddOrder
       this.Order.RecipientPhones = []
       this.Order.OrderItem = []
       this.errorMessage = false
       this.GetSettings()
-      // this.router.navigate(['/orders/sendorder'])
     }, err => {
-      this.toasterService.pop('error', '', 'يجب ادخال جميع الحقول');
-      // console.log(err)
-      this.buttonDisabled=false
-      this.currency()
-      //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
-
+      this.buttonDisabled = false;
+      this.currency();
+      if (err?.error?.messages) {
+        err.error.messages.forEach(error => {
+          this.errors += error + " , ";
+        });
+        this.toasterService.pop('error', '', this.errors);
+      }else
+      this.toasterService.pop('error', '','يجب التأكد من الحقول المدخلة');
     })
 
   }
@@ -198,23 +193,16 @@ export class AddOrderComponent implements OnInit {
     this.Order.Cost = this.formattedAmount.split('.00')[0];
   }
   keyPressNumbers(event, cost) {
-    // console.log(cost)
-    // console.log("1")
     var charCode = (event.which) ? event.which : event.keyCode;
-    // console.log(charCode)
-
     if (charCode == 45 && cost == 0) {
-      // console.log("2")
       return true
     }
     else
       // Only Numbers 0-9
       if ((charCode < 48 || charCode > 57)) {
-        // console.log("3")
         event.preventDefault();
         return false;
       } else {
-        // console.log("4")
         return true;
       }
   }

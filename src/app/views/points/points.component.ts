@@ -41,7 +41,7 @@ export class PointsComponent implements OnInit {
   Rest: number = 0
   moneypoint(): number {
     var clientPoint = this.pointCount;
-    var lessOne = this.points[0].points;
+    var lessOne = this.points[0]?.points;
     this.money = 0;
     while (clientPoint > lessOne) {
       var lastPonit = this.points.filter(c => c.points <= clientPoint)[this.points.filter(c => c.points < clientPoint).length - 1];
