@@ -175,7 +175,7 @@ export class UploadComponent implements OnInit {
         this.fileName = ""
       }
     }, err => {
-      this.errors =  err.error;
+      this.errors =  err.error.errors;
     })
   }
 }
