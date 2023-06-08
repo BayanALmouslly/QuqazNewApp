@@ -2,7 +2,8 @@ export const environment = {
   production: true,
   // Quqaz
 
-  baseUrl: "https://backend.quqaz.com/",
+  // baseUrl: "https://backend.quqaz.com/",
+  baseUrl:"http://goldenwing-001-site2.etempurl.com/",
   appNameAR: "شركة القوقز للتوصيل السريع",
   appNameEN: "Quqaz",
   Address: "اربيل - قرب تقاطع كوك ايه",
