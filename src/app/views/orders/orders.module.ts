@@ -12,11 +12,21 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { NotificationsRoutingModule } from '../notifications/notifications-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
-import {ToasterModule} from 'angular2-toaster';
+import { ToasterModule } from 'angular2-toaster';
 import { SendordersComponent } from './sendorders/sendorders.component';
 import { PaymentOrdersComponent } from './payment-orders/payment-orders.component';
 import { ClientPrintComponent } from './client-print/client-print.component';
 import { PrintOrderComponent } from './print-order/print-order.component';
+import { InputTextModule } from 'primeng-lts/inputtext';
+import { CardModule } from 'primeng-lts/card';
+import { DropdownModule } from 'primeng-lts/dropdown';
+import { InputTextareaModule } from 'primeng-lts/inputtextarea';
+import { PanelModule } from 'primeng-lts/panel';
+import { DividerModule } from 'primeng-lts/divider';
+import { RadioButtonModule } from 'primeng-lts/radiobutton';
+import { TabMenuModule } from 'primeng-lts/tabmenu';
+import { CheckboxModule } from 'primeng-lts/checkbox';
+import { ButtonModule } from 'primeng-lts/button';
 
 @NgModule({
   declarations: [
@@ -40,7 +50,17 @@ import { PrintOrderComponent } from './print-order/print-order.component';
     AlertModule.forRoot(),
     NgSelectModule,
     ToasterModule.forRoot(),
+    InputTextModule,
+    CardModule,
+    DropdownModule,
+    InputTextareaModule,
+    PanelModule,
+    DividerModule,
+    RadioButtonModule,
+    TabMenuModule,
+    CheckboxModule,
+    ButtonModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers:[CurrencyPipe]
+  providers: [CurrencyPipe]
 })
 export class OrdersModule { }

@@ -1,0 +1,41 @@
+<div
+  class="flex flex-warp w-100 m-auto align-items-center justify-content-center"
+>
+  <p-card class="p-4 w-25rem">
+    <div class="flex flex-column justify-content-center">
+      <div class="flex justify-content-center input-lable text-lg mb-4">
+        القائمة السوداء
+      </div>
+      <div class="flex flex-column w-full mb-2 justify-content-center">
+        <span class="p-input-icon-right flex">
+          <i class="icon-search"></i>
+          <input
+            type="text"
+            pInputText
+            class="input-pn"
+            placeholder="  أدخل رقم الهاتف للبحث "
+          />
+        </span>
+      </div>
+      <div class="flex flex-column w-full justify-content-center">
+        <p-listbox
+          [options]="blackList"
+          [(ngModel)]="selectedNumber"
+          optionLabel="name"
+        >
+          <ng-template let-country pTemplate="item">
+            <div
+              class="flex flex-warp align-items-center"
+              style="direction: ltr !important"
+            >
+              <div class="flex">{{ country.name }}</div>
+              <div class="flex pr-3">
+                <i class="pi pi-phone input-lable"></i>
+              </div>
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
+    </div>
+  </p-card>
+</div>

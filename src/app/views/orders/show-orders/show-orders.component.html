@@ -1,132 +1,254 @@
-<div class="row">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <h1 class="card-title">الطلبات</h1>
-        <label>بحث على حسب </label>
-        <div class="row">
-          <div class="col-6 col-lg-4">
-            <div class="form-group">
-              <label for="cvv"></label>
-              <input type="text" class="form-control" (keyup)="GetOrders()" name="code" [(ngModel)]="orderFilter.Code"
-                placeholder="الكود">
+<div class="flex flex-warp w-100 justify-content-center">
+  <div class="flex">
+    <p-tabMenu [model]="items" [activeItem]="activeTab">
+      <ng-template pTemplate="item" let-item let-i="index">
+        {{ item.label }}
+      </ng-template>
+    </p-tabMenu>
+  </div>
+</div>
+<div *ngIf="activeTab?.label == 'الطلبات'">
+  <div class="grid mb-2">
+    <div class="p-col-12">
+      <p-panel
+        [toggleable]="true"
+        expandIcon="icon-arrow-down"
+        collapseIcon="icon-arrow-up"
+        [collapsed]="true"
+      >
+        <ng-template pTemplate="header"> بحث حسب </ng-template>
+
+        <div class="grid">
+          <div class="p-col-12 p-sm-12 p-md-6 p-lg-2">
+            <div class="form-group" style="width: 100%">
+              <input
+                type="text"
+                class="form-control p-w-full"
+                (keyup)="GetOrders()"
+                name="code"
+                [(ngModel)]="orderFilter.Code"
+                placeholder="الكود"
+              />
             </div>
           </div>
-          <div class="col-6 col-lg-4">
+          <div class="p-col-12 p-sm-12 p-md-6 p-lg-2">
             <div class="form-group">
-              <label for="cvv"></label>
-              <input type="text" class="form-control" (keyup)="GetOrders()" name="RecipientName"
-                [(ngModel)]="orderFilter.RecipientName" placeholder="اسم المستلم">
+              <input
+                type="text"
+                class="form-control"
+                (keyup)="GetOrders()"
+                name="RecipientName"
+                [(ngModel)]="orderFilter.RecipientName"
+                placeholder="اسم المستلم"
+              />
             </div>
           </div>
-          <div class="col-12 col-lg-4">
+          <div class="p-col-12 p-sm-12 p-md-6 p-lg-2">
             <div class="form-group">
-              <label for="cvv"></label>
-              <input type="text" class="form-control" maxlength="11"
+              <input
+                type="text"
+                class="form-control"
+                maxlength="11"
                 oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
-                (keyup)="GetOrders()" name="Phone" [(ngModel)]="orderFilter.Phone" placeholder="رقم الهاتف">
+                (keyup)="GetOrders()"
+                name="Phone"
+                [(ngModel)]="orderFilter.Phone"
+                placeholder="رقم الهاتف"
+              />
             </div>
           </div>
-
-          <div class="form-group col-6 col-lg-3">
-            <label for="ccmonth">حالة الشحنة</label>
-            <select class="form-control" (change)="GetOrders()" name="OrderplacedId"
-              [(ngModel)]="orderFilter.OrderplacedId">
-              <option *ngFor="let orderplace of OrderPlaced" [value]="orderplace.id">{{orderplace.name}}</option>
+          <div class="p-col-12 p-sm-12 p-md-6 p-lg-2">
+            <select
+              class="form-control p-w-full"
+              (change)="GetOrders()"
+              name="CountryId"
+              [(ngModel)]="orderFilter.CountryId"
+              placeholder="المدينة"
+            >
+              <option *ngFor="let Country of Countries" [value]="Country.id">
+                {{ Country.name }}
+              </option>
             </select>
           </div>
-          <div class="form-group col-6 col-lg-3">
-            <label for="ccyear">موقع المبلغ </label>
-            <select class="form-control" (change)="GetOrders()" name="MonePlacedId"
-              [(ngModel)]="orderFilter.MonePlacedId">
-              <option *ngFor="let moenyPlaced of MoenyPlaced" [value]="moenyPlaced.id">{{moenyPlaced.name}}</option>
+          <div class="p-col-12 p-sm-12 p-md-6 p-lg-2">
+            <select
+              class="form-control p-w-full"
+              (change)="GetOrders()"
+              name="RegionId"
+              [(ngModel)]="orderFilter.RegionId"
+              placeholder="المنطقة"
+            >
+              <option *ngFor="let Region of Regions" [value]="Region.id">
+                {{ Region.name }}
+              </option>
             </select>
           </div>
-
-          <div class="form-group col-6 col-lg-3">
-            <label for="ccmonth">المدينة</label>
-            <select class="form-control" (change)="GetOrders()" name="CountryId" [(ngModel)]="orderFilter.CountryId">
-              <option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</option>
-            </select>
-          </div>
-          <div class="form-group col-6 col-lg-3">
-            <label for="ccyear">المنطقة </label>
-            <select class="form-control" (change)="GetOrders()" name="RegionId" [(ngModel)]="orderFilter.RegionId">
-              <option *ngFor="let Region of Regions" [value]="Region.id">{{Region.name}}</option>
-            </select>
-          </div>
-          <!-- <div class="form-group col-12">
-            <label for="ccyear">الملاحظات </label>
-            <input type="text" class="form-control" (keyup)="GetOrders()" name="code"
-                [(ngModel)]="orderFilter.Note" placeholder="الكود">
-          </div> -->
         </div>
-      </div>
+        <p-divider></p-divider>
+        <div class="grid">
+          <label for="ccmonth" class="p-col-12">حالة الشحنة</label>
+
+          <div
+            *ngFor="let orderPlace of OrderPlaced"
+            class="p-col-12 p-sm-12 p-md-6 p-lg-2 p-field-checkbox"
+          >
+            <p-radioButton
+              [inputId]="orderPlace.id"
+              name="orderPlace"
+              [value]="orderPlace.id"
+              [(ngModel)]="orderFilter.OrderplacedId"
+              (onClick)="GetOrders()"
+              class="pr-2"
+            ></p-radioButton>
+            <label [for]="orderPlace.id">{{ orderPlace.name }}</label>
+          </div>
+        </div>
+        <p-divider></p-divider>
+        <div class="grid">
+          <label for="ccyear" class="p-col-12">موقع المبلغ </label>
+          <div
+            *ngFor="let orderPlace of MoenyPlaced"
+            class="p-col-12 p-sm-12 p-md-6 p-lg-2 p-field-checkbox"
+          >
+            <p-radioButton
+              [inputId]="orderPlace.id"
+              name="orderPlace"
+              [value]="orderPlace.id"
+              [(ngModel)]="orderFilter.MonePlacedId"
+              (onClick)="GetOrders()"
+              class="pr-2"
+            ></p-radioButton>
+            <label [for]="orderPlace.id">{{ orderPlace.name }}</label>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+    <div class="p-col-12"><p-divider></p-divider></div>
+  </div>
+  <div class="grid" style="text-align: center" data-aos="fade-up">
+    <div class="p-lg-4 mb-4" *ngFor="let order of orders">
+      <a class="w-full">
+        <p-card class="w-100">
+          <div class="flex flex-warp w-100">
+            <div class="flex m-2 align-items-center">
+              <div class="icon-circel">
+                <i class="icon-report-order"></i>
+              </div>
+            </div>
+            <div class="flex text-xs flex-column m-2">
+              <div class="flex mb-2">
+                <span class="font-bold">رقم الطلب</span>
+                : {{ order.code }}
+              </div>
+
+              <div class="flex mb-2 align-items-center">
+                <i class="pi pi-map-marker"></i>
+                {{ order.country ? order.country.name : null
+                }}{{ order.address ? " - " + order.address : null }}
+              </div>
+              <div class="flex align-items-center">
+                <i class="pi pi-user"></i>
+                {{ order.recipientName }}
+              </div>
+              <div
+                class="flex align-items-center"
+                *ngIf="order.recipientPhones && order.recipientPhones != ''"
+              >
+                <i class="pi pi-phone"></i>
+                {{ order.recipientPhones }}
+              </div>
+            </div>
+            <div class="flex text-left m-2 title font-bold">
+              {{ order.orderplaced.name }}
+              <!-- {{ " - " + order.monePlaced.name }} -->
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <div class="flex flex-row-reverse flex-wrap text-sm p-w-full">
+            <div class="flex align-items-center">
+              <div class="btn-review" (click)="edit(order)">
+                <i class="pi pi-eye"></i>
+                معاينة
+              </div>
+            </div>
+            <div
+              class="flex align-items-center mr-2"
+              *ngIf="order.clientPrintNumber"
+            >
+              <div
+                class="btn-download"
+                (click)="print(order.clientPrintNumber)"
+              >
+                <i class="pi pi-download"></i>
+                تنزيل التقرير
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap justify-content-center text-sm w-100 mt-2">
+            <div class="flex align-items-center justify-content-center">
+              <div
+                class="btn-download"
+                style="width: 17rem !important"
+                (click)="downloadReceipt(order.id)"
+              >
+                <i class="pi pi-download"></i>
+                تنزيل الوصل
+              </div>
+            </div>
+          </div>
+          <!-- <div class="text-value">
+            <i class="icon-social-dropbox h1"></i>
+            {{ order.code }}
+          </div>
+  
+          <br />
+          <div style="text-align: right" *ngIf="order.recipientName">
+            <i class="icon-user icons d-block">{{ order.recipientName }}</i>
+          </div>
+          <br />
+          <div style="text-align: right; direction: rtl">
+            <a *ngFor="let printnumber of order.clientPrint">
+              {{ printnumber.printNmber }}
+              {{ order.clientPrint.length > 1 ? " - " : "" }}
+            </a>
+            <i class="icon-printer" *ngIf="order.clientPrint.length != 0"></i>
+          </div>
+          <br />
+          <div style="text-align: right">
+            <i class="icon-phone icons d-block"> {{ order.recipientPhones }}</i>
+          </div>
+          <br />
+          <div style="text-align: center">
+            {{ order.orderplaced.name }} {{ " - " + order.monePlaced.name }}
+          </div>
+          <div class="chart-wrapper mt-3 mx-3" style="height: 70px">
+            <i class="icon-location-pin"></i>
+            {{ order.country ? order.country.name : null
+            }}{{ order.address ? " - " + order.address : null }}
+          </div> -->
+        </p-card>
+      </a>
+    </div>
+  </div>
+  <div class="flex flex-warp w-100 justify-content-center">
+    <div class="flex justify-content-center">
+      <pagination
+        [boundaryLinks]="showBoundaryLinks"
+        [directionLinks]="showDirectionLinks"
+        [firstText]="'الاول'"
+        [previousText]="'السابق'"
+        [nextText]="'التالي'"
+        [lastText]="'الاخير'"
+        [rotate]="true"
+        [totalItems]="totalItems"
+        [itemsPerPage]="4"
+        [maxSize]="1"
+        (pageChanged)="pageChanged($event)"
+      ></pagination>
     </div>
   </div>
 </div>
-<div class="row" style="text-align: center;" data-aos="fade-up">
 
-  <div class=" col-lg-3" *ngFor="let order of orders">
-    <a (click)="edit(order)">
-      <div class="card text-white bg-info" data-aos="zoom-in" data-aos-delay="100">
-        <div class="card-body pb-0">
-
-          <!-- <button type="button" class="btn btn-transparent p-0 float-right">
-              </button> -->
-          <div class="text-value">
-            <i class="icon-social-dropbox h1"></i>
-            {{order.code}}
-          </div>
-
-          <br>
-          <div style="text-align: right;" *ngIf="order.recipientName">
-            <i class="icon-user icons  d-block">{{order.recipientName}}</i>
-          </div>
-          <br>
-          <div style="text-align: right;direction: rtl;">
-            <a *ngFor="let printnumber of order.clientPrint">
-              {{printnumber.printNmber}} {{order.clientPrint.length>1?' - ':''}}
-            </a>
-            <i class="icon-printer" *ngIf="order.clientPrint.length!=0"></i>
-          </div>
-          <br>
-          <div style="text-align: right;">
-            <i class="icon-phone icons  d-block "> {{order.recipientPhones}}</i>
-          </div>
-          <br>
-          <div style="text-align: center;">
-            {{order.orderplaced.name}} {{" - "+order.monePlaced.name}}
-          </div>
-      
-        </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-          <i class="icon-location-pin"></i>
-          {{order.country?order.country.name:null}}{{order.address?" - "+order.address:null}}
-        </div>
-       
-      </div>
-    </a>
-  </div>
-
+<div *ngIf="activeTab?.label == 'الحسابات'">
+  <app-orders-report></app-orders-report>
 </div>
-<div class="row ">
-  <div class="col-5 ">
-    <pagination [boundaryLinks]="showBoundaryLinks" [directionLinks]="showDirectionLinks" [firstText]="'الاول'"
-      [previousText]="'السابق'" [nextText]="'التالي'" [lastText]="'الاخير'" [rotate]="true" [totalItems]="totalItems"
-      [itemsPerPage]="4" [maxSize]="1" (pageChanged)="pageChanged($event)"></pagination>
-  </div>
-</div>
-
-<!-- <div class="row">
-  <div class="col-xs-12 col-12">
-     <div class="content-wrapper">
-        <p class="content-item" *ngFor="let content of returnedArray">{{content}}</p>
-     </div>
-     <pagination [boundaryLinks]="showBoundaryLinks" 
-        [directionLinks]="showDirectionLinks" 
-        [totalItems]="contentArray.length"
-        [itemsPerPage]="5"
-        (pageChanged)="pageChanged($event)"></pagination>
-  </div>
-</div> -->

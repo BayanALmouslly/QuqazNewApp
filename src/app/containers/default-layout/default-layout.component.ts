@@ -1,8 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
-import { PageChangedEvent } from 'ngx-bootstrap/pagination';
-import { element } from 'protractor';
 import { environment } from '../../../environments/environment';
 import { Notifcation } from '../../Models/notifcation.model';
 import { Paging } from '../../Models/paging';
@@ -33,7 +31,8 @@ export class DefaultLayoutComponent implements OnInit {
   @ViewChild('navdrop') navdrop: ElementRef;
 
   count
-  showbadge: boolean = false
+  showbadge: boolean = false;
+  display: boolean;
   ngOnInit() {
 
     this.Notfiaction()
@@ -51,12 +50,12 @@ export class DefaultLayoutComponent implements OnInit {
   oldNotfiactions: Notifcation[] = []
 
   style(seen) {
-    var color="white"
+    var color = "white"
     if (seen)
-    color="white"
+      color = "white"
     else {
       // setTimeout(() => {
-        color="rgb(233, 231, 231)"
+      color = "rgb(233, 231, 231)"
       // }, 1000);
       // color="white"
     }
@@ -85,9 +84,10 @@ export class DefaultLayoutComponent implements OnInit {
       this.staticsService.GetNo().subscribe();
     }, 1000);
 
-  }  
+  }
   getNotfiaction() {
-    this.SeeNotifaction()
+    this.SeeNotifaction();
+    this.display = true;
   }
   SeeNotifaction() {
     if (this.Notfiactions.length != 0)
@@ -95,8 +95,8 @@ export class DefaultLayoutComponent implements OnInit {
         // this.signalRService.data = this.signalRService.data.filter(d => this.Notfiactions.indexOf(d) > 0)
         setTimeout(() => {
           // this.Notfiactions=[]
-          this.Notfiactions.forEach(n=>{
-            n.IsSeen=true
+          this.Notfiactions.forEach(n => {
+            n.IsSeen = true
           })
         }, 1000);
       })
