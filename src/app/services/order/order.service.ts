@@ -44,23 +44,19 @@ export class OrderService {
     // formData.append("code", code);
     return this.http.get(this.controler + "codeExist?code=" + code)
   }
-  NonSendOrder() {
-    return this.http.get<any>(this.controler + "NonSendOrder")
-  }
-  Sned(ids) {
-    return this.http.post(this.controler + "Sned", ids)
-  }
-  OrdersDontFinished(orderDontFinishFilter: OrderDontFinishFilter) {
+  NonSendOrder(paging) {
     let params = new HttpParams();
-    params = params.append("IsClientDeleviredMoney", orderDontFinishFilter.IsClientDeleviredMoney);
-    params = params.append("ClientDoNotDeleviredMoney", orderDontFinishFilter.ClientDoNotDeleviredMoney);
-    let index = 0
-    orderDontFinishFilter.OrderPlacedId.forEach(element => {
-      var key = "OrderPlacedId[" + index + "]"
-      params = params.append(key, element);
-      index++;
-    });
-    return this.http.get(this.controler + "OrdersDontFinished", { params: params })
+    if (paging.RowCount != undefined || paging.RowCount != null)
+      params = params.append("RowCount", paging.RowCount);
+    if (paging.Page != undefined || paging.Page != null)
+      params = params.append("Page", paging.Page);
+    return this.http.get<any>(this.controler + "NonSendOrder", { params: params })
+  }
+  Send(ids) {
+    return this.http.post(this.controler + "Send", { ids: ids })
+  }
+  OrdersDontFinished(orderDontFinishFilter: OrderDontFinishFilter, paging) {
+    return this.http.post<any>(this.controler + `OrdersDontFinished?Page=${paging.Page}&RowCount=${paging.RowCount}`, orderDontFinishFilter)
   }
   UnPaidRecipt() {
     return this.http.get<any>(this.controler + "UnPaidRecipt")
@@ -100,8 +96,20 @@ export class OrderService {
   OrdersNeedToRevision() {
     return this.http.get<any>(this.controler + "OrdersNeedToRevision")
   }
-  CorrectOrderCountry(orders){
+  CorrectOrderCountry(orders) {
     return this.http.put(this.controler + "CorrectOrderCountry", orders)
+  }
+  DownloadReceipt(orderId) {
+    const httpOptions = {
+      responseType: 'blob' as 'json'
+    };
+    return this.http.get<any>(this.controler + "DownloadReceipt/" + orderId, httpOptions);
+  }
+  DownloadOrdersDontFinished(parametars) {
+    const httpOptions = {
+      responseType: 'blob' as 'json'
+    };
+    return this.http.post<any>(this.controler + "DownloadOrdersDontFinished", parametars, httpOptions);
   }
 }
 

@@ -143,9 +143,9 @@ export class AddOrderComponent implements OnInit {
   onTrackBy(index) {
     return index;
   }
-  buttonDisabled=false
+  buttonDisabled = false
   AddOrder() {
-    this.buttonDisabled=true
+    this.buttonDisabled = true
     if (this.Phone && !this.errorPhone) {
       this.Order.RecipientPhones.push(this.Phone)
       this.Phone = ""
@@ -155,7 +155,7 @@ export class AddOrderComponent implements OnInit {
       || !this.Order.Cost
       || !this.Order.CountryId || !this.Order.Address || this.codeError || this.errorPhone) {
       this.errorMessage = true
-      this.buttonDisabled=false
+      this.buttonDisabled = false
       return
     }
     else
@@ -165,7 +165,7 @@ export class AddOrderComponent implements OnInit {
     this.Order.Date = new Date
     // console.log(this.Order);
     this.orderServies.Add(this.Order).subscribe(res => {
-      this.buttonDisabled=false
+      this.buttonDisabled = false
       this.toasterService.pop('success', '', 'تمت اضافة الطلب بنجاح');
       this.Order = new AddOrder
       this.Order.RecipientPhones = []
@@ -176,7 +176,7 @@ export class AddOrderComponent implements OnInit {
     }, err => {
       this.toasterService.pop('error', '', 'يجب ادخال جميع الحقول');
       // console.log(err)
-      this.buttonDisabled=false
+      this.buttonDisabled = false
       this.currency()
       //this.toasterService.pop('error', '',"اسم المستخدم او كلمة المرور غير صحيحة");
 
@@ -198,23 +198,16 @@ export class AddOrderComponent implements OnInit {
     this.Order.Cost = this.formattedAmount.split('.00')[0];
   }
   keyPressNumbers(event, cost) {
-    // console.log(cost)
-    // console.log("1")
     var charCode = (event.which) ? event.which : event.keyCode;
-    // console.log(charCode)
-
     if (charCode == 45 && cost == 0) {
-      // console.log("2")
       return true
     }
     else
       // Only Numbers 0-9
       if ((charCode < 48 || charCode > 57)) {
-        // console.log("3")
         event.preventDefault();
         return false;
       } else {
-        // console.log("4")
         return true;
       }
   }

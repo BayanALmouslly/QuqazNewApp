@@ -11,7 +11,8 @@ import { LoginComponent } from './views/login/login.component';
 import { PointsComponent } from './views/points/points.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { RegisterComponent } from './views/register/register.component';
-const title=environment.appNameAR
+import { BlackListComponent } from './views/black-list/black-list.component';
+const title = environment.appNameAR
 export const routes: Routes = [
   {
     path: '',
@@ -39,7 +40,7 @@ export const routes: Routes = [
       title: 'تسجيل الدخول'
     }
   },
-  
+
   {
     path: 'register',
     component: RegisterComponent,
@@ -99,7 +100,14 @@ export const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
         data: {
-          title: 'معلومات شخصية'
+          title: ' حسابي'
+        }
+      },
+      {
+        path: 'black-list',
+        component: BlackListComponent,
+        data: {
+          title: 'القائمة السوداء'
         }
       },
       {
@@ -115,7 +123,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

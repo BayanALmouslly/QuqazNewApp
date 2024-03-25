@@ -22,6 +22,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { TagModule } from 'primeng-lts/tag';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -50,6 +51,15 @@ import { ToasterModule } from 'angular2-toaster';
 import { ProfileComponent } from './views/profile/profile.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PointsComponent } from './views/points/points.component';
+import { InputTextModule } from 'primeng-lts/inputtext';
+import { ButtonModule } from 'primeng-lts/button';
+import { CheckboxModule } from 'primeng-lts/checkbox';
+import { SidebarModule } from 'primeng-lts/sidebar';
+import { CardModule } from 'primeng-lts/card';
+import { PasswordModule } from 'primeng-lts/password';
+import { BlackListComponent } from './views/black-list/black-list.component';
+import { ListboxModule } from 'primeng-lts/listbox';
+import { DividerModule } from 'primeng-lts/divider';
 
 @NgModule({
   imports: [
@@ -72,8 +82,15 @@ import { PointsComponent } from './views/points/points.component';
     ReactiveFormsModule,
     ToasterModule.forRoot(),
     ModalModule.forRoot(),
-
-
+    InputTextModule,
+    ButtonModule,
+    CheckboxModule,
+    TagModule,
+    SidebarModule,
+    CardModule,
+    PasswordModule,
+    ListboxModule,
+    DividerModule
   ],
   declarations: [
     AppComponent,
@@ -83,7 +100,8 @@ import { PointsComponent } from './views/points/points.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    PointsComponent
+    PointsComponent,
+    BlackListComponent
   ],
   providers: [
     {

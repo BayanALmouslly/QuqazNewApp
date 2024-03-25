@@ -1,109 +1,198 @@
 <div class="row">
-    <div class="col-lg-4 mx-auto">
+  <div class="col-lg-4 mx-auto">
+    <!-- <div class="card-box">
+      <li
+        class="icon-pencil d-block"
+        *ngIf="!showEdit"
+        (click)="CanEdit()"
+      ></li>
+      <li class="fa fa-bookmark" *ngIf="showEdit" (click)="saveEdit()"></li>
 
-        <div class=" card-box ">
-            <li class="icon-pencil d-block" *ngIf="!showEdit" (click)="CanEdit()"></li>
-            <li class="fa fa-bookmark" *ngIf="showEdit" (click)="saveEdit()"></li>
+      <div class="text-center member-card pt-2 pb-2" *ngIf="user">
+        <div class="thumb-lg member-thumb mx-auto">
+          <img
+            src="assets/img/brand/user.png"
+            class="rounded-circle img-thumbnail"
+            alt="profile-image"
+          />
+        </div>
+        <div class="" *ngIf="!showEdit">
+          <h4>{{ user?.name }}</h4>
+          <p class="text-muted">
+            <i class="icon-user icons d-block mt-4">
+              <span>| </span>
+              <span
+                ><a class="text-info">{{ user?.userName }}</a></span
+              >
+            </i>
+          </p>
+          <p class="text-muted" *ngIf="user.mail">
+            <i class="icon-envelope icons d-block mt-4">
+              <span>| </span>
+              <span
+                ><a class="text-info">{{ user.mail }}</a></span
+              >
+            </i>
+          </p>
+          <p class="text-muted" *ngFor="let phone of user.phones">
+            <li class="icon icon-phone d-block">
+              <span>| </span>
+              <span
+                ><a class="text-info">{{ phone.phone }}</a></span
+              >
+            </li>
+          </p>
+          <p class="text-muted" *ngIf="user.address != ' ' && user.address">
+            <li class="icon icon-location-pin d-block">
+              <span>| </span>
+              <span
+                ><a class="text-info"
+                  >{{ user.address
+                  }}{{ user.country ? "-" + user.country.name : null }}</a
+                ></span
+              >
+            </li>
+          </p>
+        </div>
+        <div class="row" *ngIf="showEdit">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-pencil"></i></span>
+            </div>
+            <input
+              type="text"
+              name="code"
+              [(ngModel)]="user.name"
+              class="form-control"
+              placeholder="الاسم "
+              required
+              maxlength="50"
+              (ngModelChange)="CheckName()"
+            />
+          </div>
+          <small style="color: red" *ngIf="errorName">الاسم مكرر</small><br />
+          <small style="color: red" *ngIf="!user.name && errorRequierd"
+            >الاسم حقل مطلوب</small
+          >
 
-            <div class="text-center member-card pt-2 pb-2">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-user"></i></span>
+            </div>
+            <input
+              type="text"
+              name="code"
+              [(ngModel)]="user.userName"
+              class="form-control"
+              (keypress)="keyPressNumbers($event)"
+              placeholder="اسم المستخدم "
+              required
+              maxlength="50"
+              (ngModelChange)="CheckUserName()"
+            />
+          </div>
+          <small style="color: red" *ngIf="errorUserName"
+            >اسم المستخدم مكرر</small
+          ><br />
+          <small style="color: red" *ngIf="!user.userName && errorRequierd"
+            >اسم المستخدم حقل مطلوب</small
+          >
 
-                <div class="thumb-lg member-thumb mx-auto"><img src="assets/img/brand/user.png"
-                        class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                <div class="" *ngIf="!showEdit">
-                    <h4>{{user.name}}</h4>   
-                    <p class="text-muted" >
-                        <i class="icon-user icons  d-block mt-4"> <span>| </span>
-                        <span><a  class="text-info">{{user.userName}}</a></span>
-                    </i>
-                    </p>
-                    <p class="text-muted" *ngIf="user.mail">
-                        <i class="icon-envelope icons  d-block mt-4"> <span>| </span>
-                        <span><a  class="text-info">{{user.mail}}</a></span>
-                    </i>
-                    </p>
-                    <p class="text-muted" *ngFor="let phone of user.phones">
-                        <li class="icon icon-phone d-block"> <span>| </span>
-                            <span><a  class="text-info">{{phone.phone}}</a></span>
-                        </li>
-                    </p>
-                    <p class="text-muted" *ngIf="user.address!=' '&&user.address">
-                        <li class="icon icon-location-pin d-block"> <span>| </span>
-                            <span><a class="text-info">{{user.address}}{{user.country?'-'+user.country.name:null}}</a></span>
-                        </li>
-                    </p>
-                </div>
-                <div class="row" *ngIf="showEdit">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-pencil"></i></span>
-                        </div>
-                        <input type="text" name="code" [(ngModel)]="user.name" class="form-control"
-                            placeholder="الاسم " required maxlength="50" (ngModelChange)="CheckName()">
-                    </div>
-                    <small style="color: red;" *ngIf="errorName">الاسم مكرر</small><br>
-                    <small style="color: red;" *ngIf="!user.name&&errorRequierd">الاسم حقل مطلوب</small>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">@</span>
+            </div>
+            <input
+              type="email"
+              name="mail"
+              [(ngModel)]="user.mail"
+              class="form-control"
+              placeholder="الايميل  "
+              required
+            />
+          </div>
 
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-user"></i></span>
-                        </div>
-                        <input type="text" name="code" [(ngModel)]="user.userName" class="form-control"(keypress)="keyPressNumbers($event)"
-                            placeholder="اسم المستخدم " required maxlength="50" (ngModelChange)="CheckUserName()">
-                    </div>
-                    <small style="color: red;" *ngIf="errorUserName">اسم المستخدم مكرر</small><br>
-                    <small style="color: red;" *ngIf="!user.userName&&errorRequierd">اسم المستخدم حقل مطلوب</small>
+          <ng-container
+            *ngFor="
+              let phones of user.phones;
+              let i = index;
+              trackBy: onTrackBy
+            "
+          >
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-phone"></i></span>
+              </div>
+              <input
+                type="text"
+                name="phones+{{ i }}"
+                [(ngModel)]="user.phones[i].phone"
+                maxlength="11"
+                oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
+                class="form-control"
+                placeholder=" رقم هاتف"
+                (keyup)="checkphone(user.phones[i], i)"
+                required
+              />
+              <a class="btn btn-info" (click)="RemovePhone(phones)">x </a>
+            </div>
+          </ng-container>
 
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">@</span>
-                        </div>
-                        <input type="email" name="mail" [(ngModel)]="user.mail" class="form-control"
-                            placeholder="الايميل  " required>
-                    </div>
-
-                  
-                    <ng-container *ngFor="let phones of user.phones;let i=index;trackBy: onTrackBy">
-                        <div class="input-group mb-4">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-phone"></i></span>
-                          </div>
-                          <input type="text" name="phones+{{i}}" [(ngModel)]="user.phones[i].phone" maxlength="11"
-                            oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
-                            class="form-control" placeholder=" رقم هاتف" (keyup)="checkphone(user.phones[i],i)" required>
-                            <a class="btn btn-info" (click)="RemovePhone(phones)">x </a>
-            
-                        </div>
-                      </ng-container>
-            
-                      <div class="input-group mb-4">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="icon-phone"></i></span>
-                        </div>
-                        <input type="text" name="RecipientPhones" [(ngModel)]="Phone" maxlength="11"
-                          oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" class="form-control"
-                          placeholder=" رقم هاتف جديد" required (keyup)="checkphone(Phone)">
-                        <a class="btn btn-info" (click)="AddPhone()">+ </a>
-                      </div>
-                      <small *ngIf="!Phone&&user.phones.length==0&&errorRequierd">رقم الهاتف حقل مطلوب</small>
-                      <small *ngIf="errorPhone">يجب ان يكون رقم الهاتف 11 حقل</small>
-                      <small *ngIf="errorRepeatPhone">رقم الهاتف مكرر</small>
-                    <div class="input-group mb-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-lock"></i></span>
-                        </div>
-                        <input type="password" class="form-control" placeholder="كلمة المرور الجديدة" name="Password"
-                            autocomplete="current-password" [(ngModel)]="user.password" required autocomplete="off">
-                    </div>
-                    <div class="input-group mb-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-lock"></i></span>
-                        </div>
-                        <input type="password" class="form-control" placeholder=" تأكيد كلمة المرور " name="Password"
-                            autocomplete="current-password" [(ngModel)]="tempPassword" required autocomplete="off">
-                    </div>
-                </div>
-                <small *ngIf="errorPassword">كلمة المرور غير مطابقة</small>
-                <!-- <ul class="social-links list-inline">
+          <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-phone"></i></span>
+            </div>
+            <input
+              type="text"
+              name="RecipientPhones"
+              [(ngModel)]="Phone"
+              maxlength="11"
+              oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
+              class="form-control"
+              placeholder=" رقم هاتف جديد"
+              required
+              (keyup)="checkphone(Phone)"
+            />
+            <a class="btn btn-info" (click)="AddPhone()">+ </a>
+          </div>
+          <small *ngIf="!Phone && user.phones.length == 0 && errorRequierd"
+            >رقم الهاتف حقل مطلوب</small
+          >
+          <small *ngIf="errorPhone">يجب ان يكون رقم الهاتف 11 حقل</small>
+          <small *ngIf="errorRepeatPhone">رقم الهاتف مكرر</small>
+          <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-lock"></i></span>
+            </div>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="كلمة المرور الجديدة"
+              name="Password"
+              autocomplete="current-password"
+              [(ngModel)]="user.password"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-lock"></i></span>
+            </div>
+            <input
+              type="password"
+              class="form-control"
+              placeholder=" تأكيد كلمة المرور "
+              name="Password"
+              autocomplete="current-password"
+              [(ngModel)]="tempPassword"
+              required
+              autocomplete="off"
+            />
+          </div>
+        </div>
+        <small *ngIf="errorPassword">كلمة المرور غير مطابقة</small>
+        <!-- <ul class="social-links list-inline">
                     <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
                             href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
                     <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
@@ -112,7 +201,7 @@
                             href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
                 </ul> -->
 
-                <!-- <div class="mt-4">
+    <!-- <div class="mt-4">
                     <div class="row">
                         <div class="col-4">
                             <div class="mt-3">
@@ -133,32 +222,143 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
-            </div>
+                </div> 
+      </div>
+    </div> -->
+    <div
+      bsModal
+      #infoModal="bs-modal"
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-info" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">طلب تعديل</h4>
+            <button
+              type="button"
+              class="close"
+              (click)="infoModal.hide()"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            يجب موافق ادارة الموقع للسماح بتعديل معلوماتك
+            <a class="text-pink">طلب تعديل</a> لتعديل معلوماتك يرجى الضغط على
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="infoModal.hide()"
+            >
+              اغلاق
+            </button>
+            <button
+              type="button"
+              class="btn btn-info"
+              (click)="infoModal.hide(); CanEdit()"
+            >
+              طلب تعديل
+            </button>
+          </div>
         </div>
-        <div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-info" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"> طلب تعديل</h4>
-                        <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        يجب موافق ادارة الموقع للسماح بتعديل معلوماتك
-                        <a class="text-pink">طلب تعديل</a> لتعديل معلوماتك يرجى الضغط على
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" (click)="infoModal.hide()">اغلاق</button>
-                        <button type="button" class="btn btn-info" (click)="infoModal.hide();CanEdit()">طلب
-                            تعديل</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-        <toaster-container></toaster-container>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
     </div>
+    <!-- /.modal -->
+    <toaster-container></toaster-container>
+  </div>
+</div>
+<div
+  class="flex flex-warp w-100 m-auto align-items-center justify-content-center"
+>
+  <p-card class="p-4 w-25rem">
+    <div class="flex align-items-center justify-content-center">
+      <div class="relative">
+        <div class="static">
+          <p class="font-bold text-gray-900 profile-photo"></p>
+          <div class="absolute icon-camera"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-column justify-content-center">
+      <div class="flex">تغيير كلمة المرور</div>
+      <div class="flex flex-column w-full m-2">
+        <label for="" class="flex input-lable"> كلمة المرور الحالية</label>
+        <span class="p-input-icon-right flex">
+          <i class="icon-lock"></i>
+          <input
+            type="password"
+            pInputText
+            class="input-pn"
+            placeholder="أدخل كلمة المرور الحالية"
+          />
+        </span>
+      </div>
+      <div class="flex flex-column w-full m-2">
+        <label for="" class="flex input-lable"> كلمة المرور الجديدة</label>
+        <span class="p-input-icon-right flex">
+          <i class="icon-lock"></i>
+          <input
+            type="password"
+            pInputText
+            class="input-pn"
+            placeholder="أدخل كلمة المرور الحالية"
+          />
+        </span>
+      </div>
+      <div class="flex flex-column w-full m-2">
+        <label for="" class="flex input-lable"> تأكيد كلمة المرور</label>
+        <span class="p-input-icon-right flex">
+          <i class="icon-lock"></i>
+          <input
+            type="password"
+            pInputText
+            class="input-pn"
+            placeholder="أدخل كلمة المرور الحالية"
+          />
+        </span>
+      </div>
+      <div class="flex flex-column w-full m-2">
+        <label for="" class="flex input-lable"> حسابك على فيسبوك</label>
+        <span class="p-input-icon-right flex">
+          <i class="icon-fa"></i>
+          <input
+            type="text"
+            pInputText
+            class="input-pn"
+            placeholder="أدخل اسمك على فيسبوك"
+          />
+        </span>
+      </div>
+      <div class="flex flex-column w-full m-2">
+        <label for="" class="flex input-lable"> حسابك على انستغرام</label>
+        <span class="p-input-icon-right flex">
+          <i class="icon-insta"></i>
+          <input
+            type="text"
+            pInputText
+            class="input-pn"
+            placeholder="أدخل اليوزر الخاص بك على انستقرام"
+          />
+        </span>
+      </div>
+      <div class="flex align-items-center justify-content-center mt-3">
+        <button
+          pButton
+          type="button"
+          label="  حفظ التغييرات"
+          class="company-button w-100"
+        ></button>
+      </div>
+    </div>
+  </p-card>
 </div>

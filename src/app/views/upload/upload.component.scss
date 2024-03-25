@@ -1,32 +1,105 @@
-
 p {
-    font-family: Lato;
+  font-family: Lato;
 }
 
 .error {
-    color: #f00;
+  color: #f00;
 }
 
 .dragarea {
-    font-size: 1.5rem;
-    border: 3px solid #bbb;
-    padding: 1.5rem;
-    background-color: rgb(61, 153, 245);
-    color: rgb(229, 229, 229);
+  font-size: 1.5rem;
+  //   border: 3px solid #bbb;
+  padding: 1.5rem;
+  background-color: rgba(189, 35, 34, 1);
+  color: rgb(255, 255, 255);
+  border-radius: 8px;
 }
 
 .droparea {
-    font-size: 1.5rem;
-    border: 3px dashed #bbb;
-    padding: 1.5rem;
-    background-color: #eff;
-    color: rgb(0, 0, 0);
+  font-size: 1.5rem;
+  border: 3px dashed #bbb;
+  padding: 1.5rem;
+  background-color: rgba(255, 201, 201, 0.393);
+  color: rgba(189, 35, 34, 1);
+  border-radius: 8px;
 }
-.CRed{
-    color: red;
+.CRed {
+  color: red;
 }
-.error{
-    background-color: rgb(251, 231, 231);
-    color: red;
-    border: 2px red solid;
+.error {
+  background-color: rgb(251, 231, 231);
+  color: red;
+  border: 2px red solid;
+}
+////////////////////////
+$circle-size: 100px; // Adjust the size of the circle as per your requirement
+$circle-border-width: 4px; // Adjust the border width of the circle
+$circle-border-color: #ccc; // Adjust the border color of the circle
+$circle-progress-color: rgba(
+  189,
+  35,
+  34,
+  1
+); // Adjust the color of the progress circle
+$icon-color: rgba(189, 35, 34, 1); // Adjust the color of the icon
+$icon-initial-size: 24px; // Adjust the initial size of the icon
+$icon-final-size: 48px; // Adjust the final size of the icon
+
+.priming-icon {
+  position: relative;
+  width: $circle-size;
+  height: $circle-size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $circle-size;
+  height: $circle-size;
+  border-radius: 50%;
+  border: $circle-border-width solid $circle-border-color;
+  animation: rotate 2s linear forwards;
+  border-color: $circle-progress-color;
+  transform-origin: center center;
+  animation-delay: 1s; // Delay the start of the progress circle animation by 1 second
+}
+
+.icon {
+  position: absolute;
+  font-size: $icon-initial-size;
+  color: $icon-color;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out, font-size 0.3s ease-in-out;
+  animation: icon-grow 0.3s ease-in-out forwards;
+  animation-delay: 3s; // Delay the start of the icon growth animation by 3 seconds
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 1;
+  }
+}
+
+@keyframes icon-grow {
+  0% {
+    font-size: $icon-initial-size;
+  }
+  100% {
+    font-size: $icon-final-size;
+  }
 }

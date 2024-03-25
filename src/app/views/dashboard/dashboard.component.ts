@@ -11,15 +11,44 @@ import { ToasterService } from 'angular2-toaster';
 })
 export class DashboardComponent implements OnInit {
   constructor(private staticsService: StaticsService,) { }
-  CStatics: CStatics = new CStatics
+  CStatics: CStatics = new CStatics;
+  data: any;
+  data1: any;
   ngOnInit(): void {
-    
-    this.getStatics() 
-    // this.staticsService.GetNo().subscribe();
+    this.getStatics()
   }
   getStatics() {
     this.staticsService.get().subscribe(res => {
-      this.CStatics = res as CStatics
+      this.CStatics = res as CStatics;
+      this.data = {
+        datasets: [{
+          data: [
+            this.CStatics?.orderInWat,
+          ],
+          backgroundColor: [
+            "rgba(0, 17, 56, 1)"
+
+          ],
+        }],
+        labels: [
+          "  الطلبات التي في الطريق ",
+
+        ]
+      }
+      this.data1 = {
+        datasets: [{
+          data: [
+            this.CStatics?.orderInStore ?? 0,
+          ],
+          backgroundColor: [
+            "rgba(239, 0, 0, 1)",
+          ],
+        }],
+        labels: [
+          "  الطلبات التي في المخزن ",
+
+        ]
+      }
     })
   }
 }

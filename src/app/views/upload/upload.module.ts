@@ -7,6 +7,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { ShowOrderFilesComponent } from './show-order-files/show-order-files.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng-lts/button';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     UploadRoutingModule,
     ToasterModule.forRoot(),
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    ButtonModule
   ]
 })
 export class UploadModule { }

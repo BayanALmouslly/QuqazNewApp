@@ -48,8 +48,8 @@ export class ShowOrderComponent implements OnInit {
     });
     this.orderServies.getById(this.id).subscribe(res => {
       // console.log(res)
-      this.printOrder=res
-      this.printOrder.recipientPhones =   this.printOrder.recipientPhones.split(',')
+      this.printOrder = res
+      this.printOrder.recipientPhones = this.printOrder.recipientPhones.split(',')
       this.Order.clientPrint = res.clientPrint
       this.Order.Address = res.address
       this.Order.ClientNote = res.clientNote
@@ -57,7 +57,7 @@ export class ShowOrderComponent implements OnInit {
       this.tempCode = this.Order.Code
       this.Order.Cost = res.cost
       this.currency()
-      this.deliveryCost=res.deliveryCost
+      this.deliveryCost = res.deliveryCost
       this.Order.CountryId = res.country.id
       this.Order.DateTime = res.date
       this.Order.OrderItem = res.orderItems
@@ -68,7 +68,7 @@ export class ShowOrderComponent implements OnInit {
         this.OrderTypes = this.OrderTypes.filter(o => o.name != item.orderTpye.name)
       })
       this.Order.RecipientName = res.recipientName
-      this.Order.RecipientPhones =  this.printOrder.recipientPhones
+      this.Order.RecipientPhones = this.printOrder.recipientPhones
       this.Order.monePlaced = res.monePlaced
       this.Order.orderplaced = res.orderplaced
       this.Order.isSend = res.isSend
@@ -279,5 +279,19 @@ export class ShowOrderComponent implements OnInit {
       // location.reload();
 
     }, 1000);
+  }
+  keyPressNumbers(event, cost) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode == 45 && cost == 0) {
+      return true
+    }
+    else
+      // Only Numbers 0-9
+      if ((charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+        return false;
+      } else {
+        return true;
+      }
   }
 }

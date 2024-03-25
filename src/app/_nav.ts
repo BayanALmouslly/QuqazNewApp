@@ -3,12 +3,18 @@ import { INavData } from '@coreui/angular';
 //  const user=JSON.parse(localStorage.getItem('kokazClient'))as UserLogin
 export const navItems: INavData[] = [
   {
-    // user?user.name:''
-    name: 'حساب المستخدم',
-    url: '/profile',
-    icon: 'icon-user',
-    
+    name: 'الرئيسية',
+    url: '/dashboard',
+    icon: 'icon-speedometer',
+
   },
+  // {
+  //   // user?user.name:''
+  //   name: ' حسابي',
+  //   url: '/profile',
+  //   icon: 'icon-user',
+
+  // },
   // {
   //   title: true,
   //   name: 'حول '
@@ -18,12 +24,7 @@ export const navItems: INavData[] = [
   //   url: '/orders/report',
   //   icon: 'icon-social-dropbox'
   // },
-  {
-    name: 'الرئيسية',
-    url: '/dashboard',
-    icon: 'icon-speedometer',
-    
-  },
+
   {
     name: 'اضافة طلب',
     url: '/orders/addorder',
@@ -47,11 +48,11 @@ export const navItems: INavData[] = [
     //   text: 'NEW'
     // }
   },
-  {
-    name: ' كشف حساب حسب نوع الشحنة',
-    url: '/orders/Report',
-    icon: 'icon-layers'
-  },
+  // {
+  //   name: ' كشف حساب حسب نوع الشحنة',
+  //   url: '/orders/Report',
+  //   icon: 'icon-layers'
+  // },
   {
     name: 'طلب حساب',
     url: '/orders/payment',
@@ -62,11 +63,16 @@ export const navItems: INavData[] = [
     url: '/orders/clientPrint',
     icon: 'icon-layers'
   },
-  {
-    name: 'نقاطي',
-    url: '/points',
-    icon: 'icon-energy'
-  },
+  // {
+  //   name: 'القائمة السوداء',
+  //   url: '/black-list',
+  //   icon: 'icon-list'
+  // },
+  // {
+  //   name: 'نقاطي',
+  //   url: '/points',
+  //   icon: 'icon-energy'
+  // },
   {
     name: 'تحميل ملف',
     url: '/upload/add',

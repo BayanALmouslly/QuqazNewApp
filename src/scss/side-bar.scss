@@ -1,0 +1,52 @@
+.sidebar .sidebar-minimizer {
+  background-color: #fff !important;
+  &:hover::before {
+    background-color: rgba(189, 35, 34, 1);
+  }
+}
+
+.sidebar {
+  background-color: #fff !important;
+  border-left: 7px solid rgba(189, 35, 34, 1) !important ;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  .nav-link {
+    color: #000 !important;
+    &:hover {
+      color: rgba(189, 35, 34, 1) !important;
+      background-color: rgba(189, 35, 34, 0.05) !important;
+      border-radius: 15px;
+      .nav-icon {
+        color: #fff !important;
+        background-color: rgba(189, 35, 34, 1) !important;
+      }
+    }
+    .nav-icon {
+      color: rgba(189, 35, 34, 1) !important;
+      background-color: rgba(189, 35, 34, 0.05) !important;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      align-items: center !important;
+      justify-content: center !important;
+      display: inline-flex !important;
+    }
+  }
+  .nav-link.active {
+    color: rgba(189, 35, 34, 1) !important;
+    background-color: rgba(189, 35, 34, 0.05) !important;
+    border-radius: 15px;
+    .nav-icon {
+      color: #fff !important;
+      background-color: rgba(189, 35, 34, 1) !important;
+    }
+  }
+}
+
+.sidebar-minimized .sidebar .nav-item > .nav-link .nav-icon {
+  //   background-color: transparent !important;
+  height: 40px;
+  width: 40px;
+}
+.sidebar-minimized .sidebar .nav-item:hover > .nav-link .nav-icon {
+}

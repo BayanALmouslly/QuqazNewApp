@@ -1,42 +1,102 @@
 .app-body {
-	background: linear-gradient(90deg, #e1e8f7, #79aeeb);
-    width: 100%;
-    margin-top: 0;		
+  background: #fff;
+  width: 100%;
+  margin: 0;
 }
-.card{
-    width: 330px;
-    height: 600px;
-    border-radius: 5%;
+.card {
+  width: 330px;
+  height: 600px;
+  border-radius: 5%;
 }
-.btn.btn-info{
-    background: linear-gradient(90deg, #dde5f7, #4389da);
-    border-color:  linear-gradient(90deg, #c5d5f4, #0b6bda);
-    color: white;
+.btn.btn-info {
+  background: linear-gradient(90deg, #dde5f7, #4389da);
+  border-color: linear-gradient(90deg, #c5d5f4, #0b6bda);
+  color: white;
 }
-.btn.btn-info:hover{
-    border-color:  linear-gradient(90deg, #c5d5f4, #0b6bda);
+.btn.btn-info:hover {
+  border-color: linear-gradient(90deg, #c5d5f4, #0b6bda);
 }
-.card-body{
-    margin-top: 20%;
+.card-body {
+  margin-top: 20%;
 }
 .car {
-    position: relative;
-    animation-name: car;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-  
-  }
-  
-  @keyframes car {
-    from {
-   
-    left:0%; top:0px;
+  position: relative;
+  animation-name: car;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes car {
+  from {
+    left: 0%;
+    top: 0px;
   }
 
   to {
-  
-    left:24%; top:0px;
+    left: 24%;
+    top: 0px;
   }
+}
+.bg-image-login {
+  background: linear-gradient(90deg, rgb(56, 0, 0), rgba(56, 0, 0, 0.566));
+}
+.bg-form {
+  background-color: #fff;
+  border-radius: 12px;
+}
+.map-img {
+  width: 55vw;
+  height: 50vh;
+  opacity: 0.2;
+  content: url(../../../assets/logos/world-map.png);
+  top: 20vh;
+  position: relative;
+}
+.welcome-message {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgba(189, 35, 34, 1);
+}
+.login-message {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.5);
+}
+.pi {
+  color: rgba(189, 35, 34, 1) !important;
+}
+.login-button {
+  background-color: rgba(189, 35, 34, 1) !important;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.map-text {
+  color: #fff;
+  position: absolute;
+  top: 30vh;
+  left: 10vw;
+  .company-title {
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 1.7rem;
+    text-align: left;
   }
-
+  .company-subtitle {
+    text-align: left;
+  }
+  .company-text {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+  .company-button {
+    border-radius: 15px;
+    background-color: #fff;
+    padding: 0.6rem 1.5rem;
+    color: rgba(189, 35, 34, 1);
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+}
