@@ -7,6 +7,7 @@ import { PaymentOrdersComponent } from './payment-orders/payment-orders.componen
 import { SendordersComponent } from './sendorders/sendorders.component';
 import { ShowOrderComponent } from './show-order/show-order.component';
 import { ShowOrdersComponent } from './show-orders/show-orders.component';
+import { TrackOrderComponent } from './track-order/track-order.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
         path: '',
         redirectTo: 'show'
       },
-    
+
       {
         path: 'addorder',
         component: AddOrderComponent,
@@ -59,7 +60,7 @@ const routes: Routes = [
         path: 'Report',
         component: OrdersReportComponent,
         data: {
-          title: ' طلب كشف '
+          title: ' كشف حساب '
         }
       },
       {

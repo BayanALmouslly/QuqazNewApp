@@ -8,6 +8,9 @@ import { OrderService } from '../../../services/order/order.service';
 import { SettingsService } from '../../../services/settings.service';
 import { MenuItem } from 'primeng-lts/api';
 import { log } from 'util';
+import { StaticsService } from '../../../services/statics.service';
+import { DialogService } from 'primeng-lts/dynamicdialog';
+import { TrackOrderComponent } from '../track-order/track-order.component';
 
 @Component({
   selector: 'app-show-orders',
@@ -15,19 +18,14 @@ import { log } from 'util';
   styleUrls: ['./show-orders.component.scss']
 })
 export class ShowOrdersComponent implements OnInit {
-
-  constructor(private orderServies: OrderService,
-    private settingservice: SettingsService,
-    private router: Router) { }
-  paging: Paging = new Paging
-  orderFilter: OrderFiltering = new OrderFiltering
-  orders: any[] = []
-  Regions: IdAndName[] = []
-  Countries: IdAndName[] = []
-  MoenyPlaced: IdAndName[] = []
-  OrderPlaced: IdAndName[] = []
+  paging: Paging = new Paging();
+  orderFilter: OrderFiltering = new OrderFiltering();
+  orders: any[] = [];
+  Regions: IdAndName[] = [];
+  Countries: IdAndName[] = [];
+  MoenyPlaced: IdAndName[] = [];
+  OrderPlaced: IdAndName[] = [];
   activeTab: MenuItem;
-
   items: MenuItem[] = [
     {
       label: 'الطلبات',
@@ -39,20 +37,37 @@ export class ShowOrdersComponent implements OnInit {
       label: 'الحسابات',
       command: (event) => {
         this.activeTab = event.item;
+        this.getAccountReport();
       },
     },
   ];
+  totalItems: number = 0;
+  showBoundaryLinks: boolean = true;
+  showDirectionLinks: boolean = true;
+
+  //////////
+  rangeDate
+  start: Date;
+  end: Date;
+  accountReports
+
+  constructor(
+    private orderServies: OrderService,
+    private settingservice: SettingsService,
+    private router: Router,
+    private staticsService: StaticsService,
+    public dialogService: DialogService
+  ) { }
+
   ngOnInit(): void {
     this.activeTab = this.items[0];
     this.GetOrders()
     this.GetSettings()
   }
-  totalItems: number = 0;
   GetOrders() {
     this.orderServies.get(this.paging, this.orderFilter).subscribe(res => {
       this.orders = res.data
       this.totalItems = res.total
-      // console.log(res)
     })
   }
   GetSettings() {
@@ -81,8 +96,6 @@ export class ShowOrdersComponent implements OnInit {
       this.OrderPlaced = res
     })
   }
-  showBoundaryLinks: boolean = true;
-  showDirectionLinks: boolean = true;
   pageChanged(event: PageChangedEvent): void {
     this.paging.allItemsLength = this.totalItems
     this.paging.RowCount = event.itemsPerPage
@@ -112,4 +125,28 @@ export class ShowOrdersComponent implements OnInit {
     localStorage.setItem('printnumber', printNumber)
     this.router.navigate(['/orders/clientPrint'])
   }
+  getAccountReport() {
+    this.staticsService.AccountReport(this.start, this.end).subscribe(data => {
+      this.accountReports = data;
+    })
+  }
+  changeDate() {
+    this.start = this.rangeDate[0];
+    this.end = this.rangeDate[1];
+    this.getAccountReport();
+  }
+  trackOrder(id) {
+    console.log(window.innerWidth);
+
+    const ref = this.dialogService.open(TrackOrderComponent, {
+      width: window.innerWidth > 1000 ? '40%' : window.innerWidth > 600 ? '70%' : '100%',
+      showHeader: false,
+      data: {
+        id: id
+      },
+      modal: false,
+      baseZIndex: 999999
+    });
+  }
+
 }
