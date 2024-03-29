@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToasterService } from 'angular2-toaster';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { OrderService } from '../../../services/order/order.service';
+import { Paging } from '../../../Models/paging';
 
 @Component({
   selector: 'app-sendorders',
@@ -15,7 +16,11 @@ export class SendordersComponent implements OnInit {
   constructor(private orderService: OrderService,
     private toasterService: ToasterService,) { }
   orders: any[] = []
-  NotFoundMessage: boolean=true
+  NotFoundMessage: boolean = true;
+  totalItems: number;
+  showBoundaryLinks: boolean = true
+  showDirectionLinks: boolean = true;
+  paging: Paging = new Paging();
   ngOnInit(): void {
     this.GetOrders()
   }
@@ -34,35 +39,42 @@ export class SendordersComponent implements OnInit {
     this.DeleteModal.hide();
   }
   GetOrders() {
-    this.orderService.NonSendOrder().subscribe(res => {
-      this.orders = res
-      // console.log(res)
+    this.orderService.NonSendOrder(this.paging).subscribe(res => {
+      this.orders = res.data;
+      this.totalItems = res.total;
       if (this.orders.length == 0)
         this.NotFoundMessage = true
       else
         this.NotFoundMessage = false
     })
   }
+  pageChanged(event): void {
+    this.paging.allItemsLength = this.totalItems
+    this.paging.RowCount = event.itemsPerPage
+    this.paging.Page = event.page
+    this.GetOrders()
+  }
   canSend() {
     if (this.orders.length == 1 || this.orders.length == 2)
       this.showinfoModal()
-      else
+    else
       this.Send()
   }
   Send() {
-    this.orderService.Sned(this.orders.map(o => o.id)).subscribe(res => {
+    this.orderService.Send(this.orders.map(o => o.id)).subscribe(res => {
       this.hideinfoModal()
       this.NotFoundMessage = true
       this.toasterService.pop('success', '', 'تم  الارسال بنجاح');
+      this.GetOrders()
 
     })
   }
   deleteid
-  canDelete(id){
+  canDelete(id) {
     this.showDeleteModal()
-    this.deleteid=id
+    this.deleteid = id
   }
-  delete(){
+  delete() {
     this.orderService.Delete(this.deleteid).subscribe(res => {
       this.toasterService.pop('success', '', 'تم  الحذف بنجاح');
       this.GetOrders()

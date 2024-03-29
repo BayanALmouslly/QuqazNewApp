@@ -6,6 +6,8 @@ import { OrderFiltering } from '../../../Models/order/order-filtering.model';
 import { Paging } from '../../../Models/paging';
 import { OrderService } from '../../../services/order/order.service';
 import { SettingsService } from '../../../services/settings.service';
+import { MenuItem } from 'primeng-lts/api';
+import { log } from 'util';
 
 @Component({
   selector: 'app-show-orders',
@@ -16,7 +18,7 @@ export class ShowOrdersComponent implements OnInit {
 
   constructor(private orderServies: OrderService,
     private settingservice: SettingsService,
-    private router:Router) { }
+    private router: Router) { }
   paging: Paging = new Paging
   orderFilter: OrderFiltering = new OrderFiltering
   orders: any[] = []
@@ -24,8 +26,24 @@ export class ShowOrdersComponent implements OnInit {
   Countries: IdAndName[] = []
   MoenyPlaced: IdAndName[] = []
   OrderPlaced: IdAndName[] = []
+  activeTab: MenuItem;
 
+  items: MenuItem[] = [
+    {
+      label: 'الطلبات',
+      command: (event) => {
+        this.activeTab = event.item;
+      },
+    },
+    {
+      label: 'الحسابات',
+      command: (event) => {
+        this.activeTab = event.item;
+      },
+    },
+  ];
   ngOnInit(): void {
+    this.activeTab = this.items[0];
     this.GetOrders()
     this.GetSettings()
   }
@@ -68,11 +86,30 @@ export class ShowOrdersComponent implements OnInit {
   pageChanged(event: PageChangedEvent): void {
     this.paging.allItemsLength = this.totalItems
     this.paging.RowCount = event.itemsPerPage
-    this.paging.Page = event.page 
+    this.paging.Page = event.page
     this.GetOrders()
   }
-  edit(element){
-    this.router.navigate(['/orders/edit',element.id])
+  edit(element) {
+    this.router.navigate(['/orders/edit', element.id])
 
+  }
+  downloadReceipt(orderId) {
+    this.orderServies.DownloadReceipt(orderId).subscribe((res) => {
+      let blob = new Blob([res], { type: 'application/pdf' });
+      var downloadURL = window.URL.createObjectURL(blob);
+      window.open(downloadURL, '_blank');
+
+      var link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = " وصل" + ".pdf";
+      link.click();
+    }, (err) => {
+
+
+    })
+  }
+  print(printNumber) {
+    localStorage.setItem('printnumber', printNumber)
+    this.router.navigate(['/orders/clientPrint'])
   }
 }

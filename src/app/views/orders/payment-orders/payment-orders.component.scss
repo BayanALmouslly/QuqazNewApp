@@ -1,0 +1,51 @@
+::ng-deep .page-item .page-link {
+  color: rgba(189, 35, 34, 1) !important;
+  &:hover {
+    background-color: rgba(189, 34, 34, 0.139) !important;
+  }
+}
+::ng-deep .page-item:last-child .page-link {
+  border-top-right-radius: 0rem !important;
+  border-bottom-right-radius: 0rem !important;
+}
+::ng-deep .page-item:first-child .page-link {
+  border-top-left-radius: 0rem !important;
+  border-bottom-left-radius: 0rem !important;
+}
+::ng-deep .page-item.active .page-link {
+  border-color: rgba(189, 34, 34, 1) !important;
+  background-color: rgba(189, 34, 34, 0.139) !important;
+  font-weight: 600;
+}
+::ng-deep .page-item.disabled .page-link {
+  color: #c8ced3 !important;
+}
+.table-quqaz {
+  background-color: rgba(189, 35, 34, 1);
+  color: #fff;
+}
+.icon {
+  background-color: rgba(189, 35, 34, 1);
+  color: #fff;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.company-button {
+  border-radius: 15px !important;
+  background-color: rgba(189, 35, 34, 1) !important;
+  padding: 5px 15px;
+  justify-items: center;
+  align-items: center;
+  display: flex;
+  color: #fff !important;
+  min-width: 20vw;
+  border: none;
+  &:hover {
+    border: 1px solid rgba(189, 34, 34, 0.53);
+  }
+}

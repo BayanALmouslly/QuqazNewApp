@@ -1,120 +1,132 @@
-<h3 style="text-align: center;font-size: 22px; color: rgb(54, 112, 160);"> 
-    نقاطي 
-    <!-- <span class="badge badge-info" style="color: white;">{{pointCount}}</span>  -->
-    <!-- المبلغ <span class="badge badge-info" style="color: white;">{{pointCount}}</span> دينار عراقي -->
-
+<h3 style="text-align: center; font-size: 22px; color: rgb(54, 112, 160)">
+  نقاطي
+  <!-- <span class="badge badge-info" style="color: white;">{{pointCount}}</span>  -->
+  <!-- المبلغ <span class="badge badge-info" style="color: white;">{{pointCount}}</span> دينار عراقي -->
 </h3>
 <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-2 ">
-        <div class="circle bg-info btn btn-light">
-       <h2> {{pointCount}}  </h2>  
-       <h3>
-        نقاط
-       </h3>    
-        </div>
-    
+  <div class="col-md-2"></div>
+  <div class="col-2">
+    <div class="circle bg-info btn btn-light">
+      <h2>{{ pointCount }}</h2>
+      <h3>نقاط</h3>
     </div>
-    <div class="col-md-1 ">
-        <div class="arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
-            fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-        </svg>
-        </div>
-    
+  </div>
+  <div class="col-md-1">
+    <div class="arrow">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="50"
+        height="50"
+        fill="currentColor"
+        class="bi bi-arrow-left"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+        />
+      </svg>
     </div>
-    <div class="col-2">
-        <div class="circle bg-info btn btn-light">
-     <h2>{{moneypoint()|number}}</h2>
-    دينار 
-    
-        </div>
-    
+  </div>
+  <div class="col-2">
+    <div class="circle bg-info btn btn-light">
+      <h2>{{ moneypoint() | number }}</h2>
+      دينار
     </div>
-    <div class="col-md-1 ">
-        <div class="arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
-            fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-        </svg>
-        </div>
-    
+  </div>
+  <div class="col-md-1">
+    <div class="arrow">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="50"
+        height="50"
+        fill="currentColor"
+        class="bi bi-arrow-left"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+        />
+      </svg>
     </div>
-    <div class="col-2 ">
-        <div class="circle bg-info btn btn-light">
-     <h2>{{Rest|number}}</h2>
-    الباقي 
-    نقاط
-    
-        </div>
-    
+  </div>
+  <div class="col-2">
+    <div class="circle bg-info btn btn-light">
+      <h2>{{ Rest | number }}</h2>
+      الباقي نقاط
     </div>
+  </div>
 </div>
 
-
 <div class="row">
-    <div class="col-12 col-md-3 col-lg-4" *ngFor="let point of points">
-        <div class="card text-white bg-info">
-            <div class="card-body ">
-              <!-- <button type="button" class="btn btn-transparent p-0 float-right">
+  <div class="col-12 col-md-3 col-lg-4" *ngFor="let point of points">
+    <div class="card text-white bg-info">
+      <div class="card-body">
+        <!-- <button type="button" class="btn btn-transparent p-0 float-right">
                 <i class="icon-location-pin"></i>
               </button> -->
-              <div class="h1 text-muted text-right mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
-                    <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
-                    <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
-                  </svg>
-              </div>
-              <!-- <div class="text-value"> <span class="cc-date expedition"> 
+        <div class="h1 text-muted text-right mb-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="50"
+            height="50"
+            fill="currentColor"
+            class="bi bi-cash"
+            viewBox="0 0 16 16"
+          >
+            <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+            <path
+              d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"
+            />
+          </svg>
+        </div>
+        <!-- <div class="text-value"> <span class="cc-date expedition"> 
                   معادلة الحساب 
                 </span>
               </div> -->
-              <div class="text-value" style="text-align: center;" >  
-                  كل  {{point.points}} نقطة
-                <br><br>
-                تحصل على  {{point.money|number}} دينار عراقي
-            </div>
-
-            </div>
-            <!-- <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+        <div class="text-value" style="text-align: center">
+          كل {{ point.points }} نقطة <br /><br />
+          تحصل على {{ point.money | number }} دينار عراقي
+        </div>
+      </div>
+      <!-- <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
               <canvas baseChart class="chart" [datasets]="lineChart2Data" [labels]="lineChart2Labels"
                 [options]="lineChart2Options" [colors]="lineChart2Colours" [legend]="lineChart2Legend"
                 [chartType]="lineChart2Type"></canvas>
             </div> -->
-          </div>
-      
     </div>
-    <div class="card col-12"  *ngIf="points.length==0">
-        <div class="card-body">
-            لايوجد نقاط لديك
-        </div>
-    </div>
+  </div>
+  <div class="card col-12" *ngIf="points.length == 0">
+    <div class="card-body">لايوجد نقاط لديك</div>
+  </div>
 </div>
-<h3 style="text-align: center;font-size: 22px;color: rgb(54, 112, 160);">نقاط  المدن </h3>
-<div class="row">
-    <div class="col-12">
-        <div class="card table-responsive-lg">
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead class="table-info">
-                        <th> المدينة</th>
-                        <th> النقاط</th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let countriesPoint of countriesPoints">
-                            <td>
-                                {{countriesPoint.name}}
-                            </td>
-                            <td>
-                                {{countriesPoint.points}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<!-- <h3 style="text-align: center; font-size: 22px; color: rgb(54, 112, 160)">
+</h3> -->
+<div class="grid">
+  <div class="col-12 text-center font-bold">نقاط المدن</div>
+  <div class="col-12">
+    <div class="card table-responsive-lg">
+      <div class="card-body">
+        <table class="table">
+          <thead class="table-quqaz">
+            <th>المدينة</th>
+            <th>النقاط</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let countriesPoint of countriesPoints">
+              <td>
+                {{ countriesPoint.name }}
+              </td>
+              <td>
+                <p-tag severity="danger">
+                  {{ countriesPoint.points }}
+                </p-tag>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 </div>

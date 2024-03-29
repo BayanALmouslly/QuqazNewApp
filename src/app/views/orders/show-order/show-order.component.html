@@ -1,251 +1,346 @@
+<toaster-container></toaster-container>
 <div class="row">
-  <div class="col-md-6 mx-auto">
-    <div class="card mx-4">
-      <div class="card-body p-4">
-        <form>
-          <h1>عرض الطلب</h1>
-          <p class="text-muted" style="text-align: left;">
-          <button class="btn btn-primary" (click)="printorder()">   <i class="icon-printer"></i> طباعة</button>
-          <app-print-order [order]="printOrder" *ngIf="printOrder" [hidden]="true" id="contentToConvert"></app-print-order>
-          </p>
-          <div class="input-group mb-3">
-            <div
-              style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px; padding: 5px;text-align: center;width: 100%;">
-              {{Order.orderplaced?Order.orderplaced.name:null}}  {{Order.monePlaced?" - "+Order.monePlaced.name:null}}
-            </div>
-          </div>
-          <div class="input-group mb-3" *ngIf="Order.clientPrint&&Order.clientPrint.length!=0">
-            <div
-              style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px;
-               padding: 5px;text-align: center;width: 100%;">
-                 <i class="icon-printer"></i>
-            <a *ngFor="let clientPrint of Order.clientPrint">
-            
-           <a class="btn" (click)="print(clientPrint.printNmber)"> {{clientPrint.printNmber}} {{Order.clientPrint.length>1?' - ':''}}</a>  
-            </a>  
-            </div>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="icon-pencil"></i></span>
-            </div>
-            <input type="text" [disabled]="CanEdit" name="code" [(ngModel)]="Order.Code" class="form-control"
-              placeholder="رقم الوصل " (keyup)="checkCode()" required>
-          </div>
-          <small *ngIf="!Order.Code&&errorMessage">رقم الوصل حقل مطلوب</small>
-          <small *ngIf="codeError">رقم الوصل مكرر</small>
-
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="icon-user"></i></span>
-            </div>
-            <input type="text" [disabled]="CanEdit" name="RecipientName" [(ngModel)]="Order.RecipientName"
-              class="form-control" placeholder="اسم المستلم" required>
-
-          </div>
-          <!-- <small *ngIf="!Order.RecipientName&&errorMessage">اسم المستلم حقل مطلوب</small> -->
-
-          <div class="input-group mb-3">
-            <!-- <div class="input-group-prepend">
-                <span class="input-group-text"><i class="icon-location-pin d-block"></i></span>
-              </div> -->
-            <!-- <select class="form-control" name="CountryId" [(ngModel)]="Order.CountryId" (change)="CountryChanged()">
-                <option style="background-color: rgb(207, 207, 207);">اختر مدينة</option>
-                <option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</option>
-              </select>
-                 -->
-            <ng-select [disabled]="CanEdit" appOnReturn [(ngModel)]="Order.CountryId" (change)="CountryChanged()"
-              [ngModelOptions]="{standalone: true}" [closeOnSelect]="true" name="Country"
-              style="width:100%;margin: 1px;">
-              <ng-option *ngFor="let Country of Countries" [value]="Country.id">{{Country.name}}</ng-option>
-            </ng-select>
-          </div>
-          <small *ngIf="!Order.CountryId&&errorMessage">المدينة حقل مطلوب</small>
-
-          <div class="input-group mb-3">
-            <div
-              style="border: 1px rgb(184, 182, 182) solid;border-radius: 5px; padding: 5px;text-align: right;width: 100%;">
-              كلفة توصيل : &nbsp;<span style="height: 10%;padding: 3px;width: 20%;"
-                class="bg-primary">{{deliveryCost|number}}</span> </div>
-
-
-            <!-- <ng-select appOnReturn [(ngModel)]="Order.RegionId" [ngModelOptions]="{standalone: true}"
-              [closeOnSelect]="true" name="Region" [addTag]="true" style="width:100%;">
-              <ng-option *ngFor="let Region of Regions" [value]="Region.id">{{Region.name}}</ng-option>
-            </ng-select> -->
-
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="icon-user"></i></span>
-            </div>
-            <input type="text" [disabled]="CanEdit" name="Cost" (change)="currency()" [(ngModel)]="Order.Cost"
-              class="form-control" placeholder="كلفة الطلب " required>
-
-          </div>
-          <small *ngIf="!Order.Cost&&errorMessage">كلفة الطلب حقل مطلوب</small>
-
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <li class="icon-location-pin d-block"></li>
-              </span>
-            </div>
-            <input type="text" [disabled]="CanEdit" name="Address" [(ngModel)]="Order.Address" class="form-control"
-              placeholder="عنوان المستلم" autocomplete="email" required>
-          </div>
-          <small *ngIf="!Order.Address&&errorMessage">العنوان حقل مطلوب</small>
-
-
-
-
-          <div class="input-group mb-4">
-            <button type="button" style="width: 100%;" class="btn btn-primary" data-toggle="modal"
-              (click)="primaryModal.show()">
-              نوع الطلبية
-            </button>
-
-          </div>
-          <!-- <small *ngIf="Order.OrderItem.length==0&&errorMessage"> نوع الطلبية حقل مطلوب</small> -->
-
-          <ng-container *ngFor="let phones of Order.RecipientPhones;let i=index;trackBy: onTrackBy">
-            <div class="input-group mb-4">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="icon-phone"></i></span>
-              </div>
-              <input type="text" [disabled]="CanEdit" name="phones+{{i}}" [(ngModel)]="Order.RecipientPhones[i]"
-                maxlength="11" oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
-                class="form-control" placeholder=" رقم هاتف"  (keyup)="checkphone(Order.RecipientPhones[i],i)"  required>
-              <a class="btn btn-primary" [hidden]="CanEdit" (click)="RemovePhone(phones)">x </a>
-            </div>
-          </ng-container>
-
-          <div class="input-group mb-4" [hidden]="CanEdit">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="icon-phone"></i></span>
-            </div>
-            <input type="text" name="RecipientPhones" [(ngModel)]="Phone" maxlength="11"
-              oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" class="form-control"
-              placeholder=" رقم هاتف" required (keyup)="checkphone(Phone)">
-            <a class="btn btn-primary" [hidden]="CanEdit" (click)="AddPhone()">+ </a>
-          </div>
-          <small *ngIf="!Phone&&Order.RecipientPhones.length==0&&errorMessage">رقم الهاتف حقل مطلوب</small>
-          <small *ngIf="errorPhone">يجب ان يكون رقم الهاتف 11 حقل</small>
-          <small *ngIf="errorRepeatPhone">رقم الهاتف مكرر</small>
-
-          <div class="input-group ">
-
-            <textarea [disabled]="CanEdit" name="ClientNote" [(ngModel)]="Order.ClientNote" style="width: 100%;font-size: 18px;"
-              name="textarea-input" rows="3" class="form-control" placeholder="ملاحظات"></textarea>
-
-          </div>
-          <br>
-          <!-- <button type="button" class="btn btn-block btn-primary" [hidden]="CanEdit" (click)="AddOrder()">حفظ </button> -->
-          <div class="col-12 ">
-            <button type="button" [hidden]="CanEdit" class="btn btn-primary "(click)="EditOrder()"
-            style="width: 100%;" [disabled]="buttonDisabled">
-          
-          <div *ngIf="!buttonDisabled">حفظ</div>  
-          <div *ngIf="buttonDisabled">
-            <div class="spinner-border" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
+  <div class="col-md-6 m-auto">
+    <div class="mx-4">
+      <p-card header="عرض الطلب">
+        <p class="text-muted" style="text-align: left">
+          <button
+            class="btn"
+            (click)="printorder()"
+            style="background-color: rgba(189, 35, 34, 1); color: #ffffff"
+          >
+            <i class="icon-printer"></i> طباعة
           </button>
+          <app-print-order
+            [order]="printOrder"
+            *ngIf="printOrder"
+            [hidden]="true"
+            id="contentToConvert"
+          ></app-print-order>
+        </p>
+        <div class="input-group mb-3">
+          <div
+            style="
+              border: 1px rgba(189, 35, 34, 1) solid;
+              border-radius: 15px;
+              padding: 5px;
+              text-align: center;
+              width: 100%;
+            "
+          >
+            {{ Order.orderplaced ? Order.orderplaced.name : null }}
+            {{ Order.monePlaced ? " - " + Order.monePlaced.name : null }}
+          </div>
+        </div>
+        <div
+          class="input-group mb-3"
+          *ngIf="Order.clientPrint && Order.clientPrint.length != 0"
+        >
+          <div
+            style="
+              border: 1px rgba(189, 35, 34, 1) solid;
+              border-radius: 15px;
+              padding: 5px;
+              text-align: center;
+              width: 100%;
+            "
+          >
+            <i class="icon-printer"></i>
+            <a *ngFor="let clientPrint of Order.clientPrint">
+              <a class="btn" (click)="print(clientPrint.printNmber)">
+                {{ clientPrint.printNmber }}
+                {{ Order.clientPrint.length > 1 ? " - " : "" }}</a
+              >
+            </a>
+          </div>
+        </div>
+        <form>
+          <p class="text-muted"></p>
+          <div class="p-fluid card-input mb-2">
+            <div class="p-field">
+              <label for="">رقم الوصل</label>
+              <input
+                type="text"
+                pInputText
+                name="code"
+                [(ngModel)]="Order.Code"
+                placeholder="رقم الوصل "
+                (keyup)="checkCode()"
+                required
+              />
+              <small *ngIf="!Order.Code && errorMessage"
+                >رقم الوصل حقل مطلوب</small
+              >
+              <small *ngIf="codeError">رقم الوصل مكرر</small>
+            </div>
+          </div>
+          <div class="p-fluid card-input mb-2">
+            <div class="p-field mb-3">
+              <label for="">اسم المستلم</label>
+              <input
+                type="text"
+                pInputText
+                name="RecipientName"
+                [(ngModel)]="Order.RecipientName"
+                placeholder="اسم المستلم"
+                required
+              />
+            </div>
+            <div class="p-field mb-3">
+              <label for="">اسم المحافظة</label>
+              <p-dropdown
+                [options]="Countries"
+                [(ngModel)]="Order.CountryId"
+                optionLabel="name"
+                optionValue="id"
+                placeholder="اختر اسم المحافظة  "
+                (onChange)="CountryChanged()"
+                name="country"
+              >
+                <ng-template let-country pTemplate="item">
+                  <div class="flex">
+                    <div class="flex ml-2">
+                      <i
+                        class="pi pi-map-marker"
+                        style="color: rgba(189, 34, 34, 1)"
+                      ></i>
+                    </div>
+                    <div class="flex">{{ country.name }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+            <small *ngIf="!Order.CountryId && errorMessage"
+              >المحافظة حقل مطلوب</small
+            >
+
+            <div class="p-field mb-3">
+              <div
+                style="
+                  border: 1px rgb(184, 182, 182) solid;
+                  border-radius: 5px;
+                  padding: 5px;
+                  text-align: right;
+                  width: 100%;
+                "
+              >
+                كلفة توصيل : &nbsp;<span
+                  style="
+                    height: 10%;
+                    padding: 3px;
+                    border-radius: 3px;
+                    background-color: rgba(189, 35, 34, 1);
+                    color: #ffffff;
+                  "
+                  *ngIf="deliveryCost"
+                  >{{ deliveryCost | number }}</span
+                >
+              </div>
+            </div>
+            <div class="p-field mb-3">
+              <input
+                type="text"
+                pInputText
+                name="Cost"
+                (change)="currency()"
+                [(ngModel)]="Order.Cost"
+                placeholder="كلفة الطلب مع التوصيل "
+                required
+                (keypress)="keyPressNumbers($event, Order.Cost)"
+              />
+            </div>
+            <small *ngIf="!Order.Cost && errorMessage"
+              >كلفة الطلب حقل مطلوب</small
+            >
+
+            <div class="p-field mb-3">
+              <label for="Status"> العنوان</label>
+              <input
+                type="text"
+                pInputText
+                name="Address"
+                [(ngModel)]="Order.Address"
+                placeholder="ادخل العنوان المرسل اليه"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <small *ngIf="!Order.Address && errorMessage"
+              >العنوان حقل مطلوب</small
+            >
+
+            <div class="p-field mb-4">
+              <label for="">رقم الهاتف</label>
+              <ng-container
+                *ngFor="
+                  let phones of Order.RecipientPhones;
+                  let i = index;
+                  trackBy: onTrackBy
+                "
+              >
+                <div class="p-field flex">
+                  <input
+                    type="text"
+                    pInputText
+                    name="phones+{{ i }}"
+                    [(ngModel)]="Order.RecipientPhones[i]"
+                    maxlength="11"
+                    oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
+                    placeholder="  أدخل رقم الهاتف"
+                    (keyup)="checkphone(Order.RecipientPhones[i], i)"
+                    required
+                    class="flex"
+                  />
+                  <i
+                    class="pi pi-times flex mt-3"
+                    style="font-size: 12px; color: rgba(152, 152, 152, 1)"
+                    (click)="RemovePhone(phones)"
+                  ></i>
+                </div>
+              </ng-container>
+              <input
+                type="text"
+                pInputText
+                name="RecipientPhones"
+                [(ngModel)]="Phone"
+                maxlength="11"
+                oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
+                placeholder=" أدخل رقم الهاتف"
+                required
+                (keyup)="checkphone(Phone)"
+              />
+
+              <div class="flex">
+                <span class="border-icon mt-2" (click)="AddPhone()">
+                  <i class="pi pi-plus"></i>
+                </span>
+                <span class="m-2 note-lable"> اضافة رقم هاتف اخر </span>
+              </div>
+            </div>
+            <small
+              *ngIf="
+                !Phone && Order.RecipientPhones.length == 0 && errorMessage
+              "
+              >رقم الهاتف حقل مطلوب</small
+            >
+            <small *ngIf="errorPhone">يجب ان يكون رقم الهاتف 11 حقل</small>
+            <small *ngIf="errorRepeatPhone">رقم الهاتف مكرر</small>
+            <div class="p-field">
+              <label for="">ملاحظات</label>
+              <textarea
+                [rows]="1"
+                [cols]="30"
+                pInputTextarea
+                autoResize="autoResize"
+                [(ngModel)]="Order.ClientNote"
+                placeholder="ادخل ملاحظاتك"
+                name="note"
+              ></textarea>
+            </div>
+          </div>
+          <div class="card-input">
+            <div
+              class="p-fluid p-formgrid p-grid"
+              *ngFor="let item of Order.OrderItem"
+            >
+              <div class="p-field p-col">
+                <label for="firstname2">نوع االطلب</label>
+
+                <ng-select
+                  appOnReturn
+                  [(ngModel)]="item.OrderTypeName"
+                  [ngModelOptions]="{ standalone: true }"
+                  [clearable]="true"
+                  [closeOnSelect]="true"
+                  name="orderType"
+                  (search)="onSearch($event)"
+                  style="width: 100%"
+                  placeholder="أكتب اسم او اختر نوع الطلب "
+                >
+                  <ng-option
+                    *ngFor="let orderType of OrderTypes"
+                    [value]="orderType.name"
+                    >{{ orderType.name }}</ng-option
+                  >
+                </ng-select>
+              </div>
+              <div class="p-field p-col">
+                <label for="lastname2">العدد</label>
+                <input
+                  id="lastname2"
+                  type="number"
+                  pInputText
+                  placeholder="اكتب عدد الطلبات"
+                  [(ngModel)]="item.Count"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col">
+                <label for="firstname2">نوع االطلب</label>
+
+                <ng-select
+                  appOnReturn
+                  [(ngModel)]="OrderItem.OrderTypeName"
+                  [ngModelOptions]="{ standalone: true }"
+                  [clearable]="true"
+                  [closeOnSelect]="true"
+                  name="orderType"
+                  (search)="onSearch($event)"
+                  style="width: 100%"
+                  placeholder="أكتب اسم او اختر نوع الطلب "
+                >
+                  <ng-option
+                    *ngFor="let orderType of OrderTypes"
+                    [value]="orderType.name"
+                    >{{ orderType.name }}</ng-option
+                  >
+                </ng-select>
+              </div>
+              <div class="p-field p-col">
+                <label for="lastname2">العدد</label>
+                <input
+                  id="lastname2"
+                  type="number"
+                  pInputText
+                  placeholder="اكتب عدد الطلبات"
+                  [(ngModel)]="OrderItem.Count"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+            </div>
+
+            <div class="flex">
+              <span class="border-icon mt-2" (click)="AddOrderItem()">
+                <i class="pi pi-plus"></i>
+              </span>
+              <span class="m-2 note-lable"> اضافة نوع طلب اخر </span>
+            </div>
+          </div>
+          <div class="col-12">
+            <button
+              type="button"
+              [hidden]="CanEdit"
+              class="btn"
+              (click)="EditOrder()"
+              [disabled]="buttonDisabled"
+              style="
+                background-color: rgba(189, 35, 34, 1);
+                color: #ffffff;
+                width: 100%;
+              "
+            >
+              <div *ngIf="!buttonDisabled">حفظ</div>
+              <div *ngIf="buttonDisabled">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </button>
           </div>
         </form>
-      </div>
-      <div class="card-footer p-4">
-        <!-- <div class="row">
-                  <div class="col-6">
-                    <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
-                  </div>
-                  <div class="col-6">
-                    <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
-                  </div>
-                </div> -->
-      </div>
+      </p-card>
     </div>
   </div>
 </div>
-
-<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"> نوع الطلب</h4>
-        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <table>
-          <thead>
-            <th>النوع</th>
-            <th>العدد</th>
-            <th></th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let orderItem of Order.OrderItem;index as i">
-              <td>
-                <!-- <div class="input-group "style="width: 100px;">
-                
-                  <ng-select [disabled]="true" appOnReturn [(ngModel)]="orderItem.OrderTypeName" [ngModelOptions]="{standalone: true}"
-                  [closeOnSelect]="true" name="orderType" [addTag]="true" style="width: 100%;" >
-                  <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.name">{{orderType.name}}</ng-option>
-                </ng-select>
-                </div> -->
-                {{orderItem.OrderTypeName}}
-              </td>
-              <td>
-                <!-- <div class="input-group ">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-pencil"></i></span>
-                  </div>
-                  <input type="text"[disabled]="CanEdit" name="code" [(ngModel)]="orderItem.Count" class="form-control"
-                    oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
-                    placeholder=" العدد " required>
-                </div>
-              </td> -->
-              {{orderItem.Count}}
-              <td><a class="btn btn-primary" (click)="RemoveOrderItem(orderItem)" [hidden]="CanEdit">x</a></td>
-            </tr>
-            <tr [hidden]="CanEdit">
-              <td>
-                <div class="input-group "style="width: 100px;">
-                 
-                  <!-- <select class="form-control" [(ngModel)]="OrderItem.OrderTypeId">
-                    <option *ngFor="let orderType of OrderTypes" [value]="orderType.id">{{orderType.name}}</option>
-                  </select> -->
-                  <ng-select appOnReturn [(ngModel)]="OrderItem.OrderTypeName" [ngModelOptions]="{standalone: true}"
-                  [closeOnSelect]="true" name="orderType"  (search)="onSearch($event)" style="width: 100%;">
-                  <ng-option *ngFor="let orderType of OrderTypes" [value]="orderType.name">{{orderType.name}}</ng-option>
-                </ng-select>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <!-- <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-pencil"></i></span>
-                  </div> -->
-                  <input type="text" name="code" [(ngModel)]="OrderItem.Count" class="form-control"
-                    oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
-                    placeholder=" العدد " required>
-                </div>
-              </td>
-              <td><a class="btn btn-primary" [hidden]="CanEdit" (click)="AddOrderItem()">+ </a></td>
-            </tr>
-          </tbody>
-        </table>
-
-
-      </div>
-      <!-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div> -->
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<toaster-container></toaster-container>

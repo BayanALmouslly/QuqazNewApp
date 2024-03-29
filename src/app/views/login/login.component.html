@@ -1,4 +1,4 @@
-<div class=" app-body">
+<!-- <div class=" app-body">
   <main class="main d-flex align-items-center">
     <div class="container">
       <div class="row">
@@ -37,19 +37,8 @@
                     </div>
                     </button>
                     </div>
-                    <!-- <div class="col-6 text-right">
-                      <button type="button" class="btn btn-link px-0">Forgot password?</button>
-                   
-                    </div> -->
-                  </div>
-                  <!-- <div class="row">
-                   
-                    <div class="col-12 text-right">
-                      <button type="button" class="btn btn-link px-0"(click)="Register()">Sign up</button>
-                   <p> اذا لم تكن تملك حسابا لدى شركة قوقز قم بالتسجيل الان</p>
-                    </div>
-                  </div> -->
-                  
+                                  </div>
+                 
                 </form>
 
               <div class="car">
@@ -63,5 +52,94 @@
       </div>
     </div>
   </main>
+</div> -->
+<div class="app-body grid w-full bg-image-login">
+  <div class="p-col-12 p-sm-12 p-md-4 flex justify-content-right flex-wrap">
+    <div class="flex justify-content-center flex-wrap w-100 bg-form">
+      <div
+        class="flex align-items-center justify-content-center flex-column m-2 md:px-4 w-full"
+        [formGroup]="loginForm"
+      >
+        <div class="flex m-4">
+          <i class="icon-logo"></i>
+        </div>
+
+        <div class="flex welcome-message m-2">أهلا بعودتك</div>
+        <div class="flex login-message mb-2">سجل الدخول الى حسابك</div>
+        <div class="flex flex-column w-full m-2">
+          <label for="" class="flex input-lable"> اسم المستخدم</label>
+          <span class="p-input-icon-right flex">
+            <i class="pi pi-user"></i>
+            <input
+              type="text"
+              pInputText
+              class="input-pn"
+              placeholder="اكتب اسم المستخدم هنا"
+              formControlName="UserName"
+            />
+          </span>
+        </div>
+        <div class="flex flex-column w-full m-2">
+          <label for="" class="flex input-lable"> كلمة المرور</label>
+          <span class="p-input-icon-right flex">
+            <i class="pi pi-lock"></i>
+            <input
+              type="password"
+              pInputText
+              class="input-pn"
+              placeholder="........"
+              formControlName="Password"
+              (keyup.enter)="onSubmit()"
+            />
+          </span>
+        </div>
+        <div class="flex justify-content-right flex-wrap w-full m-1">
+          <div class="flex">
+            <p-checkbox
+              name="groupname"
+              value="val1"
+              class="checkbox-bg"
+              formControlName="RememberMe"
+            ></p-checkbox>
+            <label for="" class="px-2 login-message">تذكرني</label>
+          </div>
+        </div>
+        <div class="flex w-full">
+          <button
+            pButton
+            type="button"
+            label="تسجيل الدخول"
+            class="p-button-danger w-full login-button"
+            (click)="onSubmit()"
+            [disabled]="buttonDisabled"
+            [loading]="buttonDisabled"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-md-8 p-d-none p-d-md-inline-flex">
+    <div class="flex align-items-center justify-content-center flex-wrap mt-6">
+      <div class="map-img"></div>
+      <div class="map-text">
+        <div class="company-title">القوقز</div>
+        <div class="company-subtitle">للتوصيل السريع</div>
+        <div class="company-text">
+          خدمة توصيل خلال اقل من 24 ساعة , حسابات يومية على مدار أيام الأسبوع
+        </div>
+        <div class="text-left mt-4">
+          <button
+            pButton
+            type="button"
+            label=" &nbsp;  قم بتسجيل الدخول الان  &nbsp; "
+            class="company-button"
+            icon="pi pi-angle-double-right
+            "
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 <toaster-container></toaster-container>

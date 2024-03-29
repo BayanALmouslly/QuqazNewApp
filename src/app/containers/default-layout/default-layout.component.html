@@ -1,9 +1,11 @@
-<app-header [navbarBrandRouterLink]="['/dashboard']" [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/logos/logo.PNG', width: 50, height: 35}" [sidebarToggler]="'lg'"
+<app-header
+  [navbarBrandRouterLink]="['/dashboard']"
+  [fixed]="true"
+  [navbarBrandFull]="{ src: 'assets/logos/logo.PNG', width: 50, height: 35 }"
+  [sidebarToggler]="'lg'"
   [asideMenuToggler]="false"
-  [mobileAsideMenuToggler]="false">
-  <!-- [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}" -->
-
+  [mobileAsideMenuToggler]="false"
+>
   <ul class="nav navbar-nav ml-auto">
     <!-- <li class="nav-item px-3">
       <a class="nav-link" href="#">Dashboard</a>
@@ -14,7 +16,6 @@
     <li class="nav-item px-3">
       <a class="nav-link" href="#">Settings</a>
     </li> -->
-
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <!-- <li class="nav-item d-md-down-none">
@@ -24,317 +25,154 @@
       <a class="nav-link" href="#"><i class="icon-list"></i></a>
     </li> -->
     <!-- <li class="nav-item d-md-down-none">
-      <a class="nav-link" href="#">تسجيل الدخول</a>
+      <a class="nav-link" href="#">bayan almousslli </a>
     </li> -->
-    <li class="nav-item dropdown" #navdrop dropdown placement="bottom right">
-      <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-        dropdownToggle (click)="getNotfiaction()">
-        <i class="fa fa-bell-o" ><span class="badge badge-info" style="color: white;"
-            *ngIf="count&&count!=0&&showbadge">{{count}}</span></i>
-      </a>
-      <!-- (scroll)="onScroll($event)"  -->
-      <div class="dropdown-menu dropdown-menu-left scroll"   *dropdownMenu aria-labelledby="simple-dropdown">
-        <div class="dropdown-header text-center"><strong>الاشعارات</strong></div>
-    <li *ngFor="let Notfiaction of Notfiactions" style="width: 100%;">
-      <a class="dropdown-item" [ngStyle]="{'background':style(Notfiaction.IsSeen)}" >
-        <div *ngIf="Notfiaction.OrderCount"> لديك
-          <strong>{{Notfiaction.OrderCount}}</strong> من الطلبات
-        </div>
-        <small class="text-muted" *ngIf="Notfiaction.OrderPlaced||Notfiaction.MoneyPlaced">
-          <i class="icon-location-pin"></i>{{Notfiaction.OrderPlaced?Notfiaction.OrderPlaced.Name:''}}
-          {{Notfiaction.MoneyPlaced?' - '+Notfiaction.MoneyPlaced.Name:''}} </small>
-        <br>
-        <div>{{Notfiaction.Note}}</div>
-        
 
-      </a>
-    </li>
-   
-    <!-- <a class="dropdown-item" *ngIf="showSpinner">
-      <div class="bouncingLoader">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        </div>
-    </a> -->
-    </div>
-    </li>
-    <!-- <div class="subtask-li">
-      <span class="main-tlist" (click)="getNotfiaction()"> 
-        <i class="fa fa-bell-o" ><span class="badge badge-info" style="color: white;"
-          *ngIf="count&&count!=0">{{count}}</span></i>
+    <!-- notifaction -->
+    <!-- <li class="nav-item">
+      <a class="nav-link" (click)="getNotfiaction()">
+        <span class="bg-icon-no">
+          <i class="fa fa-bell-o"
+            ><span
+              class="badge badge-info"
+              style="color: white"
+              *ngIf="count && count != 0 && showbadge"
+              >{{ count }}</span
+            ></i
+          >
         </span>
-      <ul class="subtask-pick">
-        <li *ngFor="let Notfiaction of Notfiactions">
-          <a class="tooltip1 tooltipstered" id="12" href="javascript:;">
-            <div *ngIf="Notfiaction.orderCount"> لديك
-              <strong>{{Notfiaction.orderCount}}</strong> من الطلبات
-            </div>
-         
-            <small class="text-muted" *ngIf="Notfiaction.orderplaced||Notfiaction.monePlaced">
-              <i class="icon-location-pin"></i>{{Notfiaction.orderplaced?Notfiaction.orderplaced.name:''}}
-              {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
-            <br>
-            <div>{{Notfiaction.note}}</div>
-            
-          </a></li></ul>
-      </div> -->
+      </a>
+    </li> -->
   </ul>
-
 </app-header>
 
 <div class="app-body">
-  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized"
-    (minimizedChange)="toggleMinimize($event)">
-    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+  <app-sidebar
+    #appSidebar
+    [fixed]="true"
+    [display]="'lg'"
+    [minimized]="sidebarMinimized"
+    (minimizedChange)="toggleMinimize($event)"
+  >
+    <svg
+      width="109"
+      height="134"
+      viewBox="0 0 109 134"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M149.431 87.6875C148.932 89.5515 148.356 91.3689 147.703 93.1396C144.863 102.161 140.759 110.397 135.66 117.019C133.007 120.48 129.962 123.623 126.583 126.386L125.838 126.999C124.005 128.509 122.109 130.071 120.004 130.807C111.83 133.662 103.306 134.281 95.041 133.552C91.09 133.821 87.1198 133.618 83.2147 132.95C58.5399 128.784 33.2746 112.863 17.2792 91.4005C9.29765 80.6915 4.07311 68.8422 1.75096 56.1826C-0.988085 41.2527 0.479831 24.8288 5.77624 11.1218C12.7521 -6.92862 27.1345 -21.7416 43.3113 -27.5361C57.5994 -32.6544 73.5412 -32.0542 90.6938 -25.7518C112.074 -17.8993 129.442 -2.47271 140.923 18.8569C148.594 33.1107 152.475 49.4138 152.146 66.0056C152.096 68.5103 151.948 71.0108 151.701 73.5071C151.419 78.2984 150.659 83.0486 149.431 87.6875ZM146.863 92.8139C148.839 86.492 150.161 79.9841 150.807 73.3915C151.33 64.7493 150.391 56.0777 148.031 47.7381C143.621 32.3416 135.044 19.2576 121.807 7.73883C107.931 -4.33665 93.066 -11.4362 77.625 -13.3637C58.137 -15.7953 18.2819 -9.86032 6.9282 30.0051C4.0224 40.1899 3.83258 51.699 6.3823 62.3985C8.41897 70.945 12.0838 79.0316 17.9155 87.8467C25.0037 98.5607 34.7758 107.822 46.9621 115.372C53.967 119.712 73.6192 130.74 95.0054 132.653C106.6 131.838 117.964 126.781 129.463 117.365C136.466 111.631 142.305 103.773 145.906 95.239C146.241 94.4431 146.561 93.6347 146.863 92.8139ZM100.133 132.928C106.678 133.039 113.305 132.196 119.705 129.96C121.658 129.278 123.491 127.767 125.263 126.307L126.013 125.691C129.337 122.972 132.335 119.878 134.945 116.472C137.972 112.541 140.645 108.031 142.905 103.123C139.504 108.798 135.152 113.85 130.036 118.059C120.057 126.23 110.166 131.162 100.133 132.928ZM5.81994 30.6336C5.89835 30.341 5.9784 30.0504 6.06126 29.7598C10.9791 12.4921 21.9311 -0.559154 37.7344 -7.98347C54.8272 -16.0134 71.4026 -15.0422 77.7359 -14.2518C93.3587 -12.3026 108.386 -5.13071 122.4 7.06433C135.772 18.7017 144.439 31.9269 148.899 47.4944C149.845 50.8123 150.565 54.1899 151.051 57.6038C150.151 44.0952 146.432 30.9882 140.13 19.2793C128.755 -1.85437 111.553 -17.135 90.3842 -24.9108C73.4361 -31.1377 57.7026 -31.7364 43.6186 -26.6922C27.6797 -20.9825 13.5018 -6.36926 6.61787 11.4451C1.37722 25.0037 -0.0726684 41.2512 2.63837 56.024C4.93571 68.5463 10.1043 80.2692 18.003 90.867C33.8647 112.15 58.9094 127.936 83.3637 132.065C84.9776 132.338 86.5854 132.531 88.1872 132.646C69.3141 129.346 52.8032 120.046 46.4885 116.133C34.1912 108.514 24.3251 99.1625 17.1646 88.3397C11.2727 79.4342 7.56858 71.2565 5.50633 62.605C2.99373 52.0635 3.10954 40.7476 5.81978 30.6328L5.81994 30.6336Z"
+        fill="#3E3F44"
+      />
+      <path
+        d="M36.4305 103.723C37.9314 98.1214 34.391 92.3059 28.5229 90.7336C22.6548 89.1612 16.681 92.4274 15.1801 98.0288C13.6792 103.63 17.2196 109.446 23.0877 111.018C28.9558 112.59 34.9296 109.324 36.4305 103.723Z"
+        fill="#BD2322"
+      />
+    </svg>
+
+    <app-sidebar-nav
+      [navItems]="navItems"
+      [perfectScrollbar]
+      [disabled]="appSidebar.minimized"
+    ></app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
+  <p-sidebar [(visible)]="display" position="left" [modal]="false">
+    <div class="grid">
+      <div
+        class="col-12 base-color text-center text-lg mt-4"
+        (click)="display = false"
+      >
+        <span> <i class="pi pi-angle-right"></i></span>
+
+        الاشعارات
+      </div>
+    </div>
+    <div class="flex flex-warp mt-3">
+      <div class="flex not-icon">
+        <i class="icon-notification"></i>
+      </div>
+      <div class="flex ml-2">
+        <div>
+          <span class="font-bold">لديك اشعار من المندوب : محمد علي</span> لعدم
+          استلام الشحنة المرسلة لك
+        </div>
+      </div>
+    </div>
+    <p-divider></p-divider>
+    <div class="flex flex-warp mt-3">
+      <div class="flex not-icon">
+        <i class="icon-notification"></i>
+      </div>
+      <div class="flex ml-2">
+        <div>
+          <span class="font-bold">لديك اشعار من المندوب : محمد علي</span> لعدم
+          استلام الشحنة المرسلة لك
+        </div>
+      </div>
+    </div>
+    <p-divider></p-divider>
+    <div class="flex flex-warp mt-3">
+      <div class="flex not-icon">
+        <i class="icon-notification"></i>
+      </div>
+      <div class="flex ml-2">
+        <div>
+          <span class="font-bold">لديك اشعار من المندوب : محمد علي</span> لعدم
+          استلام الشحنة المرسلة لك
+        </div>
+      </div>
+    </div>
+    <p-divider></p-divider>
+    <div class="flex flex-warp mt-3">
+      <div class="flex not-icon">
+        <i class="icon-notification"></i>
+      </div>
+      <div class="flex ml-2">
+        <div>
+          <span class="font-bold">لديك اشعار من المندوب : محمد علي</span> لعدم
+          استلام الشحنة المرسلة لك
+        </div>
+      </div>
+    </div>
+
+    <li *ngFor="let Notfiaction of Notfiactions" style="width: 100%">
+      <a
+        class="dropdown-item"
+        [ngStyle]="{ background: style(Notfiaction.IsSeen) }"
+      >
+        <div *ngIf="Notfiaction.OrderCount">
+          لديك <strong>{{ Notfiaction.OrderCount }}</strong> من الطلبات
+        </div>
+        <small
+          class="text-muted"
+          *ngIf="Notfiaction.OrderPlaced || Notfiaction.MoneyPlaced"
+        >
+          <i class="icon-location-pin"></i
+          >{{ Notfiaction.OrderPlaced ? Notfiaction.OrderPlaced.Name : "" }}
+          {{
+            Notfiaction.MoneyPlaced ? " - " + Notfiaction.MoneyPlaced.Name : ""
+          }}
+        </small>
+        <br />
+        <div>{{ Notfiaction.Note }}</div>
+      </a>
+    </li>
+  </p-sidebar>
   <!-- Main content -->
   <main class="main">
     <!-- Breadcrumb -->
-    <!-- breaking change 'cui-breadcrumb' -->
-    <cui-breadcrumb>
-      <!-- Breadcrumb Menu-->
-      <!-- <li class="breadcrumb-menu d-md-down-none">
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-          <a class="btn" href="#"><i class="icon-speech"></i></a>
-          <a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>
-          <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
-        </div>
-      </li> -->
-    </cui-breadcrumb>
-    <!-- deprecation warning for 'app-breadcrumb' -->
-    <!--<ol class="breadcrumb">-->
-    <!--<app-breadcrumb></app-breadcrumb>-->
-    <!--&lt;!&ndash; Breadcrumb Menu&ndash;&gt;-->
-    <!--<li class="breadcrumb-menu d-md-down-none">-->
-    <!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">-->
-    <!--<a class="btn" href="#"><i class="icon-speech"></i></a>-->
-    <!--<a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>-->
-    <!--<a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>-->
-    <!--</div>-->
-    <!--</li>-->
-    <!--</ol>-->
+    <cui-breadcrumb> </cui-breadcrumb>
+
     <div class="container-fluid">
       <router-outlet></router-outlet>
-    
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </main>
-  <!--الاشعارات-->
-  <!-- <app-aside [fixed]="true" [display]="false" [ngClass]="'test'" > -->
-  <!-- <tabset > -->
-  <!-- <tab >
-        <ng-template tabHeading><i class="icon-bell" (click)="getNotfiaction()"><span class="badge badge-info" style="color: white;">{{count}}</span></i></ng-template>
-        <div class="list-group list-group-accent">
-       
-     
-          <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">الاشعارات</div>
-         
-          <div class="list-group-item list-group-item-accent-success list-group-item-divider"
-          *ngFor="let Notfiaction of Notfiactions">
-            <div> لديك 
-              <strong>{{Notfiaction.orderCount}}</strong> من الطلبات </div>
-            <small class="text-muted mr-3">
-              <i class="icon-calendar"></i>  1 - 3pm</small>
-            <small class="text-muted">
-              <i class="icon-location-pin"></i>{{Notfiaction.orderplaced?Notfiaction.orderplaced.name:''}}  {{Notfiaction.monePlaced?' - '+Notfiaction.monePlaced.name:''}} </small>
-              <br>
-              <small>{{Notfiaction.note}}</small>
-          </div>
-          <strong style="text-align: center;" (click)="MoreNotfiaction()" *ngIf="Notfiactions.length==10">المزيد ...</strong> 
-          <div class="list-group-item list-group-item-accent-primary list-group-item-divider">
-            <div>
-              <strong>Team meeting</strong>
-            </div>
-            <small class="text-muted mr-3">
-              <i class="icon-calendar"></i>  4 - 6pm</small>
-            <small class="text-muted">
-              <i class="icon-home"></i>  creativeLabs HQ</small>
-            <div class="avatars-stack mt-2">
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/2.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/3.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/5.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-              <div class="avatar avatar-xs">
-                <img class="img-avatar" src="assets/img/avatars/8.jpg" alt="admin@bootstrapmaster.com">
-              </div>
-            </div>
-          </div>
-        </div>
-      </tab> -->
-  <!-- <tab>
-        <ng-template tabHeading><i class="icon-speech"></i></ng-template>
-        <div class="p-3">
-          <div class="message">
-            <div class="py-3 pb-5 mr-3 float-left">
-              <div class="avatar">
-                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                <span class="avatar-status badge-success"></span>
-              </div>
-            </div>
-            <div>
-              <small class="text-muted">Lukasz Holeczek</small>
-              <small class="text-muted float-right mt-1">1:52 PM</small>
-            </div>
-            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-          </div>
-          <hr>
-          <div class="message">
-            <div class="py-3 pb-5 mr-3 float-left">
-              <div class="avatar">
-                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                <span class="avatar-status badge-success"></span>
-              </div>
-            </div>
-            <div>
-              <small class="text-muted">Lukasz Holeczek</small>
-              <small class="text-muted float-right mt-1">1:52 PM</small>
-            </div>
-            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-          </div>
-          <hr>
-          <div class="message">
-            <div class="py-3 pb-5 mr-3 float-left">
-              <div class="avatar">
-                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                <span class="avatar-status badge-success"></span>
-              </div>
-            </div>
-            <div>
-              <small class="text-muted">Lukasz Holeczek</small>
-              <small class="text-muted float-right mt-1">1:52 PM</small>
-            </div>
-            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-          </div>
-          <hr>
-          <div class="message">
-            <div class="py-3 pb-5 mr-3 float-left">
-              <div class="avatar">
-                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                <span class="avatar-status badge-success"></span>
-              </div>
-            </div>
-            <div>
-              <small class="text-muted">Lukasz Holeczek</small>
-              <small class="text-muted float-right mt-1">1:52 PM</small>
-            </div>
-            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-          </div>
-          <hr>
-          <div class="message">
-            <div class="py-3 pb-5 mr-3 float-left">
-              <div class="avatar">
-                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                <span class="avatar-status badge-success"></span>
-              </div>
-            </div>
-            <div>
-              <small class="text-muted">Lukasz Holeczek</small>
-              <small class="text-muted float-right mt-1">1:52 PM</small>
-            </div>
-            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-          </div>
-        </div>
-      </tab> -->
-  <!-- <tab>
-        <ng-template tabHeading><i class="icon-settings"></i></ng-template>
-        <div class="p-3">
-          <h6>Settings</h6>
-          <div class="aside-options">
-            <div class="clearfix mt-4">
-              <small><b>Option 1</b></small>
-              <label class="switch switch-label switch-pill switch-success switch-sm float-right">
-                <input type="checkbox" class="switch-input" checked>
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-              </label>
-            </div>
-            <div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-            </div>
-          </div>
-          <div class="aside-options">
-            <div class="clearfix mt-3">
-              <small><b>Option 2</b></small>
-              <label class="switch switch-label switch-pill switch-success switch-sm float-right">
-                <input type="checkbox" class="switch-input">
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-              </label>
-            </div>
-            <div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-            </div>
-          </div>
-          <div class="aside-options">
-            <div class="clearfix mt-3">
-              <small><b>Option 3</b></small>
-              <label class="switch switch-label switch-pill switch-success switch-sm float-right">
-                <input type="checkbox" class="switch-input">
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-                <span class="switch-handle"></span>
-              </label>
-            </div>
-          </div>
-          <div class="aside-options">
-            <div class="clearfix mt-3">
-              <small><b>Option 4</b></small>
-              <label class="switch switch-label switch-pill switch-success switch-sm float-right">
-                <input type="checkbox" class="switch-input" checked>
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-              </label>
-            </div>
-          </div>
-          <hr>
-          <h6>System Utilization</h6>
-          <div class="text-uppercase mb-1 mt-4"><small><b>CPU Usage</b></small></div>
-          <div class="progress progress-xs">
-            <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <small class="text-muted">348 Processes. 1/4 Cores.</small>
-          <div class="text-uppercase mb-1 mt-2"><small><b>Memory Usage</b></small></div>
-          <div class="progress progress-xs">
-            <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <small class="text-muted">11444GB/16384MB</small>
-          <div class="text-uppercase mb-1 mt-2"><small><b>SSD 1 Usage</b></small></div>
-          <div class="progress progress-xs">
-            <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <small class="text-muted">243GB/256GB</small>
-          <div class="text-uppercase mb-1 mt-2"><small><b>SSD 2 Usage</b></small></div>
-          <div class="progress progress-xs">
-            <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <small class="text-muted">25GB/256GB</small>
-        </div>
-      </tab> -->
-  <!-- </tabset> -->
-  <!-- </app-aside> -->
-  
 </div>
 <app-footer>
-  <span><a>{{titleAR}}</a></span>
-  <!-- <span class="ml-auto">Powered by <a href="https://coreui.io/angular">CoreUI for Angular</a></span> -->
+  <span
+    ><a>{{ titleAR }}</a></span
+  >
 </app-footer>

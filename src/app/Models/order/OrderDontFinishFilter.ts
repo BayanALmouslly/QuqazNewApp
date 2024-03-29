@@ -1,10 +1,10 @@
 export class OrderDontFinishFilter {
-    constructor(){
-        this.IsClientDeleviredMoney=false;
-        this.ClientDoNotDeleviredMoney=false;   
+    constructor() {
+        this.IsClientDeleviredMoney = false;
+        this.ClientDoNotDeleviredMoney = false;
     }
     OrderPlacedId
-    IsClientDeleviredMoney
-    ClientDoNotDeleviredMoney
+    IsClientDeleviredMoney: boolean
+    ClientDoNotDeleviredMoney: boolean
 
 }

@@ -3,9 +3,34 @@
 
 // Import styles
 @import "~@coreui/coreui/scss/coreui";
+//local files
+@import "icons.scss";
+@import "inputs.scss";
+@import "side-bar.scss";
+@import "dashboard.scss";
 
 // If you want to add something do it here
 @import "custom";
 @import "~@ng-select/ng-select/themes/default.theme.css";
-@import 'node_modules/angular2-toaster/toaster';
+@import "node_modules/angular2-toaster/toaster";
 
+// fonts
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap");
+
+// primeng
+@import "../../node_modules/primeflex/primeflex.css";
+@import "../../node_modules/primeicons/primeicons.css";
+
+body {
+  font-family: "Cairo", sans-serif !important;
+  background-color: #fff !important;
+}
+li.breadcrumb-item {
+  a {
+    color: rgba(189, 35, 34, 1) !important;
+  }
+}
+.table-quqaz {
+  background-color: rgba(189, 35, 34, 1);
+  color: #fff;
+}

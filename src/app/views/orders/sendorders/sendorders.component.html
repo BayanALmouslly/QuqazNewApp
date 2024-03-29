@@ -1,82 +1,186 @@
-<div class="row" style="text-align: center;" data-aos="fade-up" *ngIf="!NotFoundMessage">
-  <div class=" col-lg-3" *ngFor="let order of orders" >
-    <div class="card text-white bg-info" data-aos="zoom-in" data-aos-delay="100">
-      <div class="card-body pb-0">
-      
-        <button type="button" class="btn btn-transparent p-0 float-right">
-          <i class="icon-trash icons font-1xl " (click)="canDelete(order.id)"></i>
-            </button>
-        <div class="text-value">
-          <i class="icon-social-dropbox h1"></i>
-          {{order.code}}</div>
-        
-        <br>
-        <div style="text-align: right;" *ngIf="order.recipientName">
-          <i class="icon-user icons  d-block">{{order.recipientName}}</i>
+<div
+  class="grid"
+  style="text-align: center"
+  data-aos="fade-up"
+  *ngIf="orders.length > 0"
+>
+  <div class="col-lg-4 mb-4" *ngFor="let order of orders">
+    <a class="w-full">
+      <p-card class="w-100">
+        <div class="flex flex-warp w-100">
+          <div class="flex m-2 align-items-center">
+            <div class="icon-circel">
+              <i class="icon-report-order"></i>
+            </div>
+          </div>
+          <div class="flex text-xs flex-column m-2">
+            <div class="flex mb-2">
+              <span class="font-bold">رقم الطلب</span>
+              : {{ order.code }}
+            </div>
+            <div class="flex align-items-center">
+              <i class="pi pi-credit-card"></i>
+              {{ order.cost }}
+            </div>
+            <div class="flex align-items-center">
+              <i class="pi pi-map-marker"></i>
+              {{ order.country ? order.country.name : null
+              }}{{ order.address ? " - " + order.address : null }}
+            </div>
+            <div class="flex align-items-center">
+              <i class="pi pi-user"></i>
+              {{ order?.recipientName }}
+            </div>
+            <div
+              class="flex align-items-center"
+              *ngIf="order.recipientPhones && order.recipientPhones != ''"
+            >
+              <i class="pi pi-phone"></i>
+              {{ order.recipientPhones }}
+            </div>
+          </div>
+
+          <div class="flex text-left m-2 title font-bold">
+            <i
+              class="icon-trash icons font-1xl"
+              (click)="canDelete(order.id)"
+            ></i>
+          </div>
         </div>
-        <br>
-        <div style="text-align: right;">
-          <i class="icon-phone icons  d-block "> {{order.recipientPhones}}</i>
-        </div>
-        <br>
-        <div style="text-align: center;">
-          <i class="fa fa-money fa-lg mt-4">  {{order.cost|number}}</i>
-        
-        </div>
+      </p-card>
+    </a>
+  </div>
+  <!-- <div class="col-12">
+    <div class="btn-download text-center" (click)="canSend()">
+      <div class="flex">ارسال</div>
+    </div>
+  </div> -->
+</div>
+
+<div
+  bsModal
+  #infoModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-info" role="document">
+    <div class="modal-content">
+      <div
+        class="modal-header"
+        style="background-color: #bd2222 !important; color: #fff"
+      >
+        <h4 class="modal-title">تأكيد</h4>
+        <button
+          type="button"
+          class="close"
+          (click)="hideinfoModal()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-        <i class="icon-location-pin"></i>
-        {{order.country?order.country.name:null}}{{order.address?" - "+order.address:null}}
+      <div class="modal-body">اضافة كلفة 2000 دينار للمندوب</div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn"
+          style="background-color: #bd2222 !important; color: #fff"
+          (click)="Send()"
+        >
+          قبول
+        </button>
+        &nbsp;
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="hideinfoModal()"
+        >
+          رفض
+        </button>
       </div>
     </div>
+    <!-- /.modal-content -->
   </div>
-<div class="col-12">
-  <button type="button" class="btn btn-info" style="width: 30%;" (click)="canSend()">ارسال</button>
-
+  <!-- /.modal-dialog -->
 </div>
-</div>
-<div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+<!-- /.modal -->
+<div
+  bsModal
+  #DeleteModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-info" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"> تأكيد </h4>
-        <button type="button" class="close" (click)="hideinfoModal()" aria-label="Close">
+      <div class="modal-header" style="background-color: #bd2222 !important">
+        <h4 class="modal-title">تأكيد قبل الحذف</h4>
+        <button
+          type="button"
+          class="close"
+          (click)="hideinfoModal()"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        اضافة كلفة 2000 دينار للمندوب
-      </div>
-      <div class="modal-footer" >
-        <button type="button" class="btn btn-info" (click)="Send()">قبول</button> &nbsp;
-        <button type="button" class="btn btn-secondary" (click)="hideinfoModal()"> رفض</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<div bsModal #DeleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-info" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"> تأكيد قبل الحذف </h4>
-        <button type="button" class="close" (click)="hideinfoModal()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+      <div class="modal-body">هل أنت متاكد من حذف الطلب</div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn"
+          (click)="delete()"
+          style="background-color: #bd2222 !important; color: #fff"
+        >
+          تأكيد
+        </button>
+        &nbsp;
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="hideDeleteModal()"
+        >
+          رفض
         </button>
       </div>
-      <div class="modal-body">
-        هل أنت متاكد من حذف الطلب
-      </div>
-      <div class="modal-footer" >
-        <button type="button" class="btn btn-info" (click)="delete()">تأكيد</button> &nbsp;
-        <button type="button" class="btn btn-secondary" (click)="hideDeleteModal()"> رفض</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<div *ngIf="NotFoundMessage">
-  لابوجد طلبات للعرض
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div *ngIf="NotFoundMessage">لابوجد طلبات للعرض</div>
+<div
+  class="flex flex-column w-100 justify-content-center mt-3"
+  *ngIf="orders.length > 0"
+>
+  <button
+    pButton
+    type="button"
+    label="   ارسال"
+    class="company-button"
+    (click)="canSend()"
+  ></button>
+  <div class="flex justify-content-center mt-3">
+    <pagination
+      [boundaryLinks]="showBoundaryLinks"
+      [directionLinks]="showDirectionLinks"
+      [firstText]="'الاول'"
+      [previousText]="'السابق'"
+      [nextText]="'التالي'"
+      [lastText]="'الاخير'"
+      [rotate]="true"
+      [totalItems]="totalItems"
+      [itemsPerPage]="4"
+      [maxSize]="1"
+      (pageChanged)="pageChanged($event)"
+    ></pagination>
+  </div>
 </div>
 
 <toaster-container></toaster-container>

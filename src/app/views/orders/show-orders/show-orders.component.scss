@@ -1,0 +1,75 @@
+::ng-deep .p-panel .p-panel-header {
+  background: none !important;
+}
+.icon-circel {
+  background-color: rgba(189, 35, 34, 0.1);
+  border-radius: 50%;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+}
+.pi {
+  color: rgba(189, 35, 34, 1);
+  font-size: 0.8rem;
+  margin-left: 0.8rem !important;
+}
+.title {
+  color: rgba(189, 35, 34, 1) !important;
+}
+.btn-download {
+  border-radius: 15px !important;
+  background-color: rgba(189, 35, 34, 1) !important;
+  padding: 5px 15px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: #fff !important;
+  min-width: 8rem;
+  width: 100%;
+  cursor: pointer;
+  .pi {
+    color: #fff !important;
+  }
+}
+.btn-review {
+  border-radius: 15px !important;
+  padding: 5px 15px;
+  border: 1px rgba(189, 35, 34, 1) solid;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: rgba(189, 35, 34, 1) !important;
+  min-width: 8rem;
+  width: 100%;
+  cursor: pointer;
+}
+::ng-deep .page-item .page-link {
+  color: rgba(189, 35, 34, 1) !important;
+  &:hover {
+    background-color: rgba(189, 34, 34, 0.139) !important;
+  }
+}
+::ng-deep .page-item:last-child .page-link {
+  border-top-right-radius: 0rem !important;
+  border-bottom-right-radius: 0rem !important;
+}
+::ng-deep .page-item:first-child .page-link {
+  border-top-left-radius: 0rem !important;
+  border-bottom-left-radius: 0rem !important;
+}
+::ng-deep .page-item.active .page-link {
+  border-color: rgba(189, 34, 34, 1) !important;
+  background-color: rgba(189, 34, 34, 0.139) !important;
+  font-weight: 600;
+}
+::ng-deep .page-item.disabled .page-link {
+  color: #c8ced3 !important;
+}
+::ng-deep .p-card .p-card-body :hover {
+  visibility: visible;
+  opacity: 1;
+  transition: all 1s ease-in;
+}

@@ -1,3 +1,44 @@
-small{
-    color: red;
+small {
+  color: red;
+}
+::ng-deep .p-dropdown,
+.p-inputtext {
+  border: none !important;
+  border-bottom: 0.25px solid rgba(152, 152, 152, 1) !important;
+  border-radius: 0px !important;
+}
+.card-input {
+  border: 1px solid rgba(189, 35, 34, 1) !important;
+  border-radius: 15px !important;
+  padding: 1rem;
+}
+.border-icon {
+  background-color: rgba(189, 35, 34, 1);
+  border-radius: 3px;
+  padding: 2px;
+  color: white;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 15px;
+}
+.note-lable {
+  font-size: 13px;
+  color: rgba(138, 138, 138, 1);
+}
+::ng-deep
+  .p-dropdown-panel
+  .p-dropdown-items
+  .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+  background-color: rgba(189, 34, 34, 0.1) !important;
+}
+::ng-deep {
+  .ng-select .ng-select-container {
+    border: none;
+    border-bottom: 0.25px solid rgba(152, 152, 152, 1) !important;
+    border-radius: 0px;
+    font-size: 1rem;
+  }
 }
