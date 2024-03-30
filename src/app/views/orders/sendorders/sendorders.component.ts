@@ -10,7 +10,6 @@ import { Paging } from '../../../Models/paging';
   styleUrls: ['./sendorders.component.scss']
 })
 export class SendordersComponent implements OnInit {
-  @ViewChild('infoModal') public infoModal: ModalDirective;
   @ViewChild('DeleteModal') public DeleteModal: ModalDirective;
 
   constructor(private orderService: OrderService,
@@ -23,13 +22,6 @@ export class SendordersComponent implements OnInit {
   paging: Paging = new Paging();
   ngOnInit(): void {
     this.GetOrders()
-  }
-  showinfoModal(): void {
-    this.infoModal.show();
-  }
-
-  hideinfoModal(): void {
-    this.infoModal.hide();
   }
   showDeleteModal(): void {
     this.DeleteModal.show();
@@ -54,15 +46,8 @@ export class SendordersComponent implements OnInit {
     this.paging.Page = event.page
     this.GetOrders()
   }
-  canSend() {
-    if (this.orders.length == 1 || this.orders.length == 2)
-      this.showinfoModal()
-    else
-      this.Send()
-  }
   Send() {
     this.orderService.Send(this.orders.map(o => o.id)).subscribe(res => {
-      this.hideinfoModal()
       this.NotFoundMessage = true
       this.toasterService.pop('success', '', 'تم  الارسال بنجاح');
       this.GetOrders()
