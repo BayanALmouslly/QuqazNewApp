@@ -56,57 +56,6 @@
     </div>
   </div> -->
 </div>
-
-<div
-  bsModal
-  #infoModal="bs-modal"
-  class="modal fade"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-info" role="document">
-    <div class="modal-content">
-      <div
-        class="modal-header"
-        style="background-color: #bd2222 !important; color: #fff"
-      >
-        <h4 class="modal-title">تأكيد</h4>
-        <button
-          type="button"
-          class="close"
-          (click)="hideinfoModal()"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">اضافة كلفة 2000 دينار للمندوب</div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn"
-          style="background-color: #bd2222 !important; color: #fff"
-          (click)="Send()"
-        >
-          قبول
-        </button>
-        &nbsp;
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="hideinfoModal()"
-        >
-          رفض
-        </button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 <div
   bsModal
   #DeleteModal="bs-modal"
@@ -123,7 +72,7 @@
         <button
           type="button"
           class="close"
-          (click)="hideinfoModal()"
+          (click)="hideDeleteModal()"
           aria-label="Close"
         >
           <span aria-hidden="true">&times;</span>
@@ -162,9 +111,9 @@
   <button
     pButton
     type="button"
-    label="   ارسال"
+    label="ارسال"
     class="company-button"
-    (click)="canSend()"
+    (click)="Send()"
   ></button>
   <div class="flex justify-content-center mt-3">
     <pagination
