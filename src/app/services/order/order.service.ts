@@ -111,5 +111,8 @@ export class OrderService {
     };
     return this.http.post<any>(this.controler + "DownloadOrdersDontFinished", parametars, httpOptions);
   }
+  trackOrder(orderId) {
+    return this.http.get<any>(this.controler + "Track?id=" + orderId);
+  }
 }
 

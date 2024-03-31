@@ -48,11 +48,11 @@ export const navItems: INavData[] = [
     //   text: 'NEW'
     // }
   },
-  // {
-  //   name: ' كشف حساب حسب نوع الشحنة',
-  //   url: '/orders/Report',
-  //   icon: 'icon-layers'
-  // },
+  {
+    name: 'كشف حساب',
+    url: '/orders/Report',
+    icon: 'icon-layers'
+  },
   {
     name: 'طلب حساب',
     url: '/orders/payment',

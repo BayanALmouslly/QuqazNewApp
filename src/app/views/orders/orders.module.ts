@@ -27,6 +27,10 @@ import { RadioButtonModule } from 'primeng-lts/radiobutton';
 import { TabMenuModule } from 'primeng-lts/tabmenu';
 import { CheckboxModule } from 'primeng-lts/checkbox';
 import { ButtonModule } from 'primeng-lts/button';
+import { CalendarModule } from 'primeng-lts/calendar';
+import { TrackOrderComponent } from './track-order/track-order.component';
+import { TimelineModule } from 'primeng-lts/timeline';
+import { DialogService, DynamicDialogModule } from 'primeng-lts/dynamicdialog';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,8 @@ import { ButtonModule } from 'primeng-lts/button';
     SendordersComponent,
     PaymentOrdersComponent,
     ClientPrintComponent,
-    PrintOrderComponent
+    PrintOrderComponent,
+    TrackOrderComponent
   ],
   imports: [
     CommonModule,
@@ -59,8 +64,11 @@ import { ButtonModule } from 'primeng-lts/button';
     RadioButtonModule,
     TabMenuModule,
     CheckboxModule,
-    ButtonModule
+    ButtonModule,
+    CalendarModule,
+    TimelineModule,
+    DynamicDialogModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [CurrencyPipe]
+  providers: [CurrencyPipe, DialogService],
 })
 export class OrdersModule { }

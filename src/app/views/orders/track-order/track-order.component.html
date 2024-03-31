@@ -1,0 +1,33 @@
+<div class="flex flex-column mt-4 justify-content-center" style="width: 100%">
+  <div class="flex grid my-2" style="width: 100%">
+    <div class="p-col-6">
+      <span class="bg-icon" (click)="close()"
+        ><i class="icon-arrow-right"></i
+      ></span>
+    </div>
+    <div class="p-col-6 header-title">تتبع الطلب</div>
+  </div>
+  <div class="flex justify-content-center my-2">
+    <i class="icon-map"></i>
+  </div>
+</div>
+<div class="flex flex-column justify-content-center track-card mt-2">
+  <p-timeline
+    [value]="trakOrder"
+    styleClass="customized-timeline"
+    align="right"
+  >
+    <ng-template pTemplate="marker" let-event>
+      <div
+        [ngClass]="{
+          'current-shipment': event.checked,
+          'inactive-icon': !event.checked
+        }"
+      ></div>
+    </ng-template>
+    <ng-template pTemplate="content" let-event>
+      <div class="flex title mb-2">{{ event.text }}</div>
+      <div class="flex sub-title">{{ event.extraText }}</div>
+    </ng-template>
+  </p-timeline>
+</div>

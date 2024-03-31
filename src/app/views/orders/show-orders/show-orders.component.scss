@@ -27,7 +27,6 @@
   align-items: center;
   display: flex;
   color: #fff !important;
-  min-width: 8rem;
   width: 100%;
   cursor: pointer;
   .pi {
@@ -72,4 +71,36 @@
   visibility: visible;
   opacity: 1;
   transition: all 1s ease-in;
+}
+::ng-deep {
+  .report-card {
+    background: rgba(247, 247, 247, 1) !important;
+    border-radius: 15px;
+  }
+  .p-calendar .p-button {
+    background: rgba(189, 34, 34, 1) !important;
+    border-color: rgba(189, 34, 34, 1);
+  }
+  .p-tabmenu {
+    background: rgba(247, 247, 247, 1);
+    .p-tabmenu-nav
+      .p-tabmenuitem:not(.p-highlight):not(.p-disabled)
+      .p-menuitem-link {
+      background: rgba(247, 247, 247, 1);
+      border-radius: 15px;
+      color: rgba(138, 138, 138, 1);
+    }
+    .p-tabmenu-nav {
+      border: none;
+    }
+    .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+      background: rgba(189, 34, 34, 1);
+      border-radius: 15px;
+      color: #fff;
+      border-color: rgba(189, 34, 34, 1);
+    }
+    .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link:not(.p-disabled):focus {
+      box-shadow: none;
+    }
+  }
 }
