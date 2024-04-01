@@ -35,9 +35,13 @@
     >
       <div style="justify-content: center; display: flex" class="w-full">
         <img [src]="src" width="50" height="50" *ngIf="!fileName" />
-        <div class="priming-icon" *ngIf="fileName">
+        <div class="priming-icon" *ngIf="fileName && errors?.length == 0">
           <div class="progress-circle"></div>
           <i class="icon pi pi-check"></i>
+        </div>
+        <div class="priming-icon" *ngIf="errors?.length > 0">
+          <div class="progress-circle"></div>
+          <i class="icon pi pi-info"></i>
         </div>
       </div>
 
@@ -49,7 +53,7 @@
           class="p-button p-button-danger"
           (click)="UploadExcel()"
           pButton
-          label="حفظ"
+          label="تحميل"
           icon="pi pi-arrow-circle-left"
           *ngIf="fileName"
         ></button>
@@ -96,7 +100,7 @@
   </div>
 </div>
 <br />
-<div class="card error" *ngIf="errors.length > 0">
+<div class="card error" *ngIf="errors?.length > 0">
   <div class="card-body">
     <ul>
       <li *ngFor="let err of errors">{{ err }}</li>
