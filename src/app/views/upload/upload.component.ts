@@ -179,4 +179,13 @@ export class UploadComponent implements OnInit {
       this.errors = err.error.errors;
     })
   }
+  downloadExcelFile(): void {
+    const filename = 'files/القالب.xlsx';
+    const filePath = `assets/${filename}`;
+    const link = document.createElement('a');
+    link.href = filePath;
+    link.download = 'القالب.xlsx';
+    link.target = '_blank';
+    link.click();
+  }
 }
