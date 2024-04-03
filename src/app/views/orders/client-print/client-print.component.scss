@@ -1,0 +1,34 @@
+::ng-deep .page-item .page-link {
+  color: rgba(189, 35, 34, 1) !important;
+  &:hover {
+    background-color: rgba(189, 34, 34, 0.139) !important;
+  }
+}
+::ng-deep .page-item:last-child .page-link {
+  border-top-right-radius: 0rem !important;
+  border-bottom-right-radius: 0rem !important;
+}
+::ng-deep .page-item:first-child .page-link {
+  border-top-left-radius: 0rem !important;
+  border-bottom-left-radius: 0rem !important;
+}
+::ng-deep .page-item.active .page-link {
+  border-color: rgba(189, 34, 34, 1) !important;
+  background-color: rgba(189, 34, 34, 0.139) !important;
+  font-weight: 600;
+}
+::ng-deep .page-item.disabled .page-link {
+  color: #c8ced3 !important;
+}
+.icon {
+  background: rgba(189, 34, 34, 1);
+  padding: 5px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  cursor: pointer;
+}
