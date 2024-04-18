@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { IdAndName } from '../../../Models/id-and-name.model';
@@ -7,10 +7,11 @@ import { Paging } from '../../../Models/paging';
 import { OrderService } from '../../../services/order/order.service';
 import { SettingsService } from '../../../services/settings.service';
 import { MenuItem } from 'primeng-lts/api';
-import {DatePipe} from '@angular/common';
 import { StaticsService } from '../../../services/statics.service';
 import { DialogService } from 'primeng-lts/dynamicdialog';
 import { TrackOrderComponent } from '../track-order/track-order.component';
+import { DatePipe } from '@angular/common';
+import { Calendar } from 'primeng-lts/calendar';
 
 @Component({
   selector: 'app-show-orders',
@@ -50,7 +51,17 @@ export class ShowOrdersComponent implements OnInit {
   start: Date;
   end: Date;
   accountReports
-
+  @ViewChild('calendar') calendar: Calendar;
+  customLocale = {
+    firstDayOfWeek: 0,
+    dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    today: 'اليوم',  // Custom text for the 'Today' button
+    clear: 'مسح'  // Custom text for the 'Clear' button
+  };
   constructor(
     private orderServies: OrderService,
     private settingservice: SettingsService,
@@ -64,6 +75,8 @@ export class ShowOrdersComponent implements OnInit {
     this.activeTab = this.items[0];
     this.GetOrders()
     this.GetSettings()
+    this.calendar._locale.clear = 'مسح';
+    this.calendar.locale.today = 'اليوم';
   }
   GetOrders() {
     this.orderServies.get(this.paging, this.orderFilter).subscribe(res => {
@@ -127,7 +140,7 @@ export class ShowOrdersComponent implements OnInit {
     this.router.navigate(['/orders/clientPrint'])
   }
   getAccountReport() {
-    this.staticsService.AccountReport(this.datepipe.transform(  this.start,'yyyy-MM-dd'),this.datepipe.transform(  this.end,'yyyy-MM-dd')).subscribe(data => {
+    this.staticsService.AccountReport(this.datepipe.transform(this.start, 'yyyy-MM-dd'), this.datepipe.transform(this.end, 'yyyy-MM-dd')).subscribe(data => {
       this.accountReports = data;
     })
   }
@@ -138,8 +151,6 @@ export class ShowOrdersComponent implements OnInit {
     this.getAccountReport();
   }
   trackOrder(id) {
-    console.log(window.innerWidth);
-
     const ref = this.dialogService.open(TrackOrderComponent, {
       width: window.innerWidth > 1000 ? '40%' : window.innerWidth > 600 ? '70%' : '100%',
       showHeader: false,
@@ -150,5 +161,8 @@ export class ShowOrdersComponent implements OnInit {
       baseZIndex: 999999
     });
   }
+  closeCalender() {
+    this.calendar.overlayVisible = false;
 
+  }
 }

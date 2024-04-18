@@ -7,6 +7,9 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ChartModule } from 'primeng-lts/chart';
+import { DatePipe } from '@angular/common';
+import { ProgressBarModule } from 'primeng-lts/progressbar';
+import { MapModule } from '../map/map.module';
 
 
 @NgModule({
@@ -16,8 +19,11 @@ import { ChartModule } from 'primeng-lts/chart';
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(),
-    ChartModule
+    ChartModule,
+    ProgressBarModule,
+    MapModule
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent],
+  providers: [DatePipe]
 })
 export class DashboardModule { }

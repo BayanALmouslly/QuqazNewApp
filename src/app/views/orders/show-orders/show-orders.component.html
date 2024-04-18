@@ -10,40 +10,74 @@
 <div *ngIf="activeTab?.label == 'الطلبات'">
   <div class="grid mb-2">
     <div class="p-col-12">
-      <p-panel [toggleable]="true" expandIcon="icon-arrow-down" collapseIcon="icon-arrow-up" [collapsed]="true">
+      <p-panel
+        [toggleable]="true"
+        expandIcon="icon-arrow-down"
+        collapseIcon="icon-arrow-up"
+        [collapsed]="true"
+      >
         <ng-template pTemplate="header"> بحث حسب </ng-template>
 
         <div class="grid">
           <div class="p-col-12 p-sm-12 p-md-6 p-lg-2">
             <div class="form-group" style="width: 100%">
-              <input type="text" class="form-control p-w-full" (keyup)="GetOrders()" name="code"
-                [(ngModel)]="orderFilter.Code" placeholder="الكود" />
+              <input
+                type="text"
+                class="form-control p-w-full"
+                (keyup)="GetOrders()"
+                name="code"
+                [(ngModel)]="orderFilter.Code"
+                placeholder="الكود"
+              />
             </div>
           </div>
           <div class="p-col-12 p-sm-12 p-md-6 p-lg-2">
             <div class="form-group">
-              <input type="text" class="form-control" (keyup)="GetOrders()" name="RecipientName"
-                [(ngModel)]="orderFilter.RecipientName" placeholder="اسم المستلم" />
+              <input
+                type="text"
+                class="form-control"
+                (keyup)="GetOrders()"
+                name="RecipientName"
+                [(ngModel)]="orderFilter.RecipientName"
+                placeholder="اسم المستلم"
+              />
             </div>
           </div>
           <div class="p-col-12 p-sm-12 p-md-6 p-lg-2">
             <div class="form-group">
-              <input type="text" class="form-control" maxlength="11"
+              <input
+                type="text"
+                class="form-control"
+                maxlength="11"
                 oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
-                (keyup)="GetOrders()" name="Phone" [(ngModel)]="orderFilter.Phone" placeholder="رقم الهاتف" />
+                (keyup)="GetOrders()"
+                name="Phone"
+                [(ngModel)]="orderFilter.Phone"
+                placeholder="رقم الهاتف"
+              />
             </div>
           </div>
           <div class="p-col-12 p-sm-12 p-md-6 p-lg-2">
-            <select class="form-control p-w-full" (change)="GetOrders()" name="CountryId"
-              [(ngModel)]="orderFilter.CountryId" placeholder="المدينة">
+            <select
+              class="form-control p-w-full"
+              (change)="GetOrders()"
+              name="CountryId"
+              [(ngModel)]="orderFilter.CountryId"
+              placeholder="المدينة"
+            >
               <option *ngFor="let Country of Countries" [value]="Country.id">
                 {{ Country.name }}
               </option>
             </select>
           </div>
           <div class="p-col-12 p-sm-12 p-md-6 p-lg-2">
-            <select class="form-control p-w-full" (change)="GetOrders()" name="RegionId"
-              [(ngModel)]="orderFilter.RegionId" placeholder="المنطقة">
+            <select
+              class="form-control p-w-full"
+              (change)="GetOrders()"
+              name="RegionId"
+              [(ngModel)]="orderFilter.RegionId"
+              placeholder="المنطقة"
+            >
               <option *ngFor="let Region of Regions" [value]="Region.id">
                 {{ Region.name }}
               </option>
@@ -54,18 +88,36 @@
         <div class="grid">
           <label for="ccmonth" class="p-col-12">حالة الشحنة</label>
 
-          <div *ngFor="let orderPlace of OrderPlaced" class="p-col-12 p-sm-12 p-md-6 p-lg-2 p-field-checkbox">
-            <p-radioButton [inputId]="orderPlace.id" name="orderPlace" [value]="orderPlace.id"
-              [(ngModel)]="orderFilter.OrderplacedId" (onClick)="GetOrders()" class="pr-2"></p-radioButton>
+          <div
+            *ngFor="let orderPlace of OrderPlaced"
+            class="p-col-12 p-sm-12 p-md-6 p-lg-2 p-field-checkbox"
+          >
+            <p-radioButton
+              [inputId]="orderPlace.id"
+              name="orderPlace"
+              [value]="orderPlace.id"
+              [(ngModel)]="orderFilter.OrderplacedId"
+              (onClick)="GetOrders()"
+              class="pr-2"
+            ></p-radioButton>
             <label [for]="orderPlace.id">{{ orderPlace.name }}</label>
           </div>
         </div>
         <p-divider></p-divider>
         <div class="grid">
           <label for="ccyear" class="p-col-12">موقع المبلغ </label>
-          <div *ngFor="let orderPlace of MoenyPlaced" class="p-col-12 p-sm-12 p-md-6 p-lg-2 p-field-checkbox">
-            <p-radioButton [inputId]="orderPlace.id" name="orderPlace" [value]="orderPlace.id"
-              [(ngModel)]="orderFilter.MonePlacedId" (onClick)="GetOrders()" class="pr-2"></p-radioButton>
+          <div
+            *ngFor="let orderPlace of MoenyPlaced"
+            class="p-col-12 p-sm-12 p-md-6 p-lg-2 p-field-checkbox"
+          >
+            <p-radioButton
+              [inputId]="orderPlace.id"
+              name="orderPlace"
+              [value]="orderPlace.id"
+              [(ngModel)]="orderFilter.MonePlacedId"
+              (onClick)="GetOrders()"
+              class="pr-2"
+            ></p-radioButton>
             <label [for]="orderPlace.id">{{ orderPlace.name }}</label>
           </div>
         </div>
@@ -98,7 +150,10 @@
                 <i class="pi pi-user"></i>
                 {{ order.recipientName }}
               </div>
-              <div class="flex align-items-center" *ngIf="order.recipientPhones && order.recipientPhones != ''">
+              <div
+                class="flex align-items-center"
+                *ngIf="order.recipientPhones && order.recipientPhones != ''"
+              >
                 <i class="pi pi-phone"></i>
                 {{ order.recipientPhones }}
               </div>
@@ -123,7 +178,10 @@
               </div>
             </div>
             <div class="p-col" *ngIf="order.clientPrintNumber">
-              <div class="btn-download" (click)="print(order.clientPrintNumber)">
+              <div
+                class="btn-download"
+                (click)="print(order.clientPrintNumber)"
+              >
                 <i class="pi pi-download"></i>
                 تنزيل التقرير
               </div>
@@ -173,9 +231,19 @@
   </div>
   <div class="flex flex-warp w-100 justify-content-center">
     <div class="flex justify-content-center">
-      <pagination [boundaryLinks]="showBoundaryLinks" [directionLinks]="showDirectionLinks" [firstText]="'الاول'"
-        [previousText]="'السابق'" [nextText]="'التالي'" [lastText]="'الاخير'" [rotate]="true" [totalItems]="totalItems"
-        [itemsPerPage]="4" [maxSize]="1" (pageChanged)="pageChanged($event)"></pagination>
+      <pagination
+        [boundaryLinks]="showBoundaryLinks"
+        [directionLinks]="showDirectionLinks"
+        [firstText]="'الاول'"
+        [previousText]="'السابق'"
+        [nextText]="'التالي'"
+        [lastText]="'الاخير'"
+        [rotate]="true"
+        [totalItems]="totalItems"
+        [itemsPerPage]="4"
+        [maxSize]="1"
+        (pageChanged)="pageChanged($event)"
+      ></pagination>
     </div>
   </div>
 </div>
@@ -183,29 +251,59 @@
 <div *ngIf="activeTab?.label == 'الحسابات'">
   <div class="grid">
     <div class="p-col-6 p-offset-3 px-2" style="direction: ltr">
-      <p-calendar 
-      #calendar
-      [(ngModel)]="rangeDate" dateFormat="dd-mm-yy" selectionMode="range" (onSelect)="changeDate()"
-        [touchUI]="true" showIcon="true" icon="pi pi-calendar" style="direction: ltr !important">
-        <p-footer>
-          <button pButton type="button" label="إغلاق" (click)="calendar.hideOverlay()">
-          </button>
-        </p-footer>
+      <p-calendar
+        [(ngModel)]="rangeDate"
+        dateFormat="dd.mm.yy"
+        selectionMode="range"
+        (onSelect)="changeDate()"
+        [touchUI]="true"
+        showIcon="true"
+        icon="pi pi-calendar"
+        style="direction: ltr !important"
+        #calendar
+        [showButtonBar]="true"
+        [locale]="customLocale"
+      >
+        <ng-template pTemplate="header">
+          <div
+            style="
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: 1px solid gray;
+              cursor: pointer;
+            "
+            (click)="closeCalender()"
+          >
+            <i class="pi pi-times" style="margin-right: 10px"></i>
+          </div>
+        </ng-template>
       </p-calendar>
     </div>
   </div>
   <div class="grid">
-    <div class="p-col-12 p-sm-6 p-md-4 p-lg-3" *ngFor="let item of accountReports">
+    <div
+      class="p-col-12 p-sm-6 p-md-4 p-lg-3"
+      *ngFor="let item of accountReports"
+    >
       <p-card styleClass="report-card">
         <div class="flex flex-column">
-          <div class="p-text-bold mb-3" style="font-weight: 500; font-size: 0.9rem">
+          <div
+            class="p-text-bold mb-3"
+            style="font-weight: 500; font-size: 0.9rem"
+          >
             {{ item?.title }}
           </div>
-          <div style="
+          <div
+            style="
               color: rgba(189, 35, 34, 1);
               font-size: 1.5rem;
               font-weight: 500;
-            ">
+            "
+          >
             {{ item?.text }}
           </div>
         </div>

@@ -25,4 +25,14 @@ export class StaticsService {
     return this.http.get(this.controler + 'AccountReport', { params: params });
 
   }
+  GetOrderStaticsReport(start, end) {
+    let params = new HttpParams();
+    if (start)
+      params = params.append('Start', start);
+    if (end)
+      params = params.append('End', start);
+
+    return this.http.get(this.controler + 'GetOrderStaticsReport', { params: params });
+
+  }
 }

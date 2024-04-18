@@ -103,4 +103,7 @@
       box-shadow: none;
     }
   }
+  .p-datepicker {
+    z-index: 9999 !important; /* High enough to be on top of other elements */
+  }
 }

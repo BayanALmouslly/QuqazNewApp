@@ -101,7 +101,7 @@ import { DividerModule } from 'primeng-lts/divider';
     RegisterComponent,
     ProfileComponent,
     PointsComponent,
-    BlackListComponent
+    BlackListComponent,
   ],
   providers: [
     {
@@ -112,7 +112,6 @@ import { DividerModule } from 'primeng-lts/divider';
     AuthGuard,
     IconSetService,
   ],
-
   bootstrap: [AppComponent]
 })
 export class AppModule { }
