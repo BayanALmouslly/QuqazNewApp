@@ -7,7 +7,7 @@ import { Paging } from '../../../Models/paging';
 import { OrderService } from '../../../services/order/order.service';
 import { SettingsService } from '../../../services/settings.service';
 import { MenuItem } from 'primeng-lts/api';
-import { log } from 'util';
+import {DatePipe} from '@angular/common';
 import { StaticsService } from '../../../services/statics.service';
 import { DialogService } from 'primeng-lts/dynamicdialog';
 import { TrackOrderComponent } from '../track-order/track-order.component';
@@ -56,7 +56,8 @@ export class ShowOrdersComponent implements OnInit {
     private settingservice: SettingsService,
     private router: Router,
     private staticsService: StaticsService,
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    public datepipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -126,11 +127,12 @@ export class ShowOrdersComponent implements OnInit {
     this.router.navigate(['/orders/clientPrint'])
   }
   getAccountReport() {
-    this.staticsService.AccountReport(this.start, this.end).subscribe(data => {
+    this.staticsService.AccountReport(this.datepipe.transform(  this.start,'yyyy-MM-dd'),this.datepipe.transform(  this.end,'yyyy-MM-dd')).subscribe(data => {
       this.accountReports = data;
     })
   }
   changeDate() {
+    console.log(this.rangeDate);
     this.start = this.rangeDate[0];
     this.end = this.rangeDate[1];
     this.getAccountReport();

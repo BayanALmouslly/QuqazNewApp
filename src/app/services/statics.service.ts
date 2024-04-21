@@ -20,7 +20,7 @@ export class StaticsService {
     if (start)
       params = params.append('Start', start);
     if (end)
-      params = params.append('End', start);
+      params = params.append('End', end);
 
     return this.http.get(this.controler + 'AccountReport', { params: params });
 

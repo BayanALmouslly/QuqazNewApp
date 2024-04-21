@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 
 import { OrdersRoutingModule } from './orders-routing.module';
 import { ShowOrdersComponent } from './show-orders/show-orders.component';
@@ -69,6 +69,6 @@ import { DialogService, DynamicDialogModule } from 'primeng-lts/dynamicdialog';
     TimelineModule,
     DynamicDialogModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [CurrencyPipe, DialogService],
+  providers: [CurrencyPipe, DialogService,DatePipe],
 })
 export class OrdersModule { }
