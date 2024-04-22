@@ -6,8 +6,15 @@ export class CStatics {
     orderDeliverdToClient
     orderInWat
     orderInStore
-    orderMoneyDelived 
+    orderMoneyDelived
     orderMoneyInCompany
     orderPartialReturned
-    orderWithClient 
+    orderWithClient
+}
+export class ClientOrderReportDto {
+    deliveredOrderRatio
+    returnOrderRatio
+    highestRequestedCountryMapId
+    highestDeliveredCountryMapId
+    highestReturnedCountryMapId
 }

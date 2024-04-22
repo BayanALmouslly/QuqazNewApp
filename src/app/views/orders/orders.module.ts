@@ -69,6 +69,6 @@ import { DialogService, DynamicDialogModule } from 'primeng-lts/dynamicdialog';
     TimelineModule,
     DynamicDialogModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [CurrencyPipe, DialogService,DatePipe],
+  providers: [CurrencyPipe, DialogService, DatePipe],
 })
 export class OrdersModule { }
