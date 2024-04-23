@@ -14,9 +14,11 @@ export class TrackOrderComponent implements OnInit {
     public ref: DynamicDialogRef, public config: DynamicDialogConfig) { }
   orderId: string;
   trakOrder
+  mapId
   ngOnInit(): void {
 
     this.orderId = this.config.data?.id;
+    this.mapId = this.config.data?.mapId;
     this.trackOrdrer();
   }
   trackOrdrer() {

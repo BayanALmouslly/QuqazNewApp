@@ -172,7 +172,10 @@
               </div>
             </div>
             <div class="p-col">
-              <div class="btn-review" (click)="trackOrder(order.id)">
+              <div
+                class="btn-review"
+                (click)="trackOrder(order.id, order.country.mapCountryId)"
+              >
                 <i class="pi pi-map"></i>
                 تتبع الشحنة
               </div>

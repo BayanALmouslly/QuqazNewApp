@@ -33,6 +33,7 @@ import { TimelineModule } from 'primeng-lts/timeline';
 import { DialogService, DynamicDialogModule } from 'primeng-lts/dynamicdialog';
 import { PaginatorModule } from 'primeng-lts/paginator';
 
+import { MapModule } from '../map/map.module';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { PaginatorModule } from 'primeng-lts/paginator';
     CalendarModule,
     TimelineModule,
     DynamicDialogModule,
-    PaginatorModule
+    PaginatorModule,
+    MapModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [CurrencyPipe, DialogService, DatePipe],
 })
