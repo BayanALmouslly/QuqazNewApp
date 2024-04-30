@@ -8,6 +8,8 @@ import { OrderService } from '../../services/order/order.service';
 import { SignalRService } from '../../services/signal-r.service';
 import { StaticsService } from '../../services/statics.service';
 import { navItems } from '../../_nav';
+import { BranchDetailsService } from '../../services/branch-details.service';
+import { AuthService } from '../../views/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +21,8 @@ export class DefaultLayoutComponent implements OnInit {
   public navItems = navItems;
   constructor(private router: Router, private orderService: OrderService,
     private toasterService: ToasterService, private signalRService: SignalRService,
-    private staticsService: StaticsService,) { }
+    private staticsService: StaticsService,
+    private activeBranchDetais: BranchDetailsService, private authService: AuthService) { }
   titleAR = environment.appNameAR
   titleEN = environment.appNameEN
   toggleMinimize(e) {
@@ -42,6 +45,7 @@ export class DefaultLayoutComponent implements OnInit {
     //   });
 
     // }, 1000);
+    this.activeBranchDetais.setBranch(this.authService.getUser().branch)
 
   }
 

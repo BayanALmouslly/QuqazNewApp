@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { retry } from 'rxjs/operators';
+import { retry, tap } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment.prod';
 import { OrderplacedEnum } from '../../../Models/Enum/OrderplacedEnum';
 import { OrderDontFinishFilter } from '../../../Models/order/OrderDontFinishFilter';
 import { OrderService } from '../../../services/order/order.service';
 import { UserLogin } from '../../auth/userlogin.model';
 import { Paging } from '../../../Models/paging';
+import { BranchDetailsService } from '../../../services/branch-details.service';
 
 @Component({
   selector: 'app-orders-report',
@@ -16,7 +17,8 @@ import { Paging } from '../../../Models/paging';
 export class OrdersReportComponent implements OnInit {
 
   constructor(private service: OrderService,
-    public sanitizer: DomSanitizer,) { }
+    public sanitizer: DomSanitizer,
+    private activeBranchDetais: BranchDetailsService) { }
   orderDontFinishFilter: OrderDontFinishFilter = new OrderDontFinishFilter();
   IsClientDeleviredMoney: boolean = false;
   ClientDoNotDeleviredMoney: boolean = false;
@@ -31,12 +33,18 @@ export class OrdersReportComponent implements OnInit {
   dateOfPrint = new Date()
   userName: any = JSON.parse(localStorage.getItem('kokazClient')) as UserLogin
   printnumber
-  address = environment.Address
-  companyPhone = environment.companyPhones[0] + " - " + environment.companyPhones[1]
+  address;
+  companyPhone;
   orders: any[] = [];
   paging: Paging = new Paging
   totalItems: number
   ngOnInit(): void {
+    this.paging.RowCount = 10;
+    this.activeBranchDetais.getBranch().pipe(
+      tap(data => {
+        this.address = data.address;
+        this.companyPhone = data.phoneNumber;
+      })).subscribe();
   }
   GetData() {
     this.orderDontFinishFilter.ClientDoNotDeleviredMoney = this.ClientDoNotDeleviredMoney
@@ -58,7 +66,7 @@ export class OrdersReportComponent implements OnInit {
   showDirectionLinks: boolean = true;
   pageChanged(event): void {
     this.paging.allItemsLength = this.totalItems
-    this.paging.RowCount = event.itemsPerPage
+    this.paging.RowCount = event.rows
     this.paging.Page = event.page
     this.GetData()
   }

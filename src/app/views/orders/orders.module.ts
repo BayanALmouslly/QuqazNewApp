@@ -31,6 +31,8 @@ import { CalendarModule } from 'primeng-lts/calendar';
 import { TrackOrderComponent } from './track-order/track-order.component';
 import { TimelineModule } from 'primeng-lts/timeline';
 import { DialogService, DynamicDialogModule } from 'primeng-lts/dynamicdialog';
+import { PaginatorModule } from 'primeng-lts/paginator';
+
 
 @NgModule({
   declarations: [
@@ -67,7 +69,8 @@ import { DialogService, DynamicDialogModule } from 'primeng-lts/dynamicdialog';
     ButtonModule,
     CalendarModule,
     TimelineModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    PaginatorModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [CurrencyPipe, DialogService, DatePipe],
 })

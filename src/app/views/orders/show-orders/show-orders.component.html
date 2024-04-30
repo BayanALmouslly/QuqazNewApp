@@ -255,14 +255,14 @@
         [(ngModel)]="rangeDate"
         dateFormat="dd.mm.yy"
         selectionMode="range"
-        (onSelect)="changeDate()"
         [touchUI]="true"
         showIcon="true"
         icon="pi pi-calendar"
         style="direction: ltr !important"
         #calendar
-        [showButtonBar]="true"
         [locale]="customLocale"
+        (onShow)="tempRangeDate = rangeDate"
+        (onClickOutside)="rangeDate = tempRangeDate; closeCalender()"
       >
         <ng-template pTemplate="header">
           <div
@@ -276,9 +276,30 @@
               border: 1px solid gray;
               cursor: pointer;
             "
-            (click)="closeCalender()"
+            (click)="rangeDate = tempRangeDate; closeCalender(); changeDate()"
           >
             <i class="pi pi-times" style="margin-right: 10px"></i>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <div class="flex flex-warp justify-content-between">
+            <div class="flex">
+              <button
+                pButton
+                type="button"
+                label="مسح"
+                (click)="rangeDate = null"
+              ></button>
+            </div>
+
+            <div class="flex">
+              <button
+                pButton
+                type="button"
+                label="بحث"
+                (click)="changeDate(); closeCalender()"
+              ></button>
+            </div>
           </div>
         </ng-template>
       </p-calendar>
