@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StaticsService } from '../../services/statics.service';
 import { CStatics, ClientOrderReportDto } from '../../Models/cstatics.model';
 import { DatePipe } from '@angular/common';
+import { SettingsService } from '../../services/settings.service';
+import { CountryArray } from './country';
 
 @Component({
   templateUrl: 'dashboard.component.html',
@@ -9,7 +11,8 @@ import { DatePipe } from '@angular/common';
 })
 export class DashboardComponent implements OnInit {
   constructor(private staticsService: StaticsService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private settingService: SettingsService
   ) { }
   CStatics: CStatics = new CStatics;
   data: any;
@@ -19,7 +22,7 @@ export class DashboardComponent implements OnInit {
   clientReport: ClientOrderReportDto = new ClientOrderReportDto();
   progressValue: number = 0;
   progressAngle: number = 0;
-
+  countries: any[] = CountryArray;
 
   ngOnInit(): void {
     this.getStatics();
@@ -83,14 +86,12 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
+
+  getCountryName(id) {
+    return id ? this.countries.find(c => c.id == id)?.name : '';
+  }
   GetOrderStaticsReport() {
-    let startDate = this.datePipe.transform(
-      this.start
-    );
-    let endDate = this.datePipe.transform(
-      this.end
-    );
-    this.staticsService.GetOrderStaticsReport(startDate, endDate).subscribe(data => {
+    this.staticsService.GetOrderStaticsReport(this.datePipe.transform(this.start, 'yyyy-MM-dd'), this.datePipe.transform(this.end, 'yyyy-MM-dd')).subscribe(data => {
       this.clientReport = data as ClientOrderReportDto;
     })
   }

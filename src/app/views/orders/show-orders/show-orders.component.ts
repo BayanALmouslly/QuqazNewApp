@@ -153,12 +153,13 @@ export class ShowOrdersComponent implements OnInit {
     }
     this.getAccountReport();
   }
-  trackOrder(id) {
+  trackOrder(id, mapId) {
     const ref = this.dialogService.open(TrackOrderComponent, {
       width: window.innerWidth > 1000 ? '40%' : window.innerWidth > 600 ? '70%' : '100%',
       showHeader: false,
       data: {
-        id: id
+        id: id,
+        mapId: mapId
       },
       modal: false,
       baseZIndex: 999999
