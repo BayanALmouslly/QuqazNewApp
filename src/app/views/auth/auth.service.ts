@@ -35,7 +35,7 @@ export class AuthService implements OnDestroy {
     let headers = new HttpHeaders({
       'app-v': '2'
     });
-    return this.http.post(this.baseUrl + 'ClientAuth', user,{ headers: headers });
+    return this.http.post(this.baseUrl + 'ClientAuth', user, { headers: headers });
   }
 
   signOut() {
@@ -78,6 +78,8 @@ export class AuthService implements OnDestroy {
     this.localStorageService.removeItem(this.localStorageKey);
   }
   getUser() {
+    return JSON.parse(localStorage.getItem(this.localStorageKey));
+
   }
   setPermission(permission) {
     localStorage.setItem(this.permissionlocalStorageKey, JSON.stringify(permission));

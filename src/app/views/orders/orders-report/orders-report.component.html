@@ -76,16 +76,8 @@
   >
     <table style="width: 90%">
       <tr>
-        <td>
-          <table style="width: 100%">
-            <tr>
-              <td>مستخدم الطابعة:</td>
-              <td>
-                <div style="color: rgba(138, 138, 138, 1)">
-                  {{ userName.name }}
-                </div>
-              </td>
-            </tr>
+        <td style="width: 30%">
+          <!-- <table style="width: 100%">
             <tr>
               <td>تاريخ الطباعة:</td>
               <td>
@@ -102,7 +94,7 @@
                 </div>
               </td>
             </tr>
-          </table>
+          </table> -->
           <!-- <table>
             <tr>
               <td>
@@ -577,11 +569,11 @@
           </tr>
 
           <tr
-            *ngIf="reports.length != 0"
-            style="
-              text-align: center;
-              background-color: rgba(144, 177, 240, 0.877);
+            *ngIf="
+              reports.length != 0 &&
+              paging.allItemsLength / paging.RowCount === paging.Page
             "
+            style="text-align: center; background-color: #bd2222"
           >
             <td colspan="10" style="text-align: center; font-size: 18px">
               السندات
@@ -589,8 +581,14 @@
           </tr>
         </tbody>
       </table>
-      <table style="width: 100%" *ngIf="reports.length != 0">
-        <thead style="background-color: rgb(218, 218, 219)">
+      <table
+        style="width: 100%"
+        *ngIf="
+          reports.length != 0 &&
+          paging.allItemsLength / paging.RowCount === paging.Page
+        "
+      >
+        <thead style="background-color: #ffdedec2">
           <th>
             <div
               style="
@@ -837,19 +835,16 @@
 </div>
 
 <div class="flex flex-warp w-100 justify-content-center">
-  <div class="flex justify-content-center">
-    <pagination
-      [boundaryLinks]="showBoundaryLinks"
-      [directionLinks]="showDirectionLinks"
-      [firstText]="'الاول'"
-      [previousText]="'السابق'"
-      [nextText]="'التالي'"
-      [lastText]="'الاخير'"
-      [rotate]="true"
-      [totalItems]="totalItems"
-      [itemsPerPage]="4"
-      [maxSize]="1"
-      (pageChanged)="pageChanged($event)"
-    ></pagination>
+  <div class="flex justify-content-center" *ngIf="orders.length">
+    <p-paginator
+      [rows]="10"
+      [totalRecords]="totalItems"
+      [rowsPerPageOptions]="[10, 25, 50, 100]"
+      (onPageChange)="pageChanged($event)"
+      showCurrentPageReport="true"
+      currentPageReportTemplate="عرض {first} الى {last} من اصل {totalRecords} "
+      pageLinkSize="5"
+      style="direction: ltr"
+    ></p-paginator>
   </div>
 </div>

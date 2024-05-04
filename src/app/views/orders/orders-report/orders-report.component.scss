@@ -1,24 +1,24 @@
 .example-section {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: 60px;
-  }
-  
-  .example-margin {
-    margin: 0 10px;
-  }
-  input{
-    padding-right: 10px;
-  }
-  .table-responsive {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    word-wrap: break-word;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+input {
+  padding-right: 10px;
+}
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  word-wrap: break-word;
   white-space: nowrap;
 }
-table{
+table {
   width: 100%;
 }

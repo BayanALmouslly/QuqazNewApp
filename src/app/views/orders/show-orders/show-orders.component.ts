@@ -48,6 +48,7 @@ export class ShowOrdersComponent implements OnInit {
 
   //////////
   rangeDate
+  tempRangeDate
   start: Date;
   end: Date;
   accountReports
@@ -75,8 +76,6 @@ export class ShowOrdersComponent implements OnInit {
     this.activeTab = this.items[0];
     this.GetOrders()
     this.GetSettings()
-    this.calendar._locale.clear = 'مسح';
-    this.calendar.locale.today = 'اليوم';
   }
   GetOrders() {
     this.orderServies.get(this.paging, this.orderFilter).subscribe(res => {
@@ -145,9 +144,13 @@ export class ShowOrdersComponent implements OnInit {
     })
   }
   changeDate() {
-    console.log(this.rangeDate);
-    this.start = this.rangeDate[0];
-    this.end = this.rangeDate[1];
+    if (this.rangeDate) {
+      this.start = this.rangeDate[0];
+      this.end = this.rangeDate[1];
+    } else {
+      this.start = null;
+      this.end = null;
+    }
     this.getAccountReport();
   }
   trackOrder(id) {
